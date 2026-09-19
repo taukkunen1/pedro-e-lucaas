@@ -1,4 +1,152 @@
-# TrinityConquer
+# TrinityConquer - servidor Placebo
+
+Servidor Conquer Online 5695 usado no projeto Placebo.
+
+Este repositório é a base compartilhada para desenvolvimento do servidor. O objetivo é manter aqui todas as alterações feitas no GameServer, AccountServer, API, Database5700, ferramentas e documentação para que a equipe consiga acompanhar sempre a versão atual.
+
+## Estado atual do projeto
+
+- MySQL foi removido do fluxo ativo.
+- MongoDB 7 é usado para contas/autenticação.
+- O GameServer continua usando arquivos em `COServer/Database5700`.
+- API, AccountServer e GameServer compilam para `C:\Users\hecto\OneDrive\Desktop\Placebo`.
+- Telemetria de economia está ativa para CPs, Bound CPs e Gold.
+- Logs de servidor/pacotes/erros foram adicionados.
+- Modos `DEV` e `PRODUCTION` foram adicionados.
+
+## Como rodar localmente
+
+1. Instale o .NET 10 SDK.
+2. Instale Docker Desktop ou MongoDB 7.
+3. Crie um arquivo `.env` local com:
+
+```env
+MONGO_USER=seu_usuario
+MONGO_PASSWORD=sua_senha
+```
+
+4. Suba o MongoDB:
+
+```powershell
+docker compose up -d
+```
+
+5. Compile a solução:
+
+```powershell
+dotnet build .\COServer\TrinityConquerServer.sln
+```
+
+6. Inicie os serviços gerados na pasta Placebo:
+
+```powershell
+cd "C:\Users\hecto\OneDrive\Desktop\Placebo\API"
+dotnet API.dll
+
+cd "C:\Users\hecto\OneDrive\Desktop\Placebo\AccountServer"
+dotnet AccountServer.dll
+
+cd "C:\Users\hecto\OneDrive\Desktop\Placebo\GameServer"
+dotnet GameServer.dll
+```
+
+Portas esperadas:
+
+- API: `8080`
+- AccountServer: `9958`
+- GameServer: `5816`
+- MongoDB: `27017`
+
+## Modo DEV e producao
+
+O modo pode ser controlado em `API/GameServerConfig.json`:
+
+```json
+"ServerMode": "DEV"
+```
+
+Valores:
+
+- `DEV`: ativa TestServer e grava mais detalhes nos logs, incluindo bytes iniciais de pacotes.
+- `PRODUCTION`: mantém logs mais enxutos.
+
+Também é possível usar variável de ambiente:
+
+```powershell
+$env:TRINITY_SERVER_MODE = "DEV"
+```
+
+## Logs
+
+Logs diários ficam em:
+
+```text
+COServer/Database5700/Logs/server-AAAA-MM-DD.ndjson
+```
+
+Categorias principais:
+
+- `system`: inicialização e eventos gerais.
+- `packet`: pacote desconhecido ou erro dentro de handler de pacote.
+- `error`: exceções gerais do servidor.
+
+Telemetria de economia:
+
+```text
+COServer/Database5700/Telemetry/economy/
+```
+
+## Colaboração pelo GitHub
+
+Repositório:
+
+```text
+https://github.com/taukkunen1/pedro-e-lucaas
+```
+
+Para dar acesso ao Lucas:
+
+1. Abra o repositório no GitHub.
+2. Entre em `Settings`.
+3. Clique em `Collaborators`.
+4. Clique em `Invite collaborators`.
+5. Procure pelo usuário do Lucas no GitHub ou email dele.
+6. Envie o convite.
+7. Lucas precisa aceitar o convite pelo GitHub/email.
+
+Para Lucas baixar o projeto depois de aceitar:
+
+```powershell
+git clone https://github.com/taukkunen1/pedro-e-lucaas.git
+cd pedro-e-lucaas
+```
+
+Para receber atualizações:
+
+```powershell
+git pull
+```
+
+Para enviar alterações:
+
+```powershell
+git add .
+git commit -m "Descricao da mudanca"
+git push
+```
+
+## Cuidados
+
+- Não subir `.env`.
+- Não subir `mongo_data`.
+- Não subir logs e telemetria gerados em runtime.
+- Manter o repositório privado se houver configs sensíveis ou trabalho interno.
+- Antes de enviar mudanças grandes, compilar a solução.
+
+---
+
+# TrinityConquer original
+
 Conquer Online Server. This source use Stream for send/receive the packets of conquer client. Version 5695.
 
 ## Resources
