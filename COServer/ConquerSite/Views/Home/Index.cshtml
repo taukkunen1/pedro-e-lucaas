@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center my-3">
+            <div class="alert alert-info mb-0" role="alert">
+                <h6 style="font-weight: bold; color: #EA5455;"><strong>Important</strong>: GuildWar ends in 19PM each sunday!</h6>
+            </div>
+        </div>
+        @if (ViewBag.Message != null)
+        {
+            <div class="col-12">
+                @foreach (Message msg in ViewBag.Message)
+                {
+                    <div class="alert alert-@msg.Type.ToString().ToLower() mt-5" role="alert">
+                        @msg.Text
+                    </div>
+                }
+            </div>
+        }
+        <div class="col-12 p-0">
+            <div id="carouselServerImages" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselServerImages" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselServerImages" data-slide-to="1"></li>
+                    <li data-target="#carouselServerImages" data-slide-to="2"></li>
+                    <li data-target="#carouselServerImages" data-slide-to="3"></li>
+                    <li data-target="#carouselServerImages" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="~/images/ServerImage0.png" alt="First slide" draggable="false">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/images/ServerImage1.png" alt="Second slide" draggable="false">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/images/ServerImage2.png" alt="Third slide" draggable="false">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/images/ServerImage3.png" alt="Third slide" draggable="false">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/images/ServerImage4.png" alt="Third slide" draggable="false">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselServerImages" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselServerImages" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row justify-content-center align-items-center my-3">
+                <div class="col-lg-10">
+                    <div class="row my-5">
+                        <div class="col-md-4"><img class="d-block img-thumbnail mr-auto" src="https://download.conqueronline.net/main5.jpg" alt="MainPic1"></div>
+                        <div class="col-md-8 text-md-left text-center">
+                            <h2>Fast, Fun &amp; Classic</h2>
+                            <p>TrinityConquer is a private server based on Conquer Online 2.0 with many new events, quests, maps and features! Relive the old-school Conquer Online experience with a modern twist! </p>
+                            <a class="text-medium text-decoration-none" asp-action="Register" asp-controller="Account">Register now&nbsp;<i class="icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="row my-5">
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row my-5">
+                        <div class="col-md-4 order-md-2"><img class="d-block w-270 m-auto rounded img-thumbnail" src="https://download.conqueronline.net/main2.jpg" alt="MainPic2"></div>
+                        <div class="col-md-8 order-md-1 text-md-left text-center">
+                            <div class="mt-30 hidden-md-up"></div>
+                            <h2>Custom Client</h2>
+                            <p>What makes TrinityConquer Online stand out is our heavily customized 1.0 game client. We have hundreds of client changes such as bug fixes, quality of life changes, and even completely new / overhauled features! The graphics engine has also been upgraded to support anti aliasing, custom resolutions, better performance, and much much more!.</p><a class="text-medium text-decoration-none" asp-action="Downloads">Download the client&nbsp;<i class="icon-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

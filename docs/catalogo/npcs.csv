@@ -1,0 +1,1863 @@
+﻿UID,Nome,Fonte do nome,Confianca,Tipo,Mesh,Mapa ID,Mapa,X,Y,Origem
+3601,Arthur,NpcID enum (codigo),medium,Talker,2177,1700,Gulf,607,637,Npcs.txt
+3623,Stanley,NpcID enum (codigo),medium,Shop,2350,1700,Gulf,617,639,Npcs.txt
+3623,Stanley,NpcID enum (codigo),medium,Talker,2350,1700,Gulf,617,639,Npcs.txt
+600003,Maggie,NpcID enum (codigo),medium,Talker,6100,1042,lineup-pass,19,19,Npcs.txt
+600005,Ghost 1043,NpcID enum (codigo),medium,Talker,6127,1043,lineup,6,66,Npcs.txt
+600011,Ghost 1046,NpcID enum (codigo),medium,Talker,6127,1046,lineup,6,66,Npcs.txt
+600007,Ghost 1044,NpcID enum (codigo),medium,Talker,6127,1044,lineup,6,66,Npcs.txt
+600009,Ghost 1045,NpcID enum (codigo),medium,Talker,6127,1045,lineup,6,66,Npcs.txt
+600015,Ghost 1048,NpcID enum (codigo),medium,Talker,6127,1048,lineup,6,66,Npcs.txt
+600013,Ghost 1047,NpcID enum (codigo),medium,Talker,6127,1047,lineup,6,66,Npcs.txt
+770011,Pole Domination AC,NpcID enum (codigo),medium,Talker,7717,1020,canyon,574,620,Npcs.txt
+770021,Pole Domination BI,NpcID enum (codigo),medium,Talker,7717,1015,island,720,561,Npcs.txt
+770031,Pole Domination DC,NpcID enum (codigo),medium,Talker,7717,1000,desert,499,716,Npcs.txt
+770041,Pole Domination PC,NpcID enum (codigo),medium,Talker,7717,1011,woods,260,285,Npcs.txt
+600018,Vagrant Ghost 1,NpcID enum (codigo),medium,Talker,6132,1050,lineup,184,165,Npcs.txt
+600019,Vagrant Ghost 2,NpcID enum (codigo),medium,Talker,6132,1050,lineup,160,161,Npcs.txt
+600020,Vagrant Ghost 3,NpcID enum (codigo),medium,Talker,6132,1050,lineup,132,124,Npcs.txt
+600021,Vagrant Ghost 4,NpcID enum (codigo),medium,Talker,6132,1050,lineup,183,187,Npcs.txt
+600022,Vagrant Ghost 5,NpcID enum (codigo),medium,Talker,6132,1050,lineup,100,109,Npcs.txt
+600023,Vagrant Ghost 6,NpcID enum (codigo),medium,Talker,6132,1050,lineup,81,103,Npcs.txt
+600050,Fortuneteller,Questinfo.ini (NPC citado na quest),high,Talker,6206,1002,newplain,41,417,Npcs.txt
+4293,Mine Assistant,Questinfo.ini (NPC citado na quest),high,Talker,18096,1002,newplain,46,395,Npcs.txt
+103011,Leave Spook,NpcID enum (codigo),medium,Talker,7190,2090,tiger01,56,23,Npcs.txt
+9391,Pirate Lord,Questinfo.ini (NPC citado na quest),high,Talker,50070,1004,forum,65,33,Npcs.txt
+5053,Scarecrow,SobNpcs.txt,high,Talker,9720,5000,mine-one,456,346,Npcs.txt
+5054,Scarecrow,SobNpcs.txt,high,Talker,48594,5000,mine-one,50,51,Npcs.txt
+5057,Scarecrow,SobNpcs.txt,high,Talker,48496,5000,mine-one,70,70,Npcs.txt
+770005,Classic Clan War,NpcID enum (codigo),medium,Talker,9350,1002,newplain,424,247,Npcs.txt
+8592,Skill Team Pk Manager,NpcID enum (codigo),medium,Talker,11220,1002,newplain,441,241,Npcs.txt
+770004,Monster Points,Questinfo.ini (NPC citado na quest),high,Talker,7046,1002,newplain,435,450,Npcs.txt
+4026312,Exit Capture The Flag,NpcID enum (codigo),medium,Talker,317,2057,bp-flag,482,367,Npcs.txt
+168052,Exit Elite Pk,NpcID enum (codigo),medium,Talker,317,2068,pk,46,45,Npcs.txt
+8616,Lead Wrangler,NpcID enum (codigo),medium,Talker,11280,1004,forum,69,40,Npcs.txt
+81701,Couples PK,NpcID enum (codigo),medium,Talker,2910,1002,newplain,422,289,Npcs.txt
+1153,Lab1,NpcID enum (codigo),medium,Talker,6520,1351,s-task01,489,372,Npcs.txt
+1154,Lab2,NpcID enum (codigo),medium,Talker,6520,1352,s-task02,670,465,Npcs.txt
+1155,Lab3,NpcID enum (codigo),medium,Talker,6520,1353,s-task03,790,545,Npcs.txt
+1156,Lab4,NpcID enum (codigo),medium,Talker,6520,1354,s-task04,7,292,Npcs.txt
+50,Lv30 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,217,Npcs.txt
+51,Lv35 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,213,Npcs.txt
+52,Lv35 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,209,Npcs.txt
+53,Lv35 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,205,Npcs.txt
+54,Lv40 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,201,Npcs.txt
+55,Lv40 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,197,Npcs.txt
+56,Lv40 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,193,Npcs.txt
+57,Lv45 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,189,Npcs.txt
+58,Lv45 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,185,Npcs.txt
+59,Lv45 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,181,Npcs.txt
+60,Lv50 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,177,Npcs.txt
+61,Lv50 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,118,173,Npcs.txt
+62,Lv50 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,217,Npcs.txt
+63,Lv55 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,213,Npcs.txt
+64,Lv55 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,209,Npcs.txt
+65,Lv55 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,205,Npcs.txt
+66,Lv60 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,201,Npcs.txt
+67,Lv60 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,197,Npcs.txt
+68,Lv60 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,193,Npcs.txt
+69,Lv65 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,189,Npcs.txt
+70,Lv65 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,185,Npcs.txt
+71,Lv65 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,181,Npcs.txt
+72,Lv70 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,177,Npcs.txt
+73,Lv70 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,125,173,Npcs.txt
+4261,Shop 4261 - street,sugerido (tipo+id+mapa),placeholder,Shop,6056,1036,street,205,179,Npcs.txt
+74,Lv70 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,217,Npcs.txt
+75,Lv75 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,213,Npcs.txt
+76,Lv75 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,209,Npcs.txt
+77,Lv75 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,205,Npcs.txt
+78,Lv80 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,201,Npcs.txt
+79,Lv80 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,197,Npcs.txt
+80,Lv80 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,193,Npcs.txt
+81,Lv85 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,189,Npcs.txt
+82,Lv85 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,185,Npcs.txt
+83,Lv85 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,181,Npcs.txt
+84,Lv90 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,177,Npcs.txt
+85,Lv90 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,150,173,Npcs.txt
+86,Lv90 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,217,Npcs.txt
+87,Lv95 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,213,Npcs.txt
+88,Lv95 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,209,Npcs.txt
+89,Lv95 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,205,Npcs.txt
+90,Lv100 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,201,Npcs.txt
+91,Lv100 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,197,Npcs.txt
+92,Lv100 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,193,Npcs.txt
+93,Lv105 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,189,Npcs.txt
+94,Lv105 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,185,Npcs.txt
+95,Lv105 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,181,Npcs.txt
+96,Lv110 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,177,Npcs.txt
+97,Lv110 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,157,173,Npcs.txt
+98,Lv110 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,268,Npcs.txt
+99,Lv115 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,263,Npcs.txt
+100,Lv115 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,258,Npcs.txt
+101,Lv115 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,253,Npcs.txt
+102,Lv120 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,248,Npcs.txt
+103,Lv120 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,178,243,Npcs.txt
+104,Lv120 Target,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,268,Npcs.txt
+105,Boxer,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,263,Npcs.txt
+106,Prize Officer,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,258,Npcs.txt
+107,Sunfer,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,253,Npcs.txt
+108,Shop Flag,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,248,Npcs.txt
+109,Crystal,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,185,243,Npcs.txt
+110,Snowman No.4,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,268,Npcs.txt
+111,De La Vega,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,263,Npcs.txt
+112,Princess,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,258,Npcs.txt
+113,Guild Gate Keeper,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,253,Npcs.txt
+114,Prince,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,248,Npcs.txt
+115,Guild Controller,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,210,243,Npcs.txt
+116,Warden,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,268,Npcs.txt
+117,Mine Assistant,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,263,Npcs.txt
+118,Snowman No.2,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,258,Npcs.txt
+119,Wu Xing Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,253,Npcs.txt
+120,Shawn,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,248,Npcs.txt
+121,Smith Zhang,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,217,243,Npcs.txt
+122,Matthew,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,174,Npcs.txt
+150,Lv125 Stake,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,152,Npcs.txt
+151,Christmas Tree(S),client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,147,Npcs.txt
+152,Lv125 Scarecrow,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,142,Npcs.txt
+153,Christmas Tree(M),client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,137,Npcs.txt
+154,Gender Change,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,132,Npcs.txt
+155,Christmas Tree(B),client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,166,127,Npcs.txt
+156,VIP Event Envoy,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,173,152,Npcs.txt
+157,Treater,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,173,147,Npcs.txt
+158,Sob(structure) 158 - street,sugerido (tipo+id+mapa),placeholder,Sob(structure),1086,1036,street,173,142,Npcs.txt
+159,Sob(structure) 159 - street,sugerido (tipo+id+mapa),placeholder,Sob(structure),1086,1036,street,173,137,Npcs.txt
+160,Love Stone,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,173,132,Npcs.txt
+161,Warden Li,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,173,127,Npcs.txt
+162,Sob(structure) 162 - street,sugerido (tipo+id+mapa),placeholder,Sob(structure),1086,1036,street,198,152,Npcs.txt
+163,Sob(structure) 163 - street,sugerido (tipo+id+mapa),placeholder,Sob(structure),1086,1036,street,198,147,Npcs.txt
+164,Cloud Saint,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,198,142,Npcs.txt
+165,Archer God,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,198,137,Npcs.txt
+166,Card Trade NPC,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,198,132,Npcs.txt
+167,Mystic Merchant,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,198,127,Npcs.txt
+168,Sob(structure) 168 - street,sugerido (tipo+id+mapa),placeholder,Sob(structure),1086,1036,street,205,152,Npcs.txt
+169,Dice King,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,205,147,Npcs.txt
+170,Iliad Bull,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,205,142,Npcs.txt
+171,Invitation Collector,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,205,137,Npcs.txt
+172,Card Collector,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,205,132,Npcs.txt
+173,Lucky Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,205,127,Npcs.txt
+174,TC Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,217,Npcs.txt
+175,PC Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,213,Npcs.txt
+176,AC Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,209,Npcs.txt
+177,DC Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,205,Npcs.txt
+178,BI Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,201,Npcs.txt
+179,MC Captain,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,197,Npcs.txt
+180,Boxer Huang,SobNpcs.txt,high,Sob(structure),1086,1036,street,230,193,Npcs.txt
+181,Warden Zhang,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,189,Npcs.txt
+182,Gouda,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,230,185,Npcs.txt
+183,(CN) 素云,client npc.ini (tipo = UID; pode diferir do nome real) [nome em chines],low,Sob(structure),1086,1036,street,230,181,Npcs.txt
+184,(CN) 曾飞,client npc.ini (tipo = UID; pode diferir do nome real) [nome em chines],low,Sob(structure),1086,1036,street,230,177,Npcs.txt
+185,(CN) 怜琴,client npc.ini (tipo = UID; pode diferir do nome real) [nome em chines],low,Sob(structure),1086,1036,street,230,173,Npcs.txt
+186,Carpenter Zhong,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,218,Npcs.txt
+187,Carpenter Li,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,214,Npcs.txt
+188,Carpenter Zhao,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,210,Npcs.txt
+189,Carpenter Zhou,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,206,Npcs.txt
+190,Chopper Zhang Yuan,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,202,Npcs.txt
+191,Chopper Li Lu,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,198,Npcs.txt
+192,Chopper Liu Xing,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,194,Npcs.txt
+193,Chopper Qin Mi,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,190,Npcs.txt
+194,Twin Guard,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,186,Npcs.txt
+196,Serenity Taoist,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,182,Npcs.txt
+197,Thales,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,269,178,Npcs.txt
+198,Doctor Mayer,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,217,Npcs.txt
+199,Donahue,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,213,Npcs.txt
+200,Dwight,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,209,Npcs.txt
+201,Snowball Maker,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,205,Npcs.txt
+202,Demon,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,201,Npcs.txt
+203,Cake Baker,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,197,Npcs.txt
+204,Merry Draw Chest,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,193,Npcs.txt
+205,Wealth Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,189,Npcs.txt
+206,Wealth Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,185,Npcs.txt
+207,Wealth Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,181,Npcs.txt
+208,Wealth Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,177,Npcs.txt
+209,Wealth Box,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,237,173,Npcs.txt
+210,Union Messenger,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,218,Npcs.txt
+211,President Xin,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,214,Npcs.txt
+212,Ironsmith Zhao,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,210,Npcs.txt
+213,Tailor Hui,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,206,Npcs.txt
+214,Chef Zhang,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,202,Npcs.txt
+215,Stableman Wang,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,198,Npcs.txt
+216,Alex,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,194,Npcs.txt
+217,Arthur,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,190,Npcs.txt
+218,Bryan,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,186,Npcs.txt
+219,Angela,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,182,Npcs.txt
+220,Bruce,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,178,Npcs.txt
+221,Earth Seal,client npc.ini (tipo = UID; pode diferir do nome real),low,Sob(structure),1086,1036,street,262,174,Npcs.txt
+7935,Name Register,NpcID enum (codigo),medium,DialogAndGui,9186,1036,street,201,196,Npcs.txt
+300000,Shelby,NpcID enum (codigo),medium,DialogAndGui,7624,1036,street,240,249,Npcs.txt
+15805,Dr Yin Yang,NpcID enum (codigo),medium,Talker,1544,1036,street,198,191,Npcs.txt
+44,WH Market,NpcID enum (codigo),medium,Fixed,87,1036,street,182,180,Npcs.txt
+45,Market Conductress,NpcID enum (codigo),medium,Type29,417,1036,street,215,220,Npcs.txt
+47,Prize Officer,NpcID enum (codigo),medium,Talker,1067,1036,street,185,170,Npcs.txt
+9071,Equipment Blacksmith,Questinfo.ini (NPC citado na quest),high,Type33,9506,1036,street,178,199,Npcs.txt
+9072,Rebirth Master,NpcID enum (codigo),medium,Talker,13400,1036,street,210,212,Npcs.txt
+141,(CN) 水晶传送石,client npc.ini (tipo = UID; pode diferir do nome real) [nome em chines],low,Shop,32,1036,street,198,181,Npcs.txt
+8613,Shop 8613 - mine-one,sugerido (tipo+id+mapa),placeholder,Shop,6270,5000,mine-one,52,50,Npcs.txt
+923,Lady Luck,Questinfo.ini (NPC citado na quest),high,Talker,9230,1036,street,212,188,Npcs.txt
+390,Love Stone,NpcID enum (codigo),medium,Talker,1600,1036,street,192,193,Npcs.txt
+432,Great Merchant,Questinfo.ini (NPC citado na quest),high,DialogAndGui,1390,5000,mine-one,51,50,Npcs.txt
+5004,Trojan Star,client NpcX.ini,high,Talker,4296,1036,street,182,183,Npcs.txt
+30156,House Admin,NpcID enum (codigo),medium,Talker,8060,1036,street,199,87,Npcs.txt
+10065,Godly Artisan,NpcID enum (codigo),medium,Talker,5046,1036,street,178,193,Npcs.txt
+3381,Surgeon Miracle,NpcID enum (codigo),medium,Talker,2414,1036,street,252,242,Npcs.txt
+35016,Wuxing Oven,NpcID enum (codigo),medium,Warehouse?,6680,1036,street,178,204,Npcs.txt
+2070,Collector Zhao,NpcID enum (codigo),medium,Talker,3220,1036,street,212,184,Npcs.txt
+2071,Market Cp Admin,NpcID enum (codigo),medium,Talker,3336,1036,street,178,182,Npcs.txt
+4450,Confiscator,NpcID enum (codigo),medium,Talker,8730,1036,street,193,212,Npcs.txt
+35,Gem Insetter,client npc.ini (tipo = UID; pode diferir do nome real),low,Socketer,350,1036,street,192,205,Npcs.txt
+1550,Blacksmith Lee,NpcID enum (codigo),medium,Type37,146,1036,street,192,200,Npcs.txt
+7763,Purification Stabilizer,Questinfo.ini (NPC citado na quest),high,Type38,9980,1036,street,182,199,Npcs.txt
+35015,Blessed Great Master,Questinfo.ini (NPC citado na quest),high,Type36,6690,1036,street,178,208,Npcs.txt
+5680,Breeder,NpcID enum (codigo),medium,Type30,3200,1036,street,189,212,Npcs.txt
+10003,Guild Director,Questinfo.ini (NPC citado na quest),high,Talker,150,1002,newplain,399,392,Npcs.txt
+101627,Pheonix Boxer,NpcID enum (codigo),medium,Talker,6420,1020,canyon,552,559,Npcs.txt
+30101,Snakeman Leader,Questinfo.ini (NPC citado na quest),high,Talker,7290,1020,canyon,88,387,Npcs.txt
+30105,Heresy Snakeman Leader,Questinfo.ini (NPC citado na quest),high,Talker,7342,1020,canyon,441,451,Npcs.txt
+10028,WH Ape,NpcID enum (codigo),medium,Fixed,80,1020,canyon,576,542,Npcs.txt
+10029,Shop 10029 - canyon,sugerido (tipo+id+mapa),placeholder,Shop,50,1020,canyon,560,508,Npcs.txt
+10030,Shop 10030 - canyon,sugerido (tipo+id+mapa),placeholder,Shop,30,1020,canyon,550,542,Npcs.txt
+10037,Talker 10037 - canyon,sugerido (tipo+id+mapa),placeholder,Talker,270,1020,canyon,824,601,Npcs.txt
+10038,Talker 10038 - canyon,sugerido (tipo+id+mapa),placeholder,Talker,270,1020,canyon,491,731,Npcs.txt
+10039,Talker 10039 - canyon,sugerido (tipo+id+mapa),placeholder,Talker,270,1020,canyon,106,394,Npcs.txt
+10053,Ape City Conductress,NpcID enum (codigo),medium,Type29,286,1020,canyon,566,622,Npcs.txt
+8291,Carpenter Jack,Questinfo.ini (NPC citado na quest),high,Talker,10931,1020,canyon,838,545,Npcs.txt
+8293,Ardente Taoist,Questinfo.ini (NPC citado na quest),high,Talker,10953,1020,canyon,366,304,Npcs.txt
+8294,Tempest Taoist,Questinfo.ini (NPC citado na quest),high,Talker,10963,1020,canyon,364,295,Npcs.txt
+8295,Breeze Pupil,Questinfo.ini (NPC citado na quest),high,Talker,10973,1020,canyon,356,315,Npcs.txt
+8296,Moon Maiden,Questinfo.ini (NPC citado na quest),high,Talker,10863,1020,canyon,272,438,Npcs.txt
+8297,Harmony Taoist,Questinfo.ini (NPC citado na quest),high,Talker,10873,1020,canyon,265,429,Npcs.txt
+8299,Poison Master,Questinfo.ini (NPC citado na quest),high,Talker,10893,1020,canyon,442,78,Npcs.txt
+8304,Apothecary,Questinfo.ini (NPC citado na quest),high,Talker,10833,1020,canyon,848,540,Npcs.txt
+8448,Taoist Spring,Questinfo.ini (NPC citado na quest),high,Talker,10200,1000,desert,299,461,Npcs.txt
+2003,AM Captain,NpcID enum (codigo),medium,Talker,1766,5000,mine-one,566,620,Npcs.txt
+4352,Holy Phoenix Cup,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,40,1020,canyon,557,559,Npcs.txt
+4357,Shop 4357 - canyon,sugerido (tipo+id+mapa),placeholder,Shop,10,1020,canyon,531,512,Npcs.txt
+10002,Barber,Questinfo.ini (NPC citado na quest),high,Talker,26,1002,newplain,412,376,Npcs.txt
+1,Storekeeper,Questinfo.ini (NPC citado na quest),high,DialogAndGui,10,1002,newplain,415,351,Npcs.txt
+4,Armorer,Questinfo.ini (NPC citado na quest),high,DialogAndGui,40,1002,newplain,412,366,Npcs.txt
+8,Warehouseman,Questinfo.ini (NPC citado na quest),high,Fixed,80,1002,newplain,409,351,Npcs.txt
+423,Cauldron,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,2706,1002,newplain,412,361,Npcs.txt
+30161,Furniture Store,NpcID enum (codigo),medium,Talker,8120,1002,newplain,409,370,Npcs.txt
+10063,Shopboy,NpcID enum (codigo),medium,Talker,5020,1002,newplain,424,350,Npcs.txt
+3,Pharmacist,Questinfo.ini (NPC citado na quest),high,DialogAndGui,30,1002,newplain,466,327,Npcs.txt
+101611,Tc Boxer,NpcID enum (codigo),medium,Talker,1056,1002,newplain,350,335,Npcs.txt
+2001,TC Captain,Questinfo.ini (NPC citado na quest),high,Talker,1746,1002,newplain,435,438,Npcs.txt
+10050,Twin City Conductress,NpcID enum (codigo),medium,Type29,286,1002,newplain,435,440,Npcs.txt
+43,Jail Join,NpcID enum (codigo),medium,Talker,394,1002,newplain,513,359,Npcs.txt
+8158,Team Pk Manager,NpcID enum (codigo),medium,Talker,9730,1002,newplain,419,241,Npcs.txt
+7879,Elite PK Envoy,Questinfo.ini (NPC citado na quest),high,Talker,8500,1002,newplain,430,247,Npcs.txt
+5,Blacksmith,Questinfo.ini (NPC citado na quest),high,DialogAndGui,50,1002,newplain,452,330,Npcs.txt
+380,Guild Conductor,NpcID enum (codigo),medium,Talker,1156,1002,newplain,350,337,Npcs.txt
+5601,Talker 5601 - newplain,sugerido (tipo+id+mapa),placeholder,Talker,6330,1002,newplain,388,383,Npcs.txt
+5600,Mount Trainer,Questinfo.ini (NPC citado na quest),high,Talker,6327,1002,newplain,388,386,Npcs.txt
+10021,Arena Npc,NpcID enum (codigo),medium,Talker,260,1002,newplain,459,291,Npcs.txt
+10020,Beautician 10020 - newplain,sugerido (tipo+id+mapa),placeholder,Beautician,250,1002,newplain,459,331,Npcs.txt
+5533,Clan Npc,NpcID enum (codigo),medium,Talker,9450,1002,newplain,411,392,Npcs.txt
+101611,Tc Boxer,NpcID enum (codigo),medium,Talker,1056,1002,newplain,350,335,Npcs.txt
+662,Class Pk Envoy,NpcID enum (codigo),medium,Talker,1360,1002,newplain,436,241,Npcs.txt
+3836,Ofline TG Npc,NpcID enum (codigo),medium,Talker,3016,601,Nhouse04,57,54,Npcs.txt
+924,Lottery Lady Luck,NpcID enum (codigo),medium,Talker,9230,700,arena-none,40,50,Npcs.txt
+925,Talker 925 - arena-none,sugerido (tipo+id+mapa),placeholder,Talker,9257,700,arena-none,57,57,Npcs.txt
+926,Talker 926 - arena-none,sugerido (tipo+id+mapa),placeholder,Talker,9277,700,arena-none,45,57,Npcs.txt
+927,Talker 927 - arena-none,sugerido (tipo+id+mapa),placeholder,Talker,9267,700,arena-none,45,45,Npcs.txt
+928,Talker 928 - arena-none,sugerido (tipo+id+mapa),placeholder,Talker,9287,700,arena-none,57,45,Npcs.txt
+930,Talker 930 - arena-none,sugerido (tipo+id+mapa),placeholder,Talker,9297,700,arena-none,51,51,Npcs.txt
+3952,Lottery Collector Wong,NpcID enum (codigo),medium,Talker,3236,700,arena-none,34,42,Npcs.txt
+8439,Vice General Dong,Questinfo.ini (NPC citado na quest),high,Talker,10110,1000,desert,486,346,Npcs.txt
+8438,Ironsmith Li,Questinfo.ini (NPC citado na quest),high,Talker,10100,1000,desert,481,341,Npcs.txt
+8434,Ke Yulun,Questinfo.ini (NPC citado na quest),high,Talker,10070,1000,desert,559,795,Npcs.txt
+8440,Wan Ying,Questinfo.ini (NPC citado na quest),high,Talker,10120,1000,desert,475,331,Npcs.txt
+8441,Han Cheng,Questinfo.ini (NPC citado na quest),high,Talker,10130,1000,desert,585,319,Npcs.txt
+8444,Convoy Vice Leader Ling,Questinfo.ini (NPC citado na quest),high,Talker,10160,1000,desert,345,247,Npcs.txt
+8437,General Zhu Ge,Questinfo.ini (NPC citado na quest),high,Talker,10090,1000,desert,472,345,Npcs.txt
+10016,Shop 10016 - desert,sugerido (tipo+id+mapa),placeholder,Shop,236,1000,desert,480,324,Npcs.txt
+10,Blacksmith,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,9890,1000,desert,486,621,Npcs.txt
+4573,Ghoul Kong,Questinfo.ini (NPC citado na quest),high,Talker,4027,1000,desert,85,313,Npcs.txt
+4583,Kunlun Wanderer,Questinfo.ini (NPC citado na quest),high,Talker,3910,1000,desert,490,618,Npcs.txt
+4702,Master Mo Mo,Questinfo.ini (NPC citado na quest),high,Talker,4750,1000,desert,520,589,Npcs.txt
+101623,Ape Boxer,NpcID enum (codigo),medium,Talker,6400,1000,desert,481,630,Npcs.txt
+30104,Talker 30104 - desert,sugerido (tipo+id+mapa),placeholder,Talker,7310,1000,desert,519,615,Npcs.txt
+10011,WH Desert,NpcID enum (codigo),medium,Fixed,200,1000,desert,471,629,Npcs.txt
+10015,Shop 10015 - desert,sugerido (tipo+id+mapa),placeholder,Shop,9880,1000,desert,486,623,Npcs.txt
+10040,Talker 10040 - desert,sugerido (tipo+id+mapa),placeholder,Talker,270,1000,desert,225,205,Npcs.txt
+10041,Talker 10041 - desert,sugerido (tipo+id+mapa),placeholder,Talker,270,1000,desert,793,549,Npcs.txt
+10051,Desert City Conductress,NpcID enum (codigo),medium,Type29,280,1000,desert,478,631,Npcs.txt
+4622,Stone Column,Questinfo.ini (NPC citado na quest),high,Talker,3870,1000,desert,386,103,Npcs.txt
+9,Pharmacist,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,30,1000,desert,511,630,Npcs.txt
+6135,Stake,SobNpcs.txt,high,Talker,4190,1000,desert,472,645,Npcs.txt
+8429,Withered Tree1,NpcID enum (codigo),medium,Talker,10040,1000,desert,535,735,Npcs.txt
+8430,Withered Tree2,NpcID enum (codigo),medium,Talker,10040,1000,desert,534,724,Npcs.txt
+8431,Withered Tree3,NpcID enum (codigo),medium,Talker,10040,1000,desert,552,719,Npcs.txt
+8445,Spring General Xu,Questinfo.ini (NPC citado na quest),high,Talker,10170,1000,desert,311,481,Npcs.txt
+8446,Spring Vice General Ou,Questinfo.ini (NPC citado na quest),high,Talker,10180,1000,desert,301,478,Npcs.txt
+8447,Sculptor He,Questinfo.ini (NPC citado na quest),high,Talker,10190,1000,desert,311,478,Npcs.txt
+8448,Taoist Spring,Questinfo.ini (NPC citado na quest),high,Talker,10200,1000,desert,299,461,Npcs.txt
+8449,Spring Soldier Zhao,Questinfo.ini (NPC citado na quest),high,Talker,23070,1000,desert,288,464,Npcs.txt
+8450,Elder Jiang,Questinfo.ini (NPC citado na quest),high,Talker,10220,1000,desert,308,456,Npcs.txt
+8451,st1 Tree Seed,NpcID enum (codigo),medium,Talker,10230,1000,desert,968,662,Npcs.txt
+8452,nd2 Tree Seed,NpcID enum (codigo),medium,Talker,10230,1000,desert,963,684,Npcs.txt
+8453,rd3 Tree Seed,NpcID enum (codigo),medium,Talker,10230,1000,desert,943,663,Npcs.txt
+2004,DC Captain,Questinfo.ini (NPC citado na quest),high,Talker,1770,5000,mine-one,476,631,Npcs.txt
+2006,M Captain,NpcID enum (codigo),medium,Talker,1797,5000,mine-one,80,318,Npcs.txt
+4353,Shop 4353 - desert,sugerido (tipo+id+mapa),placeholder,Shop,9900,1000,desert,493,612,Npcs.txt
+4354,Shop 4354 - desert,sugerido (tipo+id+mapa),placeholder,Shop,9910,1000,desert,494,609,Npcs.txt
+4358,Shop 4358 - desert,sugerido (tipo+id+mapa),placeholder,Shop,9920,1000,desert,486,627,Npcs.txt
+4359,Shop 4359 - desert,sugerido (tipo+id+mapa),placeholder,Shop,9930,1000,desert,493,616,Npcs.txt
+7832,Talker 7832 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,620,467,Npcs.txt
+7833,Talker 7833 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,616,494,Npcs.txt
+7834,Talker 7834 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,646,507,Npcs.txt
+7835,Talker 7835 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,640,483,Npcs.txt
+7836,Talker 7836 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,617,508,Npcs.txt
+7837,Talker 7837 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,635,460,Npcs.txt
+7838,Talker 7838 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,630,498,Npcs.txt
+7839,Talker 7839 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,615,449,Npcs.txt
+7840,Talker 7840 - desert,sugerido (tipo+id+mapa),placeholder,Talker,8170,1000,desert,613,456,Npcs.txt
+10043,Talker 10043 - d antre01,sugerido (tipo+id+mapa),placeholder,Talker,270,1001,d antre01,472,366,Npcs.txt
+4652,Shark,Questinfo.ini (NPC citado na quest),high,Talker,4066,1001,d antre01,310,631,Npcs.txt
+9391,Pirate Lord,Questinfo.ini (NPC citado na quest),high,Talker,50070,5000,mine-one,55,53,Npcs.txt
+4972,Wind Sage,Questinfo.ini (NPC citado na quest),high,Talker,50027,1004,forum,33,41,Npcs.txt
+400,Archer God,Questinfo.ini (NPC citado na quest),high,Talker,50017,1004,forum,33,53,Npcs.txt
+10000,Taoist Moon,Questinfo.ini (NPC citado na quest),high,Talker,50050,1004,forum,56,33,Npcs.txt
+10001,Warrior God,Questinfo.ini (NPC citado na quest),high,Talker,50006,1004,forum,33,65,Npcs.txt
+10022,Trojan Star,Questinfo.ini (NPC citado na quest),high,Talker,50040,1004,forum,44,33,Npcs.txt
+8314,Head Abbot,Questinfo.ini (NPC citado na quest),high,Talker,50037,1004,forum,34,33,Npcs.txt
+8591,Sub Class Manager,NpcID enum (codigo),medium,Talker,11210,5000,mine-one,55,52,Npcs.txt
+8591,Sub Class Manager,NpcID enum (codigo),medium,Talker,11210,5000,mine-one,50,33,Npcs.txt
+5518,Talker 5518 - horse,sugerido (tipo+id+mapa),placeholder,Talker,5844,1006,horse,17,33,Npcs.txt
+5519,Talker 5519 - horse,sugerido (tipo+id+mapa),placeholder,Talker,5850,1006,horse,17,22,Npcs.txt
+5520,Talker 5520 - horse,sugerido (tipo+id+mapa),placeholder,Talker,5864,1006,horse,21,33,Npcs.txt
+5591,Talker 5591 - horse,sugerido (tipo+id+mapa),placeholder,Talker,7630,1006,horse,24,22,Npcs.txt
+5592,Talker 5592 - horse,sugerido (tipo+id+mapa),placeholder,Talker,7644,1006,horse,25,33,Npcs.txt
+5593,Talker 5593 - horse,sugerido (tipo+id+mapa),placeholder,Talker,7650,1006,horse,32,22,Npcs.txt
+5594,Talker 5594 - horse,sugerido (tipo+id+mapa),placeholder,Talker,7664,1006,horse,29,33,Npcs.txt
+832662,Tinter,NpcID enum (codigo),medium,Talker,5030,1008,grocery,26,16,Npcs.txt
+4026306,Start Npc,NpcID enum (codigo),medium,Talker,190,1010,newbie,88,42,Npcs.txt
+10017,Shop 10017 - tiger,sugerido (tipo+id+mapa),placeholder,Shop,230,1013,tiger,46,22,Npcs.txt
+11,Armorer,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,116,1011,woods,202,242,Npcs.txt
+8439,Vice General Dong,Questinfo.ini (NPC citado na quest),high,Talker,10110,1000,desert,486,346,Npcs.txt
+8292,Jack Daniel,Questinfo.ini (NPC citado na quest),high,Talker,10943,1011,woods,221,395,Npcs.txt
+4478,Windwalker Promotion Manager,client npc.ini (tipo = UID; pode diferir do nome real),low,Talker,6850,1011,woods,95,426,Npcs.txt
+4479,Windwalker,client npc.ini (tipo = UID; pode diferir do nome real),low,Talker,6850,1011,woods,95,434,Npcs.txt
+4480,Talker 4480 - woods,sugerido (tipo+id+mapa),placeholder,Talker,6850,1011,woods,103,426,Npcs.txt
+4481,Talker 4481 - woods,sugerido (tipo+id+mapa),placeholder,Talker,6850,1011,woods,103,434,Npcs.txt
+8278,Militia Tiger,Questinfo.ini (NPC citado na quest),high,Talker,4460,1011,woods,656,698,Npcs.txt
+8270,Intelligence Agent,Questinfo.ini (NPC citado na quest),high,Talker,4380,1011,woods,215,360,Npcs.txt
+8272,Bandit Boss,NpcID enum (codigo),medium,Talker,4406,1011,woods,227,404,Npcs.txt
+11,Armorer,client npc.ini (tipo = UID; pode diferir do nome real),low,Shop,116,1011,woods,202,242,Npcs.txt
+4501,Dealer Shen,Questinfo.ini (NPC citado na quest),high,Talker,6767,1011,woods,779,477,Npcs.txt
+4502,Shen Junior,NpcID enum (codigo),medium,Talker,6776,1011,woods,924,556,Npcs.txt
+4582,Villager Chou,Questinfo.ini (NPC citado na quest),high,Talker,4140,1011,woods,788,456,Npcs.txt
+421,Norbert,NpcID enum (codigo),medium,Talker,9210,1011,woods,810,458,Npcs.txt
+101625,Desert Boxer,NpcID enum (codigo),medium,Talker,6418,1011,woods,206,255,Npcs.txt
+3216,Mr Free,NpcID enum (codigo),medium,Talker,1320,1011,woods,154,238,Npcs.txt
+10012,w H Pheonix,NpcID enum (codigo),medium,Fixed,210,1011,woods,227,246,Npcs.txt
+10013,Shop 10013 - woods,sugerido (tipo+id+mapa),placeholder,Shop,220,1011,woods,197,226,Npcs.txt
+10014,Shop 10014 - woods,sugerido (tipo+id+mapa),placeholder,Shop,230,1011,woods,189,252,Npcs.txt
+10034,Talker 10034 - woods,sugerido (tipo+id+mapa),placeholder,Talker,270,1011,woods,538,772,Npcs.txt
+10035,Talker 10035 - woods,sugerido (tipo+id+mapa),placeholder,Talker,270,1011,woods,734,452,Npcs.txt
+10036,Talker 10036 - woods,sugerido (tipo+id+mapa),placeholder,Talker,270,1011,woods,67,423,Npcs.txt
+10052,Pheonix City Conductress,NpcID enum (codigo),medium,Type29,287,1011,woods,228,255,Npcs.txt
+3664,Crystal Riddler,NpcID enum (codigo),medium,Talker,2480,1011,woods,398,29,Npcs.txt
+8267,Yu Jing,Questinfo.ini (NPC citado na quest),high,Talker,4357,1011,woods,13,373,Npcs.txt
+8268,Hunter Wong,Questinfo.ini (NPC citado na quest),high,Talker,4364,1011,woods,790,447,Npcs.txt
+8269,Naughty Boy,NpcID enum (codigo),medium,Talker,4370,1011,woods,770,460,Npcs.txt
+8273,Village Head,Questinfo.ini (NPC citado na quest),high,Talker,4410,1011,woods,772,475,Npcs.txt
+8274,Bold Boy,Questinfo.ini (NPC citado na quest),high,Talker,4420,1011,woods,761,473,Npcs.txt
+8275,Fur Dealer,Questinfo.ini (NPC citado na quest),high,Talker,4430,1011,woods,796,475,Npcs.txt
+8277,Militia Captain,Questinfo.ini (NPC citado na quest),high,Talker,4456,1011,woods,655,703,Npcs.txt
+8279,Militia Dragon,Questinfo.ini (NPC citado na quest),high,Talker,4472,1011,woods,661,704,Npcs.txt
+8280,Militia Leopard,Questinfo.ini (NPC citado na quest),high,Talker,4486,1011,woods,636,566,Npcs.txt
+8281,Warrant Of Arrest,Questinfo.ini (NPC citado na quest),high,Talker,4490,1011,woods,644,708,Npcs.txt
+8282,Talker 8282 - woods,sugerido (tipo+id+mapa),placeholder,Talker,2380,1011,woods,402,55,Npcs.txt
+8283,Talker 8283 - woods,sugerido (tipo+id+mapa),placeholder,Talker,2380,1011,woods,392,40,Npcs.txt
+8284,Talker 8284 - woods,sugerido (tipo+id+mapa),placeholder,Talker,2380,1011,woods,376,36,Npcs.txt
+8285,Talker 8285 - woods,sugerido (tipo+id+mapa),placeholder,Talker,2380,1011,woods,397,56,Npcs.txt
+8286,Talker 8286 - woods,sugerido (tipo+id+mapa),placeholder,Talker,2380,1011,woods,369,41,Npcs.txt
+6281,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,92,347,Npcs.txt
+6282,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,93,341,Npcs.txt
+6283,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,80,333,Npcs.txt
+6284,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,69,338,Npcs.txt
+6285,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,79,350,Npcs.txt
+6286,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,77,357,Npcs.txt
+6287,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,102,340,Npcs.txt
+6288,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,109,351,Npcs.txt
+6290,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,78,315,Npcs.txt
+6291,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,65,347,Npcs.txt
+6292,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,56,351,Npcs.txt
+6298,Stake,SobNpcs.txt,high,Talker,6793,1858,poker,52,65,Npcs.txt
+7762,WH Poker,NpcID enum (codigo),medium,Talker,81,1858,poker,55,60,Npcs.txt
+6299,Stake,SobNpcs.txt,high,Talker,6793,1860,poker02,52,65,Npcs.txt
+2002,PC Captain,NpcID enum (codigo),medium,Talker,1757,5000,mine-one,227,257,Npcs.txt
+4356,Shop 4356 - woods,sugerido (tipo+id+mapa),placeholder,Shop,16,1011,woods,168,238,Npcs.txt
+4437,Thief Chen,Questinfo.ini (NPC citado na quest),high,Talker,5970,1011,woods,33,398,Npcs.txt
+6291,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,65,347,Npcs.txt
+6292,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,56,351,Npcs.txt
+6290,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,78,315,Npcs.txt
+6281,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,92,347,Npcs.txt
+6282,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,93,341,Npcs.txt
+6283,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,80,333,Npcs.txt
+6284,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,69,338,Npcs.txt
+6285,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,79,350,Npcs.txt
+6286,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,77,357,Npcs.txt
+6287,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,102,340,Npcs.txt
+6288,Stake,SobNpcs.txt,high,Talker,4700,1011,woods,109,351,Npcs.txt
+2002,PC Captain,NpcID enum (codigo),medium,Talker,1757,1011,woods,227,257,Npcs.txt
+4356,Shop 4356 - woods,sugerido (tipo+id+mapa),placeholder,Shop,16,1011,woods,168,238,Npcs.txt
+4437,Thief Chen,Questinfo.ini (NPC citado na quest),high,Talker,5970,1011,woods,33,398,Npcs.txt
+4464,Veteran Hong,Questinfo.ini (NPC citado na quest),high,Talker,6837,1011,woods,194,260,Npcs.txt
+4465,Zhao Jian,NpcID enum (codigo),medium,Talker,6840,1011,woods,200,325,Npcs.txt
+8292,Jack Daniel,Questinfo.ini (NPC citado na quest),high,Talker,10943,1011,woods,221,395,Npcs.txt
+4478,Windwalker Promotion Manager,client npc.ini (tipo = UID; pode diferir do nome real),low,Talker,6850,1011,woods,95,426,Npcs.txt
+4479,Windwalker,client npc.ini (tipo = UID; pode diferir do nome real),low,Talker,6850,1011,woods,95,434,Npcs.txt
+4480,Talker 4480 - woods,sugerido (tipo+id+mapa),placeholder,Talker,6850,1011,woods,103,426,Npcs.txt
+4481,Talker 4481 - woods,sugerido (tipo+id+mapa),placeholder,Talker,6850,1011,woods,103,434,Npcs.txt
+8278,Militia Tiger,Questinfo.ini (NPC citado na quest),high,Talker,4460,1011,woods,656,698,Npcs.txt
+8270,Intelligence Agent,Questinfo.ini (NPC citado na quest),high,Talker,4380,1011,woods,215,360,Npcs.txt
+8272,Bandit Boss,NpcID enum (codigo),medium,Talker,4406,1011,woods,227,404,Npcs.txt
+4482,Scholar Wu,Questinfo.ini (NPC citado na quest),high,Talker,7576,1011,woods,214,231,Npcs.txt
+8551,Talker 8551 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,523,321,Npcs.txt
+8552,Talker 8552 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,599,347,Npcs.txt
+8554,Talker 8554 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,538,345,Npcs.txt
+8555,Talker 8555 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,630,429,Npcs.txt
+8551,Talker 8551 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,523,321,Npcs.txt
+8538,Alvis,Questinfo.ini (NPC citado na quest),high,Talker,10593,1015,island,321,192,Npcs.txt
+8546,Talker 8546 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,356,486,Npcs.txt
+8547,Talker 8547 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,397,591,Npcs.txt
+8548,Talker 8548 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,444,582,Npcs.txt
+8549,Talker 8549 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,391,550,Npcs.txt
+8550,Talker 8550 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,447,530,Npcs.txt
+8529,Soldier Guan,Questinfo.ini (NPC citado na quest),high,Talker,10503,1015,island,563,606,Npcs.txt
+8530,Soldier Xu,Questinfo.ini (NPC citado na quest),high,Talker,10513,1015,island,457,495,Npcs.txt
+8531,Soldier Zheng,Questinfo.ini (NPC citado na quest),high,Talker,10523,1015,island,361,583,Npcs.txt
+8532,Soldier Fei,Questinfo.ini (NPC citado na quest),high,Talker,10533,1015,island,441,724,Npcs.txt
+8559,Southwest Island,NpcID enum (codigo),medium,Talker,10693,1015,island,277,274,Npcs.txt
+8558,West Island,NpcID enum (codigo),medium,Talker,10693,1015,island,395,651,Npcs.txt
+8556,Northeast Island,NpcID enum (codigo),medium,Talker,10693,1015,island,570,628,Npcs.txt
+30115,Green Snake,NpcID enum (codigo),medium,Talker,7410,1015,island,468,203,Npcs.txt
+4569,Ye Sheng,NpcID enum (codigo),medium,Talker,3986,1015,island,324,400,Npcs.txt
+4576,Season Door,NpcID enum (codigo),medium,Talker,4210,1015,island,354,402,Npcs.txt
+4575,Time Door,Questinfo.ini (NPC citado na quest),high,Talker,4200,1015,island,340,404,Npcs.txt
+4577,Dream Door,NpcID enum (codigo),medium,Talker,4220,1015,island,362,397,Npcs.txt
+4579,Net Peddler,NpcID enum (codigo),medium,Talker,4086,1015,island,321,371,Npcs.txt
+101629,Bird Boxer,NpcID enum (codigo),medium,Talker,6430,1015,island,714,561,Npcs.txt
+10023,Shop 10023 - island,sugerido (tipo+id+mapa),placeholder,Shop,10,1015,island,721,541,Npcs.txt
+10025,Shop 10025 - island,sugerido (tipo+id+mapa),placeholder,Shop,50,1015,island,751,544,Npcs.txt
+10026,Shop 10026 - island,sugerido (tipo+id+mapa),placeholder,Shop,30,1015,island,765,542,Npcs.txt
+10027,WH Bird,NpcID enum (codigo),medium,Fixed,80,1015,island,716,541,Npcs.txt
+10056,Bird City Conductress,NpcID enum (codigo),medium,Type29,280,1015,island,789,566,Npcs.txt
+8399,Talker 8399 - island,sugerido (tipo+id+mapa),placeholder,Talker,9568,1015,island,694,632,Npcs.txt
+8400,Talker 8400 - island,sugerido (tipo+id+mapa),placeholder,Talker,9568,1015,island,703,645,Npcs.txt
+8401,Talker 8401 - island,sugerido (tipo+id+mapa),placeholder,Talker,9568,1015,island,695,648,Npcs.txt
+8516,White Chrysanthemum,NpcID enum (codigo),medium,Talker,10373,1015,island,881,747,Npcs.txt
+8514,Ximen Qing,Questinfo.ini (NPC citado na quest),high,Talker,10353,5000,mine-one,907,648,Npcs.txt
+8515,Lily,NpcID enum (codigo),medium,Talker,10363,1015,island,758,781,Npcs.txt
+8517,Jasmine,NpcID enum (codigo),medium,Talker,10383,1015,island,853,575,Npcs.txt
+8518,Willow Leaf,NpcID enum (codigo),medium,Talker,10393,1015,island,790,509,Npcs.txt
+8522,Strange Box,Questinfo.ini (NPC citado na quest),high,Talker,10433,1015,island,920,650,Npcs.txt
+8525,Island General,Questinfo.ini (NPC citado na quest),high,Talker,10463,1015,island,586,735,Npcs.txt
+8526,Xi'er,Questinfo.ini (NPC citado na quest),high,Talker,10473,1015,island,574,743,Npcs.txt
+8527,Truth Taoist,Questinfo.ini (NPC citado na quest),high,Talker,10483,1015,island,579,741,Npcs.txt
+8528,Cook Yuan,Questinfo.ini (NPC citado na quest),high,Talker,10493,1015,island,586,730,Npcs.txt
+8533,Mystery Taoist,Questinfo.ini (NPC citado na quest),high,Talker,10547,1015,island,329,470,Npcs.txt
+8534,Vice General,Questinfo.ini (NPC citado na quest),high,Talker,10553,1015,island,347,464,Npcs.txt
+8535,Soldier Zhang,Questinfo.ini (NPC citado na quest),high,Talker,10563,1015,island,352,464,Npcs.txt
+8536,Soldier's Mother,Questinfo.ini (NPC citado na quest),high,Talker,10570,1015,island,360,393,Npcs.txt
+8537,Village Head,Questinfo.ini (NPC citado na quest),high,Talker,10583,1015,island,326,390,Npcs.txt
+8539,General Armand,Questinfo.ini (NPC citado na quest),high,Talker,10603,1015,island,332,295,Npcs.txt
+8540,Old Zhang,Questinfo.ini (NPC citado na quest),high,Talker,10613,1015,island,343,384,Npcs.txt
+8541,Harriet,Questinfo.ini (NPC citado na quest),high,Talker,10623,1015,island,332,366,Npcs.txt
+8542,Mulan,Questinfo.ini (NPC citado na quest),high,Talker,10633,1015,island,517,317,Npcs.txt
+8544,Fishing Net,NpcID enum (codigo),medium,Talker,10653,1015,island,345,379,Npcs.txt
+8545,Salted Fish,NpcID enum (codigo),medium,Talker,10663,1015,island,347,382,Npcs.txt
+8546,Talker 8546 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,390,494,Npcs.txt
+8548,Talker 8548 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,432,576,Npcs.txt
+8549,Talker 8549 - island,sugerido (tipo+id+mapa),placeholder,Talker,10673,1015,island,437,545,Npcs.txt
+8552,Talker 8552 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,599,347,Npcs.txt
+8553,Talker 8553 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,537,322,Npcs.txt
+8555,Talker 8555 - island,sugerido (tipo+id+mapa),placeholder,Talker,10683,1015,island,630,429,Npcs.txt
+8557,North Island,NpcID enum (codigo),medium,Talker,10693,1015,island,392,473,Npcs.txt
+8560,Central Island,NpcID enum (codigo),medium,Talker,10693,1015,island,517,321,Npcs.txt
+8561,Northwest Island,NpcID enum (codigo),medium,Talker,10693,1015,island,330,388,Npcs.txt
+8562,Adjutant Li,Questinfo.ini (NPC citado na quest),high,Talker,10703,1015,island,327,295,Npcs.txt
+2005,B Captain,NpcID enum (codigo),medium,Talker,1780,5000,mine-one,791,566,Npcs.txt
+7000,Guild Gate Keeper,NpcID enum (codigo),medium,Talker,1131,1038,faction,354,345,Npcs.txt
+101615,Guild Conductor4,NpcID enum (codigo),medium,Talker,1487,1038,faction,348,320,Npcs.txt
+101617,Guild Conductor3,NpcID enum (codigo),medium,Talker,1477,1038,faction,348,329,Npcs.txt
+101619,Guild Conductor2,NpcID enum (codigo),medium,Talker,1467,1038,faction,339,338,Npcs.txt
+101621,Guild Conductor1,NpcID enum (codigo),medium,Talker,1457,1038,faction,331,338,Npcs.txt
+101897,Guild Officer,NpcID enum (codigo),medium,Talker,8160,1038,faction,44,60,Npcs.txt
+4454,Flame2,NpcID enum (codigo),medium,Talker,6580,1038,faction,317,270,Npcs.txt
+4455,Flame3,NpcID enum (codigo),medium,Talker,6590,1038,faction,236,291,Npcs.txt
+4456,Flame4,NpcID enum (codigo),medium,Talker,6600,1038,faction,194,168,Npcs.txt
+4457,Flame5,NpcID enum (codigo),medium,Talker,6610,1038,faction,115,53,Npcs.txt
+4458,Flame6,NpcID enum (codigo),medium,Talker,6620,1038,faction,316,378,Npcs.txt
+4459,Flame7,NpcID enum (codigo),medium,Talker,6630,1038,faction,136,182,Npcs.txt
+4460,Flame8,NpcID enum (codigo),medium,Talker,6640,1038,faction,38,94,Npcs.txt
+4462,Flame10,NpcID enum (codigo),medium,Talker,6660,1038,faction,62,59,Npcs.txt
+4026307,GW Jail,NpcID enum (codigo),medium,Talker,310,6001,prison,28,68,Npcs.txt
+42,Jail Warden,NpcID enum (codigo),medium,Talker,380,6000,prison,35,69,Npcs.txt
+4542,Jail Confiscator,NpcID enum (codigo),medium,Talker,8737,6000,prison,28,68,Npcs.txt
+1000,Jail CP Admin,NpcID enum (codigo),medium,Talker,3331,6000,prison,31,68,Npcs.txt
+13125,Frozen Grotto Guardian5,NpcID enum (codigo),medium,Talker,9781,2055,icecrypt-lev5,539,578,Npcs.txt
+7781,Chi Master,NpcID enum (codigo),medium,Talker,8972,1004,forum,78,64,Npcs.txt
+7780,Sage,NpcID enum (codigo),medium,Talker,8962,1004,forum,78,60,Npcs.txt
+7779,Warlock,NpcID enum (codigo),medium,Talker,8952,1004,forum,78,56,Npcs.txt
+7778,Martial Artist,NpcID enum (codigo),medium,Talker,8942,1004,forum,78,52,Npcs.txt
+7777,Apothecary Sub Class,NpcID enum (codigo),medium,Talker,8932,1004,forum,78,48,Npcs.txt
+7776,Performer,NpcID enum (codigo),medium,Talker,8922,1004,forum,78,44,Npcs.txt
+31,General Bravery,Questinfo.ini (NPC citado na quest),high,Talker,310,1002,newplain,451,291,Npcs.txt
+4026313,Pk War Quit,NpcID enum (codigo),medium,Talker,310,1508,ympk,106,140,Npcs.txt
+870055,Upgrader 870055 - newplain,sugerido (tipo+id+mapa),placeholder,Upgrader,240,1002,newplain,421,352,Npcs.txt
+770001,Talker 770001 - canyon,sugerido (tipo+id+mapa),placeholder,Talker,7717,1020,canyon,574,620,Npcs.txt
+7863,Kit Merchant,NpcID enum (codigo),medium,Talker,8101,1036,street,204,212,Npcs.txt
+2091995,Shop 2091995 - mine-one,sugerido (tipo+id+mapa),placeholder,Shop,32854,5000,mine-one,50,51,Npcs.txt
+2091996,Shop 2091996 - mine-one,sugerido (tipo+id+mapa),placeholder,Shop,32854,5000,mine-one,50,52,Npcs.txt
+2091997,Shop 2091997 - mine-one,sugerido (tipo+id+mapa),placeholder,Shop,32854,5000,mine-one,50,53,Npcs.txt
+5681,Steed Seller,NpcID enum (codigo),medium,Type30,6220,1006,horse,37,34,Npcs.txt
+6055,Stake,SobNpcs.txt,high,Stake,487,1039,playground,101,189,SobNpcs.txt
+5050,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,71,199,SobNpcs.txt
+250121,PVP Points,SobNpcs.txt,high,Talker,8930,1002,newplain,438,346,SobNpcs.txt
+52100,Conq Ray,SobNpcs.txt,high,Talker,33247,3935,3935,421,367,SobNpcs.txt
+52101,Conq Ray,SobNpcs.txt,high,Talker,33247,3935,3935,191,310,SobNpcs.txt
+52102,Conq Ray,SobNpcs.txt,high,Talker,33246,3935,3935,198,407,SobNpcs.txt
+52103,Conq Ray,SobNpcs.txt,high,Talker,33244,3935,3935,304,518,SobNpcs.txt
+81702,PVE Points,SobNpcs.txt,high,Talker,8630,1002,newplain,432,360,SobNpcs.txt
+252525,Knight Game,SobNpcs.txt,high,Talker,34400,1002,newplain,403,286,SobNpcs.txt
+55057,Set+12,SobNpcs.txt,high,Talker,8630,5000,mine-one,80,80,SobNpcs.txt
+770003,Boss Points,SobNpcs.txt,high,Talker,36502,1002,newplain,463,367,SobNpcs.txt
+812132,Bless,SobNpcs.txt,high,Talker,6686,1036,street,212,207,SobNpcs.txt
+349190,Souls Trade,SobNpcs.txt,high,Talker,50110,1002,newplain,446,361,SobNpcs.txt
+770002,Online Points,SobNpcs.txt,high,Talker,1816,1002,newplain,413,379,SobNpcs.txt
+103003,Five(n)Out,SobNpcs.txt,high,Talker,50210,1002,newplain,472,309,SobNpcs.txt
+91345,Nobility PK,SobNpcs.txt,high,Talker,50230,1002,newplain,447,350,SobNpcs.txt
+103004,Frozen Sky,SobNpcs.txt,high,Talker,16570,1002,newplain,469,349,SobNpcs.txt
+52006,King Of The Hill,SobNpcs.txt,high,Talker,50190,1002,newplain,461,349,SobNpcs.txt
+790,Pass The Bomb,SobNpcs.txt,high,Talker,48440,1002,newplain,443,331,SobNpcs.txt
+782567,Set+12,SobNpcs.txt,high,Talker,8630,5000,mine-one,50,50,SobNpcs.txt
+2021,Stone Change,SobNpcs.txt,high,Talker,11906,1002,newplain,422,378,SobNpcs.txt
+778,Dragon War,SobNpcs.txt,high,Talker,50246,1002,newplain,422,330,SobNpcs.txt
+81703,Level Up Map,SobNpcs.txt,high,Talker,1577,1002,newplain,448,444,SobNpcs.txt
+52315,Boss Teleport,SobNpcs.txt,high,Talker,8942,1002,newplain,456,378,SobNpcs.txt
+52000,Treasure Thief,SobNpcs.txt,high,Talker,22270,1002,newplain,447,246,SobNpcs.txt
+770000,Elite Guild War,SobNpcs.txt,high,Talker,8500,1002,newplain,436,245,SobNpcs.txt
+91214,Fortress War,SobNpcs.txt,high,Talker,5122,1002,newplain,457,388,SobNpcs.txt
+12031,City War,SobNpcs.txt,high,Talker,2706,1002,newplain,421,368,SobNpcs.txt
+8311,Trinity Points,SobNpcs.txt,high,Talker,5106,1002,newplain,424,341,SobNpcs.txt
+779,Lastmanstanding,SobNpcs.txt,high,Talker,160,1002,newplain,476,346,SobNpcs.txt
+29680,Trinity Envoy,SobNpcs.txt,high,Talker,4450,1002,newplain,438,377,SobNpcs.txt
+30015,Item Promotion,SobNpcs.txt,high,Talker,5020,1004,forum,51,49,SobNpcs.txt
+25013,Sun King,SobNpcs.txt,high,Talker,50050,3983,3983,428,360,SobNpcs.txt
+821,[Twin City],SobNpcs.txt,high,Pole,1137,8839,babel,131,127,SobNpcs.txt
+822,[Phoenix City],SobNpcs.txt,high,Pole,1137,8839,babel,133,253,SobNpcs.txt
+823,[Ape City],SobNpcs.txt,high,Pole,1137,8839,babel,253,253,SobNpcs.txt
+824,[Desert City],SobNpcs.txt,high,Pole,1137,8839,babel,253,125,SobNpcs.txt
+825,[Bird Island],SobNpcs.txt,high,Pole,1137,8839,babel,195,207,SobNpcs.txt
+25005,Golden Cicada,SobNpcs.txt,high,Talker,50977,3983,3983,85,70,SobNpcs.txt
+810,Pole,SobNpcs.txt,high,Pole,1137,1038,faction,84,99,SobNpcs.txt
+852,Fortress War,SobNpcs.txt,high,Pole,1137,501,Arena Solo1[TOW Online],54,55,SobNpcs.txt
+830,Pole Domination,SobNpcs.txt,high,Stake,8686,1020,canyon,573,633,SobNpcs.txt
+831,Pole Domination,SobNpcs.txt,high,Stake,8686,1015,island,725,573,SobNpcs.txt
+832,Pole Domination,SobNpcs.txt,high,Stake,8686,1000,desert,509,710,SobNpcs.txt
+833,Pole Domination,SobNpcs.txt,high,Stake,8686,1011,woods,282,287,SobNpcs.txt
+820,Poll,SobNpcs.txt,high,Stake,31220,3868,3868,222,131,SobNpcs.txt
+516074,Left Gate,SobNpcs.txt,high,Gate,241,1038,faction,163,210,SobNpcs.txt
+516075,Right Gate,SobNpcs.txt,high,Gate,277,1038,faction,222,177,SobNpcs.txt
+20571,Flag Base[1],SobNpcs.txt,high,Stake,8686,2057,bp-flag,326,447,SobNpcs.txt
+20572,Flag Base[2],SobNpcs.txt,high,Stake,8686,2057,bp-flag,214,269,SobNpcs.txt
+20573,Flag Base[3],SobNpcs.txt,high,Stake,8686,2057,bp-flag,207,98,SobNpcs.txt
+516076,SW In Left Gate,SobNpcs.txt,high,Gate,277,3868,3868,175,138,SobNpcs.txt
+516077,SW In Right Gate,SobNpcs.txt,high,Gate,277,3868,3868,281,143,SobNpcs.txt
+516078,SW Left Gata,SobNpcs.txt,high,Gate,241,3868,3868,168,242,SobNpcs.txt
+516079,SW Midle Gate,SobNpcs.txt,high,Gate,241,3868,3868,223,220,SobNpcs.txt
+516080,SW Right Gate,SobNpcs.txt,high,Gate,241,3868,3868,290,241,SobNpcs.txt
+5009,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,50,170,SobNpcs.txt
+6003,Stake,SobNpcs.txt,high,Stake,427,1039,playground,32,208,SobNpcs.txt
+6002,Stake,SobNpcs.txt,high,Stake,427,1039,playground,28,212,SobNpcs.txt
+6001,Stake,SobNpcs.txt,high,Stake,427,1039,playground,24,216,SobNpcs.txt
+6000,Stake,SobNpcs.txt,high,Stake,427,1039,playground,20,220,SobNpcs.txt
+5461,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,479,271,SobNpcs.txt
+5460,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,475,275,SobNpcs.txt
+5459,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,471,279,SobNpcs.txt
+5458,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,467,283,SobNpcs.txt
+5457,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,463,287,SobNpcs.txt
+5456,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,459,291,SobNpcs.txt
+5455,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,455,295,SobNpcs.txt
+5454,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,447,303,SobNpcs.txt
+5453,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,443,307,SobNpcs.txt
+5452,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,439,311,SobNpcs.txt
+5451,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,435,315,SobNpcs.txt
+5450,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,431,319,SobNpcs.txt
+5449,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,427,323,SobNpcs.txt
+5448,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,423,327,SobNpcs.txt
+5447,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,415,335,SobNpcs.txt
+5445,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,407,343,SobNpcs.txt
+5446,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,411,339,SobNpcs.txt
+5444,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,403,347,SobNpcs.txt
+5442,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,395,355,SobNpcs.txt
+5443,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,399,351,SobNpcs.txt
+5441,Scarecrow,SobNpcs.txt,high,Scarecrow,1527,1039,playground,391,359,SobNpcs.txt
+5439,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,359,391,SobNpcs.txt
+5440,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,363,387,SobNpcs.txt
+5438,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,355,395,SobNpcs.txt
+5436,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,347,403,SobNpcs.txt
+5437,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,351,399,SobNpcs.txt
+5435,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,343,407,SobNpcs.txt
+5433,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,331,419,SobNpcs.txt
+5434,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,339,411,SobNpcs.txt
+5002,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,18,202,SobNpcs.txt
+5003,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,22,198,SobNpcs.txt
+5004,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,26,194,SobNpcs.txt
+5005,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,30,190,SobNpcs.txt
+5006,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,34,186,SobNpcs.txt
+5007,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,42,178,SobNpcs.txt
+5008,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,46,174,SobNpcs.txt
+5432,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,327,423,SobNpcs.txt
+5431,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,323,427,SobNpcs.txt
+5430,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,319,431,SobNpcs.txt
+5429,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,315,435,SobNpcs.txt
+5428,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,311,439,SobNpcs.txt
+5427,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,307,443,SobNpcs.txt
+5426,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,299,451,SobNpcs.txt
+5425,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,295,455,SobNpcs.txt
+5424,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,291,459,SobNpcs.txt
+5423,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,287,463,SobNpcs.txt
+5422,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,283,467,SobNpcs.txt
+5421,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,279,471,SobNpcs.txt
+5420,Scarecrow,SobNpcs.txt,high,Scarecrow,1037,1039,playground,275,475,SobNpcs.txt
+5419,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,454,246,SobNpcs.txt
+5418,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,450,250,SobNpcs.txt
+5417,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,446,254,SobNpcs.txt
+5416,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,442,258,SobNpcs.txt
+5415,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,438,262,SobNpcs.txt
+5414,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,434,266,SobNpcs.txt
+5413,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,430,270,SobNpcs.txt
+5412,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,422,278,SobNpcs.txt
+5411,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,418,282,SobNpcs.txt
+5410,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,414,286,SobNpcs.txt
+5409,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,410,290,SobNpcs.txt
+5408,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,406,294,SobNpcs.txt
+5407,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,402,298,SobNpcs.txt
+5406,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,398,302,SobNpcs.txt
+5405,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,390,310,SobNpcs.txt
+5404,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,386,314,SobNpcs.txt
+5403,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,382,318,SobNpcs.txt
+5402,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,378,322,SobNpcs.txt
+5401,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,374,326,SobNpcs.txt
+5400,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,370,330,SobNpcs.txt
+5399,Scarecrow,SobNpcs.txt,high,Scarecrow,1007,1039,playground,366,334,SobNpcs.txt
+5398,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,338,362,SobNpcs.txt
+5397,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,334,366,SobNpcs.txt
+5396,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,330,370,SobNpcs.txt
+5395,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,326,374,SobNpcs.txt
+5394,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,322,378,SobNpcs.txt
+5393,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,318,382,SobNpcs.txt
+5392,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,314,386,SobNpcs.txt
+5391,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,306,394,SobNpcs.txt
+5390,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,302,398,SobNpcs.txt
+5389,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,298,402,SobNpcs.txt
+5388,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,294,406,SobNpcs.txt
+5387,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,290,410,SobNpcs.txt
+5386,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,286,414,SobNpcs.txt
+5385,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,282,418,SobNpcs.txt
+5384,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,274,426,SobNpcs.txt
+5383,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,270,430,SobNpcs.txt
+5382,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,266,434,SobNpcs.txt
+5381,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,262,438,SobNpcs.txt
+5380,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,258,442,SobNpcs.txt
+5379,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,254,446,SobNpcs.txt
+5378,Scarecrow,SobNpcs.txt,high,Scarecrow,977,1039,playground,250,450,SobNpcs.txt
+5377,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,429,221,SobNpcs.txt
+5376,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,425,225,SobNpcs.txt
+5375,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,421,229,SobNpcs.txt
+5374,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,417,233,SobNpcs.txt
+5373,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,413,237,SobNpcs.txt
+5372,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,409,241,SobNpcs.txt
+5371,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,405,245,SobNpcs.txt
+5370,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,397,253,SobNpcs.txt
+5369,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,393,257,SobNpcs.txt
+5368,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,389,261,SobNpcs.txt
+5367,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,385,265,SobNpcs.txt
+5366,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,381,269,SobNpcs.txt
+5365,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,377,273,SobNpcs.txt
+5364,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,373,277,SobNpcs.txt
+5363,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,365,285,SobNpcs.txt
+5362,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,361,289,SobNpcs.txt
+5361,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,357,293,SobNpcs.txt
+5360,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,353,297,SobNpcs.txt
+5359,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,349,301,SobNpcs.txt
+5358,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,345,305,SobNpcs.txt
+5357,Scarecrow,SobNpcs.txt,high,Scarecrow,947,1039,playground,341,309,SobNpcs.txt
+5356,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,313,337,SobNpcs.txt
+5355,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,309,341,SobNpcs.txt
+5354,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,305,345,SobNpcs.txt
+5353,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,301,349,SobNpcs.txt
+5352,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,297,353,SobNpcs.txt
+5351,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,293,357,SobNpcs.txt
+5350,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,289,361,SobNpcs.txt
+5349,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,281,369,SobNpcs.txt
+5348,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,277,373,SobNpcs.txt
+5347,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,273,377,SobNpcs.txt
+5346,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,269,381,SobNpcs.txt
+5345,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,265,385,SobNpcs.txt
+5344,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,261,389,SobNpcs.txt
+5343,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,257,393,SobNpcs.txt
+5342,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,249,401,SobNpcs.txt
+5341,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,245,405,SobNpcs.txt
+5340,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,241,409,SobNpcs.txt
+5339,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,237,413,SobNpcs.txt
+5338,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,233,417,SobNpcs.txt
+5337,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,229,421,SobNpcs.txt
+5336,Scarecrow,SobNpcs.txt,high,Scarecrow,917,1039,playground,225,425,SobNpcs.txt
+5335,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,404,196,SobNpcs.txt
+5334,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,400,200,SobNpcs.txt
+5333,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,396,204,SobNpcs.txt
+5332,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,392,208,SobNpcs.txt
+5331,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,388,212,SobNpcs.txt
+5330,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,384,216,SobNpcs.txt
+5329,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,380,220,SobNpcs.txt
+5328,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,372,228,SobNpcs.txt
+5327,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,368,232,SobNpcs.txt
+5326,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,364,236,SobNpcs.txt
+5325,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,360,240,SobNpcs.txt
+5324,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,356,244,SobNpcs.txt
+5323,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,352,248,SobNpcs.txt
+5322,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,348,252,SobNpcs.txt
+5321,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,340,260,SobNpcs.txt
+5320,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,336,264,SobNpcs.txt
+5319,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,332,268,SobNpcs.txt
+5318,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,328,272,SobNpcs.txt
+5317,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,324,276,SobNpcs.txt
+5316,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,320,280,SobNpcs.txt
+5315,Scarecrow,SobNpcs.txt,high,Scarecrow,887,1039,playground,316,284,SobNpcs.txt
+5314,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,288,312,SobNpcs.txt
+5313,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,284,316,SobNpcs.txt
+5312,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,280,320,SobNpcs.txt
+5311,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,276,324,SobNpcs.txt
+5310,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,272,328,SobNpcs.txt
+5309,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,268,332,SobNpcs.txt
+5308,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,264,336,SobNpcs.txt
+5307,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,256,344,SobNpcs.txt
+5306,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,252,348,SobNpcs.txt
+5305,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,248,352,SobNpcs.txt
+5304,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,244,356,SobNpcs.txt
+5303,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,240,360,SobNpcs.txt
+5302,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,236,364,SobNpcs.txt
+5301,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,232,368,SobNpcs.txt
+5300,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,224,376,SobNpcs.txt
+5299,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,220,380,SobNpcs.txt
+5298,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,216,384,SobNpcs.txt
+5297,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,212,388,SobNpcs.txt
+5296,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,208,392,SobNpcs.txt
+5295,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,204,396,SobNpcs.txt
+5294,Scarecrow,SobNpcs.txt,high,Scarecrow,857,1039,playground,200,400,SobNpcs.txt
+5293,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,379,171,SobNpcs.txt
+5292,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,375,175,SobNpcs.txt
+5291,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,371,179,SobNpcs.txt
+5290,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,367,183,SobNpcs.txt
+5289,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,363,187,SobNpcs.txt
+5288,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,359,191,SobNpcs.txt
+5287,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,355,195,SobNpcs.txt
+5286,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,347,203,SobNpcs.txt
+5285,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,343,207,SobNpcs.txt
+5284,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,339,211,SobNpcs.txt
+5283,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,335,215,SobNpcs.txt
+5282,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,331,219,SobNpcs.txt
+5281,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,327,223,SobNpcs.txt
+5280,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,323,227,SobNpcs.txt
+5279,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,315,235,SobNpcs.txt
+5278,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,311,239,SobNpcs.txt
+5277,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,307,243,SobNpcs.txt
+5276,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,303,247,SobNpcs.txt
+5275,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,299,251,SobNpcs.txt
+5274,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,295,255,SobNpcs.txt
+5273,Scarecrow,SobNpcs.txt,high,Scarecrow,827,1039,playground,291,259,SobNpcs.txt
+5272,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,263,287,SobNpcs.txt
+5271,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,259,291,SobNpcs.txt
+5270,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,255,295,SobNpcs.txt
+5269,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,251,299,SobNpcs.txt
+5268,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,247,303,SobNpcs.txt
+5267,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,243,307,SobNpcs.txt
+5266,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,239,311,SobNpcs.txt
+5265,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,231,319,SobNpcs.txt
+5264,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,227,323,SobNpcs.txt
+5263,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,223,327,SobNpcs.txt
+5262,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,219,331,SobNpcs.txt
+5261,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,215,335,SobNpcs.txt
+5260,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,211,339,SobNpcs.txt
+5259,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,207,343,SobNpcs.txt
+5258,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,199,351,SobNpcs.txt
+5257,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,195,355,SobNpcs.txt
+5256,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,191,359,SobNpcs.txt
+5255,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,187,363,SobNpcs.txt
+5254,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,183,367,SobNpcs.txt
+5253,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,179,371,SobNpcs.txt
+5252,Scarecrow,SobNpcs.txt,high,Scarecrow,797,1039,playground,175,375,SobNpcs.txt
+5251,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,339,131,SobNpcs.txt
+5250,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,335,135,SobNpcs.txt
+5249,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,331,139,SobNpcs.txt
+5248,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,327,143,SobNpcs.txt
+5247,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,323,147,SobNpcs.txt
+5246,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,319,151,SobNpcs.txt
+5245,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,315,155,SobNpcs.txt
+5244,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,307,163,SobNpcs.txt
+5243,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,303,167,SobNpcs.txt
+5242,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,299,171,SobNpcs.txt
+5241,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,295,175,SobNpcs.txt
+5240,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,291,179,SobNpcs.txt
+5239,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,287,183,SobNpcs.txt
+5238,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,283,187,SobNpcs.txt
+5237,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,275,195,SobNpcs.txt
+5236,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,271,199,SobNpcs.txt
+5235,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,267,203,SobNpcs.txt
+5234,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,263,207,SobNpcs.txt
+5233,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,259,211,SobNpcs.txt
+5232,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,255,215,SobNpcs.txt
+5231,Scarecrow,SobNpcs.txt,high,Scarecrow,767,1039,playground,251,219,SobNpcs.txt
+5230,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,223,247,SobNpcs.txt
+5229,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,219,251,SobNpcs.txt
+5228,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,215,255,SobNpcs.txt
+5227,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,211,259,SobNpcs.txt
+5226,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,207,263,SobNpcs.txt
+5225,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,203,267,SobNpcs.txt
+5224,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,199,271,SobNpcs.txt
+5223,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,191,279,SobNpcs.txt
+5222,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,187,283,SobNpcs.txt
+5221,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,183,287,SobNpcs.txt
+5220,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,179,291,SobNpcs.txt
+5219,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,175,295,SobNpcs.txt
+5218,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,171,299,SobNpcs.txt
+5217,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,167,303,SobNpcs.txt
+5216,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,159,311,SobNpcs.txt
+5215,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,155,315,SobNpcs.txt
+5214,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,151,319,SobNpcs.txt
+5213,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,147,323,SobNpcs.txt
+5212,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,143,327,SobNpcs.txt
+5211,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,139,331,SobNpcs.txt
+5210,Scarecrow,SobNpcs.txt,high,Scarecrow,737,1039,playground,135,335,SobNpcs.txt
+5209,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,314,106,SobNpcs.txt
+5208,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,310,110,SobNpcs.txt
+5207,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,306,114,SobNpcs.txt
+5206,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,302,118,SobNpcs.txt
+5205,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,298,122,SobNpcs.txt
+5204,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,294,126,SobNpcs.txt
+5203,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,290,130,SobNpcs.txt
+5202,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,282,138,SobNpcs.txt
+5201,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,278,142,SobNpcs.txt
+5200,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,274,146,SobNpcs.txt
+5199,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,270,150,SobNpcs.txt
+5198,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,266,154,SobNpcs.txt
+5197,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,262,158,SobNpcs.txt
+5196,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,258,162,SobNpcs.txt
+5195,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,250,170,SobNpcs.txt
+5194,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,246,174,SobNpcs.txt
+5193,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,242,178,SobNpcs.txt
+5192,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,238,182,SobNpcs.txt
+5191,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,234,186,SobNpcs.txt
+5190,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,230,190,SobNpcs.txt
+5189,Scarecrow,SobNpcs.txt,high,Scarecrow,707,1039,playground,226,194,SobNpcs.txt
+5188,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,198,222,SobNpcs.txt
+5187,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,194,226,SobNpcs.txt
+5186,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,190,230,SobNpcs.txt
+5185,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,186,234,SobNpcs.txt
+5184,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,182,238,SobNpcs.txt
+5183,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,178,242,SobNpcs.txt
+5182,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,174,246,SobNpcs.txt
+5181,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,166,254,SobNpcs.txt
+5180,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,162,258,SobNpcs.txt
+5179,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,158,262,SobNpcs.txt
+5178,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,154,266,SobNpcs.txt
+5177,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,150,270,SobNpcs.txt
+5176,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,146,274,SobNpcs.txt
+5175,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,142,278,SobNpcs.txt
+5174,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,134,286,SobNpcs.txt
+5173,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,130,290,SobNpcs.txt
+5172,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,126,294,SobNpcs.txt
+5171,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,122,298,SobNpcs.txt
+5170,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,118,302,SobNpcs.txt
+5169,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,114,306,SobNpcs.txt
+5168,Scarecrow,SobNpcs.txt,high,Scarecrow,677,1039,playground,110,310,SobNpcs.txt
+5167,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,289,81,SobNpcs.txt
+5166,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,285,85,SobNpcs.txt
+5165,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,281,89,SobNpcs.txt
+5164,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,277,93,SobNpcs.txt
+5163,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,273,97,SobNpcs.txt
+5162,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,269,101,SobNpcs.txt
+5161,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,265,105,SobNpcs.txt
+5160,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,257,113,SobNpcs.txt
+5159,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,253,117,SobNpcs.txt
+5158,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,249,121,SobNpcs.txt
+5157,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,245,125,SobNpcs.txt
+5156,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,241,129,SobNpcs.txt
+5155,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,237,133,SobNpcs.txt
+5154,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,233,137,SobNpcs.txt
+5153,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,225,145,SobNpcs.txt
+5152,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,221,149,SobNpcs.txt
+5151,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,217,153,SobNpcs.txt
+5150,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,213,157,SobNpcs.txt
+5149,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,209,161,SobNpcs.txt
+5148,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,205,165,SobNpcs.txt
+5147,Scarecrow,SobNpcs.txt,high,Scarecrow,647,1039,playground,201,169,SobNpcs.txt
+5146,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,173,197,SobNpcs.txt
+5145,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,169,201,SobNpcs.txt
+5144,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,165,205,SobNpcs.txt
+5143,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,161,209,SobNpcs.txt
+5142,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,157,213,SobNpcs.txt
+5141,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,153,217,SobNpcs.txt
+5140,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,149,221,SobNpcs.txt
+5139,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,141,229,SobNpcs.txt
+5138,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,137,233,SobNpcs.txt
+5137,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,133,237,SobNpcs.txt
+5136,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,129,241,SobNpcs.txt
+5135,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,125,245,SobNpcs.txt
+5134,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,121,249,SobNpcs.txt
+5133,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,117,253,SobNpcs.txt
+5132,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,109,261,SobNpcs.txt
+5131,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,105,265,SobNpcs.txt
+5130,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,101,269,SobNpcs.txt
+5129,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,97,273,SobNpcs.txt
+5128,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,93,277,SobNpcs.txt
+5127,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,89,281,SobNpcs.txt
+5126,Scarecrow,SobNpcs.txt,high,Scarecrow,617,1039,playground,85,285,SobNpcs.txt
+5125,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,264,56,SobNpcs.txt
+5124,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,260,60,SobNpcs.txt
+5123,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,256,64,SobNpcs.txt
+5122,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,252,68,SobNpcs.txt
+5121,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,248,72,SobNpcs.txt
+5120,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,244,76,SobNpcs.txt
+5119,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,240,80,SobNpcs.txt
+5118,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,232,88,SobNpcs.txt
+5117,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,228,92,SobNpcs.txt
+5116,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,224,96,SobNpcs.txt
+5115,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,220,100,SobNpcs.txt
+5114,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,216,104,SobNpcs.txt
+5113,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,212,108,SobNpcs.txt
+5112,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,208,112,SobNpcs.txt
+5111,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,200,120,SobNpcs.txt
+5110,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,196,124,SobNpcs.txt
+5109,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,192,128,SobNpcs.txt
+5108,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,188,132,SobNpcs.txt
+5107,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,184,136,SobNpcs.txt
+5106,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,180,140,SobNpcs.txt
+5105,Scarecrow,SobNpcs.txt,high,Scarecrow,587,1039,playground,176,144,SobNpcs.txt
+5104,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,148,172,SobNpcs.txt
+5103,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,144,176,SobNpcs.txt
+5102,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,140,180,SobNpcs.txt
+5101,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,136,184,SobNpcs.txt
+5100,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,132,188,SobNpcs.txt
+5099,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,128,192,SobNpcs.txt
+5098,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,124,196,SobNpcs.txt
+5097,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,116,204,SobNpcs.txt
+5096,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,112,208,SobNpcs.txt
+5095,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,108,212,SobNpcs.txt
+5094,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,104,216,SobNpcs.txt
+5093,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,100,220,SobNpcs.txt
+5092,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,96,224,SobNpcs.txt
+5091,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,92,228,SobNpcs.txt
+5090,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,84,236,SobNpcs.txt
+5089,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,80,240,SobNpcs.txt
+5088,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,76,244,SobNpcs.txt
+5087,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,72,248,SobNpcs.txt
+5086,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,68,252,SobNpcs.txt
+5085,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,64,256,SobNpcs.txt
+5084,Scarecrow,SobNpcs.txt,high,Scarecrow,557,1039,playground,60,260,SobNpcs.txt
+5083,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,239,31,SobNpcs.txt
+5082,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,235,35,SobNpcs.txt
+5081,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,231,39,SobNpcs.txt
+5080,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,227,43,SobNpcs.txt
+5079,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,223,47,SobNpcs.txt
+5078,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,219,51,SobNpcs.txt
+5077,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,215,55,SobNpcs.txt
+5076,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,207,63,SobNpcs.txt
+5075,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,203,67,SobNpcs.txt
+5074,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,199,71,SobNpcs.txt
+5073,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,195,75,SobNpcs.txt
+5072,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,191,79,SobNpcs.txt
+5071,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,187,83,SobNpcs.txt
+5070,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,183,87,SobNpcs.txt
+5069,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,175,95,SobNpcs.txt
+5068,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,171,99,SobNpcs.txt
+5067,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,167,103,SobNpcs.txt
+5066,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,163,107,SobNpcs.txt
+5065,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,159,111,SobNpcs.txt
+5064,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,155,115,SobNpcs.txt
+5063,Scarecrow,SobNpcs.txt,high,Scarecrow,527,1039,playground,151,119,SobNpcs.txt
+5062,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,123,147,SobNpcs.txt
+5061,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,119,151,SobNpcs.txt
+5060,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,115,155,SobNpcs.txt
+5059,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,111,159,SobNpcs.txt
+5058,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,107,163,SobNpcs.txt
+5057,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,103,167,SobNpcs.txt
+5056,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,99,171,SobNpcs.txt
+5055,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,91,179,SobNpcs.txt
+5054,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,87,183,SobNpcs.txt
+5053,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,83,187,SobNpcs.txt
+5052,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,79,191,SobNpcs.txt
+5051,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,75,195,SobNpcs.txt
+5049,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,67,203,SobNpcs.txt
+5048,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,59,211,SobNpcs.txt
+5047,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,55,215,SobNpcs.txt
+5046,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,51,219,SobNpcs.txt
+5045,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,47,223,SobNpcs.txt
+5044,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,43,227,SobNpcs.txt
+5043,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,39,231,SobNpcs.txt
+5042,Scarecrow,SobNpcs.txt,high,Scarecrow,497,1039,playground,35,235,SobNpcs.txt
+5041,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,214,6,SobNpcs.txt
+5040,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,210,10,SobNpcs.txt
+5039,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,206,14,SobNpcs.txt
+5038,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,202,18,SobNpcs.txt
+5037,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,198,22,SobNpcs.txt
+5036,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,194,26,SobNpcs.txt
+5035,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,190,30,SobNpcs.txt
+5034,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,182,38,SobNpcs.txt
+5033,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,178,42,SobNpcs.txt
+5032,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,174,46,SobNpcs.txt
+5031,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,170,50,SobNpcs.txt
+5030,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,166,54,SobNpcs.txt
+5029,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,162,58,SobNpcs.txt
+5028,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,158,62,SobNpcs.txt
+5027,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,150,70,SobNpcs.txt
+5026,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,146,74,SobNpcs.txt
+5025,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,142,78,SobNpcs.txt
+5024,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,138,82,SobNpcs.txt
+5023,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,134,86,SobNpcs.txt
+5022,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,130,90,SobNpcs.txt
+5021,Scarecrow,SobNpcs.txt,high,Scarecrow,467,1039,playground,126,94,SobNpcs.txt
+5020,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,98,122,SobNpcs.txt
+5019,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,94,126,SobNpcs.txt
+5018,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,90,130,SobNpcs.txt
+5017,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,86,134,SobNpcs.txt
+5016,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,82,138,SobNpcs.txt
+5015,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,78,142,SobNpcs.txt
+5014,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,74,146,SobNpcs.txt
+5013,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,66,154,SobNpcs.txt
+5012,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,62,158,SobNpcs.txt
+5011,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,58,162,SobNpcs.txt
+5010,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,54,166,SobNpcs.txt
+5001,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,14,206,SobNpcs.txt
+5000,Scarecrow,SobNpcs.txt,high,Scarecrow,437,1039,playground,10,210,SobNpcs.txt
+6004,Stake,SobNpcs.txt,high,Stake,427,1039,playground,36,204,SobNpcs.txt
+6005,Stake,SobNpcs.txt,high,Stake,427,1039,playground,40,200,SobNpcs.txt
+6006,Stake,SobNpcs.txt,high,Stake,427,1039,playground,44,196,SobNpcs.txt
+6007,Stake,SobNpcs.txt,high,Stake,427,1039,playground,52,188,SobNpcs.txt
+6008,Stake,SobNpcs.txt,high,Stake,427,1039,playground,56,184,SobNpcs.txt
+6009,Stake,SobNpcs.txt,high,Stake,427,1039,playground,60,180,SobNpcs.txt
+6010,Stake,SobNpcs.txt,high,Stake,427,1039,playground,64,176,SobNpcs.txt
+6011,Stake,SobNpcs.txt,high,Stake,427,1039,playground,68,172,SobNpcs.txt
+6012,Stake,SobNpcs.txt,high,Stake,427,1039,playground,72,168,SobNpcs.txt
+6013,Stake,SobNpcs.txt,high,Stake,427,1039,playground,76,164,SobNpcs.txt
+6014,Stake,SobNpcs.txt,high,Stake,427,1039,playground,84,156,SobNpcs.txt
+6015,Stake,SobNpcs.txt,high,Stake,427,1039,playground,88,152,SobNpcs.txt
+6016,Stake,SobNpcs.txt,high,Stake,427,1039,playground,92,148,SobNpcs.txt
+6017,Stake,SobNpcs.txt,high,Stake,427,1039,playground,96,144,SobNpcs.txt
+6018,Stake,SobNpcs.txt,high,Stake,427,1039,playground,100,140,SobNpcs.txt
+6019,Stake,SobNpcs.txt,high,Stake,427,1039,playground,104,136,SobNpcs.txt
+6020,Stake,SobNpcs.txt,high,Stake,427,1039,playground,108,132,SobNpcs.txt
+6021,Stake,SobNpcs.txt,high,Stake,457,1039,playground,136,104,SobNpcs.txt
+6022,Stake,SobNpcs.txt,high,Stake,457,1039,playground,140,100,SobNpcs.txt
+6023,Stake,SobNpcs.txt,high,Stake,457,1039,playground,144,96,SobNpcs.txt
+6024,Stake,SobNpcs.txt,high,Stake,457,1039,playground,148,92,SobNpcs.txt
+6025,Stake,SobNpcs.txt,high,Stake,457,1039,playground,152,88,SobNpcs.txt
+6026,Stake,SobNpcs.txt,high,Stake,457,1039,playground,156,84,SobNpcs.txt
+6027,Stake,SobNpcs.txt,high,Stake,457,1039,playground,160,80,SobNpcs.txt
+6028,Stake,SobNpcs.txt,high,Stake,457,1039,playground,168,72,SobNpcs.txt
+6029,Stake,SobNpcs.txt,high,Stake,457,1039,playground,172,68,SobNpcs.txt
+6030,Stake,SobNpcs.txt,high,Stake,457,1039,playground,176,64,SobNpcs.txt
+6031,Stake,SobNpcs.txt,high,Stake,457,1039,playground,180,60,SobNpcs.txt
+6032,Stake,SobNpcs.txt,high,Stake,457,1039,playground,184,56,SobNpcs.txt
+6033,Stake,SobNpcs.txt,high,Stake,457,1039,playground,188,52,SobNpcs.txt
+6034,Stake,SobNpcs.txt,high,Stake,457,1039,playground,192,48,SobNpcs.txt
+6035,Stake,SobNpcs.txt,high,Stake,457,1039,playground,200,40,SobNpcs.txt
+6036,Stake,SobNpcs.txt,high,Stake,457,1039,playground,204,36,SobNpcs.txt
+6037,Stake,SobNpcs.txt,high,Stake,457,1039,playground,208,32,SobNpcs.txt
+6038,Stake,SobNpcs.txt,high,Stake,457,1039,playground,212,28,SobNpcs.txt
+6039,Stake,SobNpcs.txt,high,Stake,457,1039,playground,216,24,SobNpcs.txt
+6040,Stake,SobNpcs.txt,high,Stake,457,1039,playground,220,20,SobNpcs.txt
+6041,Stake,SobNpcs.txt,high,Stake,457,1039,playground,224,16,SobNpcs.txt
+6042,Stake,SobNpcs.txt,high,Stake,487,1039,playground,45,245,SobNpcs.txt
+6043,Stake,SobNpcs.txt,high,Stake,487,1039,playground,49,241,SobNpcs.txt
+6044,Stake,SobNpcs.txt,high,Stake,487,1039,playground,53,237,SobNpcs.txt
+6045,Stake,SobNpcs.txt,high,Stake,487,1039,playground,57,233,SobNpcs.txt
+6046,Stake,SobNpcs.txt,high,Stake,487,1039,playground,61,229,SobNpcs.txt
+6047,Stake,SobNpcs.txt,high,Stake,487,1039,playground,65,225,SobNpcs.txt
+6048,Stake,SobNpcs.txt,high,Stake,487,1039,playground,69,221,SobNpcs.txt
+6049,Stake,SobNpcs.txt,high,Stake,487,1039,playground,77,213,SobNpcs.txt
+6050,Stake,SobNpcs.txt,high,Stake,487,1039,playground,81,209,SobNpcs.txt
+6051,Stake,SobNpcs.txt,high,Stake,487,1039,playground,85,205,SobNpcs.txt
+6052,Stake,SobNpcs.txt,high,Stake,487,1039,playground,89,201,SobNpcs.txt
+6053,Stake,SobNpcs.txt,high,Stake,487,1039,playground,93,197,SobNpcs.txt
+6054,Stake,SobNpcs.txt,high,Stake,487,1039,playground,97,193,SobNpcs.txt
+6056,Stake,SobNpcs.txt,high,Stake,487,1039,playground,109,181,SobNpcs.txt
+6057,Stake,SobNpcs.txt,high,Stake,487,1039,playground,113,177,SobNpcs.txt
+6058,Stake,SobNpcs.txt,high,Stake,487,1039,playground,117,173,SobNpcs.txt
+6059,Stake,SobNpcs.txt,high,Stake,487,1039,playground,121,169,SobNpcs.txt
+6060,Stake,SobNpcs.txt,high,Stake,487,1039,playground,125,165,SobNpcs.txt
+6061,Stake,SobNpcs.txt,high,Stake,487,1039,playground,129,161,SobNpcs.txt
+6062,Stake,SobNpcs.txt,high,Stake,487,1039,playground,133,157,SobNpcs.txt
+6063,Stake,SobNpcs.txt,high,Stake,517,1039,playground,161,129,SobNpcs.txt
+6064,Stake,SobNpcs.txt,high,Stake,517,1039,playground,165,125,SobNpcs.txt
+6065,Stake,SobNpcs.txt,high,Stake,517,1039,playground,169,121,SobNpcs.txt
+6066,Stake,SobNpcs.txt,high,Stake,517,1039,playground,173,117,SobNpcs.txt
+6067,Stake,SobNpcs.txt,high,Stake,517,1039,playground,177,113,SobNpcs.txt
+6068,Stake,SobNpcs.txt,high,Stake,517,1039,playground,181,109,SobNpcs.txt
+6069,Stake,SobNpcs.txt,high,Stake,517,1039,playground,185,105,SobNpcs.txt
+6070,Stake,SobNpcs.txt,high,Stake,517,1039,playground,193,97,SobNpcs.txt
+6071,Stake,SobNpcs.txt,high,Stake,517,1039,playground,197,93,SobNpcs.txt
+6072,Stake,SobNpcs.txt,high,Stake,517,1039,playground,201,89,SobNpcs.txt
+6073,Stake,SobNpcs.txt,high,Stake,517,1039,playground,205,85,SobNpcs.txt
+6074,Stake,SobNpcs.txt,high,Stake,517,1039,playground,209,81,SobNpcs.txt
+6075,Stake,SobNpcs.txt,high,Stake,517,1039,playground,213,77,SobNpcs.txt
+6076,Stake,SobNpcs.txt,high,Stake,517,1039,playground,217,73,SobNpcs.txt
+6077,Stake,SobNpcs.txt,high,Stake,517,1039,playground,225,65,SobNpcs.txt
+6078,Stake,SobNpcs.txt,high,Stake,517,1039,playground,229,61,SobNpcs.txt
+6079,Stake,SobNpcs.txt,high,Stake,517,1039,playground,233,57,SobNpcs.txt
+6080,Stake,SobNpcs.txt,high,Stake,517,1039,playground,237,53,SobNpcs.txt
+6081,Stake,SobNpcs.txt,high,Stake,517,1039,playground,241,49,SobNpcs.txt
+6082,Stake,SobNpcs.txt,high,Stake,517,1039,playground,245,45,SobNpcs.txt
+6083,Stake,SobNpcs.txt,high,Stake,517,1039,playground,249,41,SobNpcs.txt
+6084,Stake,SobNpcs.txt,high,Stake,547,1039,playground,70,270,SobNpcs.txt
+6085,Stake,SobNpcs.txt,high,Stake,547,1039,playground,74,266,SobNpcs.txt
+6086,Stake,SobNpcs.txt,high,Stake,547,1039,playground,78,262,SobNpcs.txt
+6087,Stake,SobNpcs.txt,high,Stake,547,1039,playground,82,258,SobNpcs.txt
+6088,Stake,SobNpcs.txt,high,Stake,547,1039,playground,86,254,SobNpcs.txt
+6089,Stake,SobNpcs.txt,high,Stake,547,1039,playground,90,250,SobNpcs.txt
+6090,Stake,SobNpcs.txt,high,Stake,547,1039,playground,94,246,SobNpcs.txt
+6091,Stake,SobNpcs.txt,high,Stake,547,1039,playground,102,238,SobNpcs.txt
+6092,Stake,SobNpcs.txt,high,Stake,547,1039,playground,106,234,SobNpcs.txt
+6093,Stake,SobNpcs.txt,high,Stake,547,1039,playground,110,230,SobNpcs.txt
+6094,Stake,SobNpcs.txt,high,Stake,547,1039,playground,114,226,SobNpcs.txt
+6095,Stake,SobNpcs.txt,high,Stake,547,1039,playground,118,222,SobNpcs.txt
+6096,Stake,SobNpcs.txt,high,Stake,547,1039,playground,122,218,SobNpcs.txt
+6097,Stake,SobNpcs.txt,high,Stake,547,1039,playground,126,214,SobNpcs.txt
+6098,Stake,SobNpcs.txt,high,Stake,547,1039,playground,134,206,SobNpcs.txt
+6099,Stake,SobNpcs.txt,high,Stake,547,1039,playground,138,202,SobNpcs.txt
+6100,Stake,SobNpcs.txt,high,Stake,547,1039,playground,142,198,SobNpcs.txt
+6101,Stake,SobNpcs.txt,high,Stake,547,1039,playground,146,194,SobNpcs.txt
+6102,Stake,SobNpcs.txt,high,Stake,547,1039,playground,150,190,SobNpcs.txt
+6103,Stake,SobNpcs.txt,high,Stake,547,1039,playground,154,186,SobNpcs.txt
+6104,Stake,SobNpcs.txt,high,Stake,547,1039,playground,158,182,SobNpcs.txt
+6105,Stake,SobNpcs.txt,high,Stake,577,1039,playground,186,154,SobNpcs.txt
+6106,Stake,SobNpcs.txt,high,Stake,577,1039,playground,190,150,SobNpcs.txt
+6107,Stake,SobNpcs.txt,high,Stake,577,1039,playground,194,146,SobNpcs.txt
+6108,Stake,SobNpcs.txt,high,Stake,577,1039,playground,198,142,SobNpcs.txt
+6109,Stake,SobNpcs.txt,high,Stake,577,1039,playground,202,138,SobNpcs.txt
+6110,Stake,SobNpcs.txt,high,Stake,577,1039,playground,206,134,SobNpcs.txt
+6111,Stake,SobNpcs.txt,high,Stake,577,1039,playground,210,130,SobNpcs.txt
+6112,Stake,SobNpcs.txt,high,Stake,577,1039,playground,218,122,SobNpcs.txt
+6113,Stake,SobNpcs.txt,high,Stake,577,1039,playground,222,118,SobNpcs.txt
+6114,Stake,SobNpcs.txt,high,Stake,577,1039,playground,226,114,SobNpcs.txt
+6115,Stake,SobNpcs.txt,high,Stake,577,1039,playground,230,110,SobNpcs.txt
+6116,Stake,SobNpcs.txt,high,Stake,577,1039,playground,234,106,SobNpcs.txt
+6117,Stake,SobNpcs.txt,high,Stake,577,1039,playground,238,102,SobNpcs.txt
+6118,Stake,SobNpcs.txt,high,Stake,577,1039,playground,242,98,SobNpcs.txt
+6119,Stake,SobNpcs.txt,high,Stake,577,1039,playground,250,90,SobNpcs.txt
+6120,Stake,SobNpcs.txt,high,Stake,577,1039,playground,254,86,SobNpcs.txt
+6121,Stake,SobNpcs.txt,high,Stake,577,1039,playground,258,82,SobNpcs.txt
+6122,Stake,SobNpcs.txt,high,Stake,577,1039,playground,262,78,SobNpcs.txt
+6123,Stake,SobNpcs.txt,high,Stake,577,1039,playground,266,74,SobNpcs.txt
+6124,Stake,SobNpcs.txt,high,Stake,577,1039,playground,270,70,SobNpcs.txt
+6125,Stake,SobNpcs.txt,high,Stake,577,1039,playground,274,66,SobNpcs.txt
+6126,Stake,SobNpcs.txt,high,Stake,607,1039,playground,95,295,SobNpcs.txt
+6127,Stake,SobNpcs.txt,high,Stake,607,1039,playground,99,291,SobNpcs.txt
+6128,Stake,SobNpcs.txt,high,Stake,607,1039,playground,103,287,SobNpcs.txt
+6129,Stake,SobNpcs.txt,high,Stake,607,1039,playground,107,283,SobNpcs.txt
+6130,Stake,SobNpcs.txt,high,Stake,607,1039,playground,111,279,SobNpcs.txt
+6131,Stake,SobNpcs.txt,high,Stake,607,1039,playground,115,275,SobNpcs.txt
+6132,Stake,SobNpcs.txt,high,Stake,607,1039,playground,119,271,SobNpcs.txt
+6133,Stake,SobNpcs.txt,high,Stake,607,1039,playground,127,263,SobNpcs.txt
+6134,Stake,SobNpcs.txt,high,Stake,607,1039,playground,131,259,SobNpcs.txt
+6135,Stake,SobNpcs.txt,high,Stake,607,1039,playground,135,255,SobNpcs.txt
+6136,Stake,SobNpcs.txt,high,Stake,607,1039,playground,139,251,SobNpcs.txt
+6137,Stake,SobNpcs.txt,high,Stake,607,1039,playground,143,247,SobNpcs.txt
+6138,Stake,SobNpcs.txt,high,Stake,607,1039,playground,147,243,SobNpcs.txt
+6139,Stake,SobNpcs.txt,high,Stake,607,1039,playground,151,239,SobNpcs.txt
+6140,Stake,SobNpcs.txt,high,Stake,607,1039,playground,159,231,SobNpcs.txt
+6141,Stake,SobNpcs.txt,high,Stake,607,1039,playground,163,227,SobNpcs.txt
+6142,Stake,SobNpcs.txt,high,Stake,607,1039,playground,167,223,SobNpcs.txt
+6143,Stake,SobNpcs.txt,high,Stake,607,1039,playground,171,219,SobNpcs.txt
+6144,Stake,SobNpcs.txt,high,Stake,607,1039,playground,175,215,SobNpcs.txt
+6145,Stake,SobNpcs.txt,high,Stake,607,1039,playground,179,211,SobNpcs.txt
+6146,Stake,SobNpcs.txt,high,Stake,607,1039,playground,183,207,SobNpcs.txt
+6147,Stake,SobNpcs.txt,high,Stake,637,1039,playground,211,179,SobNpcs.txt
+6148,Stake,SobNpcs.txt,high,Stake,637,1039,playground,215,175,SobNpcs.txt
+6149,Stake,SobNpcs.txt,high,Stake,637,1039,playground,219,171,SobNpcs.txt
+6150,Stake,SobNpcs.txt,high,Stake,637,1039,playground,223,167,SobNpcs.txt
+6151,Stake,SobNpcs.txt,high,Stake,637,1039,playground,227,163,SobNpcs.txt
+6152,Stake,SobNpcs.txt,high,Stake,637,1039,playground,231,159,SobNpcs.txt
+6153,Stake,SobNpcs.txt,high,Stake,637,1039,playground,235,155,SobNpcs.txt
+6154,Stake,SobNpcs.txt,high,Stake,637,1039,playground,243,147,SobNpcs.txt
+6155,Stake,SobNpcs.txt,high,Stake,637,1039,playground,247,143,SobNpcs.txt
+6156,Stake,SobNpcs.txt,high,Stake,637,1039,playground,251,139,SobNpcs.txt
+6157,Stake,SobNpcs.txt,high,Stake,637,1039,playground,255,135,SobNpcs.txt
+6158,Stake,SobNpcs.txt,high,Stake,637,1039,playground,259,131,SobNpcs.txt
+6159,Stake,SobNpcs.txt,high,Stake,637,1039,playground,263,127,SobNpcs.txt
+6160,Stake,SobNpcs.txt,high,Stake,637,1039,playground,267,123,SobNpcs.txt
+6161,Stake,SobNpcs.txt,high,Stake,637,1039,playground,275,115,SobNpcs.txt
+6162,Stake,SobNpcs.txt,high,Stake,637,1039,playground,279,111,SobNpcs.txt
+6163,Stake,SobNpcs.txt,high,Stake,637,1039,playground,283,107,SobNpcs.txt
+6164,Stake,SobNpcs.txt,high,Stake,637,1039,playground,287,103,SobNpcs.txt
+6165,Stake,SobNpcs.txt,high,Stake,637,1039,playground,291,99,SobNpcs.txt
+6166,Stake,SobNpcs.txt,high,Stake,637,1039,playground,295,95,SobNpcs.txt
+6167,Stake,SobNpcs.txt,high,Stake,637,1039,playground,299,91,SobNpcs.txt
+6168,Stake,SobNpcs.txt,high,Stake,667,1039,playground,120,320,SobNpcs.txt
+6169,Stake,SobNpcs.txt,high,Stake,667,1039,playground,124,316,SobNpcs.txt
+6170,Stake,SobNpcs.txt,high,Stake,667,1039,playground,128,312,SobNpcs.txt
+6171,Stake,SobNpcs.txt,high,Stake,667,1039,playground,132,308,SobNpcs.txt
+6172,Stake,SobNpcs.txt,high,Stake,667,1039,playground,136,304,SobNpcs.txt
+6173,Stake,SobNpcs.txt,high,Stake,667,1039,playground,140,300,SobNpcs.txt
+6174,Stake,SobNpcs.txt,high,Stake,667,1039,playground,144,296,SobNpcs.txt
+6175,Stake,SobNpcs.txt,high,Stake,667,1039,playground,152,288,SobNpcs.txt
+6176,Stake,SobNpcs.txt,high,Stake,667,1039,playground,156,284,SobNpcs.txt
+6177,Stake,SobNpcs.txt,high,Stake,667,1039,playground,160,280,SobNpcs.txt
+6178,Stake,SobNpcs.txt,high,Stake,667,1039,playground,164,276,SobNpcs.txt
+6179,Stake,SobNpcs.txt,high,Stake,667,1039,playground,168,272,SobNpcs.txt
+6180,Stake,SobNpcs.txt,high,Stake,667,1039,playground,172,268,SobNpcs.txt
+6181,Stake,SobNpcs.txt,high,Stake,667,1039,playground,176,264,SobNpcs.txt
+6182,Stake,SobNpcs.txt,high,Stake,667,1039,playground,184,256,SobNpcs.txt
+6183,Stake,SobNpcs.txt,high,Stake,667,1039,playground,188,252,SobNpcs.txt
+6184,Stake,SobNpcs.txt,high,Stake,667,1039,playground,192,248,SobNpcs.txt
+6185,Stake,SobNpcs.txt,high,Stake,667,1039,playground,196,244,SobNpcs.txt
+6186,Stake,SobNpcs.txt,high,Stake,667,1039,playground,200,240,SobNpcs.txt
+6187,Stake,SobNpcs.txt,high,Stake,667,1039,playground,204,236,SobNpcs.txt
+6188,Stake,SobNpcs.txt,high,Stake,667,1039,playground,208,232,SobNpcs.txt
+6189,Stake,SobNpcs.txt,high,Stake,697,1039,playground,236,204,SobNpcs.txt
+6190,Stake,SobNpcs.txt,high,Stake,697,1039,playground,240,200,SobNpcs.txt
+6191,Stake,SobNpcs.txt,high,Stake,697,1039,playground,244,196,SobNpcs.txt
+6192,Stake,SobNpcs.txt,high,Stake,697,1039,playground,248,192,SobNpcs.txt
+6193,Stake,SobNpcs.txt,high,Stake,697,1039,playground,252,188,SobNpcs.txt
+6194,Stake,SobNpcs.txt,high,Stake,697,1039,playground,256,184,SobNpcs.txt
+6195,Stake,SobNpcs.txt,high,Stake,697,1039,playground,260,180,SobNpcs.txt
+6196,Stake,SobNpcs.txt,high,Stake,697,1039,playground,268,172,SobNpcs.txt
+6197,Stake,SobNpcs.txt,high,Stake,697,1039,playground,272,168,SobNpcs.txt
+6198,Stake,SobNpcs.txt,high,Stake,697,1039,playground,276,164,SobNpcs.txt
+6199,Stake,SobNpcs.txt,high,Stake,697,1039,playground,280,160,SobNpcs.txt
+6200,Stake,SobNpcs.txt,high,Stake,697,1039,playground,284,156,SobNpcs.txt
+6201,Stake,SobNpcs.txt,high,Stake,697,1039,playground,288,152,SobNpcs.txt
+6202,Stake,SobNpcs.txt,high,Stake,697,1039,playground,292,148,SobNpcs.txt
+6203,Stake,SobNpcs.txt,high,Stake,697,1039,playground,300,140,SobNpcs.txt
+6204,Stake,SobNpcs.txt,high,Stake,697,1039,playground,304,136,SobNpcs.txt
+6205,Stake,SobNpcs.txt,high,Stake,697,1039,playground,308,132,SobNpcs.txt
+6206,Stake,SobNpcs.txt,high,Stake,697,1039,playground,312,128,SobNpcs.txt
+6207,Stake,SobNpcs.txt,high,Stake,697,1039,playground,316,124,SobNpcs.txt
+6208,Stake,SobNpcs.txt,high,Stake,697,1039,playground,320,120,SobNpcs.txt
+6209,Stake,SobNpcs.txt,high,Stake,697,1039,playground,324,116,SobNpcs.txt
+6210,Stake,SobNpcs.txt,high,Stake,727,1039,playground,145,345,SobNpcs.txt
+6211,Stake,SobNpcs.txt,high,Stake,727,1039,playground,149,341,SobNpcs.txt
+6212,Stake,SobNpcs.txt,high,Stake,727,1039,playground,153,337,SobNpcs.txt
+6213,Stake,SobNpcs.txt,high,Stake,727,1039,playground,157,333,SobNpcs.txt
+6214,Stake,SobNpcs.txt,high,Stake,727,1039,playground,161,329,SobNpcs.txt
+6215,Stake,SobNpcs.txt,high,Stake,727,1039,playground,165,325,SobNpcs.txt
+6216,Stake,SobNpcs.txt,high,Stake,727,1039,playground,169,321,SobNpcs.txt
+6217,Stake,SobNpcs.txt,high,Stake,727,1039,playground,177,313,SobNpcs.txt
+6218,Stake,SobNpcs.txt,high,Stake,727,1039,playground,181,309,SobNpcs.txt
+6219,Stake,SobNpcs.txt,high,Stake,727,1039,playground,185,305,SobNpcs.txt
+6220,Stake,SobNpcs.txt,high,Stake,727,1039,playground,189,301,SobNpcs.txt
+6221,Stake,SobNpcs.txt,high,Stake,727,1039,playground,193,297,SobNpcs.txt
+6222,Stake,SobNpcs.txt,high,Stake,727,1039,playground,197,293,SobNpcs.txt
+6223,Stake,SobNpcs.txt,high,Stake,727,1039,playground,201,289,SobNpcs.txt
+6224,Stake,SobNpcs.txt,high,Stake,727,1039,playground,209,281,SobNpcs.txt
+6225,Stake,SobNpcs.txt,high,Stake,727,1039,playground,213,277,SobNpcs.txt
+6226,Stake,SobNpcs.txt,high,Stake,727,1039,playground,217,273,SobNpcs.txt
+6227,Stake,SobNpcs.txt,high,Stake,727,1039,playground,221,269,SobNpcs.txt
+6228,Stake,SobNpcs.txt,high,Stake,727,1039,playground,225,265,SobNpcs.txt
+6229,Stake,SobNpcs.txt,high,Stake,727,1039,playground,229,261,SobNpcs.txt
+6230,Stake,SobNpcs.txt,high,Stake,727,1039,playground,233,257,SobNpcs.txt
+6231,Stake,SobNpcs.txt,high,Stake,757,1039,playground,261,229,SobNpcs.txt
+6232,Stake,SobNpcs.txt,high,Stake,757,1039,playground,265,225,SobNpcs.txt
+6233,Stake,SobNpcs.txt,high,Stake,757,1039,playground,269,221,SobNpcs.txt
+6234,Stake,SobNpcs.txt,high,Stake,757,1039,playground,273,217,SobNpcs.txt
+6235,Stake,SobNpcs.txt,high,Stake,757,1039,playground,277,213,SobNpcs.txt
+6236,Stake,SobNpcs.txt,high,Stake,757,1039,playground,281,209,SobNpcs.txt
+6237,Stake,SobNpcs.txt,high,Stake,757,1039,playground,285,205,SobNpcs.txt
+6238,Stake,SobNpcs.txt,high,Stake,757,1039,playground,293,197,SobNpcs.txt
+6239,Stake,SobNpcs.txt,high,Stake,757,1039,playground,297,193,SobNpcs.txt
+6240,Stake,SobNpcs.txt,high,Stake,757,1039,playground,301,189,SobNpcs.txt
+6241,Stake,SobNpcs.txt,high,Stake,757,1039,playground,305,185,SobNpcs.txt
+6242,Stake,SobNpcs.txt,high,Stake,757,1039,playground,309,181,SobNpcs.txt
+6243,Stake,SobNpcs.txt,high,Stake,757,1039,playground,313,177,SobNpcs.txt
+6244,Stake,SobNpcs.txt,high,Stake,757,1039,playground,317,173,SobNpcs.txt
+6245,Stake,SobNpcs.txt,high,Stake,757,1039,playground,325,165,SobNpcs.txt
+6246,Stake,SobNpcs.txt,high,Stake,757,1039,playground,329,161,SobNpcs.txt
+6247,Stake,SobNpcs.txt,high,Stake,757,1039,playground,333,157,SobNpcs.txt
+6248,Stake,SobNpcs.txt,high,Stake,757,1039,playground,337,153,SobNpcs.txt
+6249,Stake,SobNpcs.txt,high,Stake,757,1039,playground,341,149,SobNpcs.txt
+6250,Stake,SobNpcs.txt,high,Stake,757,1039,playground,345,145,SobNpcs.txt
+6251,Stake,SobNpcs.txt,high,Stake,757,1039,playground,349,141,SobNpcs.txt
+6252,Stake,SobNpcs.txt,high,Stake,787,1039,playground,185,385,SobNpcs.txt
+6253,Stake,SobNpcs.txt,high,Stake,787,1039,playground,189,381,SobNpcs.txt
+6254,Stake,SobNpcs.txt,high,Stake,787,1039,playground,193,377,SobNpcs.txt
+6255,Stake,SobNpcs.txt,high,Stake,787,1039,playground,197,373,SobNpcs.txt
+6256,Stake,SobNpcs.txt,high,Stake,787,1039,playground,201,369,SobNpcs.txt
+6257,Stake,SobNpcs.txt,high,Stake,787,1039,playground,205,365,SobNpcs.txt
+6258,Stake,SobNpcs.txt,high,Stake,787,1039,playground,209,361,SobNpcs.txt
+6259,Stake,SobNpcs.txt,high,Stake,787,1039,playground,217,353,SobNpcs.txt
+6260,Stake,SobNpcs.txt,high,Stake,787,1039,playground,221,349,SobNpcs.txt
+6261,Stake,SobNpcs.txt,high,Stake,787,1039,playground,225,345,SobNpcs.txt
+6262,Stake,SobNpcs.txt,high,Stake,787,1039,playground,229,341,SobNpcs.txt
+6263,Stake,SobNpcs.txt,high,Stake,787,1039,playground,233,337,SobNpcs.txt
+6264,Stake,SobNpcs.txt,high,Stake,787,1039,playground,237,333,SobNpcs.txt
+6265,Stake,SobNpcs.txt,high,Stake,787,1039,playground,241,329,SobNpcs.txt
+6266,Stake,SobNpcs.txt,high,Stake,787,1039,playground,249,321,SobNpcs.txt
+6267,Stake,SobNpcs.txt,high,Stake,787,1039,playground,253,317,SobNpcs.txt
+6268,Stake,SobNpcs.txt,high,Stake,787,1039,playground,257,313,SobNpcs.txt
+6269,Stake,SobNpcs.txt,high,Stake,787,1039,playground,261,309,SobNpcs.txt
+6270,Stake,SobNpcs.txt,high,Stake,787,1039,playground,265,305,SobNpcs.txt
+6271,Stake,SobNpcs.txt,high,Stake,787,1039,playground,269,301,SobNpcs.txt
+6272,Stake,SobNpcs.txt,high,Stake,787,1039,playground,273,297,SobNpcs.txt
+6273,Stake,SobNpcs.txt,high,Stake,817,1039,playground,301,269,SobNpcs.txt
+6274,Stake,SobNpcs.txt,high,Stake,817,1039,playground,305,265,SobNpcs.txt
+6275,Stake,SobNpcs.txt,high,Stake,817,1039,playground,309,261,SobNpcs.txt
+6276,Stake,SobNpcs.txt,high,Stake,817,1039,playground,313,257,SobNpcs.txt
+6277,Stake,SobNpcs.txt,high,Stake,817,1039,playground,317,253,SobNpcs.txt
+6278,Stake,SobNpcs.txt,high,Stake,817,1039,playground,321,249,SobNpcs.txt
+6279,Stake,SobNpcs.txt,high,Stake,817,1039,playground,325,245,SobNpcs.txt
+6280,Stake,SobNpcs.txt,high,Stake,817,1039,playground,333,237,SobNpcs.txt
+6281,Stake,SobNpcs.txt,high,Stake,817,1039,playground,337,233,SobNpcs.txt
+6282,Stake,SobNpcs.txt,high,Stake,817,1039,playground,341,229,SobNpcs.txt
+6283,Stake,SobNpcs.txt,high,Stake,817,1039,playground,345,225,SobNpcs.txt
+6284,Stake,SobNpcs.txt,high,Stake,817,1039,playground,349,221,SobNpcs.txt
+6285,Stake,SobNpcs.txt,high,Stake,817,1039,playground,353,217,SobNpcs.txt
+6286,Stake,SobNpcs.txt,high,Stake,817,1039,playground,357,213,SobNpcs.txt
+6287,Stake,SobNpcs.txt,high,Stake,817,1039,playground,365,205,SobNpcs.txt
+6288,Stake,SobNpcs.txt,high,Stake,817,1039,playground,369,201,SobNpcs.txt
+6289,Stake,SobNpcs.txt,high,Stake,817,1039,playground,373,197,SobNpcs.txt
+6290,Stake,SobNpcs.txt,high,Stake,817,1039,playground,377,193,SobNpcs.txt
+6291,Stake,SobNpcs.txt,high,Stake,817,1039,playground,381,189,SobNpcs.txt
+6292,Stake,SobNpcs.txt,high,Stake,817,1039,playground,385,185,SobNpcs.txt
+6293,Stake,SobNpcs.txt,high,Stake,817,1039,playground,389,181,SobNpcs.txt
+6294,Stake,SobNpcs.txt,high,Stake,847,1039,playground,210,410,SobNpcs.txt
+6295,Stake,SobNpcs.txt,high,Stake,847,1039,playground,214,406,SobNpcs.txt
+6296,Stake,SobNpcs.txt,high,Stake,847,1039,playground,218,402,SobNpcs.txt
+6297,Stake,SobNpcs.txt,high,Stake,847,1039,playground,222,398,SobNpcs.txt
+6298,Stake,SobNpcs.txt,high,Stake,847,1039,playground,226,394,SobNpcs.txt
+6299,Stake,SobNpcs.txt,high,Stake,847,1039,playground,230,390,SobNpcs.txt
+6300,Stake,SobNpcs.txt,high,Stake,847,1039,playground,234,386,SobNpcs.txt
+6301,Stake,SobNpcs.txt,high,Stake,847,1039,playground,242,378,SobNpcs.txt
+6302,Stake,SobNpcs.txt,high,Stake,847,1039,playground,246,374,SobNpcs.txt
+6303,Stake,SobNpcs.txt,high,Stake,847,1039,playground,250,370,SobNpcs.txt
+6304,Stake,SobNpcs.txt,high,Stake,847,1039,playground,254,366,SobNpcs.txt
+6305,Stake,SobNpcs.txt,high,Stake,847,1039,playground,258,362,SobNpcs.txt
+6306,Stake,SobNpcs.txt,high,Stake,847,1039,playground,262,358,SobNpcs.txt
+6307,Stake,SobNpcs.txt,high,Stake,847,1039,playground,266,354,SobNpcs.txt
+6308,Stake,SobNpcs.txt,high,Stake,847,1039,playground,274,346,SobNpcs.txt
+6309,Stake,SobNpcs.txt,high,Stake,847,1039,playground,278,342,SobNpcs.txt
+6310,Stake,SobNpcs.txt,high,Stake,847,1039,playground,282,338,SobNpcs.txt
+6311,Stake,SobNpcs.txt,high,Stake,847,1039,playground,286,334,SobNpcs.txt
+6312,Stake,SobNpcs.txt,high,Stake,847,1039,playground,290,330,SobNpcs.txt
+6313,Stake,SobNpcs.txt,high,Stake,847,1039,playground,294,326,SobNpcs.txt
+6314,Stake,SobNpcs.txt,high,Stake,847,1039,playground,298,322,SobNpcs.txt
+6315,Stake,SobNpcs.txt,high,Stake,877,1039,playground,326,294,SobNpcs.txt
+6316,Stake,SobNpcs.txt,high,Stake,877,1039,playground,330,290,SobNpcs.txt
+6317,Stake,SobNpcs.txt,high,Stake,877,1039,playground,334,286,SobNpcs.txt
+6318,Stake,SobNpcs.txt,high,Stake,877,1039,playground,338,282,SobNpcs.txt
+6319,Stake,SobNpcs.txt,high,Stake,877,1039,playground,342,278,SobNpcs.txt
+6320,Stake,SobNpcs.txt,high,Stake,877,1039,playground,346,274,SobNpcs.txt
+6321,Stake,SobNpcs.txt,high,Stake,877,1039,playground,350,270,SobNpcs.txt
+6322,Stake,SobNpcs.txt,high,Stake,877,1039,playground,358,262,SobNpcs.txt
+6323,Stake,SobNpcs.txt,high,Stake,877,1039,playground,362,258,SobNpcs.txt
+6324,Stake,SobNpcs.txt,high,Stake,877,1039,playground,366,254,SobNpcs.txt
+6325,Stake,SobNpcs.txt,high,Stake,877,1039,playground,370,250,SobNpcs.txt
+6326,Stake,SobNpcs.txt,high,Stake,877,1039,playground,374,246,SobNpcs.txt
+6327,Stake,SobNpcs.txt,high,Stake,877,1039,playground,378,242,SobNpcs.txt
+6328,Stake,SobNpcs.txt,high,Stake,877,1039,playground,382,238,SobNpcs.txt
+6329,Stake,SobNpcs.txt,high,Stake,877,1039,playground,390,230,SobNpcs.txt
+6330,Stake,SobNpcs.txt,high,Stake,877,1039,playground,394,226,SobNpcs.txt
+6331,Stake,SobNpcs.txt,high,Stake,877,1039,playground,398,222,SobNpcs.txt
+6332,Stake,SobNpcs.txt,high,Stake,877,1039,playground,402,218,SobNpcs.txt
+6333,Stake,SobNpcs.txt,high,Stake,877,1039,playground,406,214,SobNpcs.txt
+6334,Stake,SobNpcs.txt,high,Stake,877,1039,playground,410,210,SobNpcs.txt
+6335,Stake,SobNpcs.txt,high,Stake,877,1039,playground,414,206,SobNpcs.txt
+6336,Stake,SobNpcs.txt,high,Stake,907,1039,playground,235,435,SobNpcs.txt
+6337,Stake,SobNpcs.txt,high,Stake,907,1039,playground,239,431,SobNpcs.txt
+6338,Stake,SobNpcs.txt,high,Stake,907,1039,playground,243,427,SobNpcs.txt
+6339,Stake,SobNpcs.txt,high,Stake,907,1039,playground,247,423,SobNpcs.txt
+6340,Stake,SobNpcs.txt,high,Stake,907,1039,playground,251,419,SobNpcs.txt
+6341,Stake,SobNpcs.txt,high,Stake,907,1039,playground,255,415,SobNpcs.txt
+6342,Stake,SobNpcs.txt,high,Stake,907,1039,playground,259,411,SobNpcs.txt
+6343,Stake,SobNpcs.txt,high,Stake,907,1039,playground,267,403,SobNpcs.txt
+6344,Stake,SobNpcs.txt,high,Stake,907,1039,playground,271,399,SobNpcs.txt
+6345,Stake,SobNpcs.txt,high,Stake,907,1039,playground,275,395,SobNpcs.txt
+6346,Stake,SobNpcs.txt,high,Stake,907,1039,playground,279,391,SobNpcs.txt
+6347,Stake,SobNpcs.txt,high,Stake,907,1039,playground,283,387,SobNpcs.txt
+6348,Stake,SobNpcs.txt,high,Stake,907,1039,playground,287,383,SobNpcs.txt
+6349,Stake,SobNpcs.txt,high,Stake,907,1039,playground,291,379,SobNpcs.txt
+6350,Stake,SobNpcs.txt,high,Stake,907,1039,playground,299,371,SobNpcs.txt
+6351,Stake,SobNpcs.txt,high,Stake,907,1039,playground,303,367,SobNpcs.txt
+6352,Stake,SobNpcs.txt,high,Stake,907,1039,playground,307,363,SobNpcs.txt
+6353,Stake,SobNpcs.txt,high,Stake,907,1039,playground,311,359,SobNpcs.txt
+6354,Stake,SobNpcs.txt,high,Stake,907,1039,playground,315,355,SobNpcs.txt
+6355,Stake,SobNpcs.txt,high,Stake,907,1039,playground,319,351,SobNpcs.txt
+6356,Stake,SobNpcs.txt,high,Stake,907,1039,playground,323,347,SobNpcs.txt
+6357,Stake,SobNpcs.txt,high,Stake,937,1039,playground,351,319,SobNpcs.txt
+6358,Stake,SobNpcs.txt,high,Stake,937,1039,playground,355,315,SobNpcs.txt
+6359,Stake,SobNpcs.txt,high,Stake,937,1039,playground,359,311,SobNpcs.txt
+6360,Stake,SobNpcs.txt,high,Stake,937,1039,playground,363,307,SobNpcs.txt
+6361,Stake,SobNpcs.txt,high,Stake,937,1039,playground,367,303,SobNpcs.txt
+6362,Stake,SobNpcs.txt,high,Stake,937,1039,playground,371,299,SobNpcs.txt
+6363,Stake,SobNpcs.txt,high,Stake,937,1039,playground,375,295,SobNpcs.txt
+6364,Stake,SobNpcs.txt,high,Stake,937,1039,playground,383,287,SobNpcs.txt
+6365,Stake,SobNpcs.txt,high,Stake,937,1039,playground,387,283,SobNpcs.txt
+6366,Stake,SobNpcs.txt,high,Stake,937,1039,playground,391,279,SobNpcs.txt
+6367,Stake,SobNpcs.txt,high,Stake,937,1039,playground,395,275,SobNpcs.txt
+6368,Stake,SobNpcs.txt,high,Stake,937,1039,playground,399,271,SobNpcs.txt
+6369,Stake,SobNpcs.txt,high,Stake,937,1039,playground,403,267,SobNpcs.txt
+6370,Stake,SobNpcs.txt,high,Stake,937,1039,playground,407,263,SobNpcs.txt
+6371,Stake,SobNpcs.txt,high,Stake,937,1039,playground,415,255,SobNpcs.txt
+6372,Stake,SobNpcs.txt,high,Stake,937,1039,playground,419,251,SobNpcs.txt
+6373,Stake,SobNpcs.txt,high,Stake,937,1039,playground,423,247,SobNpcs.txt
+6374,Stake,SobNpcs.txt,high,Stake,937,1039,playground,427,243,SobNpcs.txt
+6375,Stake,SobNpcs.txt,high,Stake,937,1039,playground,431,239,SobNpcs.txt
+6376,Stake,SobNpcs.txt,high,Stake,937,1039,playground,435,235,SobNpcs.txt
+6377,Stake,SobNpcs.txt,high,Stake,937,1039,playground,439,231,SobNpcs.txt
+6378,Stake,SobNpcs.txt,high,Stake,967,1039,playground,260,460,SobNpcs.txt
+6379,Stake,SobNpcs.txt,high,Stake,967,1039,playground,264,456,SobNpcs.txt
+6380,Stake,SobNpcs.txt,high,Stake,967,1039,playground,268,452,SobNpcs.txt
+6381,Stake,SobNpcs.txt,high,Stake,967,1039,playground,272,448,SobNpcs.txt
+6382,Stake,SobNpcs.txt,high,Stake,967,1039,playground,276,444,SobNpcs.txt
+6383,Stake,SobNpcs.txt,high,Stake,967,1039,playground,280,440,SobNpcs.txt
+6384,Stake,SobNpcs.txt,high,Stake,967,1039,playground,284,436,SobNpcs.txt
+6385,Stake,SobNpcs.txt,high,Stake,967,1039,playground,292,428,SobNpcs.txt
+6386,Stake,SobNpcs.txt,high,Stake,967,1039,playground,296,424,SobNpcs.txt
+6387,Stake,SobNpcs.txt,high,Stake,967,1039,playground,300,420,SobNpcs.txt
+6388,Stake,SobNpcs.txt,high,Stake,967,1039,playground,304,416,SobNpcs.txt
+6389,Stake,SobNpcs.txt,high,Stake,967,1039,playground,308,412,SobNpcs.txt
+6390,Stake,SobNpcs.txt,high,Stake,967,1039,playground,312,408,SobNpcs.txt
+6391,Stake,SobNpcs.txt,high,Stake,967,1039,playground,316,404,SobNpcs.txt
+6392,Stake,SobNpcs.txt,high,Stake,967,1039,playground,324,396,SobNpcs.txt
+6393,Stake,SobNpcs.txt,high,Stake,967,1039,playground,328,392,SobNpcs.txt
+6394,Stake,SobNpcs.txt,high,Stake,967,1039,playground,332,388,SobNpcs.txt
+6395,Stake,SobNpcs.txt,high,Stake,967,1039,playground,336,384,SobNpcs.txt
+6396,Stake,SobNpcs.txt,high,Stake,967,1039,playground,340,380,SobNpcs.txt
+6397,Stake,SobNpcs.txt,high,Stake,967,1039,playground,344,376,SobNpcs.txt
+6398,Stake,SobNpcs.txt,high,Stake,967,1039,playground,348,372,SobNpcs.txt
+6399,Stake,SobNpcs.txt,high,Stake,997,1039,playground,376,344,SobNpcs.txt
+6400,Stake,SobNpcs.txt,high,Stake,997,1039,playground,380,340,SobNpcs.txt
+6401,Stake,SobNpcs.txt,high,Stake,997,1039,playground,384,336,SobNpcs.txt
+6402,Stake,SobNpcs.txt,high,Stake,997,1039,playground,388,332,SobNpcs.txt
+6403,Stake,SobNpcs.txt,high,Stake,997,1039,playground,392,328,SobNpcs.txt
+6404,Stake,SobNpcs.txt,high,Stake,997,1039,playground,396,324,SobNpcs.txt
+6405,Stake,SobNpcs.txt,high,Stake,997,1039,playground,400,320,SobNpcs.txt
+6406,Stake,SobNpcs.txt,high,Stake,997,1039,playground,408,312,SobNpcs.txt
+6407,Stake,SobNpcs.txt,high,Stake,997,1039,playground,412,308,SobNpcs.txt
+6408,Stake,SobNpcs.txt,high,Stake,997,1039,playground,416,304,SobNpcs.txt
+6409,Stake,SobNpcs.txt,high,Stake,997,1039,playground,420,300,SobNpcs.txt
+6410,Stake,SobNpcs.txt,high,Stake,997,1039,playground,424,296,SobNpcs.txt
+6411,Stake,SobNpcs.txt,high,Stake,997,1039,playground,428,292,SobNpcs.txt
+6412,Stake,SobNpcs.txt,high,Stake,997,1039,playground,432,288,SobNpcs.txt
+6413,Stake,SobNpcs.txt,high,Stake,997,1039,playground,440,280,SobNpcs.txt
+6414,Stake,SobNpcs.txt,high,Stake,997,1039,playground,444,276,SobNpcs.txt
+6415,Stake,SobNpcs.txt,high,Stake,997,1039,playground,448,272,SobNpcs.txt
+6416,Stake,SobNpcs.txt,high,Stake,997,1039,playground,452,268,SobNpcs.txt
+6417,Stake,SobNpcs.txt,high,Stake,997,1039,playground,456,264,SobNpcs.txt
+6418,Stake,SobNpcs.txt,high,Stake,997,1039,playground,460,260,SobNpcs.txt
+6419,Stake,SobNpcs.txt,high,Stake,997,1039,playground,464,256,SobNpcs.txt
+6420,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,285,485,SobNpcs.txt
+6421,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,289,481,SobNpcs.txt
+6422,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,293,477,SobNpcs.txt
+6423,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,297,473,SobNpcs.txt
+6424,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,301,469,SobNpcs.txt
+6425,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,305,465,SobNpcs.txt
+6426,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,309,461,SobNpcs.txt
+6427,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,317,453,SobNpcs.txt
+6428,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,321,449,SobNpcs.txt
+6429,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,325,445,SobNpcs.txt
+6430,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,329,441,SobNpcs.txt
+6431,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,333,437,SobNpcs.txt
+6432,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,337,433,SobNpcs.txt
+6433,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,341,429,SobNpcs.txt
+6434,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,349,421,SobNpcs.txt
+6435,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,353,417,SobNpcs.txt
+6436,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,357,413,SobNpcs.txt
+6437,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,361,409,SobNpcs.txt
+6438,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,365,405,SobNpcs.txt
+6439,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,369,401,SobNpcs.txt
+6440,Stake,SobNpcs.txt,high,Stake,1027,1039,playground,373,397,SobNpcs.txt
+6441,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,401,369,SobNpcs.txt
+6442,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,405,365,SobNpcs.txt
+6443,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,409,361,SobNpcs.txt
+6444,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,413,357,SobNpcs.txt
+6445,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,417,353,SobNpcs.txt
+6446,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,421,349,SobNpcs.txt
+6447,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,425,345,SobNpcs.txt
+6448,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,433,337,SobNpcs.txt
+6449,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,437,333,SobNpcs.txt
+6450,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,441,329,SobNpcs.txt
+6451,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,445,325,SobNpcs.txt
+6452,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,449,321,SobNpcs.txt
+6453,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,453,317,SobNpcs.txt
+6454,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,457,313,SobNpcs.txt
+6455,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,465,305,SobNpcs.txt
+6456,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,469,301,SobNpcs.txt
+6457,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,473,297,SobNpcs.txt
+6458,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,477,293,SobNpcs.txt
+6459,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,481,289,SobNpcs.txt
+6460,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,485,285,SobNpcs.txt
+6461,Stake,SobNpcs.txt,high,Stake,1507,1039,playground,489,281,SobNpcs.txt
+180,Boxer Huang,SobNpcs.txt,high,Talker,6447,1039,playground,222,220,SobNpcs.txt
+710010,Unlimited Arena,SobNpcs.txt,high,Talker,1944,1002,newplain,422,395,SobNpcs.txt
+828280,Claim,SobNpcs.txt,high,Talker,34400,1111,1111,126,77,SobNpcs.txt
+828281,Claim,SobNpcs.txt,high,Talker,34400,1112,1112,126,77,SobNpcs.txt
+828282,Claim,SobNpcs.txt,high,Talker,34400,1113,1113,126,77,SobNpcs.txt
+828283,Claim,SobNpcs.txt,high,Talker,34400,1114,1114,126,77,SobNpcs.txt
+,Edit NPC,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Chi Token,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Events Manager,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Super Clan Token,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Super Guild Token,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+290,Teleport To DC,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Stake,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+103009,Monster Points,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+103010,Flying Dragon,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,VIP Book,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+20823,Giant Out,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+20522,Nobility War Cross,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,L60 Unique Gear Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+200002,Dukeof Hell,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+200124,Elder Power2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+200058,Sister Yung2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+20030,Sister Yung,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+20029,Elder Power,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+20028,Windwalker Guard,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Level67 Elite Headgear Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Level55 Elite Weapon Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Level52 Unique Headgear Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Level50 Unique Weapon Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+30000,Matchmaker,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4580,Treasure Box,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4600,Treasure Box1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4601,Treasure Box2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4602,Treasure Box3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4567,Yang Yun,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4572,Plum,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4568,Ruan Brother,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4570,Ruan Good Man,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4571,Ruan Better Man,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4566,Yang Yun,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4578,Cauldron,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4603,Block Stone,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4584,Herbalist Chou,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4586,Jade Courtesan,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4590,Leopard Pillar,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4589,Tiger Pillar,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4588,Dragon Pillar,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4587,Sparrow Pillar,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4595,Mr Loneliness,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4594,Night Box,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4593,Dark Box,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4592,Day Box,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4591,Platform,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4565,Sugar Tang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+10850,Mr Wonder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+20005,Celestine,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Power Book,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4704,Old Beggar,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Ring Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4651,Louis,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4432,Arena Guard,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4434,Ironsmith Chou,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+10223,Prize Officer2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+300010,Bird Exorcist,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4707,Commander Kerry,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4706,Guide Zhang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4705,Felix,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4711,Commander Aid4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4710,Commander Aid3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4709,Commander Aid2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4708,Commander Aid1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Flood Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Ancient Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Aurora Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Sacred Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Chaos Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Heaven Demon Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+9619,Prize Center Teleporter1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9620,Prize Center Teleporter2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9621,Prize Center Teleporter3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9622,Prize Center Teleporter4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9650,Prize Center Teleporter5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9651,Prize Center Teleporter6,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9652,Prize Center Teleporter7,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9653,Prize Center Teleporter8,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19160,Pak Yan,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19165,Flame Altar,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19239,Lava Flower1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19172,Lava Flower2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19173,Lava Flower3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19174,Lava Flower4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19176,Lava Flower5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19177,Lava Flower6,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19238,Lava Flower7,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19164,Ching Yan,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19167,White Herb1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19168,White Herb2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19169,White Herb3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19170,White Herb4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19171,White Herb5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19175,White Herb6,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19183,Wounded Bright Tribesman,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19184,Bright Guard,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19163,Broken Forge Furnace,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19162,Chong Yan,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19161,Remainof Bright Tribesman,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19166,Guidof Fiery Dragon,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Steed3 Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Steed1 Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+15702,Server Transfer,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Black Friday Accesory,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+19436,Ideal Desgner,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19452,Astral Pheonix,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19507,Holy Phoenix Cup,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19506,Golden Phoenix Cup,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19505,Silver Pheoenix Cup,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+19504,Bronze Phoenix Cup,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Select Sacred Refinery Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Gold Prize Token,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Sash Fragment Realm,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+10951,Explosive Devide1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+10950,Explosive Devide2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+10949,Explosive Devide3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+10948,Explosive Devide4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+18787,Realm Envoy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Poker Millionaire Lee,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4633,Aunt Peach,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4623,Obscure Warrior,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4626,Stone Column1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4624,Stone Column2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4625,Stone Column3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4627,Stone Column4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4621,Harvey,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4719,Carolyn,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4718,Farmer Lynn,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4505,Taoist Shine,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4507,Ghost Sweety Puddy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4513,Dark Sweety Puddy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4514,Dark Sweety Lily,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4508,Ghost Sweety Lily,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4515,Dark Sweety Mindy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4509,Ghost Sweety Mindy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4516,Dark Sweety Day,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4510,Ghost Sweety Day,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4511,Ghost Sweety Cuty,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4517,Dark Sweety Cuty,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4518,Ghost Fiend Altar1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4519,Ghost Fiend Altar2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4520,Ghost Fiend Altar3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4521,Ghost Fiend Altar4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4506,Ghost Mo Mo,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4526,Mo Mo,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4504,Jerk Wang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4503,Aunt Zhang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Super Headgear Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4701,Doctor Knowit All,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4700,Poor Xiao,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Clothing Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+8796,Taskmaster Chang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Tempest Secret Letter,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+8521,City General,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8519,Wind Taoist,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8524,Wealthy Wan,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8523,Wealthy Wan's Wife,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8520,Little Ben,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8513,Armorer Yu,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8512,BI-Vice Captain,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8511,Xu Fan,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8510,BI Castellan,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8428,Lotus,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8425,DC-Vice Captain,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8427,Taoist Yu,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8443,Convoy Leader Gu,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8442,Soldier Mu,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+15988,Skill Eraser,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+52003,Pk Reset,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+81700,Hide N Seek,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+52002,Reborn Quest,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+422,Old Quarrier,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4491,Revenant1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4492,Revenant2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4493,Revenant3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4494,Revenant4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4495,Revenant5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+8290,Stone Ape,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8288,Cliff Flower1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+8300,Cliff Flower2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+8435,Ke Yuluns Follower,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+8426,DC-Vice General,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8298,Captor Cooke,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8590,AC-Castellan,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8289,Lydia,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8287,AC-Lieutenant,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7997,Peach Tree,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+7996,Peach Tree2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Item1,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4436,Thief Wong,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4484,Bian Qing,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4483,Pharmacist Mu Mu,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Level43 Unique Ring Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4466,Apprentice Luo,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4467,Artisan Luo,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4500,Minstrel,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4486,Doctor Li,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4485,Officer Bao,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4487,General Amber,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4490,Guard Li,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4489,Painter Feng Kang,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4488,General Zhao,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4477,Purple Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4476,Indigo Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4475,Blue Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4474,Green Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4473,Yellow Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4472,Orange Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4470,Pharmacist Dong,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4471,Red Powder,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+1611,General Judd,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+4468,Du San,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+16051,Myster Cheast1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16052,Myster Cheast2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16053,Myster Cheast3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16054,Myster Cheast4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16055,Myster Cheast5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16050,Fairy Cloud,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9897,Magnolia Envoy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+301,Desert Guardian,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Normal Spirit Bead,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Refined Spirit Bead,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Unique Spirit Bead,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Elite Spirit Bead,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Daily Super Spirit Bead,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+8233,Heavenly Master,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+200012,Eart Master,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9998,Daily Quest Envoy,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+9891,Good Man Liu,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9892,Nuwa,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9893,Huang Di,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9952,Cense3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9953,Censer2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9954,Censer1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9894,Yan Di,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4596,Wine Kiddo,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+8271,Phoenix Castellan,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+8266,Forest Governor,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7995,Yu Lin,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7994,Master Hao,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7993,Ru Hua,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7992,Xu Liang,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7991,TC Vice Captain,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7927,Terato Twin,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Dragon Tail,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Steed1,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Dazzling Diamond Box,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Steed3,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Steed6,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Rare Steed Pack6,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Noble Steed Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+4026320,Treasure Leave,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4026311,Exit Super Guild War,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16851,Class Pk War,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+9464,Nemesys Conductort,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+1002,Warden Zhang,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16833,Sarck Soldier,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16834,Sarck Soldier Enctrance,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16852,Sarck Soldier Supplu Point1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16853,Sarck Soldier Supplu Point2,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16854,Sarck Soldier Supplu Point3,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16855,Sarck Soldier Supplu Point4,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16856,Sarck Soldier Supplu Point5,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Select P7 Equipment Soul Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Select P7 Weapon Soul Pack,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+16849,P7 Sacred Treasures Envoy,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+832664,Elemental Pool,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+832663,Swapper Starry,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+16915,Casino Hostess,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+1152,Simon,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+13124,Frozen Froto4 Teleporter,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4453,Flame1,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4461,Flame9,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+4452,Flame Taoist,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+18950,Class6 House,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+3085,Master Xuan,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+2000,Cloud Saint,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+3825,Unknow Man,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+,Pass The Bomb,identificador no codigo,medium,(dinamico),,,,,,codigo (NpcAttribute)
+5517,Mount Retailer,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+17222,Kung Fu King,NpcID enum (codigo),medium,(dinamico),,,,,,codigo (NpcAttribute)
+5673,Kungfu Boy,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+7538,Refinery Stabilizer,Questinfo.ini (NPC citado na quest),high,(dinamico),,,,,,codigo (NpcAttribute)
+5789,Reallot Points,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10315,All Tournaments,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19634,Promotion Wind Walker,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10603,General Pak Map3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10604,Mr Mirror Map3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10605,Divine Jade Map3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10600,General Pak Map2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10601,Mr Mirror Map2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10602,Divine Jade Map2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10606,Epic Trojan Divine Jade,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10583,Monk Misery,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10582,Mr Mirror,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10619,Mr Mirror2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10581,General Pak,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10584,Monk Misery1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10579,Paks Ghost,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10585,Epic2 Monk Misery,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10589,Epic2 Array Eye1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1881,Arena Manager Wang,Questinfo.ini (NPC citado na quest),high,(enum),,,,,,NpcID enum
+1882,Agate1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1883,Agate2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1884,Agate3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1885,Agate4,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1886,Agate5,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1887,Agate6,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+1888,Agate7,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+9623,Mammon Envoy,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+9534,Squidward Tentacles,Questinfo.ini (NPC citado na quest),high,(enum),,,,,,NpcID enum
+19128,Cloud Sweeper,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19231,Towerof Mystery Conductor,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19194,Towerof Mystery Conductor2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19127,Tower Keeper,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19424,CS Elite Pk Manager,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19121,Crystal1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+17400,Kingdom Mission Envoy,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+52300,Recharge Shop,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19122,Crystal2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19123,Crystal3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19124,Crystal4,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19125,Crystal5,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+19111,Poker Millinaire Lee,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4522,Dark Fiend Altar1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4523,Dark Fiend Altar2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4524,Dark Fiend Altar3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4525,Dark Fiend Altar4,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+52007,Kill The Captain,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+52005,Skill Tournament,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+52004,Freeze War,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+52001,Football,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+25015,Super Guild War,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+780,Killer Of Elite,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4699,Extreme Pk,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+777,Team Death Match,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+3215,Twin Dis City Main,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+9280,Solar Saint,Questinfo.ini (NPC citado na quest),high,(enum),,,,,,NpcID enum
+4026314,Dis City Map1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4026315,Dis City Map2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4026316,Dic City Map4,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+781,Server Rewards,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+666,DB Shower,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+8713,Capture The Flag,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10123,Taoist Pure,Questinfo.ini (NPC citado na quest),high,(enum),,,,,,NpcID enum
+4026308,Battle Field Map1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4026309,Battle Field Map2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4026310,Battle Field Map3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+15987,Marial Dealer,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+4101,WH Stone,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+15745,Jiang Hu Npc,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+17126,Promotion Lee Long,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+683,Costumer,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+101620,Tele Guild1,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+101618,Tele Guild2,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+101616,Tele Guild3,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+101614,Tele Guild4,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+10580,Super Mok,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+16850,Divine Jade,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+20508,Dragon Island Conductress,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+20499,Iron Tong,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum
+20500,Cobb Wind,NpcID enum (codigo),medium,(enum),,,,,,NpcID enum

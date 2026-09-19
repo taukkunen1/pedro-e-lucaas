@@ -1,0 +1,845 @@
+﻿currency,op,file,line,npc,method,case,target,amount,hint
+Gold,gain,Base/Poker/Structures/PokerTable.cs,1642,,GetWinners,Enums.TableUpdate.Chips,SidePot,((long)Lowest.Value * (long)s2.Count),
+Gold,set,Base/Poker/Structures/PokerTable.cs,1654,,GetWinners,Enums.TableUpdate.Chips,SidePot,SidePot.Money * 99 / 100,
+CP,spend,Base/PokerHandler.cs,537,,Handler,1,client.Player,(uint)(Respond.RoundPot),
+Gold,spend,Base/PokerHandler.cs,541,,Handler,1,client.Player,(uint)(Respond.RoundPot),
+CP,spend,Base/PokerHandler.cs,586,,Handler,1,client.Player,(uint)(Table.RequiredPot),
+Gold,spend,Base/PokerHandler.cs,590,,Handler,1,client.Player,(uint)(Table.RequiredPot),
+CP,spend,Base/PokerHandler.cs,763,,Handler,2,client.Player,(uint)(Table.RequiredPot + Respond.RoundPot),
+Gold,spend,Base/PokerHandler.cs,767,,Handler,2,client.Player,(uint)(Table.RequiredPot + Respond.RoundPot),
+CP,set,Base/PokerHandler.cs,812,,Handler,32,client.Player,0,
+Gold,set,Base/PokerHandler.cs,817,,Handler,32,client.Player,0,
+Gold,spend,Base/PokerHandler.cs,884,,Handler,32,client.Player,(uint)Table.LowestMoney + (uint)Table.RequiredPot,
+Gold,spend,Base/PokerHandler.cs,889,,Handler,32,client.Player,(uint)Table.LowestMoney,
+Gold,spend,Base/PokerHandler.cs,944,,Handler,32,client.Player,(uint)Table.RequiredPot,
+CP,spend,Base/PokerHandler.cs,1074,,ShowHand,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+Gold,spend,Base/PokerHandler.cs,1078,,ShowHand,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+CP,set,Base/PokerHandler.cs,1347,,ShowHand,Poker.Enums.TableState.ShowDown,client.Player,(uint)p.CurrentMoney,
+Gold,set,Base/PokerHandler.cs,1371,,ShowHand,Poker.Enums.TableState.ShowDown,client.Player,(uint)p.CurrentMoney,
+CP,spend,Base/PokerHandler.cs,1496,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+CP,spend,Base/PokerHandler.cs,1498,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet,
+CP,spend,Base/PokerHandler.cs,1500,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+Gold,spend,Base/PokerHandler.cs,1504,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+Gold,spend,Base/PokerHandler.cs,1506,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet,
+Gold,spend,Base/PokerHandler.cs,1508,,TexasHoldem,Poker.Enums.TableState.Unopened,client.Player,Table.MinBet / 2,
+CP,set,Base/PokerHandler.cs,1780,,TexasHoldem,Poker.Enums.TableState.ShowDown,client.Player,(uint)p.CurrentMoney,
+Gold,set,Base/PokerHandler.cs,1804,,TexasHoldem,Poker.Enums.TableState.ShowDown,client.Player,(uint)p.CurrentMoney,
+Gold,gain,Client/PoolProcesor.cs,141,,SecondsCallback,SquamaLocationRewardType.Gold,client.Player,sqReward.RewardValue,You get {sqReward.RewardValue} of Gold.
+CP,gain,Client/PoolProcesor.cs,147,,SecondsCallback,SquamaLocationRewardType.ConquerPoints,client.Player,sqReward.RewardValue,You get {sqReward.RewardValue} of Gold.
+BoundCP,gain,Client/PoolProcesor.cs,153,,SecondsCallback,SquamaLocationRewardType.BoundConquerPoints,client.Player,(int)sqReward.RewardValue,You get {sqReward.RewardValue} of ConquerPoints.
+Gold,spend,Client/PoolProcesor.cs,1162,,SecondsCallback,SquamaLocationRewardType.Item,client.Player,99999,
+Gold,gain,Client/PoolProcesor.cs,1166,,SecondsCallback,SquamaLocationRewardType.Item,client.Player,100,You received 100 Silver!
+Gold,gain,Database/ArenaTable.cs,152,,ResetArena,10,client.Player,CPsForRank(user.Info.TodayRank),You got {CPsForRank(user.Info.TodayRank)} Money for ranking in top10 arena.
+CP,set,Database/ServerDatabase.cs,437,,SaveClient,,player,client.Player.ConquerPoints,
+BoundCP,set,Database/ServerDatabase.cs,438,,SaveClient,,player,client.Player.BoundConquerPoints,
+Gold,set,Database/ServerDatabase.cs,440,,SaveClient,,player,client.Player.Money,
+CP,set,Database/ServerDatabase.cs,664,,LoadCharacter,,client.Player,"reader.ReadUInt32(""Character"", ""ConquerPoints"", 0)",Character
+BoundCP,set,Database/ServerDatabase.cs,666,,LoadCharacter,,client.Player,"reader.ReadInt32(""Character"", ""BoundConquerPoints"", 0)",Character
+Gold,set,Database/ServerDatabase.cs,667,,LoadCharacter,,client.Player,"reader.ReadUInt32(""Character"", ""Money"", 0)",Character
+CP,set,Database/ServerDatabase.cs,1043,,LoadCharacter,global,client.Player,player.ConquerPoints,
+BoundCP,set,Database/ServerDatabase.cs,1045,,LoadCharacter,global,client.Player,player.BoundConquerPoints,
+Gold,set,Database/ServerDatabase.cs,1046,,LoadCharacter,global,client.Player,player.Money,
+Gold,gain,Database/TheCrimeTable.cs,30,,AddCrime,,crime,Money,
+CP,gain,Game/MsgEvents/DragonWar.cs,145,,CheckUp,,Winner.Player,EventsRewards.DragonWar, + Winner.Player.Name + 
+CP,gain,Game/MsgEvents/DragonWar.cs,148,,CheckUp,,Winner.Player,"EventsRewards.EventReward(""DragonWar"").RewardValue", + Winner.Player.Name + 
+Gold,gain,Game/MsgEvents/DragonWar.cs,149,,CheckUp,,Winner.Player,5000000, + Winner.Player.Name + 
+CP,gain,Game/MsgFloorItem/MsgItem.cs,83,,IsTrap,ItemType.Cps,this,Amount,
+Gold,gain,Game/MsgFloorItem/MsgItemPacket.cs,140,,FloorMap,MsgItem.ItemType.Money,client.Player,MapItem.Gold,You have picked up a 
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,182,,FloorMap,MsgItem.ItemType.Cps,client.Player,5,You have picked up a 5 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,187,,FloorMap,MsgItem.ItemType.Cps,client.Player,5,You have picked up a 5 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,192,,FloorMap,MsgItem.ItemType.Cps,client.Player,10,You have picked up a 5 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,197,,FloorMap,MsgItem.ItemType.Cps,client.Player,10,You have picked up a 10 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,202,,FloorMap,MsgItem.ItemType.Cps,client.Player,20,You have picked up a 10 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,207,,FloorMap,MsgItem.ItemType.Cps,client.Player,20,You have picked up a 20 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,212,,FloorMap,MsgItem.ItemType.Cps,client.Player,25,You have picked up a 20 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,217,,FloorMap,MsgItem.ItemType.Cps,client.Player,50,You have picked up a 25 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,222,,FloorMap,MsgItem.ItemType.Cps,client.Player,50,You have picked up a 50 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,227,,FloorMap,MsgItem.ItemType.Cps,client.Player,100,You have picked up a 50 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,232,,FloorMap,MsgItem.ItemType.Cps,client.Player,100,You have picked up a 100 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,237,,FloorMap,MsgItem.ItemType.Cps,client.Player,200,You have picked up a 100 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,242,,FloorMap,MsgItem.ItemType.Cps,client.Player,200,You have picked up a 200 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,247,,FloorMap,MsgItem.ItemType.Cps,client.Player,270,You have picked up a 250 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,252,,FloorMap,MsgItem.ItemType.Cps,client.Player,500,You have picked up a 270 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,257,,FloorMap,MsgItem.ItemType.Cps,client.Player,500,You have picked up a 500 ConquerPoints.
+CP,gain,Game/MsgFloorItem/MsgItemPacket.cs,262,,FloorMap,MsgItem.ItemType.Cps,client.Player,500,You have picked up a 500 ConquerPoints.
+CP,spend,Game/MsgInterServer/PipeClient.cs,242,,FilterPackets,2,pipe.Owner.Player,1000000,
+CP,set,Game/MsgInterServer/PipeClient.cs,401,,FilterPackets,MsgUpdate.DataType.ConquerPoints,pipe.Owner.Player,(uint)Value,
+Gold,set,Game/MsgInterServer/PipeClient.cs,402,,FilterPackets,MsgUpdate.DataType.Money,pipe.Owner.Player,(uint)Value,
+CP,set,Game/MsgInterServer/PipeServer.cs,230,,Receive,MsgUpdate.DataType.ConquerPoints,user.Owner.Player,(uint)Value,
+BoundCP,set,Game/MsgInterServer/PipeServer.cs,231,,Receive,MsgUpdate.DataType.BoundConquerPoints,user.Owner.Player,(int)Value,
+Gold,gain,Game/MsgMonster/DropMob.cs,40,,Checkup,ConfigurableDropSystem.DropType.Money,killer.Player,money_value, + killer.Player.VipLevel + $
+Gold,gain,Game/MsgMonster/DropMob.cs,53,,Checkup,ConfigurableDropSystem.DropType.Money,killer.Player,money_value, + killer.Player.VipLevel + $
+CP,gain,Game/MsgMonster/DropMob.cs,68,,Checkup,ConfigurableDropSystem.DropType.Money,killer.Player,awardCPs,You get {awardCPs} ConquerPoints for killing the monster.
+BoundCP,gain,Game/MsgMonster/DropMob.cs,74,,Checkup,ConfigurableDropSystem.DropType.Money,killer.Player,awardCPs,You get {awardCPs} ConquerPoints for killing the monster.
+CP,spend,Game/MsgNpc/NpcHandler.cs,140,BlessKey,BlessKey,97,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Gourd.
+CP,spend,Game/MsgNpc/NpcHandler.cs,181,BlessKey,BlessKey,75,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Gourd.
+CP,spend,Game/MsgNpc/NpcHandler.cs,232,BlessKey,BlessKey,74,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Gourd.
+CP,spend,Game/MsgNpc/NpcHandler.cs,281,BlessKey,BlessKey,73,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Gourd.
+CP,spend,Game/MsgNpc/NpcHandler.cs,332,BlessKey,BlessKey,13,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Gourd.
+CP,spend,Game/MsgNpc/NpcHandler.cs,383,BlessKey,BlessKey,9,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Heaven Fan.
+CP,spend,Game/MsgNpc/NpcHandler.cs,434,BlessKey,BlessKey,7,client.Player,100000,Congratulation! You've added 1 blessed attribute to the Star Tower.
+CP,spend,Game/MsgNpc/NpcHandler.cs,485,BlessKey,BlessKey,3,client.Player,100000,Congratulation! You've added 1 blessed attribute to the garment.
+CP,gain,Game/MsgNpc/NpcHandler.cs,532,PoleDominationAC,PoleDominationAC,1,client.Player,MsgTournaments.MsgSchedules.PoleDomination.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,gain,Game/MsgNpc/NpcHandler.cs,582,PoleDominationBI,PoleDominationBI,1,client.Player,MsgSchedules.PoleDominationBI.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,gain,Game/MsgNpc/NpcHandler.cs,632,PoleDominationDC,PoleDominationDC,1,client.Player,MsgSchedules.PoleDominationDC.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,gain,Game/MsgNpc/NpcHandler.cs,682,PoleDominationPC,PoleDominationPC,1,client.Player,MsgSchedules.PoleDominationPC.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,gain,Game/MsgNpc/NpcHandler.cs,789,KnightGameClaim,KnightGameClaim,1,client.Player,CPsReward,KnightGameLv100
+CP,gain,Game/MsgNpc/NpcHandler.cs,800,KnightGameClaim,KnightGameClaim,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,811,KnightGameClaim,KnightGameClaim,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,822,KnightGameClaim,KnightGameClaim,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,896,KnightGameClaim2,KnightGameClaim2,1,client.Player,CPsReward,KnightGameLv100
+CP,gain,Game/MsgNpc/NpcHandler.cs,907,KnightGameClaim2,KnightGameClaim2,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,918,KnightGameClaim2,KnightGameClaim2,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,929,KnightGameClaim2,KnightGameClaim2,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1003,KnightGameClaim3,KnightGameClaim3,1,client.Player,CPsReward,KnightGameLv100
+CP,gain,Game/MsgNpc/NpcHandler.cs,1014,KnightGameClaim3,KnightGameClaim3,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1025,KnightGameClaim3,KnightGameClaim3,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1036,KnightGameClaim3,KnightGameClaim3,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1110,KnightGameClaim4,KnightGameClaim4,1,client.Player,CPsReward,KnightGameLv100
+CP,gain,Game/MsgNpc/NpcHandler.cs,1121,KnightGameClaim4,KnightGameClaim4,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1132,KnightGameClaim4,KnightGameClaim4,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1143,KnightGameClaim4,KnightGameClaim4,1,client.Player,CPsReward,You received 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1571,FortesWar,FortesWar,2,client.Player,rewardCPs,FortressWar
+CP,gain,Game/MsgNpc/NpcHandler.cs,1592,FortesWar,FortesWar,2,client.Player,60000, + client.Player.Name + 
+CP,gain,Game/MsgNpc/NpcHandler.cs,1993,ClassicClanWar,ClassicClanWar,1,client.Player,MsgTournaments.MsgSchedules.ClassicClanWar.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,spend,Game/MsgNpc/NpcHandler.cs,3704,RemoveBound,RemoveBound,3,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3736,RemoveBound,RemoveBound,4,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3768,RemoveBound,RemoveBound,5,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3800,RemoveBound,RemoveBound,6,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3832,RemoveBound,RemoveBound,7,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3864,RemoveBound,RemoveBound,8,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3896,RemoveBound,RemoveBound,9,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3928,RemoveBound,RemoveBound,11,client.Player,50000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,3960,RemoveBound,RemoveBound,12,client.Player,50000,
+CP,gain,Game/MsgNpc/NpcHandler.cs,5420,ConquerQuest,ConquerQuest,1,client.Player,"EventsRewards.EventReward(""FruitsQuest"").RewardValue",FruitsQuest
+CP,gain,Game/MsgNpc/NpcHandler.cs,5615,FruitQuest,FruitQuest,1,client.Player,"EventsRewards.EventReward(""FruitsQuest"").RewardValue",FruitsQuest
+CP,gain,Game/MsgNpc/NpcHandler.cs,6721,MonsterGeneral,MonsterGeneral,1,client.Player,"EventsRewards.EventReward(""KillMonstersQuest"").RewardValue",KillMonstersQuest
+Gold,gain,Game/MsgNpc/NpcHandler.cs,9350,YangYun2,YangYun2,2,client.Player,100,You received 100 Silver!
+Gold,spend,Game/MsgNpc/NpcHandler.cs,9421,NetPeddler,NetPeddler,2,client.Player,10000,"You~bought~a~Fishing~Net~with~5,000~Silver.~Hurry~and~use~it~around~the~water~(303,380)."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,9584,Plum,Plum,2,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,9707,RuanBrother,RuanBrother,2,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10122,YangYun1,YangYun1,21,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10171,YangYun1,YangYun1,11,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10337,GhoulKong,GhoulKong,4,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10561,Cauldron,Cauldron,6,client.Player,100,"Thanks,~bye!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10741,KunlunWanderer,KunlunWanderer,7,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,10831,KunlunWanderer,KunlunWanderer,2,client.Player,100,You received 100 Silver!
+Gold,spend,Game/MsgNpc/NpcHandler.cs,10854,KunlunWanderer,KunlunWanderer,3,client.Player,10000,You arrived at Viper Cave. Now kill the Viper to get the Poison Fang.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,11956,Platform,Platform,2,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12185,VillagerChou,VillagerChou,33,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12270,VillagerChou,VillagerChou,27,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12333,VillagerChou,VillagerChou,21,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12440,VillagerChou,VillagerChou,9,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12527,VillagerChou,VillagerChou,2,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,12723,SugarTang,SugarTang,41,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,13569,OldBeggar,OldBeggar,18,client.Player,6000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,13690,OldBeggar,OldBeggar,6,client.Player,100,You gave the Old Beggar a Meteor and received the Power Book!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,13898,MasterMoMo,MasterMoMo,32,client.Player,6000,"You received 1 hour EXP and 6,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,13945,MasterMoMo,MasterMoMo,24,client.Player,100,You completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14058,MasterMoMo,MasterMoMo,13,client.Player,100,You completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14151,MasterMoMo,MasterMoMo,1,client.Player,100,I`m master Mo Mo. I like making inventions.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14436,Shark,Shark,6,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14733,Louis,Louis,37,client.Player,6000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14852,Louis,Louis,31,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,14992,Louis,Louis,12,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,15102,Louis,Louis,3,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,21430,CommanderKerry,CommanderKerry,11,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,21794,Felix,Felix,31,client.Player,6000,"You received 1 hour EXP and 6,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,21939,Felix,Felix,22,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,21994,Felix,Felix,18,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,22062,Felix,Felix,14,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,22120,Felix,Felix,10,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,22173,Felix,Felix,6,client.Player,100,You~received~100~Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,22216,Felix,Felix,2,client.Player,100,You completed the quest and received 100 Silver!
+CP,spend,Game/MsgNpc/NpcHandler.cs,22983,PrizeOfficer,PrizeOfficer,11,client.Player,4000000,You received [10]DonationPoints.
+CP,spend,Game/MsgNpc/NpcHandler.cs,23013,PrizeOfficer,PrizeOfficer,12,client.Player,12000000,You received [30]DonationPoints.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23382,PakYan,PakYan,6,client.Player,1000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23427,PakYan,PakYan,2,client.Player,1000,You received 3 Twilight Star Stones!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23623,FlameAltar,FlameAltar,24,client.Player,5000,You received a Radiant Star Stone!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23650,FlameAltar,FlameAltar,21,client.Player,5000,(It requires a large number of Star Ores to extract the Essence of Star.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23716,FlameAltar,FlameAltar,14,client.Player,5000,"(The Metal element has been recovered, and it`s time to explore the Fire Force."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23768,FlameAltar,FlameAltar,11,client.Player,5000,Go~make~the~Metal~Force.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23813,FlameAltar,FlameAltar,5,client.Player,5000,~But where is the Wheel of Nature? It must be stolen by the Clawed Rock Devils nearby.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,23850,FlameAltar,FlameAltar,1,client.Player,1000,Go~find~Building~Stones.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24058,ChingYan,ChingYan,10,client.Player,3000,"You`re looking for the Flame Temple? If not I can`t even walk, I`ll go with you."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24108,ChingYan,ChingYan,5,client.Player,5000,Thanks for fulfilling my last wish! Now... Now I can die without anything to regret.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24181,ChingYan,ChingYan,1,client.Player,1000,"~Go, go kill the monsters, and I`ll believe you."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24413,BrokenForgeFurnace,BrokenForgeFurnace,1,client.Player,1000000,"(You tried to read the rune on the furnace, but found too many parts missing.)"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24462,BrokenForgeFurnace,BrokenForgeFurnace,4,client.Player,5000000,"(You read the runes on the Forge Furnace carefully, and understood the most words.)"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24514,BrokenForgeFurnace,BrokenForgeFurnace,8,client.Player,1000000,"(Since the Rune Fragments were collected from the alien monsters,"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24566,BrokenForgeFurnace,BrokenForgeFurnace,12,client.Player,5000,You received 2 Bright Star Stones!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24750,ChongYan,ChongYan,11,client.Player,500000,"Now the monsters have been swept off, we`ll continue to find the Flame Temple."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24789,ChongYan,ChongYan,5,client.Player,5000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24847,ChongYan,ChongYan,1,client.Player,1000,"Hero, you saved my life, and I am eternally grateful! We got attacked by a horde of"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,24905,RemainofBrightTribesman,RemainofBrightTribesman,1,client.Player,1000,~You found many bloodstains and footsteps along the road. The Bright tribesmen must have a
+CP,spend,Game/MsgNpc/NpcHandler.cs,25426,IdealDesgner,IdealDesgner,3,client.Player,15000,Please make 1 more space in your inventory.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,27129,PokerMillionaireLee,PokerMillionaireLee,2,client.Player,100100000,Let me check.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,27161,PokerMillionaireLee,PokerMillionaireLee,4,client.Player,50100000,Let me check.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27223,AuntPeach,AuntPeach,3,client.Player,6000,Aunt~Peach~found~a~Note~in~the~Peach~Bag~and~gave~it~to~you.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27312,ObscureWarrior,ObscureWarrior,10,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27352,ObscureWarrior,ObscureWarrior,1,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27379,ObscureWarrior,ObscureWarrior,3,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27458,ObscureWarrior,ObscureWarrior,7,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27688,Harvey,Harvey,6,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27744,Harvey,Harvey,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27851,Carolyn,Carolyn,4,client.Player,3000,"You~managed~to~persuade~Carolyn!~You`ve~received~3,000~Silver~and~EXP~worth~1/2~EXP~Ball!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27909,FarmerLynn,FarmerLynn,1,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,27965,FarmerLynn,FarmerLynn,5,client.Player,100,You`ve~received~100~Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28014,FarmerLynn,FarmerLynn,7,client.Player,100,You`ve~received~100~Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28065,TaoistShine,TaoistShine,1,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28083,TaoistShine,TaoistShine,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28486,Dark_MoMo,Dark_MoMo,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28555,JerkWang,JerkWang,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28572,JerkWang,JerkWang,3,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28655,AuntZhang,AuntZhang,10,client.Player,6000,"If you forgot some skills or you qualifed for rebirth, you can learn skills in Job Center."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,28682,AuntZhang,AuntZhang,1,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29164,DoctorKnowitAll,DoctorKnowitAll,41,client.Player,100,You`ve received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29260,DoctorKnowitAll,DoctorKnowitAll,28,client.Player,100,You`ve received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29319,DoctorKnowitAll,DoctorKnowitAll,22,client.Player,100,You`ve received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29411,DoctorKnowitAll,DoctorKnowitAll,16,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29468,DoctorKnowitAll,DoctorKnowitAll,11,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29514,DoctorKnowitAll,DoctorKnowitAll,2,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29694,PoorXiao,PoorXiao,32,client.Player,6000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29719,PoorXiao,PoorXiao,21,client.Player,100,You`ve received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,29782,PoorXiao,PoorXiao,11,client.Player,100,You`ve received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31413,Mulan,Mulan,30,client.Player,3000,"You~received~20~minutes~of~EXP,~2,000~Silver~and~a~Diamond~Ring(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31458,Mulan,Mulan,10,client.Player,3000,"You~received~40~minutes~of~EXP~and~4,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31510,Mulan,Mulan,1,client.Player,3000,"You~received~30~minutes~of~EXP,~3,000~Silver~and~a~Diligence~Book!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31578,Harriet,Harriet,30,client.Player,2000,"You~received~40~minutes~of~EXP,~4,000~Silver~and~a~Refined~Gem!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31614,Harriet,Harriet,20,client.Player,2000,"You~received~20~minutes~of~EXP,~2,000~Silver~and~a~pair~of~Unique~Kylin~Boots(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31662,Harriet,Harriet,1,client.Player,3000,"You~received~30~minutes~of~EXP,~3,000~Silver~and~5~Ginsengs!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31774,BiVillageHead,BiVillageHead,40,client.Player,3000,"You~received~30~minutes~of~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31800,BiVillageHead,BiVillageHead,30,client.Player,4000,"You~received~40~minutes~of~EXP,~4,000~Silver~and~5~Ginsengs!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31837,BiVillageHead,BiVillageHead,20,client.Player,4000,"You~received~40~minutes~of~EXP~and~4,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31907,BiVillageHead,BiVillageHead,1,client.Player,3000,"You~received~40~minutes~of~EXP,~4,000~Silver~and~an~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,31984,AdjutantLi,AdjutantLi,10,client.Player,2000,"You~received~20~minutes~of~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32031,AdjutantLi,AdjutantLi,1,client.Player,3000,"You~received~30~minutes~of~EXP,~3,000~Silver~and~a~Defense~Pot~(20m)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32088,OldZhang,OldZhang,10,client.Player,4000,"You~received~40~minutes~of~EXP~and~4,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32212,SoldiersMother,SoldiersMother,20,client.Player,4000,"You~received~40~minutes~of~EXP~and~4,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32254,SoldiersMother,SoldiersMother,10,client.Player,4000,"Congratulations!~You~received~40~minutes~of~Exp,~4,000~silver~and~1~Diligence~Book!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32290,SoldiersMother,SoldiersMother,1,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~1~Small~Joy~Stone!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32339,SoldierZhang,SoldierZhang,40,client.Player,3000,"Congratulations!~You~received~20~minutes~of~Exp,~2,000~silver~and~1~Diligence~Book!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32391,SoldierZhang,SoldierZhang,10,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~5~Ginseng!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32428,SoldierZhang,SoldierZhang,1,client.Player,3000,"You~received~30~minutes~of~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32557,MysteryTaoist,MysteryTaoist,70,client.Player,3000,"Without their leader, the Hawks will be easily destroyed. Thanks for your help!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32603,MysteryTaoist,MysteryTaoist,60,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~5~Panacea!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32650,MysteryTaoist,MysteryTaoist,50,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp~and~3,000~silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32696,MysteryTaoist,MysteryTaoist,40,client.Player,4000,"Congratulations!~You~received~40~minutes~of~Exp,~4,000~silver~and~1~Bird~Island~Gate!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32744,MysteryTaoist,MysteryTaoist,30,client.Player,3000,~to their owners. Thanks for your help!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32786,MysteryTaoist,MysteryTaoist,20,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~5~Ginseng!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32838,MysteryTaoist,MysteryTaoist,10,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~1~Small~Joy~Stone!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32878,MysteryTaoist,MysteryTaoist,1,client.Player,3000,You`re~welcome.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,32938,SoldierGuan,SoldierGuan,12,client.Player,1000,"Congratulations! You received 10 minutes of Exp and 1,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33062,SoldierXu,SoldierXu,16,client.Player,1000,"Congratulations!~You~received~10~minutes~of~Exp~and~1,000~silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33120,SoldierZheng,SoldierZheng,10,client.Player,1000,"Congratulations!~You~received~10~minutes~of~Exp,~1,000~silver~and~5~Panacea!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33208,SoldierFei,SoldierFei,10,client.Player,1000,"Congratulations!~You~received~10~minutes~of~Exp~and~1,000~silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33316,CookYuan,CookYuan,1,client.Player,3000,"You~received~30~minutes~of~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33471,TruthTaoist,TruthTaoist,30,client.Player,3000,"You~received~20~minutes~of~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33541,TruthTaoist,TruthTaoist,10,client.Player,3000,"~You~received~30~minutes~of~Exp,~3,000~silver~and~1~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33600,TruthTaoist,TruthTaoist,1,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~5~Panacea!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33820,XimenQing,XimenQing,50,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~1~Small~Joy~Stone!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33866,XimenQing,XimenQing,40,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33936,XimenQing,XimenQing,20,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,33984,XimenQing,XimenQing,1,client.Player,2000,"You`ve~received~some~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34031,StrangeBox,StrangeBox,30,client.Player,3000,You~saw~a~mysterious~halo~and~found~yourself~energized!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34068,StrangeBox,StrangeBox,10,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34138,CityGeneral,CityGeneral,1,client.Player,2000,"You`ve~received~some~EXP,~3,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34256,WindTaoist,WindTaoist,1,client.Player,2000,"Congratulations!~You~received~3,270,000~Exp~and~2,000~silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34357,WealthyWan,WealthyWan,30,client.Player,3000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34427,WealthyWan,WealthyWan,20,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp~and~3,000~silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34471,WealthyWan,WealthyWan,10,client.Player,3000,"You~received~30~minutes~of~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34520,WealthyWan,WealthyWan,1,client.Player,3000,"Congratulations!~You~received~30~minutes~of~Exp,~3,000~silver~and~an~Exp~Potion!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34644,LittleBen,LittleBen,5,client.Player,2000,"You~received~20~minutes~of~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34826,ArmorerYu,ArmorerYu,10,client.Player,3000,"Congratulations!~You~received~4,850,000~Exp,~3,000~silver~and~an~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34892,ViceGeneral,ViceGeneral,10,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,34927,ViceGeneral,ViceGeneral,1,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35018,IslandGeneral,IslandGeneral,10,client.Player,4000,"You`ve~received~EXP~worth~2/3~EXP~Ball,~4,000~Silver~and~1~Bird~Island~Gate!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35058,IslandGeneral,IslandGeneral,1,client.Player,3000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35148,BIViceCaptain,BIViceCaptain,10,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~1~Bird~Island~Gate!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35187,BIViceCaptain,BIViceCaptain,1,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35264,XuFan,XuFan,10,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~a~Small~Joy~Stone!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35305,XuFan,XuFan,1,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~1~Defense~Pot~(20m)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35350,Xi_er,Xi_er,10,client.Player,4000,"You`ve~received~EXP~worth~2/3~EXP~Ball,~4,000~Silver~and~1~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35393,Xi_er,Xi_er,1,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~5~Study~Points!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35489,BICastellan,BICastellan,10,client.Player,2000,"You~received~20~minutes~of~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35532,BICastellan,BICastellan,1,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35599,Lotus,Lotus,11,client.Player,3000,~and~an~EXP~Ball!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35750,DCViceCaptain,DCViceCaptain,51,client.Player,3000,"You`ve~received~some~EXP,~2,000~Silver,~a~random~Gem~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35847,DCViceCaptain,DCViceCaptain,22,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35884,DCViceCaptain,DCViceCaptain,12,client.Player,3000,"You~received~2,519,000~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,35919,DCViceCaptain,DCViceCaptain,2,client.Player,1500,"You`ve~received~some~EXP,~1,500~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36158,TaoistYu,TaoistYu,53,client.Player,3000,"You've~received~some~EXP~3,000~Silver,~5~Panaceas,~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36217,TaoistYu,TaoistYu,42,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36246,TaoistYu,TaoistYu,31,client.Player,1000,"You`ve~received~some~EXP,~1,000~Silver~and~2~SmallJoyStone!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36296,TaoistYu,TaoistYu,11,client.Player,1000,"You`ve~received~some~EXP~and~1,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36356,TaoistYu,TaoistYu,3,client.Player,3000,"You've~received~some~EXP,~3,000~Silver,~an~EXP~Ball~Scrap~and~a~+1~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36429,SpringSoldierZhao,SpringSoldierZhao,32,client.Player,2000,"You've~received~some~EXP~3,000~Silver,~and~EXP~Postion~and~a~+2~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36467,SpringSoldierZhao,SpringSoldierZhao,21,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36528,SpringSoldierZhao,SpringSoldierZhao,3,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36613,TaoistSpring,TaoistSpring,22,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver,~a~Super~Necklace!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36704,TaoistSpring,TaoistSpring,15,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36733,TaoistSpring,TaoistSpring,4,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36808,ElderJiang,ElderJiang,21,client.Player,1000,"You`ve~received~EXP~worth~1/6~EXP~Ball~and~1,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36875,ElderJiang,ElderJiang,3,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,36978,ConvoyViceLeader,ConvoyViceLeader,42,client.Player,2000,"You`ve~received~some~EXP,~3,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37030,ConvoyViceLeader,ConvoyViceLeader,32,client.Player,2000,"You`ve~received~some~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37079,ConvoyViceLeader,ConvoyViceLeader,22,client.Player,2000,"You`ve~received~some~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37140,ConvoyViceLeader,ConvoyViceLeader,14,client.Player,2000,"You~received~2,952,000~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37223,ConvoyViceLeader,ConvoyViceLeader,4,client.Player,3000,"You`ve~received~some~EXP~3,000~Silver,~a~Small~Joy~Stone~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37350,SpringViceGeneralOu,SpringViceGeneralOu,13,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~3~EXPBallScrap!."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37412,SpringViceGeneralOu,SpringViceGeneralOu,4,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~Meteor!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37500,SculptorHe,SculptorHe,22,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~a~Super~Ring!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37562,SculptorHe,SculptorHe,12,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37622,SculptorHe,SculptorHe,3,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~a~+1~Steed(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37703,SpringGeneralXu,SpringGeneralXu,31,client.Player,1000,"You`ve~received~EXP~worth~1/6~EXP~Ball,~1,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37752,SpringGeneralXu,SpringGeneralXu,22,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver,~and~a~+2~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37807,SpringGeneralXu,SpringGeneralXu,12,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver,~5~Panaceas~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37835,SpringGeneralXu,SpringGeneralXu,2,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball,~2,000~Silver~and~an~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37942,ConvoyLeaderGu,ConvoyLeaderGu,12,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,37977,ConvoyLeaderGu,ConvoyLeaderGu,2,client.Player,2000,"You`ve~received~some~EXP,~2,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38024,SoldierMu,SoldierMu,21,client.Player,2000,"You`ve~received~EXP~worth~1/3~EXP~Ball~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38103,SoldierMu,SoldierMu,3,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~ExpPotion!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38181,HanCheng,HanCheng,12,client.Player,3000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38224,HanCheng,HanCheng,2,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~Diligence~Book!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38330,DCWanYing,DCWanYing,43,client.Player,3000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38368,DCWanYing,DCWanYing,30,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38430,DCWanYing,DCWanYing,22,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38483,DCWanYing,DCWanYing,12,client.Player,3000,"You`ve~received~some~EXP~3,000~Silver~and~an~EXP~Potion!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38537,DCWanYing,DCWanYing,3,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38707,GeneralZhuGe,GeneralZhuGe,40,client.Player,2000,"You`ve~received~some~EXP~and~2,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38733,GeneralZhuGe,GeneralZhuGe,30,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~Desert~City~Gate!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38772,GeneralZhuGe,GeneralZhuGe,22,client.Player,3000,"You`ve~received~some~EXP~and~3,000~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38830,GeneralZhuGe,GeneralZhuGe,12,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~an~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38882,GeneralZhuGe,GeneralZhuGe,3,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~Diligence~Book!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38936,GeneralZhuGe,GeneralZhuGe,62,client.Player,1500,"You've~received~some~EXP,~2,000~Silver,~5~Panaceas~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,38994,IronsmithLi,IronsmithLi,31,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~a~Desert~City~Gate!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39033,IronsmithLi,IronsmithLi,22,client.Player,3000,"You`ve~received~EXP~worth~1/2~EXP~Ball,~3,000~Silver~and~an~EXP~Ball~Scrap!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39087,IronsmithLi,IronsmithLi,12,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~a~+1~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39142,IronsmithLi,IronsmithLi,3,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silvers,~a~Small~Joy~Stone~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39208,ViceGeneralDong,ViceGeneralDong,31,client.Player,3000,"You`ve~received~some~EXP,~2,000~Silver,~Tiger~Boots~and~a~+1~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39264,ViceGeneralDong,ViceGeneralDong,26,client.Player,3000,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39329,ViceGeneralDong,ViceGeneralDong,12,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silver~and~5~Panaceas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39365,ViceGeneralDong,ViceGeneralDong,3,client.Player,2500,"You`ve~received~some~EXP,~2,000~Silvers~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39452,KeYulun,KeYulun,22,client.Player,3000,"You`ve~received~some~EXP,~3,000~Silvers,~Unique~Snakeskin~Boots~and~a~+1~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39505,KeYulun,KeYulun,12,client.Player,3000,"You've~received~some~EXP,~3,000~Silver~and~2~Meteors!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,39549,KeYulun,KeYulun,3,client.Player,2000,"You`ve~received~some~EXP,~2,000~Silver~and~a~Desert~City~Gate!"
+CP,spend,Game/MsgNpc/NpcHandler.cs,41097,KitMerchant,KitMerchant,40,client.Player,7000,You received 1 EliteTaoistKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41140,KitMerchant,KitMerchant,41,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41187,KitMerchant,KitMerchant,42,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41234,KitMerchant,KitMerchant,43,client.Player,7000,You received 1 EliteArcherKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41277,KitMerchant,KitMerchant,44,client.Player,7000,You received 1 EliteWarriorKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41320,KitMerchant,KitMerchant,45,client.Player,7000,You received 1 EliteTrojanKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41363,KitMerchant,KitMerchant,46,client.Player,7000,You received 1 EliteNinjaKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41405,KitMerchant,KitMerchant,47,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41457,KitMerchant,KitMerchant,49,client.Player,7000,You received 1 EliteUniversalKitB.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41488,KitMerchant,KitMerchant,50,client.Player,7000,You received 1 EliteUniversalKitA.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41559,KitMerchant,KitMerchant,21,client.Player,7000,You received 1 SuperTaoistKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41601,KitMerchant,KitMerchant,9,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41648,KitMerchant,KitMerchant,8,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41695,KitMerchant,KitMerchant,7,client.Player,7000,You received 1 SuperArcherKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41737,KitMerchant,KitMerchant,6,client.Player,7000,You received 1 SuperWarriorKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41780,KitMerchant,KitMerchant,5,client.Player,7000,You received 1 SuperTrojanKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41821,KitMerchant,KitMerchant,4,client.Player,7000,You received 1 SuperNinjaKit.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41860,KitMerchant,KitMerchant,3,client.Player,7000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,41913,KitMerchant,KitMerchant,86,client.Player,7000,You received 1 SuperUniversalKitB.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41944,KitMerchant,KitMerchant,99,client.Player,7000,You received 1 SuperUniversalKitA.
+CP,spend,Game/MsgNpc/NpcHandler.cs,41995,PkReset,PkReset,1,client.Player,100,eidolon
+CP,spend,Game/MsgNpc/NpcHandler.cs,42024,PkReset,PkReset,2,client.Player,1000,You've removed 100 Pk Points.
+CP,spend,Game/MsgNpc/NpcHandler.cs,42053,PkReset,PkReset,3,client.Player,5000,You've removed 500 Pk Points.
+CP,spend,Game/MsgNpc/NpcHandler.cs,42450,DrYinYang,DrYinYang,1,client.Player,1075,Please remove your garment.
+CP,spend,Game/MsgNpc/NpcHandler.cs,42549,NameRegister,NameRegister,11,client.Player,3225,Your name reset was finished succesfully!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,42829,StoneApe,StoneApe,2,client.Player,1000,"You received 485,000 points of EXP, 1,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,42842,StoneApe,StoneApe,10,client.Player,1500,"You received 728,000 points of EXP, 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,42887,JackDaniel,JackDaniel,1,client.Player,1000,"You received 495,000 points of EXP, 1000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43064,DCViceGenera,DCViceGenera,21,client.Player,3000,"ou've~received~some~EXP,~3,000~Silver,~a~Small~Joy~Stone~and~a~+1~Stone~(B)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43113,DCViceGenera,DCViceGenera,3,client.Player,1500,"You`ve~received~some~EXP~and~1,500~Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43174,DCViceGenera,DCViceGenera,6,client.Player,3000,"You~received~some~EXP,~3,000~Silver~and~1~Refined~Gem!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43277,SnakemanLeader,SnakemanLeader,12,client.Player,2000,"You received 1,205,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43384,CaptorCooke,CaptorCooke,72,client.Player,3000,"You received 1,863,000 EXP, an Elite Necklace and 3,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43440,CaptorCooke,CaptorCooke,62,client.Player,2700,"You received 1,739,000 EXP, and 2,700 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43491,CaptorCooke,CaptorCooke,52,client.Player,2500,"You received 1,553,000 EXP, 2,500 Silver, and 5 Panaceas."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43526,CaptorCooke,CaptorCooke,41,client.Player,2000,"You received 1,835,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43570,CaptorCooke,CaptorCooke,21,client.Player,1500,"You received 475,000 EXP, a pair of Elite Shoes and 1500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43623,CaptorCooke,CaptorCooke,3,client.Player,1500,"You received 890,000 EXP, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43681,HeresySnakemanLeader,HeresySnakemanLeader,12,client.Player,2000,"You received 1,205,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43800,HarmonyTaoist,HarmonyTaoist,82,client.Player,2000,"You received 1,205,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43826,HarmonyTaoist,HarmonyTaoist,71,client.Player,500,"You received 301,000 EXP, and 500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43895,HarmonyTaoist,HarmonyTaoist,42,client.Player,2000,"You received 1,187,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43937,HarmonyTaoist,HarmonyTaoist,32,client.Player,1500,"You received 1,290,000 EXP, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,43958,HarmonyTaoist,HarmonyTaoist,22,client.Player,1500,"You received 890,000 EXP, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44001,HarmonyTaoist,HarmonyTaoist,12,client.Player,2000,"You received 1,223,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44044,HarmonyTaoist,HarmonyTaoist,3,client.Player,2000,"You received 1,170,000 EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44125,MoonMaiden,MoonMaiden,32,client.Player,2000,"You received 1,223,000 points of EXP, 2 Diligence Book, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44170,MoonMaiden,MoonMaiden,22,client.Player,2000,"You received 1,170,000 points of EXP, 2 EXPBallScrap, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44214,MoonMaiden,MoonMaiden,12,client.Player,1200,"You received 702000 EXP, a Meteor and 1200 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44241,MoonMaiden,MoonMaiden,2,client.Player,5000,"You received 292,000 points of EXP, and 5,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44317,TempestTaoist,TempestTaoist,22,client.Player,2000,"You received 1,134,000 points of EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44365,TempestTaoist,TempestTaoist,12,client.Player,1500,"You received 1,250,000 points of EXP, 1 EXP Ball Scrap, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44395,TempestTaoist,TempestTaoist,2,client.Player,1500,"You received 850,000 points of EXP, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44486,ArdenteTaoist,ArdenteTaoist,12,client.Player,2000,"You received 1,134,000 points of EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44538,ArdenteTaoist,ArdenteTaoist,3,client.Player,2000,"You received 1,079,000 points of EXP, 1 Small Joy Stone, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44641,BreezePupil,BreezePupil,12,client.Player,2000,"You received 1,116,000 points of EXP, 5 Amritas, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44698,BreezePupil,BreezePupil,3,client.Player,2000,"You received 1,079,000 points of EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44800,PoisonMaster,PoisonMaster,92,client.Player,900,"You received 518,000 points of EXP,a level 60 Elite Ring and 900 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44860,PoisonMaster,PoisonMaster,82,client.Player,2000,"You received 1,152,000 points of EXP, and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44900,PoisonMaster,PoisonMaster,72,client.Player,1500,"You received 864,000 points of EXP, and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,44950,PoisonMaster,PoisonMaster,62,client.Player,800,"You received 461,000 points of EXP, and 800 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45007,PoisonMaster,PoisonMaster,52,client.Player,500,"You received 288,000 points of EXp, and 500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45050,PoisonMaster,PoisonMaster,42,client.Player,2000,"You received 1,116,000 points of EXp, 1 Meteor and 2,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45095,PoisonMaster,PoisonMaster,32,client.Player,1000,"You received 558,000 points of EXp, and 1000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45160,PoisonMaster,PoisonMaster,22,client.Player,1000,"You received 279,000 points of EXp, 1 EXP Ball Scrap, and 1,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45228,PoisonMaster,PoisonMaster,12,client.Player,1500,"You received 809,000 points of EXp, 5 Amritas and 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45257,PoisonMaster,PoisonMaster,2,client.Player,800,"You received 247,000 points of EXp, and 800 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45507,CarpenterJack,CarpenterJack,32,client.Player,1000,"You received 247,000 points of EXP, 1 Ape City Gage and 1,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45535,CarpenterJack,CarpenterJack,20,client.Player,1500,"You received 743,000 points of Exp, 1,500 Silver, 1 Meteor."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45587,CarpenterJack,CarpenterJack,1,client.Player,500,"You received 247,000 points of EXP, 500 Silver, and 1 Diligence Book."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45671,ACCastellan,ACCastellan,10,client.Player,800,"You received 374,000 points of EXP, 800 Silver, and 1 Apec City Gate."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45717,ACCastellan,ACCastellan,1,client.Player,1500,"You received 674,000 points of Exp, 1,500 Silver and 1 Exp Ball Scrap."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45813,Lydia,Lydia,3,client.Player,1500,"You received 701,000 points of EXP, 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45897,AC_Lieutenant,AC_Lieutenant,22,client.Player,1500,"You received 701,000 points of EXP, 1,500 Silver, 1 emerald and level50 EliteBoots."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45947,AC_Lieutenant,AC_Lieutenant,17,client.Player,1500,"You received 701,000 points of EXP, 1,500 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,45991,AC_Lieutenant,AC_Lieutenant,12,client.Player,1000,"You received 467,000 points of EXP, 1,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46035,AC_Lieutenant,AC_Lieutenant,7,client.Player,1000,"You received 674,000 points of EXP, 1,000 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46056,AC_Lieutenant,AC_Lieutenant,1,client.Player,400,"You received 179,000 points of EXP, 400 Silver, and 5 Amritas."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46112,AC_Lieutenant,AC_Lieutenant,4,client.Player,1500,"You received 674,000 points of EXP, 1,500 Silver, and 1 +1Stone."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46423,ThiefChen,ThiefChen,2,client.Player,100,You've received 100 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46445,ThiefChen,ThiefChen,4,client.Player,100,You've received 100 Silver and 1600 EXP.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46582,ThiefWong,ThiefWong,2,client.Player,100,Let me check.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46616,ThiefWong,ThiefWong,10,client.Player,1000,"You've received EXP worth 1/6 EXP Ball and 1,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46772,VeteranHong,VeteranHong,2,client.Player,100,You've received 100 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46805,VeteranHong,VeteranHong,6,client.Player,100,You've received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46840,VeteranHong,VeteranHong,10,client.Player,1000,"You've received EXP worth 1/6 EXP Ball and 1,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46965,ScholarWu,ScholarWu,8,client.Player,1500,"You've received EXP worth 1/3 EXP Ball and 1,500 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,46994,ScholarWu,ScholarWu,2,client.Player,100,You've received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47227,PharmacistMuMu,PharmacistMuMu,2,client.Player,100,You've received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47267,PharmacistMuMu,PharmacistMuMu,5,client.Player,100,You've received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47368,ApprenticeLuo,ApprenticeLuo,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47486,ArtisanLuo,ArtisanLuo,10,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47503,ArtisanLuo,ArtisanLuo,11,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47552,ArtisanLuo,ArtisanLuo,16,client.Player,1500,"You've received EXP worth 1/6 EXP Ball and 1,500 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47617,ArtisanLuo,ArtisanLuo,5,client.Player,400,You~are~welcome.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47774,DealerShen,DealerShen,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47825,DealerShen,DealerShen,5,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47864,DealerShen,DealerShen,7,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,47933,DealerShen,DealerShen,10,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48035,Minstrel,Minstrel,2,client.Player,100,You've completed the quest and received 100 Silver!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48107,Minstrel,Minstrel,7,client.Player,1000,"You've received EXP worth 1/6 EXP Ball and 1,000 Silver!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48214,DoctorLi,DoctorLi,3,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48290,DoctorLi,DoctorLi,7,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48409,OfficerBao,OfficerBao,2,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48450,OfficerBao,OfficerBao,4,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48481,OfficerBao,OfficerBao,8,client.Player,3000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48634,GeneralAmber,GeneralAmber,2,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48677,GeneralAmber,GeneralAmber,5,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48721,GeneralAmber,GeneralAmber,8,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48759,GeneralAmber,GeneralAmber,10,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,48855,GuardLi,GuardLi,1,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49025,KungfuMaster,KungfuMaster,16,client.Player,4000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49457,PharmacistDong,PharmacistDong,2,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49679,GeneralJudd,GeneralJudd,2,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49721,GeneralJudd,GeneralJudd,4,client.Player,100,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49838,DuSan,DuSan,13,client.Player,5000,recovery
+Gold,gain,Game/MsgNpc/NpcHandler.cs,49877,DuSan,DuSan,2,client.Player,100,recovery
+CP,spend,Game/MsgNpc/NpcHandler.cs,50063,MysterCheast1,MysterCheast1,4,client.Player,cps,
+CP,spend,Game/MsgNpc/NpcHandler.cs,50261,MysterCheast2,MysterCheast2,4,client.Player,cps,
+CP,spend,Game/MsgNpc/NpcHandler.cs,50460,MysterCheast3,MysterCheast3,4,client.Player,cps,
+CP,spend,Game/MsgNpc/NpcHandler.cs,50659,MysterCheast4,MysterCheast4,4,client.Player,cps,
+CP,spend,Game/MsgNpc/NpcHandler.cs,50858,MysterCheast5,MysterCheast5,4,client.Player,cps,
+CP,spend,Game/MsgNpc/NpcHandler.cs,51074,MagnoliaEnvoy,MagnoliaEnvoy,3,client.Player,50,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51113,MagnoliaEnvoy,MagnoliaEnvoy,5,client.Player,600,Please make 1 more space in your inventory
+CP,spend,Game/MsgNpc/NpcHandler.cs,51247,DesertGuardian,DesertGuardian,3,client.Player,700,Please make 1 more space in your inventory
+CP,spend,Game/MsgNpc/NpcHandler.cs,51377,DailyNormalSpiritBead,DailyNormalSpiritBead,2,client.Player,500,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51450,DailyRefinedSpiritBead,DailyRefinedSpiritBead,2,client.Player,500,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51523,DailyUniqueSpiritBead,DailyUniqueSpiritBead,2,client.Player,500,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51596,DailyEliteSpiritBead,DailyEliteSpiritBead,2,client.Player,500,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51669,DailySuperSpiritBead,DailySuperSpiritBead,2,client.Player,500,"Sorry, but you don`t have enough CPs."
+CP,spend,Game/MsgNpc/NpcHandler.cs,51759,HeavenlyMaster,HeavenlyMaster,11,client.Player,1500,
+CP,spend,Game/MsgNpc/NpcHandler.cs,52186,DailyQuestEnvoy,DailyQuestEnvoy,53,client.Player,500,Let me check.
+CP,spend,Game/MsgNpc/NpcHandler.cs,52273,DailyQuestEnvoy,DailyQuestEnvoy,52,client.Player,100,You received a 
+CP,spend,Game/MsgNpc/NpcHandler.cs,52380,DailyQuestEnvoy,DailyQuestEnvoy,35,client.Player,50,"You received 70 Study Points, 240 minutes of EXP, 1 Chi Token and 1 Protection Pill."
+CP,spend,Game/MsgNpc/NpcHandler.cs,52595,DailyQuestEnvoy,DailyQuestEnvoy,112,client.Player,50,eidolon
+CP,spend,Game/MsgNpc/NpcHandler.cs,52747,DailyQuestEnvoy,DailyQuestEnvoy,5,client.Player,50,You~received~
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53114,MilitiaCaptain,MilitiaCaptain,8,client.Player,500,"You've receive some EXP 1,000 Silver, 5 EXP Ball Scraps and Level 40 Super Weapon(B)! "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53171,MilitiaCaptain,MilitiaCaptain,1,client.Player,500,"You receive 161,000 Experience and 500 Gold.. "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53207,MilitiaCaptain,MilitiaCaptain,4,client.Player,500,"You received some EXP, 500 Silver and 5 Amritas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53261,MilitiaLeopard,MilitiaLeopard,1,client.Player,600,"You receive 200,000 Experience and 600 Gold. "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53284,MilitiaLeopard,MilitiaLeopard,3,client.Player,1000,"You've received some EXP, 1,000 Silver and 5 EXP Ball Scraps! "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53378,MilitiaDragon,MilitiaDragon,1,client.Player,600,"You receive 194,000 Experience and 600 Gold. "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53454,MilitiaTiger,MilitiaTiger,2,client.Player,500,"You receive 161,000 Experience and 500 Gold."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53471,MilitiaTiger,MilitiaTiger,3,client.Player,1000,"You received 60 minutes EXP, 1,000 Silver and 5 Amritas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53569,BoldBoy,BoldBoy,5,client.Player,800,"You received 60 minutes EXP, 800 Silver and Castle Gate"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53650,FurDealer,FurDealer,4,client.Player,500,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53722,VillageHead,VillageHead,2,client.Player,300,You've received 300 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53774,VillageHead,VillageHead,5,client.Player,800,"You've received some EXP, 800 Silver, 3 EXP Ball Scraps and a Level 37 Elite Helment! "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53807,VillageHead,VillageHead,7,client.Player,500,You received 151000 Experience and 500 Gold. 
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53844,VillageHead,VillageHead,10,client.Player,800,"You've received some EXP, 800 Silver and 3 Small Joy Stones. "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53881,VillageHead,VillageHead,12,client.Player,800,"You received 242,000 Experience and 800 Gold. "
+Gold,gain,Game/MsgNpc/NpcHandler.cs,53911,VillageHead,VillageHead,14,client.Player,2000,Let me check.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,54021,WineKiddo,WineKiddo,6,client.Player,10000,Alright.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,54066,WineKiddo,WineKiddo,3,client.Player,1000,You have bought a bottle of wine from me! Don`t drink too much!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54146,HunterWong,HunterWong,5,client.Player,600,"You received 138,000 EXP and 600 Silver."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54210,PhoenixCastellan,PhoenixCastellan,3,client.Player,500,You've received some exp and 500 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54226,PhoenixCastellan,PhoenixCastellan,4,client.Player,1200,You've received some exp and 1200 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54305,IntelligenceAgent,IntelligenceAgent,1,client.Player,800,You've received some exp and 800 Silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54396,IntelligenceAgent,IntelligenceAgent,4,client.Player,1000,"You've received some Exp, 1,000 Silver and 5 Amritas!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54491,ForestGuvernor,ForestGuvernor,3,client.Player,500,"You've received some exp, 500 Silver, a Bound EXP Potion and a Gold Ring(Bound)!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54607,YuJing,YuJing,2,client.Player,300,You've received some EXP and 300 Silver
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54643,YuJing,YuJing,5,client.Player,500,You've received some EXP and 500 Silver
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54724,YuLin,YuLin,1,client.Player,300,What? My husband is dead? You can`t be serious!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54790,YuLin,YuLin,7,client.Player,500,"You've received some EXP and 500 Silver, and Uniquer Soft Boots(B)."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54825,MasterHao,MasterHao,0,client.Player,500,The~quest~`Capture~Spirit~I`~is~completed.~You`ve~received~500~Silver~and~some~EXP!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,54991,Fortuneteller,Fortuneteller,2,client.Player,500,The~quest~`Capture~Spirit~I`~is~completed.~You`ve~received~500~Silver~and~some~EXP!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55113,RuHua,RuHua,11,client.Player,200,You`ve~completed~`Love~Confession~5`~and~received~200~Silver~and~some~EXP!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55133,RuHua,RuHua,5,client.Player,200,"Yes! This is the Handkerchief I made it, myself. Thanks for your help!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55179,RuHua,RuHua,2,client.Player,200,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55265,XuLiang,XuLiang,0,client.Player,500,Let me check.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55290,XuLiang,XuLiang,0,client.Player,1200,
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55361,XuLiang,XuLiang,30,client.Player,300,Best~wishes~for~you!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55437,XuLiang,XuLiang,24,client.Player,400,Good~luck!
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55491,XuLiang,XuLiang,2,client.Player,500,"You~completed~`Letter~Delivery~3`,~and~received~500~Silver~and~5~minutes~of~EXP!"
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55727,TCViceCaptain,TCViceCaptain,3,client.Player,100,You~completed~Letter~Delivery~1~and~received~100~silver.
+Gold,gain,Game/MsgNpc/NpcHandler.cs,55774,TCViceCaptain,TCViceCaptain,6,client.Player,300,
+CP,gain,Game/MsgNpc/NpcHandler.cs,55953,Shelby,Shelby,12,client.Player,1075,"Sorry,~you~do~not~have~20,000~virtue~points."
+Gold,spend,Game/MsgNpc/NpcHandler.cs,55991,TcBoxer,TcBoxer,1,client.Player,1000, level is lower than your.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,56034,BirdBoxer,BirdBoxer,1,client.Player,1000, level is lower than your.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,56077,PheonixBoxer,PheonixBoxer,1,client.Player,1000, level is lower than your.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,56120,ApeBoxer,ApeBoxer,1,client.Player,1000, level is lower than your.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,56163,DesertBoxer,DesertBoxer,1,client.Player,1000, level is lower than your.
+CP,spend,Game/MsgNpc/NpcHandler.cs,56308,SteedRace,SteedRace,3,client.Player,100000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,56582,EquipmentBlacksmith,EquipmentBlacksmith,38,client.Player,20000,Thanks~a~lot!
+CP,spend,Game/MsgNpc/NpcHandler.cs,56686,EquipmentBlacksmith,EquipmentBlacksmith,68,client.Player,10000,Update Item 
+CP,spend,Game/MsgNpc/NpcHandler.cs,57001,DragonTail,DragonTail,1,client.Player,200,
+CP,spend,Game/MsgNpc/NpcHandler.cs,57024,DragonTail,DragonTail,2,client.Player,100,
+CP,spend,Game/MsgNpc/NpcHandler.cs,57046,DragonTail,DragonTail,3,client.Player,20,
+CP,spend,Game/MsgNpc/NpcHandler.cs,57089,SellItems,SellItems,1,client.Player,200,
+CP,spend,Game/MsgNpc/NpcHandler.cs,57112,SellItems,SellItems,2,client.Player,100,
+CP,spend,Game/MsgNpc/NpcHandler.cs,57134,SellItems,SellItems,3,client.Player,20,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,57174,MarketCpAdmin,MarketCpAdmin,3,client.Player,999999999,"You do not have 999,999,999 Silvers with you."
+CP,gain,Game/MsgNpc/NpcHandler.cs,57190,MarketCpAdmin,MarketCpAdmin,1,client.Player,2150,Congratulations!You~have~got~2150~CPs~in~your~inventory
+CP,gain,Game/MsgNpc/NpcHandler.cs,57208,MarketCpAdmin,MarketCpAdmin,2,client.Player,215,Congratulations!You~have~got~215~CPs~in~your~inventory
+Gold,gain,Game/MsgNpc/NpcHandler.cs,57709,StartNpc,StartNpc,3,client.Player,5000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,58239,NemesysConductort,NemesysConductort,1,client.Player,100,You do not have 100 Silvers with you.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,58255,NemesysConductort,NemesysConductort,2,client.Player,100,You do not have 100 Silvers with you.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,58302,NemesysConductort,SpaceMarks,1,client.Player,1000,
+CP,gain,Game/MsgNpc/NpcHandler.cs,58361,JailCPAdmin,JailCPAdmin,1,client.Player,2150,Congratulations!You~have~got~2150~CPs~in~your~inventory
+CP,gain,Game/MsgNpc/NpcHandler.cs,58378,JailCPAdmin,JailCPAdmin,2,client.Player,215,Congratulations!You~have~got~215~CPs~in~your~inventory
+CP,gain,Game/MsgNpc/NpcHandler.cs,58419,WardenZhang,WardenZhang,1,client.Player,(uint)ConquerPoints,For arrest 
+CP,spend,Game/MsgNpc/NpcHandler.cs,58484,JailWarden,JailWarden,4,client.Player,cost,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,58550,JailJoin,JailJoin,2,client.Player,1000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,59115,P7SacredTreasuresEnvoy,P7SacredTreasuresEnvoy,6,client.Player,17000,
+CP,spend,Game/MsgNpc/NpcHandler.cs,59149,P7SacredTreasuresEnvoy,P7SacredTreasuresEnvoy,4,client.Player,3700,
+CP,spend,Game/MsgNpc/NpcHandler.cs,59360,SwapperStarry,SwapperStarry,12,client.Player,1000,Please make 1 more space in your inventory
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60173,DesertFrozenGroto,Furnitures,1,client.Player,(uint)Furniture.MoneyCost,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60433,DesertFrozenGroto,GuildCondTeleBack,1,client.Player,500,You do not have 500 silvers with you.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60466,DesertFrozenGroto,GuildConductorsProces,1,client.Player,1000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60503,DesertFrozenGroto,GuildConductorsProces,3,client.Player,100000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60541,DesertFrozenGroto,GuildConductorsProces,6,client.Player,100000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60579,DesertFrozenGroto,GuildConductorsProces,5,client.Player,100000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,60617,DesertFrozenGroto,GuildConductorsProces,4,client.Player,100000,
+CP,gain,Game/MsgNpc/NpcHandler.cs,60688,GuildOfficer,GuildOfficer,1,client.Player,MsgTournaments.MsgSchedules.GuildWar.Winner.ConquerPointsReward,Please make 3 more spaces in your inventory.
+CP,gain,Game/MsgNpc/NpcHandler.cs,60770,EliteGuildOfficer,EliteGuildOfficer,1,client.Player,MsgTournaments.MsgSchedules.EliteGuildWar.Winner.ConquerPointsReward, + client.Player.Name + 
+CP,spend,Game/MsgNpc/NpcHandler.cs,61625,Class6House,Class6House,1,client.Player,99000,Please remove all your furnitures from your house.
+CP,spend,Game/MsgNpc/NpcHandler.cs,62012,HouseAdmin,HouseAdmin,10,client.Player,cost,"Sorry, but you don`t have enough CPs to buy that."
+CP,spend,Game/MsgNpc/NpcHandler.cs,62033,HouseAdmin,HouseAdmin,11,client.Player,cost,"Sorry, but you don`t have enough CPs to buy that."
+CP,spend,Game/MsgNpc/NpcHandler.cs,62054,HouseAdmin,HouseAdmin,12,client.Player,cost,"Sorry, but you don`t have enough CPs to buy that."
+CP,spend,Game/MsgNpc/NpcHandler.cs,62075,HouseAdmin,HouseAdmin,13,client.Player,cost,"Sorry, but you don`t have enough CPs to buy that."
+CP,spend,Game/MsgNpc/NpcHandler.cs,62096,HouseAdmin,HouseAdmin,14,client.Player,cost,"Sorry, but you don`t have enough CPs to buy that."
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62232,Barber,Barber,16,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62262,Barber,Barber,15,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62292,Barber,Barber,14,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62322,Barber,Barber,13,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62352,Barber,Barber,12,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62382,Barber,Barber,11,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62412,Barber,Barber,10,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62438,Barber,Barber,10,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62466,Barber,Barber,17,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62496,Barber,Barber,21,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62526,Barber,Barber,22,client.Player,10000,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62556,Barber,Barber,56,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62586,Barber,Barber,57,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62616,Barber,Barber,70,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62646,Barber,Barber,71,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62676,Barber,Barber,72,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62745,Barber,Barber,30,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62775,Barber,Barber,31,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62805,Barber,Barber,32,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62835,Barber,Barber,33,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62865,Barber,Barber,34,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62895,Barber,Barber,35,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62925,Barber,Barber,36,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62955,Barber,Barber,37,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,62985,Barber,Barber,38,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63046,Barber,Barber,44,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63076,Barber,Barber,45,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63106,Barber,Barber,46,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63136,Barber,Barber,47,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63166,Barber,Barber,48,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63197,Barber,Barber,49,client.Player,500,Health
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63227,Barber,Barber,50,client.Player,500,Health
+CP,gain,Game/MsgNpc/NpcHandler.cs,63327,GuildConductor,GuildConductor,4,client.Player,client.Player.MyGuild.GetLeaderReward()[0],"Sorry, you already claimed the reward."
+Gold,gain,Game/MsgNpc/NpcHandler.cs,63328,GuildConductor,GuildConductor,4,client.Player,client.Player.MyGuild.GetLeaderReward()[1],"Sorry, you already claimed the reward."
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63426,GuildConductor,GuildConductor,3,client.Player,50000,Please make 1 more space in your inventory.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,63636,ArenaNpc,ArenaNpc,1,client.Player,50,You do not have 50 silvers with you.
+CP,spend,Game/MsgNpc/NpcHandler.cs,63758,MasterXuan,MasterXuan,3,client.Player,100,You Sash was update Successful.
+CP,spend,Game/MsgNpc/NpcHandler.cs,63802,MasterXuan,MasterXuan,4,client.Player,200,You Sash was update Successful.
+CP,spend,Game/MsgNpc/NpcHandler.cs,64861,CloudSaint,CloudSaint,6,client.Player,3000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,65171,MillionaireLee,MillionaireLee,33,client.Player,100000,
+CP,gain,Game/MsgNpc/NpcHandler.cs,65656,CollectorZhao,CollectorZhao,1,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,gain,Game/MsgNpc/NpcHandler.cs,65680,CollectorZhao,CollectorZhao,2,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,gain,Game/MsgNpc/NpcHandler.cs,65704,CollectorZhao,CollectorZhao,3,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,gain,Game/MsgNpc/NpcHandler.cs,65748,LotteryCollectorWong,LotteryCollectorWong,1,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,gain,Game/MsgNpc/NpcHandler.cs,65772,LotteryCollectorWong,LotteryCollectorWong,2,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,gain,Game/MsgNpc/NpcHandler.cs,65796,LotteryCollectorWong,LotteryCollectorWong,3,client.Player,15,You receive 15 ConquerPoints for you item.
+CP,spend,Game/MsgNpc/NpcHandler.cs,65889,MarketLadyLuck,MarketLadyLuck,1,client.Player,27,You don`t have enough conquer points or enough space in your inventory.
+CP,gain,Game/MsgNpc/NpcHandler.cs,66026,CityWar,CityWar,1,client.Player,"EventsRewards.EventReward(""CityWars"").RewardValue",CityWars
+CP,spend,Game/MsgNpc/NpcHandler.cs,66211,RebirthMaster,RebirthMaster,7,client.Player,5000,Sorry you dont Have 5.000 cps in your bag.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,66642,MountTrainer,MountTrainer,8,client.Player,500000,You`ve learned 
+Gold,spend,Game/MsgNpc/NpcHandler.cs,66677,MountTrainer,MountTrainer,6,client.Player,1000000,You`ve learned 
+Gold,spend,Game/MsgNpc/NpcHandler.cs,66712,MountTrainer,MountTrainer,4,client.Player,100000,You`ve learned 
+Gold,spend,Game/MsgNpc/NpcHandler.cs,66748,MountTrainer,MountTrainer,2,client.Player,50000,You`ve learned 
+CP,spend,Game/MsgNpc/NpcHandler.cs,71558,ClanNpc,ClanNpc,32,client.Player,1075,Done!~You~can~check~the~name~after~the~server~maintenance~tomorrow.
+Gold,spend,Game/MsgNpc/NpcHandler.cs,71833,ClanNpc,ClanNpc,3,client.Player,500000,~and honor!
+Gold,spend,Game/MsgNpc/NpcHandler.cs,71946,GuildCreator,GuildCreator,3,client.Player,1000000,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,72154,TwinCityConductress,TwinCityConductress,0,client.Player,100,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,72915,PheonixCityConductress,PheonixCityConductress,0,client.Player,100,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,72957,DesertCityConductress,DesertCityConductress,0,client.Player,100,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,72999,ApeCityConductress,ApeCityConductress,0,client.Player,100,
+Gold,spend,Game/MsgNpc/NpcHandler.cs,73041,BirdCityConductress,BirdCityConductress,0,client.Player,100,
+CP,spend,Game/MsgNpc/NpcHandler.cs,73818,StoneChange,StoneChange,1,client.Player,15000,You`ve got the item! Check your inventory.
+CP,gain,Game/MsgNpc/NpcHandler.cs,73908,GM,GM,203,client.Player,5000,Votes/Remove
+CP,gain,Game/MsgNpc/NpcHandler.cs,73928,GM,GM,204,client.Player,10000,Votes/Remove
+Gold,spend,Game/MsgServer/Arena Gui/MsgArenaSignup.cs,109,,Handler,DialogType.BuyPoints,user.Player,9000000,
+Gold,spend,Game/MsgServer/Arena Gui/MsgTeamArenaSignup.cs,111,,Handler,DialogType.BuyPoints,user.Player,9000000,
+CP,spend,Game/MsgServer/MsgBroadcast.cs,77,,Handler,BroadTyp.Urgen5CPs,user.Player,5,
+CP,spend,Game/MsgServer/MsgBroadcast.cs,112,,Handler,BroadTyp.Urgen15CPs,user.Player,15,
+CP,spend,Game/MsgServer/MsgBroadcast.cs,237,,Handler,BroadTyp.BroadcastMessage,user.Player,5,
+CP,spend,Game/MsgServer/MsgChiInfo.cs,261,,OnDequeue,ActionHandle.BuyPoints,user.Player,cost,
+CP,spend,Game/MsgServer/MsgChiInfo.cs,279,,OnDequeue,ActionHandle.Buy200,user.Player,100,"Sorry, you need "
+Gold,spend,Game/MsgServer/MsgClan.cs,514,,Process,Info.Dedicate,client.Player,(uint)Amount,
+Gold,set,Game/MsgServer/MsgClientInfo.cs,22,,GetHeroInfo,,user,stream.ReadUInt32(),
+CP,set,Game/MsgServer/MsgClientInfo.cs,23,,GetHeroInfo,,user,stream.ReadUInt32(),
+BoundCP,set,Game/MsgServer/MsgClientInfo.cs,51,,GetHeroInfo,,user,stream.ReadInt32(),
+CP,spend,Game/MsgServer/MsgDataPacket.cs,787,,UpdateSpell,3,client.Player,(uint)Costfloat,
+CP,spend,Game/MsgServer/MsgDataPacket.cs,807,,UpdateProf,3,client.Player,Cost,
+Gold,spend,Game/MsgServer/MsgDataPacket.cs,1054,,ChangeLookface,3,client.Player,500,You do not have 500 silvers with you.
+Gold,spend,Game/MsgServer/MsgGuildProces.cs,181,,Process,GuildAction.SilverDonate,user.Player,(uint)UID,
+CP,spend,Game/MsgServer/MsgGuildProces.cs,200,,Process,GuildAction.CpDonate,user.Player,UID,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,338,,ItemUsage,ItemUsageID.DegradeEquipment,client.Player,54,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,401,,ItemUsage,3005061,client.Player,7000,Please make 4 more spaces in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,420,,ItemUsage,3005062,client.Player,10000,Please make 6 more spaces in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,440,,ItemUsage,3005064,client.Player,20000,Please make 11 more spaces in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,466,,ItemUsage,3005065,client.Player,30000,Please make 14 more spaces in your inventory.
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,614,,ItemUsage,ItemUsageID.RedeemGear,client.Player,(uint)Role.Instance.Confiscator.CalculateCpsCost(DetainedItem),
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,716,,ItemUsage,ItemUsageID.ClaimGear,client.Player,(uint)ClaimItem.RewardConquerPoints,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,791,,ItemUsage,183315,client.Player,(uint)(price - Points),
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,857,,ItemUsage,ItemUsageID.ToristSuper,client.Player,100000,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,921,,ItemUsage,ItemUsageID.GemCompose,client.Player,price,"Sorry you don`t have 100,000 silver!."
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1023,,ItemUsage,ItemUsageID.BuyItemFromForging,client.Player,DBItem.ConquerPointsWorth,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1274,,ItemUsage,ItemUsageID.BuyVendingItem,client.Player,(uint)item.AmountCost,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1308,,ItemUsage,ItemUsageID.BuyVendingItem,client.Player,item.AmountCost,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1361,,ItemUsage,ItemUsageID.BuyVendingItem,client.Player,(uint)VItem.AmountCost,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,1362,,ItemUsage,ItemUsageID.BuyVendingItem,npc.OwnerVendor.Player,(uint)VItem.AmountCost,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1369,,ItemUsage,ItemUsageID.BuyVendingItem,client.Player,VItem.AmountCost,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,1370,,ItemUsage,ItemUsageID.BuyVendingItem,npc.OwnerVendor.Player,VItem.AmountCost,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1584,,ItemUsage,6,client.Player,(uint)nRepairCost,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1636,,ItemUsage,6,client.Player,nRepairCost,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1668,,ItemUsage,ItemUsageID.DepositWarehouse,client.Player,(uint)dwParam,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,1682,,ItemUsage,ItemUsageID.WarehouseWithdraw,client.Player,(uint)dwParam,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,1716,,ItemUsage,ItemUsageID.SocketTalismanWithCPs,client.Player,price,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,1841,,ItemUsage,ItemUsageID.SellItem,client.Player,(uint)prince,
+BoundCP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,2081,,ItemUsage,Database.Shops.ShopFile.MoneyType.ConquerPoints,client.Player,(int)DBItem.ConquerPointsWorth,
+CP,spend,Game/MsgServer/MsgItemUsuagePacket.cs,2115,,ItemUsage,Database.Shops.ShopFile.MoneyType.ConquerPoints,client.Player,DBItem.ConquerPointsWorth,
+Gold,spend,Game/MsgServer/MsgItemUsuagePacket.cs,2136,,ItemUsage,Database.Shops.ShopFile.MoneyType.Gold,client.Player,DBItem.GoldWorth,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4037,,UseItem,3005945,client.Player,200000000,You received 200000000 silver for opening the HonorableMoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4052,,UseItem,3008452,client.Player,1000000,You received 1000000 silver for opening the MillionSilverBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4065,,UseItem,723713,client.Player,300000,You received 300000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4079,,UseItem,723714,client.Player,800000,You received 800000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4092,,UseItem,723715,client.Player,1200000,You received 1200000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4105,,UseItem,723716,client.Player,1800000,You received 1800000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4118,,UseItem,723717,client.Player,5000000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4131,,UseItem,723718,client.Player,20000000,You received 5000000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4144,,UseItem,723719,client.Player,25000000,You received 25000000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4157,,UseItem,723720,client.Player,80000000,You received 80000000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4170,,UseItem,723721,client.Player,10000000,You received 100000000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4183,,UseItem,723722,client.Player,300000000,You received 300000000 silver for opening the MoneyBag's.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4196,,UseItem,723723,client.Player,500000000,You received 500000000 silver for opening the MoneyBag's.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4217,,UseItem,3005107,client.Player,20,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4224,,UseItem,3005108,client.Player,30,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4231,,UseItem,3005109,client.Player,50,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4238,,UseItem,3005110,client.Player,80,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4245,,UseItem,3005111,client.Player,100,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4252,,UseItem,3005112,client.Player,200,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4259,,UseItem,3005113,client.Player,300,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4266,,UseItem,3005114,client.Player,500,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4273,,UseItem,3005115,client.Player,800,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4280,,UseItem,3005116,client.Player,1000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4287,,UseItem,3005117,client.Player,5000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4294,,UseItem,3005118,client.Player,10000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4301,,UseItem,3005119,client.Player,20000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4308,,UseItem,3005120,client.Player,50000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4315,,UseItem,3005121,client.Player,100000,
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,4322,,UseItem,3005122,client.Player,200000,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,5252,,UseItem,729911,client.Player,val,You got 
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,5310,,UseItem,723753,client.Player,500,Please make 10 more spaces in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10022,,UseItem,721017,client.Player,10,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10030,,UseItem,721018,client.Player,20,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10037,,UseItem,721019,client.Player,25,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10044,,UseItem,721026,client.Player,50,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10050,,UseItem,721027,client.Player,100,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10056,,UseItem,721028,client.Player,200,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10062,,UseItem,721029,client.Player,250,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10069,,UseItem,3003749,client.Player,3000,You received 3000 conquerpoints for opening the ConquerPointsBag's.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10077,,UseItem,3003750,client.Player,10000,You received 3000 conquerpoints for opening the ConquerPointsBag's.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10366,,UseItem,3,client.Player,200,You have received 200 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10399,,UseItem,4,client.Player,200,You have received 200 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10526,,UseItem,8,client.Player,300,You have received 300 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10908,,UseItem,20,client.Player,600,You have received 600 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,10969,,UseItem,22,client.Player,1000,You have received 1000 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,11001,,UseItem,23,client.Player,2000,You have received 2000 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,11036,,UseItem,24,client.Player,2000,You have received 2000 ConquerPoints.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,11359,,UseItem,3001318,client.Player,500000,"You received 500,000 silver for opening the GloryMoneyBag's."
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,11372,,UseItem,3001322,client.Player,25000000,"You received 25,000,000 silver for opening the SplendidMoneyBox's."
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,12394,,UseItem,3005061,client.Player,7000,Please make 3 space in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,12419,,UseItem,3005062,client.Player,10000,Please make 6 space in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,12444,,UseItem,3005064,client.Player,20000,Please make 11 space in your inventory.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,12469,,UseItem,3005065,client.Player,30000,Please make 14 space in your inventory.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,13286,,UseItem,721931,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,13312,,UseItem,721929,client.Player,100,You received 100 Silver!
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,13372,,UseItem,721926,client.Player,100,You~left~teeth~marks~and~finished~the~5th~step.~Commence~the~6th~step~now.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,13690,,UseItem,729594,client.Player,50,"You opened the Golden Exorcism Pack, and received 50 CPs (B)!"
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,13869,,UseItem,3001266,client.Player,100000,
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,14758,,UseItem,729536,client.Player,amount,You`ve received 
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,14770,,UseItem,720665,client.Player,60,eidolon
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,15897,,UseItem,3001133,client.Player,5,You have received 5 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,15908,,UseItem,3001134,client.Player,10,You have received 10 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,15919,,UseItem,3001135,client.Player,20,You have received 20 ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,15930,,UseItem,3001136,client.Player,500,You have received 500 ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16002,,UseItem,729462,client.Player,6999,"You have received 6,999 (B)ConquerPoints."
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16012,,UseItem,729463,client.Player,4999,"You have received 4,999 (B)ConquerPoints."
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16025,,UseItem,729464,client.Player,2999,"You have received 2,999 (B)ConquerPoints."
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16034,,UseItem,729465,client.Player,599,You have received 599 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16043,,UseItem,729466,client.Player,99,You have received 99 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16053,,UseItem,3200522,client.Player,60,You have received 60 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16061,,UseItem,3200523,client.Player,125,You have received 125 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16070,,UseItem,3200524,client.Player,320,You have received 320 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16079,,UseItem,3200525,client.Player,530,You have received 530 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16089,,UseItem,3200526,client.Player,1075,You have received 1075 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16098,,UseItem,3200527,client.Player,2050,You have received 2050 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16108,,UseItem,3200528,client.Player,4200,You have received 4200 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16118,,UseItem,3200700,client.Player,20,You have received 20 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16127,,UseItem,3200701,client.Player,300,You have received 300 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16136,,UseItem,3200702,client.Player,500,You have received 500 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16146,,UseItem,3200703,client.Player,5000,You have received 5000 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16155,,UseItem,3200704,client.Player,50,You have received 50 (B)ConquerPoints.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16165,,UseItem,3200705,client.Player,600,You have received 600 (B)ConquerPoints.
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16176,,UseItem,720675,client.Player,250,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16196,,UseItem,720676,client.Player,500,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16208,,UseItem,720677,client.Player,1000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16219,,UseItem,720678,client.Player,13500,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16231,,UseItem,720679,client.Player,69000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16243,,UseItem,720681,client.Player,500,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16256,,UseItem,720682,client.Player,1000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16270,,UseItem,720683,client.Player,2000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16283,,UseItem,720684,client.Player,27000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16297,,UseItem,720685,client.Player,138000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16309,,UseItem,720687,client.Player,1000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16321,,UseItem,720688,client.Player,2000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16332,,UseItem,720689,client.Player,4000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16343,,UseItem,720690,client.Player,54000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16355,,UseItem,720691,client.Player,276000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16374,,UseItem,720693,client.Player,2500,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16386,,UseItem,720694,client.Player,5000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16398,,UseItem,720695,client.Player,10000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16411,,UseItem,720696,client.Player,135000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16423,,UseItem,720697,client.Player,690000,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16435,,UseItem,720653,client.Player,270,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16448,,UseItem,720654,client.Player,1380,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16460,,UseItem,720655,client.Player,20,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16471,,UseItem,720656,client.Player,10,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16482,,UseItem,720657,client.Player,5,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16493,,UseItem,720658,client.Player,25,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16504,,UseItem,720659,client.Player,50,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16516,,UseItem,720660,client.Player,100,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16527,,UseItem,720661,client.Player,1350,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16539,,UseItem,720662,client.Player,6900,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16550,,UseItem,720663,client.Player,50,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16561,,UseItem,720664,client.Player,100,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16573,,UseItem,720666,client.Player,2700,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16584,,UseItem,720667,client.Player,13800,[DemonBox]
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,16596,,UseItem,3005646,client.Player,200,You have received 200 ConquerPoints.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,18912,,UseItem,3005836,client.Player,50000000,You received 50000000 silver for opening the MediumSilverBag.
+Gold,gain,Game/MsgServer/MsgItemUsuagePacket.cs,18924,,UseItem,3005837,client.Player,100000000,You received 100000000 silver for opening the BigSilverBag.
+BoundCP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,19068,,UseItem,3008727,client.Player,270,Success ! You successfully combined all fragments and received 270 CPs(B).
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,20765,,UseItem,728248,client.Player,25000, + client.Player.Name + 
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,20774,,UseItem,728248,client.Player,10000, + client.Player.Name + 
+CP,gain,Game/MsgServer/MsgItemUsuagePacket.cs,20782,,UseItem,728248,client.Player,5000,You received 10.000 ConquerPoints!
+Gold,gain,Game/MsgServer/MsgLoginClient.cs,425,,LoadPlayer,,client.Player,client.Player.ArenaCPS,You got {client.Player.ArenaCPS} Silver for ranking in top10 arena.
+CP,spend,Game/MsgServer/MsgMachine.cs,57,,Handler,SlotMachineSubType.StartSpin,user.Player,cost,
+Gold,spend,Game/MsgServer/MsgMachine.cs,62,,Handler,SlotMachineSubType.StartSpin,user.Player,cost,
+CP,spend,Game/MsgServer/MsgMachine.cs,89,,Handler,SlotMachineSubType.StartSpin,user.Player,cost,You bet is 
+Gold,spend,Game/MsgServer/MsgMachine.cs,94,,Handler,SlotMachineSubType.StartSpin,user.Player,cost,
+CP,gain,Game/MsgServer/MsgMachine.cs,117,,Handler,SlotMachineSubType.ClientFinishSpin,user.Player,reward,You won is 
+Gold,gain,Game/MsgServer/MsgMachine.cs,122,,Handler,SlotMachineSubType.ClientFinishSpin,user.Player,reward,
+CP,spend,Game/MsgServer/MsgMemoryAgate.cs,134,,MemoryAgateHandler,AgateEx.AgateActions.Repair,client.Player,(uint)cost,
+CP,gain,Game/MsgServer/MsgMessage.cs,996,,ChatCommands,ChatMode.Clan,user.Player,500,
+CP,gain,Game/MsgServer/MsgMessage.cs,1006,,ChatCommands,ChatMode.Clan,user.Player,500,
+CP,gain,Game/MsgServer/MsgMessage.cs,1039,,ChatCommands,ChatMode.Clan,user.Player,playerCompensationCPs,
+Gold,gain,Game/MsgServer/MsgMessage.cs,1194,,ChatCommands,ChatMode.Clan,user.Player,uint.Parse(data[3]),
+CP,gain,Game/MsgServer/MsgMessage.cs,1204,,ChatCommands,ChatMode.Clan,user.Player,uint.Parse(data[3]),reborns
+Gold,set,Game/MsgServer/MsgMessage.cs,2043,,ChatCommands,ChatMode.Clan,client.Player,(uint)amount,
+CP,set,Game/MsgServer/MsgMessage.cs,2392,,ChatCommands,ChatMode.Clan,client.Player,amount,
+BoundCP,set,Game/MsgServer/MsgMessage.cs,2418,,ChatCommands,ChatMode.Clan,client.Player,amount,boundcps
+BoundCP,set,Game/MsgServer/MsgMessage.cs,2794,,ChatCommands,ChatMode.Clan,client.Player,int.Parse(data[1]),
+CP,spend,Game/MsgServer/MsgNameChange.cs,138,,OnDequeue,ActionID.Request,user.Player,1075,
+Gold,spend,Game/MsgServer/MsgNobility.cs,81,,HandlerNobility,DonationTyp.Money,user.Player,(uint)(UID),
+CP,spend,Game/MsgServer/MsgNobility.cs,93,,HandlerNobility,DonationTyp.ConquerPoints,user.Player,(uint)conquerPointsCost,
+BoundCP,spend,Game/MsgServer/MsgOsShop.cs,60,,Process,,user.Player,Cost,
+CP,spend,Game/MsgServer/MsgOsShop.cs,76,,Process,,user.Player,(uint)Cost,
+CP,gain,Game/MsgServer/MsgTrade.cs,201,,HandlerTrade,TradeID.RequestCompleteTrade,user.Player,user.MyTrade.Target.MyTrade.ConquerPoints,
+Gold,gain,Game/MsgServer/MsgTrade.cs,202,,HandlerTrade,TradeID.RequestCompleteTrade,user.Player,user.MyTrade.Target.MyTrade.Money,
+CP,gain,Game/MsgServer/MsgTrade.cs,205,,HandlerTrade,TradeID.RequestCompleteTrade,user.MyTrade.Target.Player,user.MyTrade.ConquerPoints,
+Gold,gain,Game/MsgServer/MsgTrade.cs,206,,HandlerTrade,TradeID.RequestCompleteTrade,user.MyTrade.Target.Player,user.MyTrade.Money,
+CP,gain,Game/MsgTournaments/FrozenSky.cs,118,,CheckUp,,winner.Player,RewardConquerPoints, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/FrozenSky.cs,175,,CheckUp,,winner.Player,RewardConquerPoints, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/KingOfTheHill.cs,154,,CheckUp,,Winner.Player,"EventsRewards.EventReward(""KingOfTheHill"").RewardValue",KingOfTheHill has ended.
+Gold,gain,Game/MsgTournaments/MsgClanWar.cs,259,,GetRewards,CityType.Phoenix,user.Player,value,You received 
+Gold,gain,Game/MsgTournaments/MsgClanWar.cs,272,,GetRewards,CityType.Phoenix,user.Player,value / 2,You received 
+CP,gain,Game/MsgTournaments/MsgClassPKWar.cs,289,,GetMyReward,TournamentType.Pirate,client.Player,value,You received 
+CP,gain,Game/MsgTournaments/MsgCouples.cs,125,,CheckUp,,winner.Player,value,CouplesTournament
+CP,gain,Game/MsgTournaments/MsgLastManStand.cs,97,,CheckUp,,winner.Player,RewardConquerPoints, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgLastManStand.cs,101,,CheckUp,,winner.Player,"EventsRewards.EventReward(""LastMan"").RewardValue", + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgPkWar.cs,70,,GiveReward,,client.Player,value,WeeklyPKWar
+Gold,gain,Game/MsgTournaments/MsgSkillTournament.cs,108,,CheckUp,,winner.Player,(int)RewardConquerPoints, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgTopFight.cs,157,,CheckUp,,winner.Player,King, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgTopFight.cs,169,,CheckUp,,winner.Player,Prince, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgTopFight.cs,181,,CheckUp,,winner.Player,Duke, + winner.Player.Name + 
+CP,gain,Game/MsgTournaments/MsgTopFight.cs,193,,CheckUp,,winner.Player,Duke, + winner.Player.Name + 
+Gold,gain,Game/MsgTournaments/MsgTreasureThief.cs,137,,Reward,0,user.Player,value,You've received 
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgEliteTournament.cs,134,,GetReward,,client.Player,"EventsRewards.EventReward(""ElitePK1st"").RewardValue",ElitePK1st
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgEliteTournament.cs,152,,GetReward,,client.Player,"EventsRewards.EventReward(""ElitePK2nd"").RewardValue",ElitePK2nd
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgEliteTournament.cs,167,,GetReward,,client.Player,"EventsRewards.EventReward(""ElitePK3rd"").RewardValue",ElitePK3rd
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgEliteTournament.cs,183,,GetReward,,client.Player,"EventsRewards.EventReward(""ElitePK4th"").RewardValue",ElitePK4th
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgEliteTournament.cs,198,,GetReward,,client.Player,"EventsRewards.EventReward(""ElitePK8th"").RewardValue",ElitePK8th
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs,85,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK1st"").RewardValue",TeamPK1st
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs,102,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK2nd"").RewardValue",Congratulation to 
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs,119,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK3rd"").RewardValue",You've received 
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs,136,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK4th"").RewardValue",You've received {EventsRewards.EventReward(
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs,153,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK8th"").RewardValue",You've received {EventsRewards.EventReward(
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs,85,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK1st"").RewardValue",TeamPK1st
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs,102,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK2nd"").RewardValue",Congratulation to 
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs,119,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK3rd"").RewardValue",You've received {EventsRewards.EventReward(
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs,136,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK4th"").RewardValue",You've received {EventsRewards.EventReward(
+CP,gain,Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs,153,,GetReward,,client.Player,"EventsRewards.EventReward(""TeamPK8th"").RewardValue",You've received {EventsRewards.EventReward(
+CP,gain,Game/MsgTournaments/PassTheBomb.cs,156,,CheckUp,,winner.Player,"EventsRewards.EventReward(""PassTheBomb"").RewardValue", + winner.Player.Name + 
+Gold,gain,MadeByDaRkFox/CharacterCreationDefaultSet.cs,47,,Init,,client.Player,50000,Code:NewCharacter
+CP,set,MadeByDaRkFox/SqlMigrator.cs,120,,GeneratePlayerObjFromFiles,,player,"reader.ReadUInt32(""Character"", ""ConquerPoints"", 0)",Character
+BoundCP,set,MadeByDaRkFox/SqlMigrator.cs,122,,GeneratePlayerObjFromFiles,,player,"reader.ReadInt32(""Character"", ""BoundConquerPoints"", 0)",Character
+Gold,set,MadeByDaRkFox/SqlMigrator.cs,123,,GeneratePlayerObjFromFiles,,player,"reader.ReadUInt32(""Character"", ""Money"", 0)",Character
+CP,gain,NewItems.cs,122,,EventBag,8,client.Player,value,You've received Stone(+
+CP,spend,Role/Instance/Trade.cs,38,,AddConquerPoints,,Owner.Player,dwParam,
+CP,gain,Role/Instance/Trade.cs,39,,AddConquerPoints,,this,dwParam,
+Gold,spend,Role/Instance/Trade.cs,51,,AddMoney,,Owner.Player,dwParam,
+Gold,gain,Role/Instance/Trade.cs,52,,AddMoney,,this,dwParam,
+CP,gain,Role/Instance/Trade.cs,137,,DestroyItems,,Owner.Player,ConquerPoints,
+Gold,gain,Role/Instance/Trade.cs,138,,DestroyItems,,Owner.Player,Money,
+Gold,spend,Role/Player.cs,1201,,CheckDropItems,Role.Flags.ConquerAction.Sit,this,DropMoney * 5,

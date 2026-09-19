@@ -1,0 +1,16 @@
+<Project>
+  <!-- Caminhos centrais do projeto (podem ser sobrescritos por variavel de ambiente) -->
+  <PropertyGroup>
+    <PlaceboDir Condition="'$(PlaceboDir)' == '' And '$(PLACEBO_DIR)' != ''">$(PLACEBO_DIR)</PlaceboDir>
+    <PlaceboDir Condition="'$(PlaceboDir)' == ''">C:\Users\hecto\OneDrive\Desktop\Placebo</PlaceboDir>
+    <!-- Database fica dentro do TrinityConquer -->
+    <DatabaseDir>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'COServer', 'Database5700'))</DatabaseDir>
+  </PropertyGroup>
+  <!-- Toda compilacao vai para a pasta Placebo. Projetos SDK: OutputPath definido AQUI (antes do SDK),
+       senao o SDK cria arquivos (deps.json etc.) em bin\ e a saida fica dividida. -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' != 'TrinityConquerLoader' And '$(MSBuildProjectName)' != 'ConquerHook'">
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <OutputPath>$(PlaceboDir)\$(MSBuildProjectName)\</OutputPath>
+  </PropertyGroup>
+</Project>

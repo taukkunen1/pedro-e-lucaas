@@ -1,0 +1,606 @@
+﻿ID,Nome,Nome original,Niveis
+1000,Thunder,Thunder,5
+1001,Fire,Fire,4
+1005,Cure,Cure,5
+1010,Lightning,Lightning,1
+1015,Accuracy,Accuracy,1
+1020,Shield,Shield,1
+1025,Superman,Superman,1
+1002,Tornado,Tornado,4
+1040,Roar,Roar,1
+1045,Fast Blade,FastBlade,5
+1046,Scent Sword,ScentSword,5
+1125,Volcano,Volcano,1
+1050,Revive,Revive,1
+1051,Dash,Dash,1
+1055,Healing Rain,HealingRain,5
+1075,Invisibility,Invisibility,5
+1085,Starof Accuracy,StarofAccuracy,5
+1090,Magic Shield,MagicShield,5
+1095,Stigma,Stigma,5
+1100,Pray,Pray,1
+1105,Restore,Restore,1
+1110,Cyclone,Cyclone,1
+1115,Hercules,Hercules,5
+1120,Fire Circle,FireCircle,4
+1150,Fire Ring,FireRing,8
+1160,Bomb,Bomb,4
+1165,Fireof Hell,FireofHell,4
+1170,Nectar,Nectar,5
+1175,Advanced Cure,AdvancedCure,5
+1180,Fire Meteor,FireMeteor,8
+1190,Spirit Healing,SpiritHealing,3
+1195,Meditation,Meditation,3
+1250,Wide Strike,WideStrike,10
+1260,Speed Gun,SpeedGun,10
+1270,Golem,Golem,8
+1280,Water Elf,WaterElf,9
+1290,Penetration,Penetration,10
+1300,Halt,Halt,10
+1320,Flying Moon,FlyingMoon,3
+1350,Divine Hare,DivineHare,5
+1360,Night Devil,NightDevil,5
+1380,Dance2,Dance2,1
+1385,Dance3,Dance3,1
+1390,Dance4,Dance4,1
+1395,Dance5,Dance5,1
+1400,Dance6,Dance6,1
+1405,Dance7,Dance7,1
+1410,Dance8,Dance8,1
+1415,Battle Dance,BattleDance,1
+1416,Triumph,Triumph,1
+1417,Step Stomp,StepStomp,1
+1418,Moonlight,Moonlight,1
+1419,Snow Wind,SnowWind,1
+1420,Phoenix,Phoenix,1
+1421,Melody,Melody,1
+1422,Tipsy,Tipsy,1
+1423,Felicity,Felicity,1
+3000,Human Messenger,HumanMessenger,1
+3001,Winged Snake Msgr,WingedSnakeMsgr,1
+3002,Bandit Messenger,BanditMessenger,1
+3003,Rat Messenger,RatMessenger,1
+3004,Elf Messenger,ElfMessenger,1
+3005,Monkey Messenger,MonkeyMessenger,1
+3006,Giant Ape Msgr,GiantApeMsgr,1
+3007,Thunder Ape Msgr,ThunderApeMsgr,1
+3008,Snakeman Msgr,SnakemanMsgr,1
+3009,Sand Monster Msgr,SandMonsterMsgr,1
+3010,Hill Monster Msgr,HillMonsterMsgr,1
+3011,Rock Monster Msgr,RockMonsterMsgr,1
+3012,Blade Ghost Msgr,BladeGhostMsgr,1
+3013,Birdman Msgr,BirdmanMsgr,1
+3014,Hawk Msgr,HawkMsgr,1
+3015,Bandit Messenger,BanditMessenger,1
+3016,Bat Messenger,BatMessenger,1
+3017,Bloody Bat Msgr,BloodyBatMsgr,1
+3018,Bull Messenger,BullMessenger,1
+3019,Devil Messenger,DevilMessenger,1
+3050,Cruel Shade,CruelShade,4
+3080,Dodge,Dodge,3
+3090,Pervade,Pervade,6
+3091,Pervade21,Pervade21,1
+3092,Pervade22,Pervade22,1
+3093,Pervade23,Pervade23,1
+3095,Pervade31,Pervade31,1
+3096,Pervade32,Pervade32,1
+3097,Pervade33,Pervade33,1
+3099,Pervade41,Pervade41,1
+3100,Pervade42,Pervade42,1
+3101,Pervade43,Pervade43,1
+3103,Pervade51,Pervade51,1
+3104,Pervade52,Pervade52,1
+3105,Pervade53,Pervade53,1
+3106,Pervade24,Pervade24,1
+3107,Pervade34,Pervade34,1
+3108,Pervade44,Pervade44,1
+3109,Pervade54,Pervade54,1
+3191,Pervade1,Pervade1,1
+3192,Pervade2,Pervade2,1
+3193,Pervade3,Pervade3,1
+3206,Pervade4,Pervade4,1
+3291,Pervade11,Pervade11,1
+3292,Pervade12,Pervade12,1
+3293,Pervade13,Pervade13,1
+3306,Pervade14,Pervade14,1
+3310,Cute Bunny,CuteBunny,1
+3311,Playful Bunny,PlayfulBunny,1
+3312,Cute Bunny,CuteBunny,1
+3313,Fowl Empress,FowlEmpress,1
+3320,tuzi,tuzi,1
+3321,Piglet,Piglet,1
+3322,Emcee Rabbit,EmceeRabbit,1
+4000,Summon Guard,SummonGuard,4
+4010,Summon Bat,SummonBat,4
+4020,Summon Bat Boss,SummonBatBoss,4
+4030,Standin Bat,StandinBat,1
+4040,Vampire,Vampire,1
+4050,Bloody Bat,BloodyBat,4
+4060,Fire Evil,FireEvil,4
+4070,Skeleton,Skeleton,4
+4075,Wraith,Wraith,1
+4076,Syren,Syren,1
+5000,Freezing Arrow,FreezingArrow,1
+5001,Speed Lightning,SpeedLightning,1
+5002,Poisonous Arrows,PoisonousArrows,1
+5010,Snow,Snow,10
+5020,Stranded Monster,StrandedMonster,10
+5030,Phoenix,Phoenix,10
+5040,Boom,Boom,10
+5050,Boreas,Boreas,10
+5100,Iron Shirt,IronShirt,1
+5101,Iron Shirt1,IronShirt1,1
+6000,Twofold Blades,TwofoldBlades,5
+6001,Toxic Fog,ToxicFog,5
+6010,Shuriken Vortex,ShurikenVortex,1
+6011,Fatal Strike,FatalStrike,1
+6003,Counter-Kill,Counter-Kill,5
+6002,Poison Star,PoisonStar,5
+6004,Archer Bane,ArcherBane,1
+7000,Seizer,Seizer,10
+7010,Earthquake,Earthquake,10
+7020,Rage,Rage,10
+7030,Celestial,Celestial,10
+7040,Roamer,Roamer,10
+7100,Seizer0,Seizer0,1
+7101,Seizer1,Seizer1,1
+7102,Seizer2,Seizer2,1
+7103,Seizer3,Seizer3,1
+7104,Seizer4,Seizer4,1
+7105,Seizer5,Seizer5,1
+7106,Seizer6,Seizer6,1
+7107,Seizer7,Seizer7,1
+7108,Seizer8,Seizer8,1
+7109,Seizer9,Seizer9,1
+7130,Poison10,Poison10,1
+7131,Poison11,Poison11,1
+7132,Poison12,Poison12,1
+7133,Poison13,Poison13,1
+7134,Poison14,Poison14,1
+7135,Poison15,Poison15,1
+7136,Poison16,Poison16,1
+7137,Poison17,Poison17,1
+7138,Poison18,Poison18,1
+7139,Poison19,Poison19,1
+8000,Rapid Fire,RapidFire,6
+8001,Scatter Fire,ScatterFire,6
+8002,Fly,Fly,1
+8003,Fly,Fly,2
+8030,Arrow Rain,ArrowRain,1
+8031,Scatter2,Scatter2,1
+8032,Scatter3,Scatter3,1
+8033,Scatter4,Scatter4,1
+8034,Scatter5,Scatter5,1
+8035,Scatter6,Scatter6,1
+8036,Guard's Spell,Guard`sSpell,1
+8040,Turkey,Turkey,1
+8041,Stone Monster,StoneMonster,1
+8042,Fire Snake,FireSnake,1
+8043,Roaring Ape,RoaringApe,1
+8044,Sand Monster,SandMonster,1
+8046,Temptress,Temptress,1
+8047,Siren,Siren,1
+8056,Easter Rooster,EasterRooster,1
+8057,Easter Rooster,EasterRooster,1
+8058,Easter Rooster,EasterRooster,1
+8059,Easter Rooster,EasterRooster,1
+8060,Rat King,RatKing,1
+8061,Fire Rat,FireRat,1
+8062,Toxic Rat,ToxicRat,1
+8068,Fish Lady,FishLady,1
+8080,Eidolon,Eidolon,1
+8081,Eidolon,Eidolon,1
+8082,Ultimate Pluto,UltimatePluto,1
+8083,Ultimate Pluto,UltimatePluto,1
+8084,Syren,Syren,1
+8085,Temptress,Temptress,1
+8086,Fire Rat A,FireRatA,1
+8087,Fire Rat A,FireRatA,1
+8088,Cateran,Cateran,1
+8089,Cateran,Cateran,1
+8090,Fury Skeleton,FurySkeleton,1
+8091,Fury Skeleton,FurySkeleton,1
+8096,Elf King1,ElfKing1,1
+8097,Bloody Bat1,BloodyBat1,1
+8098,Hill Monster Kin,HillMonsterKin,1
+8099,Bird King1,BirdKing1,1
+8100,Winged Snake Kin,WingedSnakeKin,1
+8101,Blue Cooer,BlueCooer,1
+8102,Wraith,Wraith,1
+8103,Eidolon,Eidolon,1
+8110,Temptress,Temptress,1
+8111,Siren,Siren,1
+8112,Blue Cock,BlueCock,1
+8113,Magenta Cock,MagentaCock,1
+8114,Fish A,FishA,1
+8115,Brown Cock,BrownCock,1
+8116,Wraith,Wraith,1
+8117,Purple Rooster,PurpleRooster,1
+8118,Sand Monster,SandMonster,1
+8119,Roaring Ape,RoaringApe,1
+8120,Cateran,Cateran,1
+8121,Fire Snake,FireSnake,1
+8122,Stone Monster,StoneMonster,1
+8123,Turkey,Turkey,1
+8124,Snakeman,Snakeman,1
+8125,Bull Devil,BullDevil,1
+8126,Fish B,FishB,1
+8127,Eidolon,Eidolon,1
+8129,Kung Fu Bunny,KungFuBunny,1
+8130,Pheasant,Pheasant,1
+8131,Turtle Dove,TurtleDove,1
+8132,Robin,Robin,1
+8133,Apparition,Apparition,1
+8134,Winged Snake,WingedSnake,1
+8135,Bandit,Bandit,1
+8136,Ratling,Ratling,1
+8137,Vampire,Vampire,1
+8138,Vampire,Vampire,1
+8139,Vampire,Vampire,1
+8140,Vampire,Vampire,1
+8141,Vampire,Vampire,1
+8142,Vampire,Vampire,1
+8143,Vampire,Vampire,1
+8144,Vampire,Vampire,1
+8204,Pink Piglet,PinkPiglet,1
+8210,Pink Piglet,PinkPiglet,1
+8212,yishe,yishe,1
+8213,Transform8,Transform8,1
+8214,Christmas Elf,ChristmasElf,1
+8215,Pig,Pig,1
+8216,Fire Rat,FireRat,1
+8218,Bat,Bat,1
+8219,Mink,Mink,1
+8225,Grum Pig,GrumPig,1
+8226,Lava Rat,LavaRat,1
+8257,Bandits L95,BanditsL95,1
+8258,Weird Pumpkin,WeirdPumpkin,1
+8259,Elf Messenger,ElfMessenger,1
+8260,Evil Snake Msgr,EvilSnakeMsgr,1
+8261,Script Elf,ScriptElf,1
+8262,Bloody Bat,BloodyBat,1
+8270,Pheasant,Pheasant,1
+8271,Turtledove,Turtledove,1
+8272,Robin,Robin,1
+8273,Apparition,Apparition,1
+8274,Winged Snake,WingedSnake,1
+8275,Bandit,Bandit,1
+8276,Ratling,Ratling,1
+8279,Babirusa,Babirusa,1
+8280,Rabbit,Rabbit,1
+8282,Big Whirl,BigWhirl,1
+8283,Little Whirl,LittleWhirl,1
+8284,Bronze Head,BronzeHead,1
+8285,Iron Head,IronHead,1
+8286,Big Lark,BigLark,1
+8287,Little Lark,LittleLark,1
+8288,Blue Dragon,BlueDragon,1
+8289,Red Dragon,RedDragon,1
+8290,Happy,Happy,1
+8291,Very Happy,VeryHappy,1
+8292,Loud,Loud,1
+8293,Very Loud,VeryLoud,1
+8294,Big Jay,BigJay,1
+8295,Little Jay,LittleJay,1
+8296,Bright Wing,BrightWing,1
+8297,Dark Wing,DarkWing,1
+8298,Good Luck,GoodLuck,1
+8299,Better Luck,BetterLuck,1
+8300,Good Fly,GoodFly,1
+8301,Better Fly,BetterFly,1
+8302,Yellow Ox,YellowOx,1
+8303,Heaven Ox,HeavenOx,1
+8304,Golden Ox,GoldenOx,1
+8305,Silver Ox,SilverOx,1
+8307,Red Fox1,RedFox1,1
+8308,Blue Fox1,BlueFox1,1
+8309,Red Fox2,RedFox2,1
+8310,Blue Fox2,BlueFox2,1
+8311,Guard,Guard,1
+8312,Turtle Dove,TurtleDove,1
+8313,Ratling,Ratling,1
+8314,Winged Snake,WingedSnake,1
+8318,Transform1,Transform1,1
+8319,Transform2,Transform2,1
+8320,Transform3,Transform3,1
+8321,Transform4,Transform4,1
+8322,Transform5,Transform5,1
+8323,Transform6,Transform6,1
+8324,Transform7,Transform7,1
+8325,Minotaur,Minotaur,1
+8326,Male Ghost1,MaleGhost1,1
+8317,Female Ghost1,FemaleGhost1,1
+8329,Piggy,Piggy,1
+8330,Bandit1,Bandit1,1
+8332,Bandit2,Bandit2,1
+8333,Occult Beast2,OccultBeast2,1
+8334,Water Elf2,WaterElf2,1
+8335,Occult Beast1,OccultBeast1,1
+8336,Water Elf1,WaterElf1,1
+8337,Pumpkin1,Pumpkin1,1
+8338,Pumpkin2,Pumpkin2,1
+8339,Pumpkin3,Pumpkin3,1
+8341,Pink Piglet,PinkPiglet,1
+8342,Kung Fu Bunny,KungFuBunny,1
+8343,Night Devil,NightDevil,1
+8344,Iron Head,IronHead,1
+8345,Fire Rat A,FireRatA,1
+8350,Heaven Tiger,HeavenTiger,1
+8351,Golden Tiger,GoldenTiger,1
+8352,Silver Tiger,SilverTiger,1
+8353,Tiger Roarer,TigerRoarer,1
+9000,Intensify,Intensify,4
+7011,Tail Sweep,TailSweep,1
+7012,Destroy,Destroy,1
+7013,Flame Shower,FlameShower,1
+7014,Dragon Breath,DragonBreath,1
+7015,Fear Roar,FearRoar,1
+7016,Blood Restore,BloodRestore,1
+7017,Misty Flame,MistyFlame,1
+9965,Misty Quake,MistyQuake,1
+9966,Roar Blade,RoarBlade,1
+9967,Scorch,Scorch,1
+9968,Arch Chop,ArchChop,1
+9969,Asura Chop,AsuraChop,1
+9970,Despot Kill,DespotKill,1
+9971,Sandy Shatter,SandyShatter,1
+9972,Destiny Fire,DestinyFire,1
+9973,Nine Flames,NineFlames,1
+9974,Destiny Thunder,DestinyThunder,1
+9975,Heaven Shatter,HeavenShatter,1
+9976,Death Chop,DeathChop,1
+9977,Inferno Sting,InfernoSting,1
+9978,Red Locust,RedLocust,1
+9979,Blue Locust,BlueLocust,1
+9980,White Locust,WhiteLocust,1
+9981,Scarlet Fog,ScarletFog,1
+9982,White Shuttle,WhiteShuttle,1
+9983,Fire Shower,FireShower,1
+9984,Feral Attack,FeralAttack,1
+9985,Blue Shadow,BlueShadow,1
+9986,Purple Shadow,PurpleShadow,1
+9987,Fanatic Bite,FanaticBite,1
+9988,Fear Roar,FearRoar,1
+9989,Icy Curse,IcyCurse,1
+9990,Whirl Curse,WhirlCurse,1
+9991,Sand Bite,SandBite,1
+9992,Flying Flame,FlyingFlame,1
+9993,Fire Implosion,FireImplosion,1
+9994,Dire Scorch,DireScorch,1
+9995,Fire Penetration,FirePenetration,1
+9996,Swift Blaze,SwiftBlaze,1
+9997,Dark Shadow,DarkShadow,1
+9998,Poisonous Awn,PoisonousAwn,1
+9999,Feral Boil,FeralBoil,1
+10000,Blade,Blade,1
+10001,Smash,Smash,1
+10002,Roar,Roar,1
+10003,Sweep,Sweep,1
+10004,Unholy Implosion,UnholyImplosion,1
+10005,Acidic Breath,AcidicBreath,1
+10010,Poison0,Poison0,1
+10011,Poison1,Poison1,1
+10012,Poison2,Poison2,1
+10013,Poison3,Poison3,1
+10015,Icy Arrow0,IcyArrow0,1
+10016,Icy Arrow1,IcyArrow1,1
+10017,Icy Arrow2,IcyArrow2,1
+10020,Bolt0,Bolt0,1
+10021,Bolt1,Bolt1,1
+10022,Bolt2,Bolt2,1
+10023,Bolt3,Bolt3,1
+10030,Bolt10,Bolt10,1
+10031,Bolt11,Bolt11,1
+10032,Bolt12,Bolt12,1
+10033,Bolt13,Bolt13,1
+10040,Bolt20,Bolt20,1
+10041,Bolt21,Bolt21,1
+10042,Bolt22,Bolt22,1
+10043,Bolt23,Bolt23,1
+10050,Arrow Storm0,ArrowStorm0,1
+10051,Arrow Storm1,ArrowStorm1,1
+10052,Arrow Storm2,ArrowStorm2,1
+10053,Arrow Storm3,ArrowStorm3,1
+10060,Arrow Storm10,ArrowStorm10,1
+10061,Arrow Storm11,ArrowStorm11,1
+10062,Arrow Storm12,ArrowStorm12,1
+10063,Arrow Storm13,ArrowStorm13,1
+10070,Arrow Storm20,ArrowStorm20,1
+10071,Arrow Storm21,ArrowStorm21,1
+10072,Arrow Storm22,ArrowStorm22,1
+10073,Arrow Storm23,ArrowStorm23,1
+10080,Arrow Storm30,ArrowStorm30,1
+10081,Arrow Storm31,ArrowStorm31,1
+10082,Arrow Storm32,ArrowStorm32,1
+10083,Arrow Storm33,ArrowStorm33,1
+10100,Rocket0,Rocket0,1
+10101,Rocket1,Rocket1,1
+10102,Rocket2,Rocket2,1
+10103,Rocket3,Rocket3,1
+10110,Rocket10,Rocket10,1
+10111,Rocket11,Rocket11,1
+10112,Rocket12,Rocket12,1
+10113,Rocket13,Rocket13,1
+10120,Rocket20,Rocket20,1
+10121,Rocket21,Rocket21,1
+10122,Rocket22,Rocket22,1
+10123,Rocket23,Rocket23,1
+10130,Rocket30,Rocket30,1
+10131,Rocket31,Rocket31,1
+10132,Rocket32,Rocket32,1
+10133,Rocket33,Rocket33,1
+10140,Rocket40,Rocket40,1
+10141,Rocket41,Rocket41,1
+10142,Rocket42,Rocket42,1
+10143,Rocket43,Rocket43,1
+10150,Rocket50,Rocket50,1
+10151,Rocket51,Rocket51,1
+10152,Rocket52,Rocket52,1
+10153,Rocket53,Rocket53,1
+10160,Rocket60,Rocket60,1
+10161,Rocket61,Rocket61,1
+10162,Rocket62,Rocket62,1
+10163,Rocket63,Rocket63,1
+10170,Rocket70,Rocket70,1
+10171,Rocket71,Rocket71,1
+10172,Rocket72,Rocket72,1
+10173,Rocket73,Rocket73,1
+10180,Rocket80,Rocket80,1
+10181,Rocket81,Rocket81,1
+10182,Rocket82,Rocket82,1
+10183,Rocket83,Rocket83,1
+10200,Poisoning,Poisoning,1
+10201,Cure,Cure,1
+10202,Meditation,Meditation,1
+10203,Magic Shield,MagicShield,1
+9876,Bless,Bless,1
+7001,Riding,Riding,1
+7002,Spook,Spook,1
+7003,War Cry,WarCry,1
+10304,Soul Enticer,SoulEnticer,1
+10305,Atrocious Seal,AtrociousSeal,1
+10306,Appaling Wind,AppalingWind,1
+10307,Icy Sting,IcySting,1
+10308,Thwart,Thwart,1
+10309,Chain Bolt,ChainBolt,5
+10310,Heaven Blade,HeavenBlade,5
+10311,Perseverance,Perseverance,1
+30000,Azure Shield,AzureShield,5
+10313,Star Arrow,StarArrow,5
+10315,Dragon Whirl,DragonWhirl,5
+10500,Immolation,Immolation,1
+10505,Revenge Punch,RevengePunch,1
+10502,Blade Storm,BladeStorm,1
+10506,Blade Vortex,BladeVortex,1
+10504,Sword Beam,SwordBeam,1
+30013,Arrow Hail,ArrowHail,1
+30012,Avalanche,Avalanche,1
+30011,Ice Shock,IceShock,1
+30010,Ice Bolt,IceBolt,1
+10360,Surging Shake,SurgingShake,1
+10361,Bloody Battle,BloodyBattle,1
+10362,Soaring Leap,SoaringLeap,1
+10363,Lightning Crash,LightningCrash,1
+10364,Piercing Strike,PiercingStrike,1
+30014,Frost Claw,FrostClaw,1
+10503,Blade Storm,BladeStorm,1
+10369,Slash,Slash,1
+10370,Recovery,Recovery,1
+30015,Arrow Hail,ArrowHail,2
+10372,Metaplasia,Metaplasia,1
+10373,Ice Burst,IceBurst,1
+10374,Heal,Heal,1
+10381,Radiant Palm,RadiantPalm,5
+10390,Oblivion,Oblivion,1
+10395,Tyrant Aura,TyrantAura,5
+10400,Serenity,Serenity,1
+10405,Soul Shackle,SoulShackle,5
+10410,Fend Aura,FendAura,5
+10415,Whirlwind Kick,WhirlwindKick,5
+10425,Tranquility,Tranquility,1
+10430,Compassion,Compassion,1
+10420,Elemental Aura Metal,ElementalAuraMetal,5
+10421,Elemental Aura Wood,ElementalAuraWood,5
+10422,Elemental Aura Water,ElementalAuraWater,5
+10423,Elemental Aura Fire,ElementalAuraFire,5
+10424,Elemental Aura Earth,ElementalAuraEarth,5
+10470,Shield Block,ShieldBlock,5
+10484,Death Blow,DeathBlow,1
+10485,Snakeman,Snakeman,1
+10486,Heresy Snakeman,HeresySnakeman,1
+10487,Macaque,Macaque,1
+10488,Macaque,Macaque,1
+10490,Triple Attack,TripleAttack,5
+10501,Blade Ghost Messenger,BladeGhostMessenger,1
+10508,Fatal Crash,FatalCrash,1
+10509,Icy Touch,IcyTouch,1
+10510,Fumigate,Fumigate,1
+10511,Rosy Spell,RosySpell,1
+10512,Romantic Strike,RomanticStrike,1
+10513,Lover Hug,LoverHug,1
+10514,Pheasant,Pheasant,1
+10522,Divine Hare,DivineHare,1
+10523,Golden Hare,GoldenHare,1
+10524,Silver Hare,SilverHare,1
+10525,Hare Guard,HareGuard,1
+10526,Gold Rabbit,GoldRabbit,1
+10527,Silver Rabbit,SilverRabbit,1
+10528,Pheasant,Pheasant,1
+10529,Freeze,Freeze,1
+10530,Frenzy,Frenzy,1
+10531,Stunt,Stunt,1
+11000,Dragon Tail,DragonTail,5
+11005,Viper Fang,ViperFang,5
+11010,Winged Snake1,WingedSnake1,1
+11011,Bandit1,Bandit1,1
+11012,Ratling1,Ratling1,1
+11013,Macaque1,Macaque1,1
+11014,Giant Ape1,GiantApe1,1
+11015,Snakeman1,Snakeman1,1
+11016,Sand Monster1,SandMonster1,1
+11017,Rockmonster1,Rockmonster1,1
+11018,Blade Ghost1,BladeGhost1,1
+11019,Hare Guard,HareGuard,1
+11020,Pumpkin Spell,PumpkinSpell,1
+11021,Pirate Octopus,PirateOctopus,1
+11022,Doom Slash,DoomSlash,1
+11024,Heaven Slash,HeavenSlash,1
+11025,Earth Slash,EarthSlash,1
+11026,Frost Burst,FrostBurst,1
+11027,Breath Recovery,BreathRecovery,1
+11028,Magic Stones,MagicStones,1
+11030,Eagle Eye,EagleEye,5
+11040,Scurvy Bomb,ScurvyBomb,5
+11050,Cannon Barrage,CannonBarrage,1
+11060,Blackbeard's Rage,Blackbeard`sRage,5
+11070,Gale Bomb,GaleBomb,5
+11083,Soul-Ice Spell,Soul-IceSpell,1
+11084,Soul-Icy Claw,Soul-IcyClaw,1
+11085,Soul-Icy Stun,Soul-IcyStun,1
+11086,Soul-Icy Punch,Soul-IcyPunch,1
+11088,Soul-Transform,Soul-Transform,1
+11089,Soul-Freezing Call,Soul-FreezingCall,1
+11100,Kraken's Revenge,Kraken`sRevenge,5
+11110,Blade Tempest,BladeTempest,5
+11120,Black Spot,BlackSpot,5
+11130,Adrenaline Rush,AdrenalineRush,5
+11140,Windstorm,Windstorm,5
+11154,Deer,Deer,1
+11155,Undead Soldier,UndeadSoldier,1
+11156,Phantom,Phantom,1
+11157,Revenant,Revenant,1
+11210,Immolation,Immolation,1
+11211,Blade Storm,BladeStorm,1
+11160,Defensive Stance,DefensiveStance,2
+11170,Bloody Scythe,BloodyScythe,5
+11180,Mortal Drag,MortalDrag,5
+11190,Charging Vortex,ChargingVortex,5
+11200,Magic Defender,MagicDefender,5
+11212,Blade Storm,BladeStorm,1
+11213,Sword Beam,SwordBeam,1
+11214,Revenge Punch,RevengePunch,1
+11215,Blade Vortex,BladeVortex,1
+11216,Slash,Slash,1
+11217,Heal,Heal,1
+11230,Gaping Wounds,GapingWounds,5
+11304,Pheasant,Pheasant,1
+11305,Apparition,Apparition,1
+11306,Ratling,Ratling,1
+11307,Winged Snake,WingedSnake,1
+11308,Minotaur,Minotaur,1
+11309,Surging Shake,SurgingShake,1
+11310,Bloody Battle,BloodyBattle,1
+11311,Lightning Crash,LightningCrash,1
+11312,Lightning Crash,LightningCrash,1
+11313,Piercing Strike,PiercingStrike,1
+11314,Recovery,Recovery,1
+11315,Surging Shake,SurgingShake,1
+11316,Bloody Battle,BloodyBattle,1
+11317,Lightning Crash,LightningCrash,1
+11318,Piercing Strike,PiercingStrike,1
+11319,Recovery,Recovery,1
+11320,Recovery,Recovery,1
+11321,Soaring Leap,SoaringLeap,1
+11322,Surging Shake,SurgingShake,1
+11324,Fruit Monster,FruitMonster,1
+11520,Fox,Fox,1

@@ -1,0 +1,16 @@
+version: '3.8'
+# Tudo (contas, servidores, votos, configuracoes e os dados do jogo da API) fica no MongoDB, autenticado e so em localhost.
+# Crie um arquivo .env ao lado deste com:  MONGO_USER=trinity   MONGO_PASSWORD=<senha forte>
+services:
+  mongo:
+    image: mongo:7
+    container_name: trinity_mongo
+    restart: always
+    command: ["--auth"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-trinity}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:?defina MONGO_PASSWORD no .env}
+    ports:
+      - '127.0.0.1:27017:27017'
+    volumes:
+      - ./mongo_data:/data/db

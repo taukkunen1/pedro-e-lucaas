@@ -1,0 +1,479 @@
+﻿using Core.Interfaces.GameServer;
+using Core.Models.GameServer;
+using Newtonsoft.Json;
+using RestSharp;
+using System.Collections.Generic;
+
+namespace Core
+{
+    public static class RestApiHelper
+    {
+        public static ushort ApiPort = 8080;
+        public static string ApiRequestBaseURI = $"http://localhost:{ApiPort}/api/";
+        private static RestClient ResClient = new RestClient(ApiRequestBaseURI);
+        public static void Init()
+        {
+            ApiRequestBaseURI = $"http://localhost:{ApiPort}/api/";
+            ResClient = new RestClient(ApiRequestBaseURI);
+        }
+        #region General
+        public static bool PostRequestSuccessful<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Post);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            var res = ResClient.ExecuteAsync(ResRequest).Result;
+            return res.IsSuccessful;
+        }
+        public static string PostRequestRaw<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Post);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            var res = ResClient.ExecuteAsync(ResRequest).Result;
+            return res.Content;
+        }
+        public static T PostRequest<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Post);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            string JSON = ResClient.ExecuteAsync(ResRequest).Result.Content;
+            return JsonConvert.DeserializeObject<T>(JSON);
+        }
+        public static string PutRequestRaw<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Put);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            var res = ResClient.ExecuteAsync(ResRequest).Result;
+            return res.Content;
+        }
+        public static T GetRequest<T>(string Endpoint, Dictionary<string, string> Parameters = null)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Get);
+            
+            if (Parameters != null)
+            {
+                foreach (KeyValuePair<string, string> kvp in Parameters)
+                {
+                    Parameter p = Parameter.CreateParameter(kvp.Key, kvp.Value, ParameterType.GetOrPost);
+                    ResRequest.AddParameter(p);
+                }
+            }
+
+            string JSON = ResClient.ExecuteAsync(ResRequest).Result.Content;
+            var jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+            return JsonConvert.DeserializeObject<T>(JSON, jsonSerializerSettings);
+        }
+        public static T DeleteRequest<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Delete);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            string JSON = ResClient.ExecuteAsync(ResRequest).Result.Content;
+            return JsonConvert.DeserializeObject<T>(JSON);
+        }
+        public static bool DeleteRequestSuccessful<T>(string Endpoint, T Data)
+        {
+            RestRequest ResRequest = new RestRequest(Endpoint, Method.Delete);
+            ResRequest.AddJsonBody((object)Data);
+            ResRequest.RequestFormat = DataFormat.Json;
+            var res = ResClient.ExecuteAsync(ResRequest).Result;
+            return res.IsSuccessful;
+        }
+        #endregion
+        #region Players
+
+        public static List<Player> GetPlayers()
+        {
+            List<Player> players = GetRequest<List<Player>>("Players/Get");
+            return players;
+        }
+        public static Player GetPlayer(uint UID)
+        {
+            if (UID == 0)
+            {
+                return null;
+            }
+            Dictionary<string, string> paramGetPlayer = new()
+            {
+                { "UID", UID.ToString() }
+            };
+            Player player = GetRequest<Player>("Players/GetOne", paramGetPlayer);
+            return player;
+        }
+        public static void CreatePlayer(Player Player)
+        {
+            List<Player> players = [Player];
+            PostRequestSuccessful("Players/Set", players);
+        }
+
+        public static bool UpdatePlayers(List<Player> players)
+        {
+            return PostRequestSuccessful("Players/Update", players);
+        }
+
+        public static bool UpdatePlayer(Player player)
+        {
+            return PostRequestSuccessful("Players/Update", new List<Player> { player });
+        }
+
+        public static List<PlayerItem> GetPlayerItems(uint EntityID)
+        {
+            Dictionary<string, string> paramGetPlayer = new()
+            {
+                { "EntityID", EntityID.ToString() }
+            };
+            return GetRequest<List<PlayerItem>>("PlayerItems/Get", paramGetPlayer);
+        }
+        public static int UpdatePlayerItems(UpdatePlayerItem playerItems)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("PlayerItems/Update", playerItems);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region PlayerSpells (Api Restfull calls)
+        public static List<PlayerSpell> GetPlayerSpells(uint PlayerUID)
+        {
+            Dictionary<string, string> param = new()
+            {
+                { "PlayerUID", PlayerUID.ToString() }
+            };
+            return GetRequest<List<PlayerSpell>>("PlayerSpells", param);
+        }
+        public static int AddPlayerSpells(uint PlayerUID, List<PlayerSpell> PlayerSpells)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("PlayerSpells/"+ PlayerUID, PlayerSpells);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdatePlayerSpells(uint PlayerUID, List<PlayerSpell> PlayerSpells)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("PlayerSpells/" + PlayerUID, PlayerSpells);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region PlayerProfs (Api Restfull calls)
+        public static List<PlayerProficiency> GetPlayerProfs(uint PlayerUID)
+        {
+            Dictionary<string, string> param = new()
+            {
+                { "PlayerUID", PlayerUID.ToString() }
+            };
+            return GetRequest<List<PlayerProficiency>>("PlayerProfs", param);
+        }
+        public static int AddPlayerProfs(uint PlayerUID, List<PlayerProficiency> PlayerProfs)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("PlayerProfs/" + PlayerUID, PlayerProfs);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdatePlayerProfs(uint PlayerUID, List<PlayerProficiency> PlayerProfs)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("PlayerProfs/" + PlayerUID, PlayerProfs);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region VendorShops (Api Restfull calls)
+        public static List<VendorShop> GetVendorShops()
+        {
+            return GetRequest<List<VendorShop>>("VendorShops");
+        }
+        public static int AddVendorShop(List<VendorShop> VendorShops)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("VendorShops", VendorShops);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdateVendorShops(List<VendorShop> VendorShops)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("VendorShops", VendorShops);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region TeamElitePKS (Api Restfull calls)
+        public static List<TeamElitePK> GetTeamElitePKS(EliteTournamentType Type)
+        {
+            return GetRequest<List<TeamElitePK>>("TeamElitePKS/"+Type);
+        }
+        public static int AddTeamElitePK(List<TeamElitePK> TeamElitePKS)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("TeamElitePKS", TeamElitePKS);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdateTeamElitePKS(List<TeamElitePK> TeamElitePKS)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("TeamElitePKS", TeamElitePKS);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region ClassPKWar (Api Restfull calls)
+        public static List<ClassPKWar> GetClassPKWars()
+        {
+            return GetRequest<List<ClassPKWar>>("ClassPKWars");
+        }
+        public static int AddClassPKWars(List<ClassPKWar> ClassPKWars)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("ClassPKWars", ClassPKWars);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdateClassPKWars(List<ClassPKWar> ClassPKWars)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("ClassPKWars", ClassPKWars);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region ElitePKS (Api Restfull calls)
+        public static List<ElitePK> GetElitePKS()
+        {
+            return GetRequest<List<ElitePK>>("ElitePKS");
+        }
+        public static int AddElitePK(List<ElitePK> ElitePKS)
+        {
+            int affectedRows = 0;
+            string responseRaw = PostRequestRaw("ElitePKS", ElitePKS);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static int AddUpdateElitePKS(List<ElitePK> ElitePKS)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("ElitePKS", ElitePKS);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region Couples (Api Restfull calls)
+        public static List<Couple> GetCouples()
+        {
+            return GetRequest<List<Couple>>("ElitePKS");
+        }
+        public static int AddUpdateCouples(List<Couple> Couples)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("ElitePKS", Couples);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region CityWars (Api Restfull calls)
+        public static List<CityWar> GetCityWars()
+        {
+            return GetRequest<List<CityWar>>("CityWars");
+        }
+        public static int AddUpdateCityWars(List<CityWar> CityWars)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("CityWars", CityWars);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region GuildWars (Api Restfull calls)
+        public static List<GuildWar> GetGuildWars(GuildWarType Type)
+        {
+            return GetRequest<List<GuildWar>>("GuildWars/" + Type);
+        }
+        public static int AddUpdateGuildWars(List<GuildWar> GuildWars)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("GuildWars", GuildWars);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region VIPShares (Api Restfull calls)
+        public static List<VIPShare> GetVIPShares()
+        {
+            return GetRequest<List<VIPShare>>("VIPShares");
+        }
+        public static int AddUpdateVIPShares(List<VIPShare> VIPShares)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("VIPShares", VIPShares);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region KOBoardRanks (Api Restfull calls)
+        public static List<KOBoardRank> GetKOBoardRanks()
+        {
+            return GetRequest<List<KOBoardRank>>("KOBoardRanks");
+        }
+        public static int AddUpdateKOBoardRanks(List<KOBoardRank> KOBoardRanks)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("KOBoardRanks", KOBoardRanks);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region BanUIDs (Api Restfull calls)
+        public static List<BanUID> GetBanUIDs()
+        {
+            return GetRequest<List<BanUID>>("BanUIDs");
+        }
+        public static int AddUpdateBanUIDs(List<BanUID> BanUIDs)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("BanUIDs", BanUIDs);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static bool RemoveBanUID(uint UID)
+        {
+            return DeleteRequestSuccessful($"BanUIDs/{UID}", "");
+        }
+        #endregion
+        #region BanIPs (Api Restfull calls)
+        public static List<BanIP> GetBanIPs()
+        {
+            return GetRequest<List<BanIP>>("BanIPs");
+        }
+        public static int AddUpdateBanIPs(List<BanIP> BanIPs)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("BanIPs", BanIPs);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static bool RemoveBanIP(string IP)
+        {
+            return DeleteRequestSuccessful($"BanIPs/{IP}", "");
+        }
+        #endregion
+        #region Associates (Api Restfull calls)
+        public static List<Associate> GetAssociates()
+        {
+            return GetRequest<List<Associate>>($"Associates");
+        }
+        public static int AddUpdateAssociates(List<Associate> Associates)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw($"Associates", Associates);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        public static bool RemoveAssociateMember(AssociateMemberType Type, uint MemberUID)
+        {
+            return DeleteRequestSuccessful($"Associates/{Type}/{MemberUID}", "");
+        }
+        #endregion
+        #region ClanWars (Api Restfull calls)
+        public static List<ClanWar> GetClanWars()
+        {
+            return GetRequest<List<ClanWar>>("ClanWars");
+        }
+        public static int AddUpdateClanWars(List<ClanWar> ClanWars)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("ClanWars", ClanWars);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+        #region PlayerHouses (Api Restfull calls)
+        public static List<PlayerHouse> GetPlayerHouses(uint playerUid)
+        {
+            return GetRequest<List<PlayerHouse>>($"PlayerHouses/{playerUid}");
+        }
+        public static int AddUpdatePlayerHouses(List<PlayerHouse> playerHouses)
+        {
+            int affectedRows = 0;
+            string responseRaw = PutRequestRaw("PlayerHouses", playerHouses);
+            if (int.TryParse(responseRaw, out int affectedRowsQuery))
+            {
+                affectedRows += affectedRowsQuery;
+            }
+            return affectedRows;
+        }
+        #endregion
+    }
+}

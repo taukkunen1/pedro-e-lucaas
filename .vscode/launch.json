@@ -1,0 +1,53 @@
+{
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Account",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "C:/Users/hecto/OneDrive/Desktop/Placebo/AccountServer/AccountServer.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/COServer/DFAccountServer",
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Launch Game",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "C:/Users/hecto/OneDrive/Desktop/Placebo/GameServer/GameServer.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/COServer/DFGameServer",
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Launch API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "C:/Users/hecto/OneDrive/Desktop/Placebo/API/API.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/COServer/DFAPI",
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch TrinityConquer",
+      "configurations": ["Launch API", "Launch Account", "Launch Game"]
+    }
+  ]
+}

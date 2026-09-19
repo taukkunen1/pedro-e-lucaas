@@ -1,0 +1,141 @@
+{
+  "_readme": "Regras: a primeira que casar com o reason vence. flow: auto|transfer|ignore. Sem regra => system 'Other'.",
+  "settings": {
+    "enabled": true,
+    "folder": "Telemetry/economy",
+    "autoReasonFromStack": true,
+    "logMinDeltaGold": 1,
+    "logMinDeltaCps": 1,
+    "alertGold": 500000000,
+    "alertCps": 5000,
+    "summarySeconds": 300,
+    "queueSize": 200000
+  },
+  "rules": [
+    {
+      "match": "^ItemUsage:(DepositWarehouse|WarehouseWithdraw|ShowWarehouseMoney)$",
+      "system": "Warehouse",
+      "flow": "transfer"
+    },
+    {
+      "match": "^ItemUsage:DropGold$",
+      "system": "FloorDrop",
+      "flow": "auto"
+    },
+    {
+      "match": "^ItemUsage:(BuyVendingItem|AddVendingItem\\w*|RemoveVendingItem|ShowVendingList)$",
+      "system": "Booth",
+      "flow": "transfer"
+    },
+    {
+      "match": "^ItemUsage:(BuyItem|BuyItemFromForging|GarmentShop|SellItem)$",
+      "system": "NpcShop",
+      "flow": "auto"
+    },
+    {
+      "match": "^ItemUsage:Repair",
+      "system": "Repair",
+      "flow": "auto"
+    },
+    {
+      "match": "^ItemUsage:(Upgrade|GemCompose|Socket|CreateSocket|AddBless|UpdatePurity|ToristSuper|Alternante|UnAlternante|Merge|Embed)",
+      "system": "Forging",
+      "flow": "auto"
+    },
+    {
+      "match": "^ItemUsage:",
+      "system": "ItemUsage.Other",
+      "flow": "auto"
+    },
+    {
+      "match": "^ItemUse:",
+      "system": "ItemUse",
+      "flow": "auto"
+    },
+    {
+      "match": "^Npc:",
+      "system": "Npc",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(MsgTrade|Trade)\\b",
+      "system": "Trade",
+      "flow": "transfer"
+    },
+    {
+      "match": "^Code:MsgItemPacket\\b",
+      "system": "FloorPickup",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(DropMob|MonsterRole|MobCollection|MonsterFamily)\\b",
+      "system": "MonsterDrop",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(Poker|PokerHandler|PokerTable|PokerPlayer)\\b",
+      "system": "Poker",
+      "flow": "transfer"
+    },
+    {
+      "match": "^Code:(PipeClient|PipeServer|StaticConnexion)\\b",
+      "system": "InterServer",
+      "flow": "transfer"
+    },
+    {
+      "match": "^Code:(MsgNobility)\\b",
+      "system": "Nobility",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(MsgGuildProces|Guild\\w*)\\b",
+      "system": "Guild",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgOsShop\\b",
+      "system": "OsShop",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgChiInfo\\b",
+      "system": "Chi",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgNameChange\\b",
+      "system": "NameChange",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgMachine\\b",
+      "system": "Machine",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgBroadcast\\b",
+      "system": "Broadcast",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:MsgMessage\\b",
+      "system": "GM/Commands",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(Msg\\w*(Tournament|Arena|War|TopFight|Flag|Couples|Group)\\w*|KingOfTheHill|PassTheBomb|FrozenSky|LastManStand|TreasureThief|DragonWar|CityWars|FortressWars|Fivenout|KillerSystem)\\b",
+      "system": "Events",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:(ServerDatabase|DataManager|EventsRewards|ItemsByTime|BulletinManager)\\b",
+      "system": "ServerSystems",
+      "flow": "auto"
+    },
+    {
+      "match": "^Code:PoolProcesor\\b",
+      "system": "PoolTimers",
+      "flow": "auto"
+    }
+  ]
+}

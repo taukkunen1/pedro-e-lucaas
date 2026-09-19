@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Guides";
+}
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <h1>@ViewData["Title"]</h1>
+            <h2>Answers for the common questions from server here...</h2>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        "Failed to open server.dat file" when enter on the client login
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <img src="~/images/ErrorServerDat.png" alt="Error Server Dat" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Error installing patch when patching
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    Need <strong>close any TrinityConquerLoader.exe</strong> process with <strong>Task Manager</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        How get CPs? I am not getting cps from monsters...
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    Getting CPs in TrinityConquer is a bit different, can get DragonBall from drop of monsters and exchange this in market. When having VIP3+ can use autohunt for auto looting this automaticly.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingCollapse-buy">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#headingCollapse-buy" aria-expanded="false" aria-controls="headingCollapse-buy">
+                                        How buy a character in this server?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="headingCollapse-buy" class="collapse" aria-labelledby="headingCollapse-buy" data-parent="#accordion">
+                                <div class="card-body">
+                                    Cannot buy a character in this server but can buy Donation Points for buy some special items in <strong>Donation Points Shop</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingCollapse-buycps">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#headingCollapse-buycps" aria-expanded="false" aria-controls="headingCollapse-buycps">
+                                        How buy a cps in this server?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="headingCollapse-buycps" class="collapse" aria-labelledby="headingCollapse-buycps" data-parent="#accordion">
+                                <div class="card-body">
+                                    Cannot buy a cps in this server but can buy Donation Points for buy some special items in <strong>Donation Points Shop</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

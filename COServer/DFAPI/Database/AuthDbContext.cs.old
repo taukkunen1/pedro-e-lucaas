@@ -1,0 +1,52 @@
+﻿using API.Models;
+using API.Models.AccountServer;
+using Core.Models.SharedConfig;
+using Microsoft.EntityFrameworkCore;
+
+namespace API
+{
+    public class AuthDbContext : DbContext
+    {
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Server> Servers { get; set; }
+        public DbSet<Vote> Votes { get; set; }
+        public DbSet<Online> Onlines { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
+
+        public AuthDbContext()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            AccountServerConfig aServConf = Utils.ReadAccountServerConfig();
+            string strCon = $"server={aServConf.DatabaseHostname};port={aServConf.DatabasePort};database={aServConf.DatabaseName};user={aServConf.DatabaseUsername};password={aServConf.DatabasePassword};Persist Security Info=False;Pooling=true; Min Pool Size = 32;Max Pool Size = 300;";
+            try
+            {
+                options.UseMySql(strCon, ServerVersion.AutoDetect(strCon));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Cannot connect to database. Error: {ex.Message}");
+                Console.ReadKey();
+            }
+        }
+        public override int SaveChanges()
+        {
+            CheckEntityUIDs();
+            return base.SaveChanges();
+        }
+        private void CheckEntityUIDs()
+        {
+            int minimalRequiredUid = 1000000;
+            foreach (var entry in ChangeTracker.Entries<Account>().Where(e => e.State == EntityState.Added))
+            {
+                if (entry.Entity.EntityID < minimalRequiredUid)
+                {
+                    var maxId = Accounts.Max(e => (int?)e.EntityID) ?? (minimalRequiredUid - 1);
+                    entry.Entity.EntityID = (uint)maxId + 1;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <h1>@ViewData["Title"]</h1>
+            <hr />
+        </div>
+        <div class="col-12">
+            <h4>Can buy donation points here for buy in DonationPoints Shop in TrinityConquer</h4>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="JRSQWKVTX9HH2">
+                <table>
+                    <tr><td><input type="hidden" name="on0" value="Quantity">Quantity</td></tr>
+                    <tr>
+                        <td>
+                            <select name="os0">
+                                <option value="20 DonationPoints">20 DonationPoints €10,00 EUR</option>
+                                <option value="40 DonationPoints">40 DonationPoints €20,00 EUR</option>
+                                <option value="60 DonationPoints">60 DonationPoints €30,00 EUR</option>
+                                <option value="80 DonationPoints">80 DonationPoints €40,00 EUR</option>
+                                <option value="100 DonationPoints">100 DonationPoints €50,00 EUR</option>
+                                <option value="120 DonationPoints">120 DonationPoints €60,00 EUR</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="currency_code" value="EUR">
+                <input type="image" class="buy-dp-button" src="https://i.ibb.co/9qCknQt/buynow.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+            </form>
+            <div class="alert alert-info my-3" role="alert">
+                <p><strong>Once the payment is completed successfully</strong>, you must contact <a href="https://www.facebook.com/darkfoxdeveloper/">DaRkFoxDeveloper en facebook</a> for claim your points</p>
+            </div>
+            <h4>Don't know what you can buy with points? Take a look at the store in Market (NPC right next to warehouse)</h4>
+            <img src="~/images/shopTrinityConquerDonationPoints.jpg" alt="Tienda DonationPoints en TrinityConquer" draggable="false" />
+        </div>
+    </div>
+</div>

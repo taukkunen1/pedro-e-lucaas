@@ -1,0 +1,640 @@
+ID=2888
+MoneyType=1
+700103 item|hot Super.~Embed~it~in~Heaven~Fan~to~increase~attack~by~500.
+700123 item|hot Super.~Embed~it~in~Star~Tower~to~reduce~damage~by~500.
+700013 item Super.~Embed~it~in~equipment~to~increase~15%~of~P-Attack.
+1200005 item Make~the~2nd~socket~at~Socketsmith~(Market~192,200).~If~fails,~it~will~turn~to~a~Star~Drill.
+1088000 item For~quality~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+1080001 item Promotion~item.
+721080 item Promotion~item.
+1072031 item Promotion~item.
+1088001 item For~Item~level~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+723700 item Use~it~to~gain~much~EXP.~You~can~use~up~to~10~EXP~Balls~in~a~day,~at~most.~Right~click~to~use.
+700073 item Super.~Embed~it~in~equipment~to~reduce~6%~of~damage.
+723717 item Open~to~get~5~million~Silver.
+721259 item A~required~item~for~the~first~rebirth~quest.~Give~it~to~Rebirth~Master~(Market~210,212).
+723701 item Use~it~to~finish~the~2nd~rebirth~quest.~Visit~Rebirth~Master~(Market~210,212)~to~get~reborn.
+700003 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~M-Attack.
+700013 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~P-Attack.
+700023 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~Hit~Rate.
+700033 item|hot Super.~Embed~it~in~equipment~to~increase~25%~of~killing~EXP.
+700043 item|hot Super.~Embed~it~in~equipment~to~increase~200%~of~durability.
+700053 item|hot Super.~Embed~it~in~to~increase~100%~of~weapon~proficiency.
+700063 item|hot Super.~Embed~it~in~equipment~to~increase~50%~of~magic~EXP.
+1060039 item Use~it~to~reach~the~mouth~of~the~Serpent`s~Arroyo~(535,558).
+1060020 item Use~it~to~teleport~yourself~to~Twin~City.
+1060023 item Use~it~to~teleport~yourself~to~Phoenix~City.
+1060022 item Use~it~to~teleport~yourself~to~Ape~City.
+1060021 item Use~it~to~teleport~yourself~to~Desert~City.
+1060024 item Use~it~to~teleport~yourself~to~Birds~Island.
+720027 item Use~it~to~upgrade~items.
+722700 item Use~it~to~double~exp.
+723584 item Right~click~on~it~to~dye~your~armor~black.
+723087 item Given~by~SolarSaint~to~exchange~for~new~hairstyles~with~Mr.Free~in~Phoenix~City.
+727000 item Right~click~to~receive~a~pack~of~Speed~Arrows.
+725067 item It~contains~5~7~Star~Ointments.~Each~7~Star~Ointment~will~restore~6000~HP.
+725068 item It~contains~5~Serenity~Pills.~Each~Serenity~Pill~will~restore~6000~MP
+1080001 item [Lv.70~Promotion]~This~item~is~required~to~get~promoted~when~you~reach~Level~70.~Collect~it~from~the~Hill~Monsters~in~Desert.
+203009 item|new Enables~fighting~on~horseback~and~reduces~the~rate~of~being~knocked~off~your~steed.
+201009 item|hot Attack~Talisman,~which~increases~the~damage~you~cause.
+202009 item|hot Defense~Talisman,~which~reduces~the~damage~you~receive.
+2100025 item Equip~it~to~get~extra~800~HP~and~800~MP.
+728526 item Open~to~choose~a~+3~Steed~you~want.
+728527 item Open~to~choose~a~+6~Steed~you~want.
+
+[recommend]
+Amount=5
+Item0=723700 null Use~it~to~gain~much~EXP.~You~can~use~up~to~10~EXP~Balls~in~a~day,~at~most.~Right~click~to~use.
+Item1=1088000 null For~quality~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+Item2=728526 null Open~to~choose~a~+3~Steed~you~want.
+Item3=1200005 null Make~the~2nd~socket~at~Socketsmith~(Market~192,200).~If~fails,~it~will~turn~to~a~Star~Drill.
+
+ID=432
+MoneyType=1
+
+729242 item|new Right~click~to~receive~500~Chi~Points~that~can~be~used~to~study~the~Chi~System.
+3000508 item|new Find~Official~Long~to~swap~for~a~prize,~after~you~collect~enough~New~Dragon~Balls.
+511028 equip|new A~powerful~scythe.~It`s~a~new~Ninja~weapon.
+724002 item|hot Contains~3~Small~Lottery~Tickets.~Visit~Lady~Luck~(Market~212,188)~for~lottery.
+1200005 item Make~the~2nd~socket~at~Socketsmith~(Market~192,200).~If~fails,~it~will~turn~to~a~Star~Drill.
+1088000 item For~quality~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+1088001 item For~Item~level~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+723700 item Use~it~to~gain~much~EXP.~You~can~use~up~to~10~EXP~Balls~in~a~day,~at~most.~Right~click~to~use.
+700073 item Super.~Embed~it~in~equipment~to~reduce~6%~of~damage.
+723717 item Open~to~get~5~million~Silver.
+721259 item A~required~item~for~the~first~rebirth~quest.~Give~it~to~Rebirth~Master~(Market~210,212).
+723701 item Use~it~to~finish~the~2nd~rebirth~quest.~Visit~Rebirth~Master~(Market~210,212)~to~get~reborn.
+1200001 item Right~click~on~it~to~get~7~days~of~Heaven~Blessing~and~enjoy~offline~training,~extra~exp,~etc.
+700102 item|hot Refined.~For~Heaven~Fan~only,~increasing~attack~by~300.~Find~Jeweler~in~Market~to~upgrade.
+700122 item|hot Refined.~For~Star~Tower~only,~increasing~attack~by~300.~Find~Jeweler~in~Market~to~upgrade.
+700003 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~M-Attack.
+700013 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~P-Attack.
+700023 item|hot Super.~Embed~it~in~equipment~to~increase~15%~of~Hit~Rate.
+700033 item|hot Super.~Embed~it~in~equipment~to~increase~25%~of~killing~EXP.
+700043 item|hot Super.~Embed~it~in~equipment~to~increase~200%~of~durability.
+700053 item|hot Super.~Embed~it~in~to~increase~100%~of~weapon~proficiency.
+700063 item|hot Super.~Embed~it~in~equipment~to~increase~50%~of~magic~EXP.
+752099 item 99~Lilies~are~meant~for~a~100%~lady.
+754099 item 99~Tuilps~is~meant~for~a~perfect~lady.~Give~them~to~a~female~player.
+754999 item 999~Tulips~means~true~love~lasts~for~ever.~Give~them~to~a~female~player.
+753999 item 999~Orchids~mean~true~love~lasts~for~ever.~Give~them~to~a~female~player.
+751999 item 999~Red~Roses~means~true~love~lasts~forever.
+752999 item 999~Lilies~means~true~love~lasts~forever.
+1060039 item Use~it~to~reach~the~mouth~of~the~Serpent`s~Arroyo~(535,558).
+1060020 item Use~it~to~teleport~yourself~to~Twin~City.
+1080001 item [Lv.70~Promotion]~This~item~is~required~to~get~promoted~when~you~reach~Level~70.~Collect~it~from~the~Hill~Monsters~in~Desert.
+
+203009 item|new Enables~fighting~on~horseback~and~reduces~the~rate~of~being~knocked~off~your~steed.
+201009 item|hot Attack~Talisman,~which~increases~the~damage~you~cause.
+202009 item|hot Defense~Talisman,~which~reduces~the~damage~you~receive.
+2100025 item Equip~it~to~get~extra~800~HP~and~800~MP.
+2100045 item Equip~it~to~get~extra~400~MP.
+728525 item Open~to~choose~a~+1~Steed~you~want.
+728526 item Open~to~choose~a~+3~Steed~you~want.
+728527 item Open~to~choose~a~+6~Steed~you~want.
+1100003 item A~magic~pack~which~can~hold~up~to~3~items.~The~items~inside~will~be~well~protected.
+1100006 item A~magic~pack~which~can~hold~up~to~6~items.~The~items~inside~will~be~well~protected.
+
+145008 equip A~hood~for~pirate~recruits.~It~gives~good~protection~to~your~head,~without~messing~your~hair~up.
+181355 equip You~can~wear~it~over~your~armor.
+191405 equip You~can~wear~it~over~your~armor.
+181535 equip You~can~wear~it~over~your~armor.
+193300 equip You~can~wear~it~over~your~armor.
+183395 equip You~can~wear~it~over~your~armor.
+183385 equip You~can~wear~it~over~your~armor.
+183325 equip You~can~wear~it~over~your~armor.
+184355 equip You~can~wear~it~over~your~armor.
+182355 equip You~can~wear~it~over~your~armor.
+187315 equip You~can~wear~it~over~your~armor.
+183365 equip You~can~wear~it~over~your~armor.
+184335 equip You~can~wear~it~over~your~armor.
+183315 equip You~can~wear~it~over~your~armor.
+183305 equip You~can~wear~it~over~your~armor.
+194300 equip You~can~wear~it~over~your~armor.
+183345 equip You~can~wear~it~over~your~armor.
+181395 equip You~can~wear~it~over~your~armor.
+183375 equip You~can~wear~it~over~your~armor.
+187305 equip You~can~wear~it~over~your~armor.
+184375 equip You~can~wear~it~over~your~armor.
+192300 equip You~can~wear~it~over~your~armor.
+187355 equip You~can~wear~it~over~your~armor.
+350011 equip You~can~wear~it~over~your~weapon.
+350012 equip You~can~wear~it~over~your~weapon.
+350014 equip You~can~wear~it~over~your~weapon.
+350015 equip You~can~wear~it~over~your~weapon.
+350016 equip You~can~wear~it~over~your~weapon.
+350017 equip You~can~wear~it~over~your~weapon.
+350018 equip You~can~wear~it~over~your~weapon.
+350019 equip You~can~wear~it~over~your~weapon.
+350020 equip You~can~wear~it~over~your~weapon.
+360021 equip You~can~wear~it~over~your~weapon.
+360022 equip You~can~wear~it~over~your~weapon.
+360023 equip You~can~wear~it~over~your~weapon.
+360024 equip You~can~wear~it~over~your~weapon.
+360025 equip You~can~wear~it~over~your~weapon.
+360026 equip You~can~wear~it~over~your~weapon.
+360027 equip You~can~wear~it~over~your~weapon.
+360028 equip You~can~wear~it~over~your~weapon.
+360029 equip You~can~wear~it~over~your~weapon.
+360030 equip You~can~wear~it~over~your~weapon.
+360031 equip You~can~wear~it~over~your~weapon.
+360032 equip You~can~wear~it~over~your~weapon.
+360033 equip You~can~wear~it~over~your~weapon.
+360034 equip You~can~wear~it~over~your~weapon.
+360035 equip You~can~wear~it~over~your~weapon.
+360036 equip You~can~wear~it~over~your~weapon.
+360037 equip You~can~wear~it~over~your~weapon.
+360038 equip You~can~wear~it~over~your~weapon.
+360039 equip You~can~wear~it~over~your~weapon.
+360040 equip You~can~wear~it~over~your~weapon.
+380011 equip You~can~wear~it~over~your~weapon.
+380012 equip You~can~wear~it~over~your~weapon.
+380013 equip You~can~wear~it~over~your~weapon.
+380014 equip You~can~wear~it~over~your~weapon.
+380015 equip You~can~wear~it~over~your~weapon.
+370011 equip You~can~wear~it~over~your~weapon.
+370012 equip You~can~wear~it~over~your~weapon.
+370013 equip You~can~wear~it~over~your~weapon.
+370014 equip You~can~wear~it~over~your~weapon.
+370015 equip You~can~wear~it~over~your~weapon.
+
+[recommend]
+Amount=8
+Item0=3000508 new Find~Official~Long~to~swap~for~a~prize,~after~you~collect~enough~New~Dragon~Balls.
+Item1=729242 new Right~click~to~receive~500~Chi~Points~that~can~be~used~to~study~the~Chi~System.
+Item2=724002 null Contains~3~Small~Lottery~Tickets.~Visit~Lady~Luck~(Market~212,188)~for~lottery.
+Item3=1088000 null For~quality~up~at~Artisan~Wind~(Twin~City~421,352)~or~Equipment~Blacksmith~(Market~178,199).
+Item4=728526 null Open~to~choose~a~+3~Steed~you~want.
+Item5=1200005 null Make~the~2nd~socket~at~Socketsmith~(Market~192,200).~If~fails,~it~will~turn~to~a~Star~Drill.
+Item6=723700 null Use~it~to~gain~much~EXP.~You~can~use~up~to~10~EXP~Balls~in~a~day,~at~most.~Right~click~to~use.
+
+ID=4261
+MoneyType=1
+
+754099 item|new 99~Tuilps~is~meant~for~a~perfect~lady.~Give~them~to~a~female~player.
+754999 item|new 999~Tulips~means~true~love~lasts~for~ever.~Give~them~to~a~female~player.
+753999 item|new 999~Orchids~mean~true~love~lasts~for~ever.~Give~them~to~a~female~player.
+751999 item|new 999~Red~Roses~means~true~love~lasts~forever.
+729990 item|new Open~to~pick~a~steed~from~+6~Spitfire~Steed
+700103 item|hot Super.~Embed~it~in~Heaven~Fan~to~increase~attack~by~500.
+700123 item|hot Super.~Embed~it~in~Star~Tower~to~reduce~damage~by~500.
+700013 item Super.~Embed~it~in~equipment~to~increase~15%~of~P-Attack.
+700003 item Super.~Embed~it~in~equipment~to~increase~15%~of~M-Attack.
+700033 item Super.~Embed~it~in~equipment~to~increase~25%~of~killing~EXP.
+700063 item Super.~Embed~it~in~equipment~to~increase~50%~of~magic~EXP.
+700053 item Super.~Embed~it~in~to~increase~100%~of~weapon~proficiency.
+700023 item Super.~Embed~it~in~equipment~to~increase~15%~of~Hit~Rate.
+700043 item Super.~Embed~it~in~equipment~to~increase~200%~of~durability.
+
+[recommend]
+Amount=6
+Item0=700103 hot Super.~Embed~it~in~Heaven~Fan~to~increase~attack~by~500.
+Item1=700123 hot Super.~Embed~it~in~Star~Tower~to~reduce~damage~by~500.
+Item2=700013 null Super.~Embed~it~in~equipment~to~increase~15%~of~P-Attack.
+Item3=700003 null Super.~Embed~it~in~equipment~to~increase~15%~of~M-Attack..
+
+ID=5517
+MoneyType=1
+
+723855 item Open~to~get~a~+1~Maroon~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723856 item Open~to~get~a~+1~White~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723859 item Open~to~get~a~+1~Black~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723860 item Open~to~get~a~+3~Maroon~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723861 item Open~to~get~a~+3~White~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723862 item Open~to~get~a~+3~Black~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723863 item Open~to~get~a~+6~Maroon~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723864 item Open~to~get~a~+6~White~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+723865 item Open~to~get~a~+6~Black~Steed,~which~you~can~mount~after~you~learn~riding~skill.
+
+[recommend]
+Amount=0
+
+ID=5231
+MoneyType=1
+
+723342 item|new You~Get~500~StudyPoints.
+824015 item|new P3BootsDragonSoul~player.
+3003747 item|new use~Chi~Token~unlock~Epic.
+800801 item|new P3DragonSoul~player.
+800806 item|new P3DragonSoul~player.
+800807 item|new P3DragonSoul~player.
+800019 item|new P3DragonSoul~player.
+800050 item|new P3DragonSoul~player. 
+800071 item|new P3DragonSoul~player.
+800140 item|new P3DragonSoul~player.
+800141 item|new P3DragonSoul~player.
+800230 item|new P3DragonSoul~player.
+800520 item|new P3DragonSoul~player.
+800521 item|new P3DragonSoul~player.
+800615 item|new P3DragonSoul~player.
+800617 item|new P3DragonSoul~player.
+800723 item|new P3DragonSoul~player.
+800724 item|new P3DragonSoul~player.
+821027 item|new P3DragonSoul~player.
+821029 item|new P3DragonSoul~player.
+824016 item|new P3DragonSoul~player.
+822056 item|new P3DragonSoul~player.
+822057 item|new P3DragonSoul~player.
+800720 item|new P4DragonSoul~player.
+823052 item|new P4DragonSoul~player.
+823053 item|new P4DragonSoul~player.
+823054 item|new P4DragonSoul~player.
+800803 item|new P4DragonSoul~player.
+800808 item|new P4DragonSoul~player.
+800015 item|new P4DragonSoul~player.
+800014 item|new P4DragonSoul~player.
+800016 item|new P4DragonSoul~player.
+800512 item|new P4DragonSoul~player.
+800613 item|new P4DragonSoul~player.
+800415 item|new P5DragonSoul~player.
+820056 item|new P5DragonSoul~player.
+820057 item|new P5DragonSoul~player.
+821030 item|new P5DragonSoul~player.
+821028 item|new P5DragonSoul~player.
+720128 item|new Baja~PK.
+[recommend]
+Amount=23
+Item0=723342 item|new You~Get~500~StudyPoints.
+Item1=824015 item|new P3BootsDragonSoul~player.
+Item2=3003747 item|new use~Chi~Token~unlock~Epic.
+Item3=800801 item|new P3DragonSoul~player.
+Item4=800806 item|new P3DragonSoul~player.
+Item5=800807 item|new P3DragonSoul~player.
+Item6=800019 item|new P3DragonSoul~player.
+Item7=800050 item|new P3DragonSoul~player.
+Item8=800071 item|new P3DragonSoul~player.
+Item9=800140 item|new P3DragonSoul~player.
+Item10=800141 item|new P3DragonSoul~player.
+Item11=800230 item|new P3DragonSoul~player.
+Item12=800520 item|new P3DragonSoul~player.
+Item13=800521 item|new P3DragonSoul~player.
+Item14=800615 item|new P3DragonSoul~player.
+Item15=800617 item|new P3DragonSoul~player.
+Item16=800723 item|new P3DragonSoul~player.
+Item17=800724 item|new P3DragonSoul~player.
+Item18=821027 item|new P3DragonSoul~player.
+Item19=821029 item|new P3DragonSoul~player.
+Item20=824016 item|new P3DragonSoul~player.
+Item21=822056 item|new P3DragonSoul~player.
+Item22=822057 item|new P3DragonSoul~player.
+Item23=800720 item|new P4DragonSoul~player.
+Item24=823052 item|new P4DragonSoul~player.
+Item25=823053 item|new P4DragonSoul~player.
+Item26=823054 item|new P4DragonSoul~player.
+Item27=800803 item|new P4DragonSoul~player.
+Item28=800808 item|new P4DragonSoul~player.
+Item29=800015 item|new P4DragonSoul~player.
+Item30=800014 item|new P4DragonSoul~player.
+Item31=800016 item|new P4DragonSoul~player.
+Item32=800512 item|new P4DragonSoul~player.
+Item33=800613 item|new P4DragonSoul~player.
+Item34=800415 item|new P5DragonSoul~player.
+Item35=820056 item|new P5DragonSoul~player.
+Item36=820057 item|new P5DragonSoul~player.
+Item37=821030 item|new P5DragonSoul~player.
+Item38=821028 item|new P5DragonSoul~player.
+Item39=720128 item|new Baja~PK.
+MoneyType=1
+
+721091 item Use~it~to~reach~the~11th~floor~of~the~Fiend`s~Lair.
+721092 item Use~it~to~reach~the~12th~floor~of~the~Fiend`s~Lair.
+721093 item Use~it~to~reach~the~13th~floor~of~the~Fiend`s~Lair.
+721094 item Use~it~to~reach~the~14th~floor~of~the~Fiend`s~Lair.
+721095 item Use~it~to~reach~the~15th~floor~of~the~Fiend`s~Lair.
+
+[recommend]
+Amount=0
+
+ID=9264
+MoneyType=1
+
+184315 item A~classic~Santa~Claus~suit~for~male~players,~or~a~purple~warm~jacket~suit~for~female~players.
+183465 item A~blue~Santa~Claus~suit~for~male~players,~or~a~green~warm~jacket~suit~for~female~players.
+187355 item Wear~it~on~the~beach~and~enjoy~the~sunshine~and~beautiful~sea.
+183395 item The~driver~suit~for~the~people~who~are~in~pursuit~of~the~top~speed.
+183385 item Put~this~jacket~on~and~you`ll~be~ready~to~start~diagnosing~Lupus~in~no~time!
+183325 item It~shines~as~brightly~as~the~rays~of~the~sun!
+184355 item An~elegant~suit.~You`re~sure~to~turn~heads,~everywhere~you~go!
+182355 item Made~of~feathers.~You~will~feel~slim~and~graceful~like~flying~feathers~wearing~it.
+187315 item It~is~patterned~on~Monkey~King`s~gown~which~was~awarded~by~Heavenly~Emperor.
+183365 item For~female~only.~A~gorgeous~looking~evening~dress,~specially~made~for~Valentine`s~Day.
+184335 item This~handmade~clothing~absolutely~makes~you~special~and~unique.
+183315 item The~legacy~of~noble~Samurai~will~endow~you~with~both~physical~prowess~AND~good~looks!
+183305 item You~can~wear~it~over~your~armor.
+194300 item The~fresh~on~campus~look~will~keep~you~trendy~everyday!~Right~click~to~wear.
+183345 item It~expresses~the~taekwondo~philosophy:~be~a~champion~of~justice,~freedom~and~brightness.
+181395 item Delicate~and~touching~like~blue~or~yellow~daisy.
+183375 item You~can~wear~it~over~your~armor.
+187305 item A~magnificent~outfit~for~only~the~most~reputable~generals~of~Beijing~opera.
+184375 item The~bronze~armor~of~the~ultimate~ancient~warriors,~the~defenders~of~Sparta!
+192300 item A~gorgeous~looking~fairy~dress.
+360029 item An~accessory~for~1-Handed~weapon.
+360030 item An~accessory~for~1-Handed~weapon.
+360031 item An~accessory~for~1-Handed~weapon.
+360032 item An~accessory~for~1-Handed~weapon.
+360033 item An~accessory~for~1-Handed~weapon.
+360034 item An~accessory~for~1-Handed~weapon.
+360035 item An~accessory~for~1-Handed~weapon.
+360036 item An~accessory~for~1-Handed~weapon.
+360037 item An~accessory~for~1-Handed~weapon.
+360038 item An~accessory~for~1-Handed~weapon.
+360039 item An~accessory~for~1-Handed~weapon.
+360040 item An~accessory~for~1-Handed~weapon.
+380011 item An~accessory~for~shield.
+380012 item An~accessory~for~shield.
+380013 item An~accessory~for~shield.
+380014 item An~accessory~for~shield.
+380015 item An~accessory~for~shield.
+370011 item equip An~accessory~for~bow.
+370012 item equip An~accessory~for~bow.
+370013 item equip An~accessory~for~bow.
+370014 item equip An~accessory~for~bow.
+370015 item equip An~accessory~for~bow.
+193300 item Sometimes~being~a~beggar~can~become~a~stylish~fashion.
+350011 item It`s~a~common~broom~with~a~long~handle.
+350012 item It`s~a~blue~guitar,~a~must~for~singers.
+350014 item It`s~a~dragon~bone~that~is~as~hard~as~iron.
+350015 item It`s~an~Oar~made~of~first-class~mahogany.
+350016 item A~traditional~music~instrument~of~Twin~City.
+350017 item A~delicate~and~beautiful~fan~made~of~palm~leaves.
+350018 item An~iron~shovel~you~use~to~shovel~paths~through~snow~in~winter.
+350019 item It`s~a~strangely-shaped~tuna~from~Bird~Island.
+350020 item A~strange~stick.~Maybe~you~can~play~ice~hockey~with~it.
+360021 item It`s~a~heavy~wrench.
+360022 item This~wooden~club~often~gives~off~a~sweet~odor.
+360023 item An~unbreakable~umbrella~is~a~stealth~weapon~that~also~keeps~you~dry.
+360024 item The~Mackerel~makes~a~good~weapon~for~it`s~as~hard~as~iron.
+360025 item An~accessory~for~1-Handed~weapon.
+360026 item An~accessory~for~1-Handed~weapon.
+360027 item An~accessory~for~1-Handed~weapon.
+360028 item An~accessory~for~1-Handed~weapon.
+
+[recommend]
+Amount=2
+Item0=184315 null A~classic~Santa~Claus~suit~for~male~players,~or~a~purple~warm~jacket~suit~for~female~players.
+Item1=183465 null A~blue~Santa~Claus~suit~for~male~players,~or~a~green~warm~jacket~suit~for~female~players.
+
+ID=9794
+MoneyType=1
+
+720650 item Right~click~to~release~a~Demon.
+720651 item Right~click~to~release~an~Ancient~Demon.
+720652 item Right~click~to~release~a~Flood~Demon.
+720671 item Right~click~to~release~a~Heaven~Demon,~you`ll~have~a~chance~to~receive~a~Frost~CP~Pack~(69000~CPs)~or~other~nice~rewards!
+720672 item Right~click~to~release~a~Chaos~Demon,~you`ll~have~a~chance~to~receive~a~Nimbus~CP~Pack~(138000~CPs)~or~other~nice~rewards!
+720673 item Right~Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~276000~CPs!
+720674 item Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~690000~CPs!
+188155 item Made~for~knights-errant,~which~stands~for~justice.
+3000530 item Open~to~get~a~Big~Permanent~Stone~&~a~random~gift~(Tough~Drill/Super~Tortoise~Gem/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+3000531 item Open~to~get~10~Vital~Pills~and~a~random~gift~(Permanent~Stone/+3~Maroon~Steed/Class~5~Money~Bag/Lottery~Ticket/EXP~Ball).
+3000307 item Open~to~receive~an~Exemption~Token~(B).
+3000465 item Open~it~to~get~a~+3~Stone~and~have~a~chance~to~get~9-108~CPs.
+[recommend]
+Amount=12
+Item0=720650 null Right~click~to~release~a~Demon.
+Item1=720651 null Right~click~to~release~an~Ancient~Demon.
+Item2=720652 null Right~click~to~release~a~Flood~Demon.
+Item3=720671 null Right~click~to~release~a~Heaven~Demon,~you`ll~have~a~chance~to~receive~a~Frost~CP~Pack~(69000~CPs)~or~other~nice~rewards!
+Item4=720672 null Right~click~to~release~a~Chaos~Demon,~you`ll~have~a~chance~to~receive~a~Nimbus~CP~Pack~(138000~CPs)~or~other~nice~rewards!
+Item5=720673 null Right~Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~276000~CPs!
+Item6=720674 null Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~690000~CPs!
+Item7=188155 null Made~for~knights-errant,~which~stands~for~justice.
+Item8=3000530 null Open~to~get~a~Big~Permanent~Stone~&~a~random~gift~(Tough~Drill/Super~Tortoise~Gem/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+Item9=3000531 null Open~to~get~10~Vital~Pills~and~a~random~gift~(Permanent~Stone/+3~Maroon~Steed/Class~5~Money~Bag/Lottery~Ticket/EXP~Ball).
+Item10=3000307 null Open~to~receive~an~Exemption~Token~(B).
+Item11=3000465 null Open~it~to~get~a~+3~Stone~and~have~a~chance~to~get~9-108~CPs.
+
+ID=10071
+MoneyType=1
+
+729242 item Right~click~to~receive~500~Chi~Points~that~can~be~used~to~study~the~Chi~System.
+
+[recommend]
+Amount=1
+Item0=729242 null Right~click~to~receive~500~Chi~Points~that~can~be~used~to~study~the~Chi~System.
+
+ID=9683
+MoneyType=1
+
+720650 item Right~click~to~release~a~Demon.
+720651 item Right~click~to~release~an~Ancient~Demon.
+720652 item Right~click~to~release~a~Flood~Demon.
+720671 item Right~click~to~release~a~Heaven~Demon,~you`ll~have~a~chance~to~receive~a~Frost~CP~Pack~(69000~CPs)~or~other~nice~rewards!
+720672 item Right~click~to~release~a~Chaos~Demon,~you`ll~have~a~chance~to~receive~a~Nimbus~CP~Pack~(138000~CPs)~or~other~nice~rewards!
+3000277 item Open~to~receive~11~Demon~Boxes.
+3000278 item Open~to~receive~11~Ancient~Demon~Boxes.
+3000279 item Open~to~receive~11~Flood~Demon~Boxes.
+3000280 item Open~to~receive~11~Heaven~Demon~Boxes.
+3000281 item Open~to~receive~11~Chaos~Demon~Boxes.
+3000282 item Open~to~get~a~+6~Stone~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+3000287 item Open~to~get~a~+8~Stone~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+3000292 item Open~to~get~a~Tough~Drill~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+3000297 item Open~to~get~10~Vital~Pills~(5~at~most).~Pay~fee~to~open~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th
+3000302 item Open~to~get~a~Big~Permanent~Stone~(5~at~most).~Pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan~4th
+3000307 item Open~to~receive~an~Exemption~Token~(B).
+3000308 item Open~to~receive~a~Super~Tower,~Super~Fan~or~a~Super~Riding~Crop.
+3000309 item Open~to~receive~a~Miraculous~Gourd~(B).
+
+
+183485 equip Wear~this~suit~to~show~your~charm~and~attract~your~lover`s~eyes.
+192311 equip A~robe~embroidered~with~ancient~wizard~spells.
+187455 equip A~beautiful~garment~for~charming~ladies.
+187465 equip A~special~garment~for~the~man~with~invincible~power
+192185 equip A~cool~garment~that~suits~a~merciless~killer.
+187355 equip Wear~it~on~the~beach~and~enjoy~the~sunshine~and~beautiful~sea.
+193300 equip Sometimes~being~a~beggar~can~become~a~stylish~fashion,~though~it~does~smell~a~little~funny...~Right~click~to~wear.
+187475 equip When~wearing~it,~you`ll~feel~a~sense~of~elegance,~charm~and~mystery.
+183375 equip Right~click~to~put~on~this~gorgeous~garment.
+184315 equip A~classic~Santa~Claus~suit~for~male~players,~or~a~purple~warm~jacket~suit~for~female~players.
+183465 equip A~blue~Santa~Claus~suit~for~male~players,~or~a~green~warm~jacket~suit~for~female~players.
+183395 equip The~driver~suit~for~the~people~who~are~in~pursuit~of~the~top~speed.~Feel~the~delight~of~the~speed!
+183385 equip Put~this~jacket~on~and~you`ll~be~ready~to~start~diagnosing~Lupus~in~no~time!
+192125 equip This~rare~garment~was~made~from~ancient~fairy~tales~and~the~softest~fabric.~Wear~it~to~start~your~own~dream!
+183325 equip It~shines~as~brightly~as~the~rays~of~the~sun!~The~design~hints~at~a~romantic~story,~still~yet~to~unfold...
+184355 equip For~male~and~female.~An~elegant~suit,~for~all~of~your~romantic~evening~adventures.~You`re~sure~to~turn~heads,~everywhere~you~go!
+184325 equip A~garment~specially~designed~for~Halloween!~Its~unique~design~makes~it~the~most~trendy~costume~for~Halloween!
+192300 equip A~gorgeous~looking~fairy~dress.
+188395 equip A~Fariy~Tale~garment~for~the~most~charming~ladies.
+188355 equip It~reminds~people~of~the~years~when~the~many~families~competed~for~control~of~the~underground.
+183425 equip Embroidered~with~chinese~traditional~design,~this~blue~garment~shows~the~royal~style.
+187605 equip This~garment~can~fully~show~a~lady`s~grace.
+187315 equip It~is~patterned~on~Monkey~King`s~gown~which~was~awarded~by~Heavenly~Emperor.
+188345 equip This~well~tailored~garment~is~so~gorgeous~that~nobody~will~decline~this~style~makeover.
+183365 equip For~female~only.~A~gorgeous~looking~evening~dress,~specially~made~for~Valentine`s~Day.~It~will~definitely~make~you~the~star~of~the~party!
+187305 equip A~magnificent~outfit~for~only~the~most~reputable~generals~of~Beijing~opera.
+184335 equip This~handmade~clothing~absolutely~makes~you~special~and~unique.
+188365 equip Limited~edition.~This~garment~is~made~for~those~who~have~the~courage~to~say~NO.
+183335 equip This~garment~perfectly~represents~the~spirit~of~justice.
+183315 equip The~legacy~of~the~noble~Samurai~will~endow~you~with~both~physical~prowess~AND~good~looks!
+183305 equip Fixed.
+194300 equip Even~if~you`re~not~in~school~anymore,~the~fresh~on~campus~look~will~keep~you~trendy~everyday!~Right~click~to~wear.
+184375 equip The~bronze~armor~of~the~ultimate~ancient~warriors,~the~defenders~of~Sparta!
+183345 equip This~garment~expresses~the~taekwondo~philosophy:~be~a~champion~of~justice,~freedom~and~brightness.
+184365 equip It`s~specially~designed~for~white-collar~elites,~and~it~shows~your~grace~and~wisdom.
+
+3000254 equip Open~to~receive~a~permanent~-1~mount~armor,~Jade~Hare.
+3000255 equip Open~to~receive~a~permanent~-1~mount~armor,~Somesault~Cloud.
+3000256 equip Open~to~receive~a~permanent~-1~mount~armor,~Chaos~Bull.
+3000257 equip Open~to~receive~a~permanent~-1~mount~armor,~Silver~Beast.
+3000258 equip Open~to~receive~a~permanent~-1~mount~armor,~Green~Eyed~Beast.
+3000259 equip Open~to~receive~a~permanent~-1~mount~armor,~Royal~Ape.
+3000260 equip Open~to~receive~a~permanent~-1~mount~armor,~Polar~Bear.
+3000261 equip Open~to~receive~a~permanent~-1~mount~armor,~Roaring~Chow.
+3000262 equip Open~to~receive~a~permanent~-1~mount~armor,~Auspicious~Kylin.
+3000263 equip Open~to~receive~a~permanent~-1~mount~armor,~Ancient~Elephant.
+3000264 equip Open~to~receive~a~permanent~-1~mount~armor,~Gold~Globefish.
+3000265 equip Open~to~receive~a~permanent~-1~mount~armor,~Celestial~Bird.
+3000266 equip Open~to~receive~a~permanent~-1~mount~armor,~Saint~Dragon.
+3000267 equip Open~to~receive~a~permanent~-1~mount~armor,~Winebibber~Panda.
+3000268 equip Open~to~receive~a~permanent~-1~mount~armor,~Wild~Camel.
+3000269 equip Open~to~receive~a~permanent~-1~mount~armor,~Pegasus.
+3000270 equip Open~to~receive~a~permanent~-1~mount~armor,~Ice~Phoenix.
+3000271 equip Open~to~receive~a~permanent~-1~mount~armor,~Fiery~Lion.
+
+
+[recommend]
+Amount=13
+Item0=3000277 null Open~to~receive~11~Demon~Boxes.
+Item1=3000278 null Open~to~receive~11~Ancient~Demon~Boxes.
+Item2=3000279 null Open~to~receive~11~Flood~Demon~Boxes.
+Item3=3000280 null Open~to~receive~11~Heaven~Demon~Boxes.
+Item4=3000281 null Open~to~receive~11~Chaos~Demon~Boxes.
+Item5=3000282 null Open~to~get~a~+6~Stone~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+Item6=3000287 null Open~to~get~a~+8~Stone~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+Item7=3000292 null Open~to~get~a~Tough~Drill~(5~at~most).~Pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th.
+Item8=3000297 null Open~to~get~10~Vital~Pills~(5~at~most).~Pay~fee~to~open~since~the~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan.~4th
+Item9=3000302 null Open~to~get~a~Big~Permanent~Stone~(5~at~most).~Pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.~Expires~on~Jan~4th
+Item10=3000307 null Open~to~receive~an~Exemption~Token~(B).
+Item11=3000308 null Open~to~receive~a~Super~Tower,~Super~Fan~or~a~Super~Riding~Crop.
+Item12=3000309 null Open~to~receive~a~Miraculous~Gourd~(B).
+
+ID=15375
+MoneyType=1
+
+720650 item Right~click~to~release~a~Demon.
+720651 item Right~click~to~release~an~Ancient~Demon.
+720652 item Right~click~to~release~a~Flood~Demon.
+720671 item Right~click~to~release~a~Heaven~Demon,~you`ll~have~a~chance~to~receive~a~Frost~CP~Pack~(69000~CPs)~or~other~nice~rewards!
+720672 item Right~click~to~release~a~Chaos~Demon,~you`ll~have~a~chance~to~receive~a~Nimbus~CP~Pack~(138000~CPs)~or~other~nice~rewards!
+720673 item Right~Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~276000~CPs!
+720674 item Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~690000~CPs!
+188155 item Made~for~knights-errant,~which~stands~for~justice.
+3000527 item Open~to~get~a~+6~Stone~and~a~random~gift~(Tough~Drill/Permanent~Stone/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+3000528 item Open~to~get~a~+8~Stone~and~a~random~gift~(+7~Stone/Big~Permanent~Stone/Tough~Drill/Vital~Pill~Gift~Pack/Super~Tortoise~Gem).
+3000529 item Open~to~get~a~Tough~Drill~&~a~random~gift~(Perm.~Stone/Vital~Pill/Class~5~Money~Bag/+2~Stone/Super~Dragon/Phoenix~Gem).
+3000530 item Open~to~get~a~Big~Permanent~Stone~&~a~random~gift~(Tough~Drill/Super~Tortoise~Gem/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+3000531 item Open~to~get~10~Vital~Pills~and~a~random~gift~(Permanent~Stone/+3~Maroon~Steed/Class~5~Money~Bag/Lottery~Ticket/EXP~Ball).
+3000307 item Open~to~receive~an~Exemption~Token~(B).
+3000465 item Open~it~to~get~a~+3~Stone~and~have~a~chance~to~get~9-108~CPs.
+[recommend]
+Amount=15
+Item0=720650 null Right~click~to~release~a~Demon.
+Item1=720651 null Right~click~to~release~an~Ancient~Demon.
+Item2=720652 null Right~click~to~release~a~Flood~Demon.
+Item3=720671 null Right~click~to~release~a~Heaven~Demon,~you`ll~have~a~chance~to~receive~a~Frost~CP~Pack~(69000~CPs)~or~other~nice~rewards!
+Item4=720672 null Right~click~to~release~a~Chaos~Demon,~you`ll~have~a~chance~to~receive~a~Nimbus~CP~Pack~(138000~CPs)~or~other~nice~rewards!
+Item5=720673 null Right~Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~276000~CPs!
+Item6=720674 null Right~click~to~release~a~demon~and~kill~it!~If~you`re~lucky~enough,~you~may~even~find~690000~CPs!
+Item7=188155 null Made~for~knights-errant,~which~stands~for~justice.
+Item8=3000527 null Open~to~get~a~+6~Stone~and~a~random~gift~(Tough~Drill/Permanent~Stone/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+Item9=3000528 null Open~to~get~a~+8~Stone~and~a~random~gift~(+7~Stone/Big~Permanent~Stone/Tough~Drill/Vital~Pill~Gift~Pack/Super~Tortoise~Gem).
+Item10=3000529 null Open~to~get~a~Tough~Drill~&~a~random~gift~(Perm.~Stone/Vital~Pill/Class~5~Money~Bag/+2~Stone/Super~Dragon/Phoenix~Gem).
+Item11=3000530 null Open~to~get~a~Big~Permanent~Stone~&~a~random~gift~(Tough~Drill/Super~Tortoise~Gem/Vital~Pill/Class~5~Money~Bag/+3~Stone).
+Item12=3000531 null Open~to~get~10~Vital~Pills~and~a~random~gift~(Permanent~Stone/+3~Maroon~Steed/Class~5~Money~Bag/Lottery~Ticket/EXP~Ball).
+Item13=3000307 null Open~to~receive~an~Exemption~Token~(B).
+Item14=3000465 null Open~it~to~get~a~+3~Stone~and~have~a~chance~to~get~9-108~CPs.
+
+ID=15374
+MoneyType=1
+
+
+728811 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Warrior`s~Helmet.
+728812 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Trojan`s~Coronet.
+728813 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Taoist`s~Cap.
+728814 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~72~Archer`s~Hat.
+728815 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Ninja`s~Hood.
+728816 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Monk~Headband.
+728817 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Pirate~Headgear.
+728818 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Warrior`s~Armor.
+728819 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Trojan`s~Armor.
+728820 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Taoist`s~Robe.
+728821 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Archer`s~Coat.
+728822 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Ninja`s~Vest.
+728823 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Monk~Frock.
+728824 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Pirate~Armor.
+728825 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Necklace.
+728826 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Ring.
+728827 item Open~to~receive~Super~1-Soc~+4~-3~Level~70~Boots.
+728828 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Taoist`s~Bag.
+728829 item Open~to~receive~a~Super~1-Soc~+4~-3~Level~65~Taoist`s~Bracelet.
+3000466 item Open~to~get~a~+4~level~67~Super~1-Socket~Earring~with~-3%~damage.
+3000467 item Open~to~get~a~+4~level~70~Super~2-Socket~Wand~with~-3%~damage.
+3000468 item Open~to~get~a~+4~level~70~Super~2-Socket~Spear~with~-3%~damage.
+3000469 item Open~to~get~a~+4~level~70~Super~2-Socket~Blade~with~-3%~damage.
+3000470 item Open~to~get~a~+4~level~70~Super~2-Socket~Sword~with~-3%~damage.
+3000471 item Open~to~get~a~+4~level~70~Super~2-Socket~Club~with~-3%~damage.
+3000472 item Open~to~get~a~+4~level~70~Super~2-Socket~Shield~with~-3%~damage.
+3000473 item Open~to~get~a~+4~level~70~Super~2-Socket~Backword~with~-3%~damage.
+3000474 item Open~to~get~a~+4~level~70~Super~2-Socket~Bow~with~-3%~damage.
+3000475 item Open~to~get~a~+4~level~70~Super~2-Socket~Katana~with~-3%~damage.
+3000476 item Open~to~get~a~+4~level~70~Super~2-Socket~Prayer~Beads~with~-3%~damage.
+3000477 item Open~to~get~a~+4~level~70~Super~2-Socket~Rapier~with~-3%~damage.
+3000478 item Open~to~get~a~+4~level~70~Super~2-Socket~Pistol~with~-3%~damage.
+3000479 item Open~to~get~a~+4~level~70~Super~2-Socket~Scythe~with~-3%~damage.
+
+
+
+[recommend]
+Amount=33
+Item0=728811 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Warrior`s~Helmet.
+Item1=728812 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Trojan`s~Coronet.
+Item2=728813 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Taoist`s~Cap.
+Item3=728814 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~72~Archer`s~Hat.
+Item4=728815 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Ninja`s~Hood.
+Item5=728816 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Monk~Headband.
+Item6=728817 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Pirate~Headgear.
+Item7=728818 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Warrior`s~Armor.
+Item8=728819 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Trojan`s~Armor.
+Item9=728820 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Taoist`s~Robe.
+Item10=728821 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Archer`s~Coat.
+Item11=728822 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Ninja`s~Vest.
+Item12=728823 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Monk~Frock.
+Item13=728824 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Pirate~Armor.
+Item14=728825 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Necklace.
+Item15=728826 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~70~Ring.
+Item16=728827 null Open~to~receive~Super~1-Soc~+4~-3~Level~70~Boots.
+Item17=728828 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~67~Taoist`s~Bag.
+Item18=728829 null Open~to~receive~a~Super~1-Soc~+4~-3~Level~65~Taoist`s~Bracelet.
+Item19=3000466 null Open~to~get~a~+4~level~67~Super~1-Socket~Earring~with~-3%~damage.
+Item20=3000467 null Open~to~get~a~+4~level~70~Super~2-Socket~Wand~with~-3%~damage.
+Item21=3000468 null Open~to~get~a~+4~level~70~Super~2-Socket~Spear~with~-3%~damage.
+Item22=3000469 null Open~to~get~a~+4~level~70~Super~2-Socket~Blade~with~-3%~damage.
+Item23=3000470 null Open~to~get~a~+4~level~70~Super~2-Socket~Sword~with~-3%~damage.
+Item24=3000471 null Open~to~get~a~+4~level~70~Super~2-Socket~Club~with~-3%~damage.
+Item25=3000472 null Open~to~get~a~+4~level~70~Super~2-Socket~Shield~with~-3%~damage.
+Item26=3000473 null Open~to~get~a~+4~level~70~Super~2-Socket~Backword~with~-3%~damage.
+Item27=3000474 null Open~to~get~a~+4~level~70~Super~2-Socket~Bow~with~-3%~damage.
+Item28=3000475 null Open~to~get~a~+4~level~70~Super~2-Socket~Katana~with~-3%~damage.
+Item29=3000476 null Open~to~get~a~+4~level~70~Super~2-Socket~Prayer~Beads~with~-3%~damage.
+Item30=3000477 null Open~to~get~a~+4~level~70~Super~2-Socket~Rapier~with~-3%~damage.
+Item31=3000478 null Open~to~get~a~+4~level~70~Super~2-Socket~Pistol~with~-3%~damage.
+Item32=3000479 null Open~to~get~a~+4~level~70~Super~2-Socket~Scythe~with~-3%~damage.
+
+ID=15328
+MoneyType=1
+
+3000366 item Open~to~get~a~+6~Stone~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+3000369 item Open~to~get~a~+8~Stone~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+3000372 item Open~to~get~a~Tough~Drill~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+3000375 item Open~to~get~a~Big~Permanent~Stone~(3~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.
+3000378 item Open~to~get~10~Vital~Pills~(3~times~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.
+3000381 item Open~to~get~100~million~Silver~(3~times~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.
+
+[recommend]
+Amount=6
+Item0=3000366 null Open~to~get~a~+6~Stone~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+Item1=3000369 null Open~to~get~a~+8~Stone~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+Item2=3000372 null Open~to~get~a~Tough~Drill~(3~at~most).~You~need~to~pay~fee~to~open~it~since~the~2nd~time.~The~more~times~the~lower~fee.
+Item3=3000375 null Open~to~get~a~Big~Permanent~Stone~(3~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.
+Item4=3000378 null Open~to~get~10~Vital~Pills~(3~times~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.
+Item5=3000381 null Open~to~get~100~million~Silver~(3~times~at~most).~You~need~to~pay~fee~to~open~since~2nd~time.~The~more~times~the~lower~fee.

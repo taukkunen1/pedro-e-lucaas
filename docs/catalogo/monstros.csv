@@ -1,0 +1,440 @@
+﻿ID,Nome,Nome original,Nivel,Vida,Lookface,Arquivo
+3020,Aberrant Evil,AberrantEvil,118,18205,0197,AberrantEvil.ini
+3602,Abyss Demon,AbyssDemon,120,50000,0327,AbyssDemon.ini
+3145,Agile Rat,AgileRat,112,58110,0442,AgileRat.ini
+1409,Alien Ape,AlienApe,92,15432,0503,AlienApe.ini
+111,Alien Bandit,AlienBandit,32,600,0201,AlienBandit.ini
+40947,Alien Dragon(Elite),AlienDragon(Elite),138,60000000,0950,AlienDragon(Elite).ini
+40937,Alien Dragon(Nor.),AlienDragon(Nor.),138,40000000,0950,AlienDragon(Nor.).ini
+1413,Alien Serpent,AlienSerpent,112,35050,0244,AlienSerpent.ini
+40120,Alluring Witch,AlluringWitch,140,22500000,919,AlluringWitch.ini
+2421,Ancient Demon,AncientDemon,1,33,756,AncientDemon.ini
+3636,Andrew,Andrew,120,65535,0361,Andrew.ini
+40903,Anger Rat,AngerRat,117,61000,202,AngerRat.ini
+3628,Angry Beast,AngryBeast,120,50000,0154,AngryBeast.ini
+55434417,Angry Blade Ghost,AngryBladeGhost,82,11673,0200,AngryBladeGhost.ini
+14335,Ape Leader,ApeLeader,50,5000,0463,ApeLeader.ini
+6017,Ape Monster,ApeMonster,60,10200,0103,ApeMonster.ini
+678000,Ape Tyrant,ApeTyrant,57,100,0156,ApeTyrant.ini
+4,Apparition,Apparition,17,202,0108,Apparition.ini
+2133,Arena Sentinel1,ArenaSentinel1,130,15000,900,ArenaSentinel1.ini
+2134,Arena Sentinel2,ArenaSentinel2,130,15000,900,ArenaSentinel2.ini
+2135,Arena Sentinel3,ArenaSentinel3,120,15000,900,ArenaSentinel3.ini
+2136,Arena Sentinel4,ArenaSentinel4,110,15000,900,ArenaSentinel4.ini
+2137,Arena Sentinel5,ArenaSentinel5,110,15000,900,ArenaSentinel5.ini
+2138,Arena Sentinel6,ArenaSentinel6,100,15000,900,ArenaSentinel6.ini
+2139,Arena Sentinel7,ArenaSentinel7,100,15000,900,ArenaSentinel7.ini
+2438,Aurora Demon,AuroraDemon,1,33,597,AuroraDemon.ini
+7486,Awake Flame Devastator,AwakeFlameDevastator,130,10000000,983,AwakeFlameDevastator.ini
+40109,Azure Dragon,AzureDragon,140,500000,711,AzureDragon.ini
+40105,Azure Dragon Defender,AzureDragonDefender,140,50000,255,AzureDragonDefender.ini
+7,Bandit,Bandit,32,545,0201,Bandit.ini
+8202,Bandit Aide,BanditAide,32,1067,0241,BanditAide.ini
+2225,Bandit Courier,BanditCourier,98,26680,201,BanditCourier.ini
+2226,Bandit Deliverer,BanditDeliverer,100,26680,401,BanditDeliverer.ini
+8302,Bandit King,BanditKing,32,30015,0241,BanditKing.ini
+66,Bandit L33,BanditL33,33,1635,0601,BanditL33.ini
+55,Bandit L97,BanditL97,97,13805,0201,BanditL97.ini
+79,Bandit L98,BanditL98,98,27610,0601,BanditL98.ini
+1401,Bandit Leader,BanditLeader,52,2643,0201,BanditLeader.ini
+2224,Bandit Leader L97,BanditLeaderL97,97,26680,201,BanditLeaderL97.ini
+8102,Bandit Messenger,BanditMessenger,32,1067,0241,BanditMessenger.ini
+84,Banditti,Banditti,98,26680,0201,Banditti.ini
+3634,Banshee,Banshee,120,60460,0252,Banshee.ini
+1414,Basilisk,Basilisk,117,60460,0244,Basilisk.ini
+8216,Bat Aide,BatAide,102,45000,0246,BatAide.ini
+8316,Bat King,BatKing,102,65535,0246,BatKing.ini
+8116,Bat Messenger,BatMessenger,102,45000,0246,BatMessenger.ini
+25,Battle Ghost,BattleGhost,25,548,0308,BattleGhost.ini
+3645,Beast Satan,BeastSatan,120,65535,0200,BeastSatan.ini
+38,Bird King,BirdKing,90,1342200,0405,BirdKing.ini
+18,Birdman,Birdman,87,8952,0205,Birdman.ini
+8213,Birdman Aide,BirdmanAide,87,17342,0245,BirdmanAide.ini
+8313,Birdman King,BirdmanKing,87,40327,0245,BirdmanKing.ini
+77,Birdman L88,BirdmanL88,88,17905,0605,BirdmanL88.ini
+8113,Birdman Msgr,BirdmanMsgr,87,17342,0245,BirdmanMsgr.ini
+40110,Black Turtle,BlackTurtle,140,500000,712,BlackTurtle.ini
+40107,Black Turtle Defender,BlackTurtleDefender,140,50000,168,BlackTurtleDefender.ini
+20012,Blade Devil Envoy,BladeDevilEnvoy,128,65535,0129,BladeDevilEnvoy.ini
+20013,Blade Devil King,BladeDevilKing,127,65535,0329,BladeDevilKing.ini
+20011,Blade Devil Lord,BladeDevilLord,128,65535,0129,BladeDevilLord.ini
+17,Blade Ghost,BladeGhost,82,7786,0200,BladeGhost.ini
+8212,Blade Ghost Aide,BladeGhostAide,82,14674,0240,BladeGhostAide.ini
+8312,Blade Ghost King,BladeGhostKing,82,33350,0240,BladeGhostKing.ini
+76,Blade Ghost L83,BladeGhostL83,83,15572,0200,BladeGhostL83.ini
+8112,Blade Ghost Msgr,BladeGhostMsgr,82,14674,0240,BladeGhostMsgr.ini
+37,Blade Monster,BladeMonster,85,1167300,0400,BladeMonster.ini
+3144,Bladeling,Bladeling,110,33140,0240,Bladeling.ini
+3009,Blood Ghost,BloodGhost,118,18205,0200,BloodGhost.ini
+56,Bloody Bat,BloodyBat,107,28140,0148,BloodyBat.ini
+8217,Bloody Bat Aide,BloodyBatAide,107,50000,0188,BloodyBatAide.ini
+81,Bloody Bat L108,BloodyBatL108,108,56280,0548,BloodyBatL108.ini
+8117,Bloody Bat Msgr,BloodyBatMsgr,107,50000,0188,BloodyBatMsgr.ini
+88,Bloody Devil,BloodyDevil,118,60000,0197,BloodyDevil.ini
+91,Bloody King,BloodyKing,110,2814000,0348,BloodyKing.ini
+2157,Bloody Shawn,BloodyShawn,95,30000,404,BloodyShawn.ini
+3147,Blue Bird,BlueBird,115,38050,0332,BlueBird.ini
+22,Blue Cooer,BlueCooer,10,8100,0304,BlueCooer.ini
+28,Blue Elf,BlueElf,40,99900,0402,BlueElf.ini
+3608,Blue Fiend,BlueFiend,120,50000,0326,BlueFiend.ini
+3624,Bone Skeleton,BoneSkeleton,120,50000,0163,BoneSkeleton.ini
+2168,Brigand,Brigand,95,14335,201,Brigand.ini
+3015,Brutal Bandit,BrutalBandit,78,4545,0201,BrutalBandit.ini
+8218,Bull Aide,BullAide,112,55000,0117,BullAide.ini
+92,Bull Devil,BullDevil,115,3505000,0317,BullDevil.ini
+8318,Bull King,BullKing,112,65535,0117,BullKing.ini
+2232,Bull Master,BullMaster,115,45000,317,BullMaster.ini
+8118,Bull Messenger,BullMessenger,112,55000,0117,BullMessenger.ini
+57,Bull Monster,BullMonster,112,35050,0117,BullMonster.ini
+82,Bull Monster L113,BullMonsterL113,113,65535,0517,BullMonsterL113.ini
+2163,Caprice Leader,CapriceLeader,63,14113,604,CapriceLeader.ini
+3626,Carrion Skeleton,CarrionSkeleton,120,50000,0263,CarrionSkeleton.ini
+11007,Castle Bandit,CastleBandit,32,817,0201,CastleBandit.ini
+3031,Cateran,Cateran,32,545,0211,Cateran.ini
+27,Cateran Boss,CateranBoss,35,81700,0401,CateranBoss.ini
+1405,Cateran Leader,CateranLeader,72,7358,0211,CateranLeader.ini
+1403,Cateran Soldier,CateranSoldier,62,4771,0401,CateranSoldier.ini
+2390,Cave Thief,CaveThief,82,10432,801,CaveThief.ini
+6016,Cecrops,Cecrops,60,10200,0204,Cecrops.ini
+3021,Cecrops Boss,CecropsBoss,108,14335,0204,CecropsBoss.ini
+5054,Centicore,Centicore,122,6794,0179,Centicore.ini
+2436,Chaos Demon,ChaosDemon,1,33,327,ChaosDemon.ini
+213883,Chaos Guard,ChaosGuard,138,50000000,0275,ChaosGuard.ini
+1406,Chief Cateran,ChiefCateran,78,8459,0211,ChiefCateran.ini
+7488,City Soldier,CitySoldier,500,50000,900,CitySoldier.ini
+3635,Cleansing Devil,CleansingDevil,120,65535,0168,CleansingDevil.ini
+7022,Coins Stealer,CoinsStealer,102,38930,519,CoinsStealer.ini
+3011,Copper Bird,CopperBird,88,6813,0205,CopperBird.ini
+3737,Corn Devil,CornDevil,140,10800000,983,CornDevil.ini
+3630,Crazy Beast,CrazyBeast,120,50000,0354,CrazyBeast.ini
+3006,Crazy Ghost,CrazyGhost,88,6813,0200,CrazyGhost.ini
+33,Crazy Snake,CrazySnake,65,477100,0404,CrazySnake.ini
+2169,Crimson Claw,CrimsonClaw,95,14335,910,CrimsonClaw.ini
+2170,Crimson Viper,CrimsonViper,100,38000,244,CrimsonViper.ini
+3017,Cruel Bandit,CruelBandit,98,9937,0201,CruelBandit.ini
+3621,Cruel Bat,CruelBat,120,50000,0257,CruelBat.ini
+3606,Crying Serpent,CryingSerpent,120,50000,0255,CryingSerpent.ini
+3640,Daphne,Daphne,120,65535,0130,Daphne.ini
+40124,Dark Crystalof Fire,DarkCrystalofFire,140,5000000,916,DarkCrystalofFire.ini
+40121,Dark Crystalof Sky,DarkCrystalofSky,140,5000000,916,DarkCrystalofSky.ini
+40122,Dark Crystalof Wind,DarkCrystalofWind,140,5000000,916,DarkCrystalofWind.ini
+20020,Dark Elf,DarkElf,140,20000000,0328,DarkElf.ini
+40946,Dark Glutton(Elite),DarkGlutton(Elite),120,55000000,0952,DarkGlutton(Elite).ini
+40936,Dark Glutton(Nor.),DarkGlutton(Nor.),120,28000000,0952,DarkGlutton(Nor.).ini
+20021,Dark Lady,DarkLady,140,20000000,0228,DarkLady.ini
+3739,Dark Spearman,DarkSpearman,120,11600000,0116,DarkSpearman.ini
+4145,Darkmoon Demon,DarkmoonDemon,120,5000,0125,DarkmoonDemon.ini
+2420,Demon,Demon,1,33,369,Demon.ini
+3623,Demon Bat,DemonBat,120,50000,0357,DemonBat.ini
+20201,Demon Ghost,DemonGhost,137,98000,0524,DemonGhost.ini
+3603,Demon Lord,DemonLord,120,50000,0127,DemonLord.ini
+2179,Desert Condor,DesertCondor,47,1401,357,DesertCondor.ini
+2392,Desert Thief,DesertThief,82,10472,801,DesertThief.ini
+14333,Devil,Devil,1,33,0240,Devil.ini
+8219,Devil Aide,DevilAide,117,60460,0197,DevilAide.ini
+89,Devil King,DevilKing,120,65000,0197,DevilKing.ini
+200,Devil King L120,DevilKingL120,120,65000,0197,DevilKingL120.ini
+201,Devil King L122,DevilKingL122,122,65000,0197,DevilKingL122.ini
+8119,Devil Messenger,DevilMessenger,117,60460,0197,DevilMessenger.ini
+452373,Dukeof Hell,DukeofHell,15,2500000,904,DukeofHell.ini
+3618,Earth Hades,EarthHades,120,50000,0360,EarthHades.ini
+3004,East Monster,EastMonster,78,4545,0105,EastMonster.ini
+5051,Eidolon,Eidolon,123,4108,0266,Eidolon.ini
+8204,Elf Aide,ElfAide,42,2401,0242,ElfAide.ini
+121,Elf Ape,ElfApe,52,2114,0156,ElfApe.ini
+8304,Elf Boss,ElfBoss,42,3002,0442,ElfBoss.ini
+29,Elf King,ElfKing,45,182800,0402,ElfKing.ini
+8104,Elf Messenger,ElfMessenger,42,2401,0242,ElfMessenger.ini
+127,Evil Blade,EvilBlade,82,9338,0200,EvilBlade.ini
+10166,Evil Centurion,EvilCenturion,127,200000,0315,EvilCenturion.ini
+10167,Evil Executioner,EvilExecutioner,127,150000,0268,EvilExecutioner.ini
+8417,Evil Ghost,EvilGhost,103,48944,0274,EvilGhost.ini
+3026,Evil Hawk,EvilHawk,1,1000,0205,EvilHawk.ini
+8319,Evil Lord,EvilLord,117,65535,0197,EvilLord.ini
+3024,Evil Monkey,EvilMonkey,78,4545,0156,EvilMonkey.ini
+10168,Evil Scout,EvilScout,127,120000,0154,EvilScout.ini
+2180,Evil Spirit,EvilSpirit,47,2100,508,EvilSpirit.ini
+3014,Fast Bird,FastBird,118,18205,0205,FastBird.ini
+3631,Fearless Beast,FearlessBeast,120,50000,0354,FearlessBeast.ini
+3148,Fiend Bat,FiendBat,117,60460,0606,FiendBat.ini
+3611,Fiend Lord,FiendLord,120,50000,0126,FiendLord.ini
+40901,Fire Bat,FireBat,122,79800,197,FireBat.ini
+112,Fire Rat,FireRat,37,800,0202,FireRat.ini
+67,Fire Rat L38,FireRatL38,38,1999,0602,FireRatL38.ini
+26,Fire Snake,FireSnake,30,66700,0403,FireSnake.ini
+3100,Fire Snake Spirit,FireSnakeSpirit,1,500,0403,FireSnakeSpirit.ini
+113,Fire Spirit,FireSpirit,42,1500,0202,FireSpirit.ini
+68,Fire Spirit L43,FireSpiritL43,43,3658,0602,FireSpiritL43.ini
+12314455,Fish Elf,FishElf,37,1000,0130,FishElf.ini
+40949,Flame Giant(Elite),FlameGiant(Elite),140,40000000,0924,FlameGiant(Elite).ini
+40939,Flame Giant(Nor.),FlameGiant(Nor.),140,60000000,0924,FlameGiant(Nor.).ini
+657219,Flame Soldier,FlameSoldier,15,5,326,FlameSoldier.ini
+2422,Flood Demon,FloodDemon,1,33,377,FloodDemon.ini
+90,Flying Bat,FlyingBat,105,2447200,0406,FlyingBat.ini
+21,Flying Rooster,FlyingRooster,3,3300,0304,FlyingRooster.ini
+2391,Forest Thief,ForestThief,82,10697,401,ForestThief.ini
+20001,Frost Serpent,FrostSerpent,123,65535,0155,FrostSerpent.ini
+3615,Fury Ape,FuryApe,120,50000,0225,FuryApe.ini
+3620,Fury Bat,FuryBat,120,50000,0157,FuryBat.ini
+3005,Fury Ghost,FuryGhost,78,4545,0200,FuryGhost.ini
+3646,Fury Satan,FurySatan,120,65535,0104,FurySatan.ini
+3627,Fury Skeleton,FurySkeleton,120,50000,0463,FurySkeleton.ini
+23,Game Bird,GameBird,15,18300,0332,GameBird.ini
+3130,Ganoderma,Ganoderma,140,39796,0140,GanodermaL72.ini
+6011,Ghost,Ghost,82,13789,0200,Ghost.ini
+8300,Ghost King,GhostKing,22,1334,0108,GhostKing.ini
+11,Giant Ape,GiantApe,52,1763,0156,GiantApe.ini
+8206,Giant Ape Aide,GiantApeAide,52,3535,0196,GiantApeAide.ini
+8306,Giant Ape King,GiantApeKing,52,30015,0196,GiantApeKing.ini
+70,Giant Ape L53,GiantApeL53,53,5289,0556,GiantApeL53.ini
+8106,Giant Ape Msgr,GiantApeMsgr,52,3535,0196,GiantApeMsgr.ini
+20136,Gibbon,Gibbon,140,20000000,0127,Gibbon.ini
+3027,Glum Monster,GlumMonster,1,1000,0105,GlumMonster.ini
+20211,Gold Box,GoldBox,140,5,0141,GoldBox.ini
+3142,Gold Ghost,GoldGhost,108,56180,0308,GoldGhost.ini
+3013,Golden Bird,GoldenBird,108,14335,0205,GoldenBird.ini
+2700,Golden Octopus,GoldenOctopus,140,600,959,GoldenOctopus.ini
+40940,Great Pheasant(Elite),GreatPheasant(Elite),123,10000000,906,GreatPheasant(Elite).ini
+40930,Great Pheasant(Nor.),GreatPheasant(Nor.),123,5000000,906,GreatPheasant(Nor.).ini
+93,Green Devil,GreenDevil,120,6046000,0397,GreenDevil.ini
+20030,Grotto Lady,GrottoLady,127,65535,0130,GrottoLady.ini
+900,Guard1,Guard1,200,65535,0900,Guard1.ini
+910,Guard2,Guard2,60,5000,0910,Guard2.ini
+3120,Guild Beast,GuildBeast,120,65535,0240,GuildBeast.ini
+3619,Hades Lord,HadesLord,120,50000,0260,HadesLord.ini
+19,Haw King,HawKing,92,10293,0205,HawKing.ini
+8214,Hawk Aide,HawkAide,92,20010,0245,HawkAide.ini
+8314,Hawk Boss,HawkBoss,92,43712,0245,HawkBoss.ini
+78,Hawk L93,HawkL93,93,20586,0605,HawkL93.ini
+4431179,Hawk Leader,HawkLeader,93,30864,0605,HawkLeader.ini
+8114,Hawk Messenger,HawkMessenger,92,20010,0245,HawkMessenger.ini
+20051,Headless General,HeadlessGeneral,128,65535,0151,HeadlessGeneral.ini
+20050,Headless Soldier,HeadlessSoldier,127,65535,0251,HeadlessSoldier.ini
+2435,Heaven Demon,HeavenDemon,1,33,266,HeavenDemon.ini
+64,Heavy Ghost L23,HeavyGhostL23,23,731,0508,HeavyGhostL23.ini
+5056,Hell Troll,HellTroll,123,20368,0353,HellTroll.ini
+40907,Hellfire Beast,HellfireBeast,135,95000,276,HellfireBeast.ini
+14338,Heresy Elder,HeresyElder,62,9500,0244,HeresyElder.ini
+3050,Heresy Snakeman,HeresySnakeman,62,3182,0404,HeresySnakeman.ini
+15,Hill Monster,HillMonster,72,4908,0105,HillMonster.ini
+8210,Hill Monster Aide,HillMonsterAide,72,9338,0145,HillMonsterAide.ini
+8310,Hill Monster King,HillMonsterKing,72,31349,0145,HillMonsterKing.ini
+74,Hill Monster L73,HillMonsterL73,73,14723,0505,HillMonsterL73.ini
+8110,Hill Monster Msgr,HillMonsterMsgr,72,9338,0145,HillMonsterMsgr.ini
+3632,Hill Spirit,HillSpirit,120,50000,0153,HillSpirit.ini
+1407,Huge Ape,HugeApe,82,11673,0156,HugeApe.ini
+1400,Huge Snake,HugeSnake,42,1828,0203,HugeSnake.ini
+1402,Huge Spirit,HugeSpirit,57,3184,0202,HugeSpirit.ini
+8200,Human Aide,HumanAide,22,734,0108,HumanAide.ini
+8100,Human Messenger,HumanMessenger,22,734,0108,HumanMessenger.ini
+20010,Icy Blade Devil,IcyBladeDevil,127,65535,0329,IcyBladeDevil.ini
+20000,Icy Serpent,IcySerpent,122,65535,0255,IcySerpent.ini
+3010,Iron Bird,IronBird,78,4545,0205,IronBird.ini
+3029,Iron Eagle,IronEagle,1,1000,0205,IronEagle.ini
+2171,Jade Courtesan,JadeCourtesan,100,38000,152,JadeCourtesan.ini
+33212,Jade Phantom,JadePhantom,60,20697,0397,JadePhantom.ini
+2189,Jinx Tomb Bat,JinxTombBat,110,45000,348,JinxTombBat.ini
+3023,Jumpy,Jumpy,88,6813,0200,Jumpy.ini
+12314461,Kid Catcher,KidCatcher,37,1500,0130,KidCatcher.ini
+12314462,Kid Hunter,KidHunter,37,5000,0126,KidHunter.ini
+12314460,Kid Ripper,KidRipper,37,1500,0242,KidRipper.ini
+12314463,Kid Siezer,KidSiezer,37,10000,0126,KidSiezer.ini
+40102,Kylin Chariot,KylinChariot,132,100000,788,KylinChariot.ini
+3625,Lame Skeleton,LameSkeleton,120,50000,0363,LameSkeleton.ini
+11224,Lapidating Mob,LapidatingMob,72,5886,0105,LapidatingMob.ini
+20055,Lava Beast,LavaBeast,135,15000000,0251,LavaBeast.ini
+40904,Lava Scorpion,LavaScorpion,125,81000,133,LavaScorpion.ini
+3614,Lightning Ape,LightningApe,120,50000,0225,LightningApe.ini
+6010,Lonely Tyrant,LonelyTyrant,45,2100,0401,LonelyTyrant.ini
+40942,Lord Protector(Elite),LordProtector(Elite),118,120000,210,LordProtector(Elite).ini
+40932,Lord Protector(Nor.),LordProtector(Nor.),118,65535,210,LordProtector(Nor.).ini
+2173,Lyra Ghost,LyraGhost,100,50000,230,LyraGhost.ini
+10,Macaque,Macaque,47,1467,0156,Macaque.ini
+69,Macaque L48,MacaqueL48,48,4400,0556,MacaqueL48.ini
+2231,Mad Bull,MadBull,113,35535,517,MadBull.ini
+40125,Maniac,Maniac,140,5000000,917,Maniac.ini
+2159,Mausoleum General1,MausoleumGeneral1,95,15000,353,MausoleumGeneral1.ini
+2161,Mausoleum General2,MausoleumGeneral2,95,15000,354,MausoleumGeneral2.ini
+2166,Mausoleum General3,MausoleumGeneral3,95,15000,354,MausoleumGeneral3.ini
+2178,Mausoleum General4,MausoleumGeneral4,95,15000,353,MausoleumGeneral4.ini
+8415,Meteor Dove,MeteorDove,32,10000,0304,MeteorDove.ini
+40101,Military Officerof Realm,MilitaryOfficerofRealm,132,100000,910,MilitaryOfficerofRealm.ini
+120,Min Macaque,MinMacaque,47,1759,0156,MinMacaque.ini
+3022,Minotaur,Minotaur,98,9937,0117,Minotaur.ini
+3155,Minotaur L120,MinotaurL120,120,60460,0117,MinotaurL120.ini
+8205,Monkey Aide,MonkeyAide,47,2935,0196,MonkeyAide.ini
+8305,Monkey King,MonkeyKing,47,30015,0196,MonkeyKing.ini
+8105,Monkey Messenger,MonkeyMessenger,47,2935,0196,MonkeyMessenger.ini
+6015,Monkey Monster,MonkeyMonster,60,10200,0156,MonkeyMonster.ini
+35,Mount Monster,MountMonster,75,735800,0305,MountMonster.ini
+12314456,Mouse Elf,MouseElf,37,1000,0242,MouseElf.ini
+3601,Mud Demon,MudDemon,120,50000,0227,MudDemon.ini
+3738,Mummy Skeleton,MummySkeleton,255,11200000,0118,MummySkeleton.ini
+5057,Naga,Naga,122,6794,0262,Naga.ini
+3146,Naga Lord,NagaLord,115,65535,0162,NagaLord.ini
+20300,Nemesis Tyrant,NemesisTyrant,138,100000000,0984,NemesisTyrant.ini
+8418,Night Devil,NightDevil,120,60460,0277,NightDevil.ini
+20031,Nightmare Lady,NightmareLady,128,65535,0230,NightmareLady.ini
+3001,North Monster,NorthMonster,108,14335,0105,NorthMonster.ini
+20200,Ocean Ghost,OceanGhost,137,98000,0524,OceanGhost.ini
+3000,Odd Monster,OddMonster,118,18205,0105,OddMonster.ini
+3025,Pan,Pan,1,1000,0201,Pan.ini
+3637,Peter,Peter,120,65535,0362,Peter.ini
+5046,Phantom,Phantom,120,3451,0363,Phantom.ini
+1,Pheasant,Pheasant,1,33,0104,Pheasant.ini
+3638,Philip,Philip,120,65535,0268,Philip.ini
+2997,Plains Thief,PlainsThief,82,15864,601,PlainsThief.ini
+2172,Poem Ghost,PoemGhost,100,50000,277,PoemGhost.ini
+3032,Poisonous Rat,PoisonousRat,37,666,0202,PoisonousRat.ini
+5,Poltergeist,Poltergeist,22,366,0108,Poltergeist.ini
+20101,Purple Banshee,PurpleBanshee,138,54000000,0983,PurpleBanshee.ini
+6018,Python,Python,70,30200,0204,Python.ini
+14336,Raging Ape,RagingApe,55,6666,0103,RagingApe.ini
+3613,Rain Ape,RainApe,120,50000,0425,RainApe.ini
+8203,Rat Aide,RatAide,37,1334,0242,RatAide.ini
+8303,Rat King,RatKing,37,30015,0442,RatKing.ini
+8103,Rat Messenger,RatMessenger,37,1334,0242,RatMessenger.ini
+8,Ratling,Ratling,37,666,0202,Ratling.ini
+58,Red Devil L117,RedDevilL117,117,60460,0197,RedDevilL117.ini
+83,Red Devil L118,RedDevilL118,118,65535,0597,RedDevilL118.ini
+3609,Red Fiend,RedFiend,120,50000,0426,RedFiend.ini
+5050,Revenant,Revenant,121,5136,0265,Revenant.ini
+10000,Reviver,Reviver,60,5000,0910,Reviver.ini
+31,Roaring Ape,RoaringApe,55,264300,0356,RoaringApe.ini
+3007,Roaring Ghost,RoaringGhost,98,9937,0200,RoaringGhost.ini
+3605,Roaring Serpent,RoaringSerpent,120,50000,0355,RoaringSerpent.ini
+40908,Roaring Snake,RoaringSnake,127,85000,355,RoaringSnake.ini
+40,Robber,Robber,100,2069700,0401,Robber.ini
+8215,Robber Aide,RobberAide,97,26680,0241,RobberAide.ini
+8315,Robber King,RobberKing,97,43712,0241,RobberKing.ini
+11008,Robber Leader,RobberLeader,32,2000,0201,RobberLeader.ini
+8115,Robber Messenger,RobberMessenger,97,26680,0241,RobberMessenger.ini
+3,Robin,Robin,12,122,0132,Robin.ini
+51,Rock Monster,RockMonster,72,7358,0105,RockMonster.ini
+8211,Rock Monster Aide,RockMonsterAide,77,11339,0145,RockMonsterAide.ini
+8311,Rock Monster King,RockMonsterKing,77,32016,0145,RockMonsterKing.ini
+59,Rock Monster L15,RockMonsterL15,15,1000,0536,RockMonsterL15.ini
+105,Rock Monster L17,RockMonsterL17,17,606,0136,RockMonsterL17.ini
+106,Rock Monster L42,RockMonsterL42,42,3656,0136,RockMonsterL42.ini
+107,Rock Monster L72,RockMonsterL72,72,14716,0136,RockMonsterL72.ini
+75,Rock Monster L78,RockMonsterL78,78,11284,0505,RockMonsterL78.ini
+108,Rock Monster L92,RockMonsterL92,92,30864,0136,RockMonsterL92.ini
+8111,Rock Monster Msgr,RockMonsterMsgr,77,11339,0145,RockMonsterMsgr.ini
+40944,Ruthless Asura(Elite),RuthlessAsura(Elite),123,25000000,0953,RuthlessAsura(Elite).ini
+40934,Ruthless Asura(Nor.),RuthlessAsura(Nor.),123,15000000,0953,RuthlessAsura(Nor.).ini
+2437,Sacred Demon,SacredDemon,1,33,168,SacredDemon.ini
+34,Sand Devil,SandDevil,70,576000,0131,SandDevil.ini
+124,Sand Elf,SandElf,67,4608,0131,SandElf.ini
+14,Sand Monster,SandMonster,67,3842,0131,SandMonster.ini
+8209,Sand Monster Aide,SandMonsterAide,67,7337,0171,SandMonsterAide.ini
+8309,Sand Monster King,SandMonsterKing,67,31349,0171,SandMonsterKing.ini
+73,Sand Monster L68,SandMonsterL68,68,11526,0531,SandMonsterL68.ini
+8109,Sand Monster Msgr,SandMonsterMsgr,67,7337,0171,SandMonsterMsgr.ini
+3644,Satan,Satan,120,65535,0166,Satan.ini
+3008,Scary Ghost,ScaryGhost,108,14335,0200,ScaryGhost.ini
+1408,Senior Ape,SeniorApe,88,13422,0103,SeniorApe.ini
+85,Senior Bandit,SeniorBandit,103,45000,0201,SeniorBandit.ini
+1404,Senior Cateran,SeniorCateran,67,5760,0401,SeniorCateran.ini
+1412,Senior Serpent,SeniorSerpent,107,28140,0604,SeniorSerpent.ini
+1410,Senior Snakeman,SeniorSnakeman,97,20697,0204,SeniorSnakeman.ini
+3629,Sensitive Beast,SensitiveBeast,120,50000,0254,SensitiveBeast.ini
+1411,Serpent,Serpent,102,24472,0404,Serpent.ini
+20002,Serpent Lord,SerpentLord,123,65535,0155,SerpentLord.ini
+3607,Serpent Spirit,SerpentSpirit,120,50000,0355,SerpentSpirit.ini
+40948,Shadow Spider(Elite),ShadowSpider(Elite),138,65000000,0951,ShadowSpider(Elite).ini
+40938,Shadow Spider(Nor.),ShadowSpider(Nor.),138,50000000,0951,ShadowSpider(Nor.).ini
+3028,Shake Monster,ShakeMonster,7,81,0105,ShakeMonster.ini
+3012,Silver Bird,SilverBird,98,9937,0205,SilverBird.ini
+20135,Silver Hawk,SilverHawk,140,20000000,0405,SilverHawk.ini
+2699,Silver Octopus,SilverOctopus,10,50,959,SilverOctopus.ini
+3604,Singing Serpent,SingingSerpent,120,50000,0155,SingingSerpent.ini
+3018,Single Eye,SingleEye,108,14335,0201,SingleEye.ini
+3141,Slinger,Slinger,105,30110,0145,Slinger.ini
+122,Slow Ape,SlowApe,57,2547,0103,SlowApe.ini
+30,Smart Monkey,SmartMonkey,50,219900,0356,SmartMonkey.ini
+20041,Snake Chief,SnakeChief,128,65535,0154,SnakeChief.ini
+20040,Snake Hubbub,SnakeHubbub,127,65535,0254,SnakeHubbub.ini
+3102,Snake King,SnakeKing,120,65535,0404,SnakeKing.ini
+123,Snake Monster,SnakeMonster,62,3817,0204,SnakeMonster.ini
+13,Snakeman,Snakeman,62,3182,0204,Snakeman.ini
+8208,Snakeman Aide,SnakemanAide,62,6337,0244,SnakemanAide.ini
+14337,Snakeman Elder,SnakemanElder,62,9500,0244,SnakemanElder.ini
+8308,Snakeman King,SnakemanKing,62,30682,0244,SnakemanKing.ini
+72,Snakeman L63,SnakemanL63,63,9547,0604,SnakemanL63.ini
+8108,Snakeman Msgr,SnakemanMsgr,62,6337,0244,SnakemanMsgr.ini
+32,Snow Ape,SnowApe,60,318400,318400,SnowApe.ini
+20070,Snow Banshee,SnowBanshee,138,60000000,0951,SnowBanshee.ini
+40945,Soul Strangler(Elite),SoulStrangler(Elite),135,40000000,0251,SoulStrangler(Elite).ini
+40935,Soul Strangler(Nor.),SoulStrangler(Nor.),135,15000000,0251,SoulStrangler(Nor.).ini
+3002,South Monster,SouthMonster,98,9937,0105,SouthMonster.ini
+3033,Stone Bandit,StoneBandit,77,5642,0105,StoneBandit.ini
+36,Stone Monster,StoneMonster,80,845900,0305,StoneMonster.ini
+3633,Swift Devil,SwiftDevil,120,55000,0133,SwiftDevil.ini
+6643,Sword Master,SwordMaster,133,15000000,0953,SwordMaster.ini
+3156,Syren,Syren,125,65535,0130,Syren.ini
+3149,Talon,Talon,120,65535,0225,Talon.ini
+5053,Temptress,Temptress,122,6794,0230,Temptress.ini
+20060,Terato Dragon,TeratoDragon,138,50000000,0950,TeratoDragon.ini
+3643,Theodore,Theodore,120,65535,0164,Theodore.ini
+2996,Thief Leader,ThiefLeader,82,20459,241,ThiefLeader.ini
+20160,Thrilling Spook,ThrillingSpook,138,60000000,0952,ThrillingSpook.ini
+12,Thunder Ape,ThunderApe,57,2124,0103,ThunderApe.ini
+8207,Thunder Ape Aide,ThunderApeAide,57,4202,0103,ThunderApeAide.ini
+8307,Thunder Ape King,ThunderApeKing,57,30015,0103,ThunderApeKing.ini
+71,Thunder Ape L58,ThunderApeL58,58,6371,0503,ThunderApeL58.ini
+8107,Thunder Ape Msgr,ThunderApeMsgr,57,4202,0103,ThunderApeMsgr.ini
+40123,Thunder Crystal,ThunderCrystal,140,5000000,916,ThunderCrystal.ini
+3639,Timothy,Timothy,120,65535,0151,Timothy.ini
+3134,Titan L77,TitanL77,77,42549,0153,TitanL77.ini
+2164,Tomb Bandit,TombBandit,35,817,401,TombBandit.ini
+2165,Tomb Bandit Leader,TombBanditLeader,85,11673,400,TombBanditLeader.ini
+20,Tomb Bat,TombBat,102,24472,0206,TombBat.ini
+80,Tomb Bat L103,TombBatL103,103,48944,0606,TombBatL103.ini
+6006,Tough Horn,ToughHorn,100,38500,0200,ToughHorn.ini
+126,Tough Monster,ToughMonster,77,6767,0105,ToughMonster.ini
+3101,Tough Snake,ToughSnake,1,500,0403,ToughSnake.ini
+2156,Trout Elf,TroutElf,10,500,311,TroutElf.ini
+2,Turtledove,Turtledove,7,81,0304,Turtledove.ini
+3019,Tyrant Bandit,TyrantBandit,118,18205,0201,TyrantBandit.ini
+66432,Ultimate Pluto,UltimatePluto,133,15000000,0168,UltimatePluto.ini
+5045,Undead Soldier,UndeadSoldier,120,3451,0263,UndeadSoldier.ini
+5049,Undead Spearman,UndeadSpearman,121,5176,0165,UndeadSpearman.ini
+3600,Vale Demon,ValeDemon,120,50000,0127,ValeDemon.ini
+86,Vampire Bat,VampireBat,108,50000,0148,VampireBat.ini
+87,Vampire King,VampireKing,113,55000,0148,VampireKing.ini
+14334,Venomous Ape,VenomousApe,50,3000,0225,VenomousApe.ini
+40108,Vermilion Bird,VermilionBird,140,500000,710,VermilionBird.ini
+40106,Vermilion Bird Defender,VermilionBirdDefender,140,50000,197,VermilionBirdDefender.ini
+3622,Vicious Bat,ViciousBat,120,50000,0357,ViciousBat.ini
+2158,Vicious Rat,ViciousRat,43,5484,602,ViciousRat.ini
+3641,Victoria,Victoria,120,65535,0328,Victoria.ini
+40902,Violet Bat King,VioletBatKing,122,109800,210,VioletBatKing.ini
+2167,Viper,Viper,95,14335,204,Viper.ini
+11223,Vulture,Vulture,47,2199,0232,Vulture.ini
+24,War Ghost,WarGhost,20,30300,0308,WarGhost.ini
+8419,Water Devil,WaterDevil,120,30000,0273,WaterDevil.ini
+3617,Water Hades,WaterHades,120,50000,0260,WaterHades.ini
+8500,Water Lord,WaterLord,120,60000,0273,WaterLord.ini
+3103,Water Snake,WaterSnake,80,47853,0203,WaterSnake.ini
+40943,Water Terror(Elite),WaterTerror(Elite),123,20000000,273,WaterTerror(Elite).ini
+40933,Water Terror(Nor.),WaterTerror(Nor.),123,10000000,273,WaterTerror(Nor.).ini
+3642,Wayne,Wayne,120,65535,0129,Wayne.ini
+3003,West Monster,WestMonster,88,6813,0105,WestMonster.ini
+3610,White Fiend,WhiteFiend,120,50000,0226,WhiteFiend.ini
+40104,White Tiger,WhiteTiger,140,500000,709,WhiteTiger.ini
+40103,White Tiger Defender,WhiteTigerDefender,140,50000,384,WhiteTigerDefender.ini
+3016,Wild Bandit,WildBandit,88,6813,0201,WildBandit.ini
+3612,Wind Ape,WindApe,120,50000,0325,WindApe.ini
+110,Wind Snake,WindSnake,27,400,0203,WindSnake.ini
+40941,Winged Lord(Elite),WingedLord(Elite),123,15000000,397,WingedLord(Elite).ini
+40931,Winged Lord(Nor.),WingedLord(Nor.),123,8000000,397,WingedLord(Nor.).ini
+6,Winged Snake,WingedSnake,27,445,0203,WingedSnake.ini
+8201,Winged Snake Aide,WingedSnakeAide,27,800,0243,WingedSnakeAide.ini
+8301,Winged Snake King,WingedSnakeKing,27,26680,0443,WingedSnakeKing.ini
+65,Winged Snake L28,WingedSnakeL28,28,890,0603,WingedSnakeL28.ini
+8101,Winged Snake Msgr,WingedSnakeMsgr,27,800,0243,WingedSnakeMsgr.ini
+3616,Wood Hades,WoodHades,120,50000,0160,WoodHades.ini
+5060,Wraith,Wraith,132,3934,0327,Wraith.ini
+20202,Wraith,Wraith,132,85000,0523,Wraith2.ini
+20203,Wraith Lord,WraithLord,133,90000,0523,WraithLord.ini
+2160,Yang Feng,YangFeng,95,40000,360,YangFeng.ini

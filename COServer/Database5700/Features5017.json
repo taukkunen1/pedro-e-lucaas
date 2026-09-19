@@ -1,0 +1,1805 @@
+{
+  "_readme": "Registro de sistemas x versao 5017. origin: Original5017|Posterior|Custom|Verify|Base. decision: keep|remove|review (edite a mao). Classificacao inicial baseada na linha do tempo do jogo, nao verificada num cliente 5017.",
+  "features": [
+    {
+      "id": "base.infra",
+      "name": "Infraestrutura (sockets, threads, console, config)",
+      "origin": "Base",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Base/**",
+        "DFGameServer/Program.cs",
+        "DFGameServer/Client/**",
+        "DFGameServer/Models/**",
+        "DFGameServer/Properties/**",
+        "DFGameServer/Role/**",
+        "DFGameServer/MsgFilter.cs",
+        "DFGameServer/Game/GamePackets.cs",
+        "DFGameServer/MapGroupThread.cs",
+        "DFGameServer/MsgSchedules.cs",
+        "DFGameServer/Database/Server.cs",
+        "DFGameServer/Database/ServerDatabase.cs",
+        "DFGameServer/Database/DataCore.cs",
+        "DFGameServer/Database/GameInfo.cs",
+        "DFGameServer/Database/DbContext/**",
+        "DFGameServer/Database/DBActions/**"
+      ],
+      "dbFiles": [
+        "client_config.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Base.Mining.Process",
+        "GameServer.BaseFunc",
+        "GameServer.Booth",
+        "GameServer.CachedAttributeInvocation",
+        "GameServer.Client.GameClient",
+        "GameServer.Client.PoolProcesses",
+        "GameServer.Client.ServerFlag",
+        "GameServer.ConcurrentSmartThreadQueue",
+        "GameServer.Console",
+        "GameServer.Cryptography.AuthCryptography",
+        "GameServer.Cryptography.BigInteger",
+        "GameServer.Cryptography.DHKeyExchange",
+        "GameServer.Cryptography.DiffieHellman",
+        "GameServer.Cryptography.Pack",
+        "GameServer.Cryptography.RivestCipher5",
+        "GameServer.Cryptography.SeedGenerator",
+        "GameServer.Cryptography.TQCast5",
+        "GameServer.Cryptography.TQCast5Impl",
+        "GameServer.Cryptography.TigerHashAlgorithm",
+        "GameServer.Cryptography.TransferCipher",
+        "GameServer.Database.DBActions.Mode",
+        "GameServer.Database.DBActions.Read",
+        "GameServer.Database.DBActions.Write",
+        "GameServer.Database.GameInfo",
+        "GameServer.Database.Server",
+        "GameServer.Database.ServerDatabase",
+        "GameServer.ErrorCodes",
+        "GameServer.Game.GamePackets",
+        "GameServer.Game.MsgTournaments.MsgSchedules",
+        "GameServer.Instance.AddMode",
+        "GameServer.MapDictionary",
+        "GameServer.MapGroupThread",
+        "GameServer.Models.Player",
+        "GameServer.MsgFilter",
+        "GameServer.MsgInvoker",
+        "GameServer.MyRandom",
+        "GameServer.OverLoading",
+        "GameServer.PacketAttribute",
+        "GameServer.PokerHandler",
+        "GameServer.Pool",
+        "GameServer.Program",
+        "GameServer.Role.ClientTransform",
+        "GameServer.Role.Core",
+        "GameServer.Role.FastRandom",
+        "GameServer.Role.Flags",
+        "GameServer.Role.FloorSpell",
+        "GameServer.Role.GameMap",
+        "GameServer.Role.IMapObj",
+        "GameServer.Role.Instance.AssociateGS",
+        "GameServer.Role.Instance.Chi",
+        "GameServer.Role.Instance.ChiRank",
+        "GameServer.Role.Instance.Clan",
+        "GameServer.Role.Instance.Confiscator",
+        "GameServer.Role.Instance.DemonExterminator",
+        "GameServer.Role.Instance.Equip",
+        "GameServer.Role.Instance.Flowers",
+        "GameServer.Role.Instance.Guild",
+        "GameServer.Role.Instance.House",
+        "GameServer.Role.Instance.Inventory",
+        "GameServer.Role.Instance.Nobility",
+        "GameServer.Role.Instance.Proficiency",
+        "GameServer.Role.Instance.Quests",
+        "GameServer.Role.Instance.RoleStatus",
+        "GameServer.Role.Instance.Spell",
+        "GameServer.Role.Instance.SubClass",
+        "GameServer.Role.Instance.Team",
+        "GameServer.Role.Instance.Vendor",
+        "GameServer.Role.Instance.Warehouse",
+        "GameServer.Role.KOBoard",
+        "GameServer.Role.MapFlagType",
+        "GameServer.Role.MapObjectType",
+        "GameServer.Role.MapTypeFlags",
+        "GameServer.Role.MapView",
+        "GameServer.Role.MyMath",
+        "GameServer.Role.Player",
+        "GameServer.Role.Portal",
+        "GameServer.Role.RoleView",
+        "GameServer.Role.SobNpc",
+        "GameServer.Role.StaticRole",
+        "GameServer.Role.Statue",
+        "GameServer.Role.StatusFlagsBigVector32",
+        "GameServer.Role.ViewPtr",
+        "GameServer.SendGlobalPacket",
+        "GameServer.ServerConfig",
+        "GameServer.ServerSockets.BruteForceEntry",
+        "GameServer.ServerSockets.BruteforceProtection",
+        "GameServer.ServerSockets.Packet",
+        "GameServer.ServerSockets.PacketRecycle",
+        "GameServer.ServerSockets.ReceiveBuffer",
+        "GameServer.ServerSockets.RecycledPacket",
+        "GameServer.ServerSockets.SecuritySocket",
+        "GameServer.ServerSockets.ServerSocket",
+        "GameServer.ServerSockets.SocketPoll",
+        "GameServer.ServerSockets.ThreadPool",
+        "GameServer.SharedExtensions",
+        "GameServer.ShowChatItems",
+        "GameServer.ThreadSafeRandom",
+        "GameServer.Threading.AliveMonstersCallback",
+        "GameServer.Threading.Basic",
+        "GameServer.Threading.Qualifier",
+        "GameServer.Threading.Server",
+        "GameServer.Threading.WorldTournaments",
+        "GameServer.UnlimitedArenaRooms",
+        "GameServer.VendorShop",
+        "GameServer.WindowsAPI.Kernel32",
+        "GameServer.WindowsAPI.MyString",
+        "HoldemHand.Hand",
+        "Poker.Database",
+        "Poker.Enums",
+        "Poker.Packets.General",
+        "Poker.Packets.MsgShowHandCallAction",
+        "Poker.Packets.MsgShowHandEnter",
+        "Poker.Packets.MsgShowHandExit",
+        "Poker.Packets.MsgTexasInteractive",
+        "Poker.Packets.Packet",
+        "Poker.Ranks",
+        "Poker.Structures.PokerStructs",
+        "Poker.Structures.PokerTable"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "base.tools",
+      "name": "Ferramentas do autor (managers, migrator)",
+      "origin": "Base",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/MadeByDaRkFox/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.MadeByDaRkFox.AssociatesManager",
+        "GameServer.MadeByDaRkFox.BanIPSManager",
+        "GameServer.MadeByDaRkFox.BanUIDSManager",
+        "GameServer.MadeByDaRkFox.BulletinConfiguration",
+        "GameServer.MadeByDaRkFox.BulletinManager",
+        "GameServer.MadeByDaRkFox.CharacterCreationDefaultSet",
+        "GameServer.MadeByDaRkFox.CityWarsManager",
+        "GameServer.MadeByDaRkFox.ClanWarsManager",
+        "GameServer.MadeByDaRkFox.ClassPKWarManager",
+        "GameServer.MadeByDaRkFox.ConfigurableDropSystem",
+        "GameServer.MadeByDaRkFox.CouplesPKManager",
+        "GameServer.MadeByDaRkFox.DropConfiguration",
+        "GameServer.MadeByDaRkFox.ElitePKDataManager",
+        "GameServer.MadeByDaRkFox.EventRewardConfig",
+        "GameServer.MadeByDaRkFox.EventsRewards",
+        "GameServer.MadeByDaRkFox.FixMonstersFromMonsterDat",
+        "GameServer.MadeByDaRkFox.GuildWarsManager",
+        "GameServer.MadeByDaRkFox.IDataManager",
+        "GameServer.MadeByDaRkFox.ItemDrop",
+        "GameServer.MadeByDaRkFox.ItemExpireSystem",
+        "GameServer.MadeByDaRkFox.KOBoardRanksManager",
+        "GameServer.MadeByDaRkFox.MapManager",
+        "GameServer.MadeByDaRkFox.MoneyDrop",
+        "GameServer.MadeByDaRkFox.PlayerHousesManager",
+        "GameServer.MadeByDaRkFox.SkillTeamPKDataManager",
+        "GameServer.MadeByDaRkFox.SmartNPCManager",
+        "GameServer.MadeByDaRkFox.SqlMigrator",
+        "GameServer.MadeByDaRkFox.SquamaLocation",
+        "GameServer.MadeByDaRkFox.SquamaLocationRewardType",
+        "GameServer.MadeByDaRkFox.SquamaManager",
+        "GameServer.MadeByDaRkFox.SquamaMapCord",
+        "GameServer.MadeByDaRkFox.SquamaReward",
+        "GameServer.MadeByDaRkFox.TeamElitePKDataManager",
+        "GameServer.MadeByDaRkFox.VIPSharesManager"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "base.moderation",
+      "name": "Banimentos / crime / filtro",
+      "origin": "Base",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Database/SystemBanned*.cs",
+        "DFGameServer/Database/TheCrimeTable.cs",
+        "DFGameServer/Database/Disdain.cs"
+      ],
+      "dbFiles": [
+        "BanIp.txt",
+        "BanUID.txt",
+        "Crime.ini",
+        "BadMsg.txt",
+        "cq_disdain.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.Disdain",
+        "GameServer.Database.SystemBanned",
+        "GameServer.Database.SystemBannedAccount",
+        "GameServer.Database.SystemBannedAccountClient",
+        "GameServer.Database.TheCrimeTable"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.login",
+      "name": "Login / sessao / handshake",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgHandShake*",
+        "DFGameServer/Game/MsgServer/MsgLoginClient*",
+        "DFGameServer/Game/MsgServer/MsgServerInfo*",
+        "DFGameServer/Game/MsgServer/MsgServerConfig*",
+        "DFGameServer/Game/MsgServer/MsgServerTimer*",
+        "DFGameServer/Game/MsgServer/MsgTick*",
+        "DFGameServer/Game/MsgServer/MsgSecondaryPassword*",
+        "DFGameServer/Database/GroupServerList.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.GroupServerList",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgLoginClient",
+        "GameServer.Game.MsgServer.MsgSecondaryPassword",
+        "GameServer.Game.MsgServer.MsgTick",
+        "GameServer.MsgHandShake"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.character",
+      "name": "Personagem (criacao, atributos, proficiencia, magias)",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgNewRole*",
+        "DFGameServer/Game/MsgServer/MsgClientInfo*",
+        "DFGameServer/Game/MsgServer/MsgNameChange*",
+        "DFGameServer/Game/MsgServer/MsgStatus*",
+        "DFGameServer/Game/MsgServer/MsgUpdatePacket*",
+        "DFGameServer/Game/MsgServer/MsgAtributeSet*",
+        "DFGameServer/Game/MsgServer/MsgProficiency*",
+        "DFGameServer/Game/MsgServer/MsgUpdateProfExperience*",
+        "DFGameServer/Database/AtributesStatus.cs",
+        "DFGameServer/Database/DBLevExp.cs",
+        "DFGameServer/Database/ClientProficiency.cs",
+        "DFGameServer/Database/ClientSpells.cs"
+      ],
+      "dbFiles": [
+        "levexp.txt",
+        "Stats.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.AtributesStatus",
+        "GameServer.Database.ClientSpells",
+        "GameServer.Database.DBLevExp",
+        "GameServer.Game.MsgServer.MsgAtributeSet",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgNameChange",
+        "GameServer.Game.MsgServer.MsgNewRole",
+        "GameServer.Game.MsgServer.MsgProficiency",
+        "GameServer.Game.MsgServer.MsgStatus",
+        "GameServer.Game.MsgServer.MsgUpdate"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.combat",
+      "name": "Combate e magias",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgAttackPacket*",
+        "DFGameServer/Game/MsgServer/AttackHandler/**",
+        "DFGameServer/Game/MsgServer/MsgSpell*",
+        "DFGameServer/Game/MsgServer/MsgPkExploit*",
+        "DFGameServer/Game/MsgServer/MsgBlackspot*",
+        "DFGameServer/Database/MagicType.cs"
+      ],
+      "dbFiles": [
+        "magictype.txt",
+        "magictypeop.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.MagicType",
+        "GameServer.Extensions23",
+        "GameServer.Game.MsgServer.AttackHandler.AddBlackSpot",
+        "GameServer.Game.MsgServer.AttackHandler.Algoritms.Fan",
+        "GameServer.Game.MsgServer.AttackHandler.Algoritms.InLineAlgorithm",
+        "GameServer.Game.MsgServer.AttackHandler.Algoritms.Line",
+        "GameServer.Game.MsgServer.AttackHandler.Algoritms.RandomFourLayTraps",
+        "GameServer.Game.MsgServer.AttackHandler.Algoritms.Sector",
+        "GameServer.Game.MsgServer.AttackHandler.AttachStatus",
+        "GameServer.Game.MsgServer.AttackHandler.Attack",
+        "GameServer.Game.MsgServer.AttackHandler.AttackStatus",
+        "GameServer.Game.MsgServer.AttackHandler.Auras",
+        "GameServer.Game.MsgServer.AttackHandler.BlackSpot",
+        "GameServer.Game.MsgServer.AttackHandler.Bomb",
+        "GameServer.Game.MsgServer.AttackHandler.Calculate.Base",
+        "GameServer.Game.MsgServer.AttackHandler.Calculate.Magic",
+        "GameServer.Game.MsgServer.AttackHandler.Calculate.Physical",
+        "GameServer.Game.MsgServer.AttackHandler.Calculate.Range",
+        "GameServer.Game.MsgServer.AttackHandler.CannonBarrage",
+        "GameServer.Game.MsgServer.AttackHandler.ChainBolt",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.BlockRefect",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CanAttackMonster",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CanAttackNpc",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CanAttackPlayer",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CanUseSpell",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CheckFloors",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CheckGemEffects",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CheckItems",
+        "GameServer.Game.MsgServer.AttackHandler.CheckAttack.CheckLineSpells",
+        "GameServer.Game.MsgServer.AttackHandler.Collide",
+        "GameServer.Game.MsgServer.AttackHandler.DetachStatus",
+        "GameServer.Game.MsgServer.AttackHandler.DirectAttack",
+        "GameServer.Game.MsgServer.AttackHandler.DispatchXp",
+        "GameServer.Game.MsgServer.AttackHandler.DragonWhirl",
+        "GameServer.Game.MsgServer.AttackHandler.EffectMP",
+        "GameServer.Game.MsgServer.AttackHandler.EffectStigma",
+        "GameServer.Game.MsgServer.AttackHandler.Line",
+        "GameServer.Game.MsgServer.AttackHandler.MoveLine",
+        "GameServer.Game.MsgServer.AttackHandler.Oblivion",
+        "GameServer.Game.MsgServer.AttackHandler.Perimeter",
+        "GameServer.Game.MsgServer.AttackHandler.PhysicalSpells",
+        "GameServer.Game.MsgServer.AttackHandler.Poison",
+        "GameServer.Game.MsgServer.AttackHandler.ReceiveAttack.Monster",
+        "GameServer.Game.MsgServer.AttackHandler.ReceiveAttack.Npc",
+        "GameServer.Game.MsgServer.AttackHandler.ReceiveAttack.Player",
+        "GameServer.Game.MsgServer.AttackHandler.Recruit",
+        "GameServer.Game.MsgServer.AttackHandler.RemoveBuffers",
+        "GameServer.Game.MsgServer.AttackHandler.Riding",
+        "GameServer.Game.MsgServer.AttackHandler.Sector",
+        "GameServer.Game.MsgServer.AttackHandler.ShieldBlock",
+        "GameServer.Game.MsgServer.AttackHandler.ShurikenVortex",
+        "GameServer.Game.MsgServer.AttackHandler.StarArrow",
+        "GameServer.Game.MsgServer.AttackHandler.Toxic",
+        "GameServer.Game.MsgServer.AttackHandler.Transform",
+        "GameServer.Game.MsgServer.AttackHandler.Updates.GetWeaponSpell",
+        "GameServer.Game.MsgServer.AttackHandler.Updates.UpdateSpell",
+        "GameServer.Game.MsgServer.AttackHandler.WarCry",
+        "GameServer.Game.MsgServer.AttackHandler.WhirlwindKick",
+        "GameServer.Game.MsgServer.AttackHandler.coords",
+        "GameServer.Game.MsgServer.InteractQuery",
+        "GameServer.Game.MsgServer.MsgAttackPacket",
+        "GameServer.Game.MsgServer.MsgBlackspot",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgPkExploit",
+        "GameServer.Game.MsgServer.MsgSpell",
+        "GameServer.Game.MsgServer.MsgSpellAnimation",
+        "GameServer.Game.MsgServer.SpellPacket"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.world",
+      "name": "Mundo: movimento, mapas, clima, itens no chao",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgMovement*",
+        "DFGameServer/Game/MsgServer/MsgInterAction*",
+        "DFGameServer/Game/MsgServer/MsgWeather*",
+        "DFGameServer/Game/MsgServer/MsgMapStatus*",
+        "DFGameServer/Game/MsgServer/MsgMapTraps*",
+        "DFGameServer/Game/MsgServer/MsgFlagIcon*",
+        "DFGameServer/Game/MsgFloorItem/**"
+      ],
+      "dbFiles": [
+        "GameMapEx.ini",
+        "portals.ini",
+        "Traps.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgFloorItem.MsgBuilder",
+        "GameServer.Game.MsgFloorItem.MsgDropID",
+        "GameServer.Game.MsgFloorItem.MsgItem",
+        "GameServer.Game.MsgFloorItem.MsgItemPacket",
+        "GameServer.Game.MsgServer.InterActionWalk",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgFlagIcon",
+        "GameServer.Game.MsgServer.MsgMovement",
+        "GameServer.Game.MsgServer.WalkQuery"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.items",
+      "name": "Itens, equipamento, armazem, sockets",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgGameItem*",
+        "DFGameServer/Game/MsgServer/MsgItemUsuagePacket*",
+        "DFGameServer/Game/MsgServer/MsgUpdateItem*",
+        "DFGameServer/Game/MsgServer/MsgItemView*",
+        "DFGameServer/Game/MsgServer/MsgShowEquipment*",
+        "DFGameServer/Game/MsgServer/MsgWarehouse*",
+        "DFGameServer/Game/MsgServer/MsgDetainedItem*",
+        "DFGameServer/Game/MsgServer/MsgEmbedSocket*",
+        "DFGameServer/Game/MsgServer/MsgTradePartner*",
+        "DFGameServer/NewItems.cs",
+        "DFGameServer/Database/ItemType.cs",
+        "DFGameServer/Database/ClientItems.cs",
+        "DFGameServer/Database/ConfiscatorTable.cs",
+        "DFGameServer/Database/Shops/**"
+      ],
+      "dbFiles": [
+        "itemtype.txt",
+        "itemtype.dat",
+        "ItemAdd.ini",
+        "Refinery.txt",
+        "Souls*.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.ClientItems",
+        "GameServer.Database.ConfiscatorTable",
+        "GameServer.Database.ItemType",
+        "GameServer.Database.RefinaryBoxes",
+        "GameServer.Database.Refinery",
+        "GameServer.Database.Shops.ChampionShop",
+        "GameServer.Database.Shops.EShopFile",
+        "GameServer.Database.Shops.EShopV2File",
+        "GameServer.Database.Shops.HonorShop",
+        "GameServer.Database.Shops.RacePointShop",
+        "GameServer.Database.Shops.ShopFile",
+        "GameServer.Game.MsgServer.AttackHandler.MsgBuilder",
+        "GameServer.Game.MsgServer.AttackHandler.MsgEmbedSocket",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgDetainedItem",
+        "GameServer.Game.MsgServer.MsgGameItem",
+        "GameServer.Game.MsgServer.MsgItemUsuagePacket",
+        "GameServer.Game.MsgServer.MsgItemView",
+        "GameServer.Game.MsgServer.MsgShowEquipment",
+        "GameServer.Game.MsgServer.MsgTradePartner",
+        "GameServer.Game.MsgServer.MsgUpdateItem",
+        "GameServer.Game.MsgServer.MsgWarehouse",
+        "GameServer.NewItems"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.itemextra",
+      "name": "Item extra / item lock",
+      "origin": "Original5017",
+      "confidence": "low",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgItemExtra*",
+        "DFGameServer/Game/MsgServer/MsgItemLock*"
+      ],
+      "dbFiles": [],
+      "note": "Item lock provavelmente veio depois; confirmar",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgItemExtra",
+        "GameServer.Game.MsgServer.MsgItemLock"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.npcs",
+      "name": "NPCs, dialogos, monstros e drops",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgNpc/**",
+        "DFGameServer/Game/MsgMonster/**",
+        "DFGameServer/Database/NpcServer.cs"
+      ],
+      "dbFiles": [
+        "Npcs.txt",
+        "SobNpcs.txt",
+        "monster.txt",
+        "Spawns.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.NpcServer",
+        "GameServer.DropMob",
+        "GameServer.Game.MsgMonster.ActionHandler",
+        "GameServer.Game.MsgMonster.MobCollection",
+        "GameServer.Game.MsgMonster.MobItemGenerator",
+        "GameServer.Game.MsgMonster.MobRateWatcher",
+        "GameServer.Game.MsgMonster.MobStatus",
+        "GameServer.Game.MsgMonster.MonsterFamily",
+        "GameServer.Game.MsgMonster.MonsterRole",
+        "GameServer.Game.MsgMonster.MonsterSettings",
+        "GameServer.Game.MsgMonster.MonsterView",
+        "GameServer.Game.MsgMonster.PoolProcesses",
+        "GameServer.Game.MsgMonster.SpecialItemWatcher",
+        "GameServer.Game.MsgNpc.Dialog",
+        "GameServer.Game.MsgNpc.Dialogs.DialogSteedSeller",
+        "GameServer.Game.MsgNpc.MsgBuilder",
+        "GameServer.Game.MsgNpc.Npc",
+        "GameServer.Game.MsgNpc.NpcAttribute",
+        "GameServer.Game.MsgNpc.NpcHandler",
+        "GameServer.Game.MsgNpc.NpcID",
+        "GameServer.Game.MsgNpc.NpcReply",
+        "GameServer.Game.MsgNpc.NpcServerQuery",
+        "GameServer.Game.MsgNpc.NpcServerReplay",
+        "GameServer.Game.MsgNpc.Procesor",
+        "GameServer.IDMonster",
+        "GameServer.Mobs.Base",
+        "GameServer.Mobs.MobID_20060",
+        "GameServer.Mobs.MobID_20070",
+        "GameServer.Mobs.MobID_20160",
+        "GameServer.Mobs.MobID_3130",
+        "GameServer.Mobs.MobID_3737",
+        "GameServer.Mobs.MobID_3738",
+        "GameServer.Mobs.MobID_3739",
+        "GameServer.Mobs.MobID_4145",
+        "GameServer.MobsHandler"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.quests",
+      "name": "Quests",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgQuestData*",
+        "DFGameServer/Game/MsgServer/MsgQuestList*",
+        "DFGameServer/Database/QuestInfo.cs",
+        "DFGameServer/Database/RoleQuests.cs"
+      ],
+      "dbFiles": [
+        "Questinfo.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.QuestInfo",
+        "GameServer.Database.RoleQuests",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgQuestList"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.communication",
+      "name": "Chat, broadcast, mensagens, GUI",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgMessage*",
+        "DFGameServer/Game/MsgServer/MsgBroadcast*",
+        "DFGameServer/Game/MsgServer/MsgStaticMessage*",
+        "DFGameServer/Game/MsgServer/MsgPopupInfo*",
+        "DFGameServer/Game/MsgServer/MsgStringPacket*",
+        "DFGameServer/Game/MsgServer/MsgGameUpdate*",
+        "DFGameServer/Game/MsgServer/MsgDataPacket*",
+        "DFGameServer/Game/MsgServer/Gui/**",
+        "DFGameServer/Game/MsgTournaments/MsgBroadcast.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.ActionQuery",
+        "GameServer.Game.MsgServer.ActionType",
+        "GameServer.Game.MsgServer.CustomCommands",
+        "GameServer.Game.MsgServer.DialogCommands",
+        "GameServer.Game.MsgServer.MsgBroadcast",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgDataPacket",
+        "GameServer.Game.MsgServer.MsgGameUpdate",
+        "GameServer.Game.MsgServer.MsgMessage",
+        "GameServer.Game.MsgServer.MsgPopupInfo",
+        "GameServer.Game.MsgServer.MsgStaticMessage",
+        "GameServer.Game.MsgServer.MsgStringPacket",
+        "GameServer.Game.MsgTournaments.MsgBroadcast"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.team",
+      "name": "Equipe / lider",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgTeam*",
+        "DFGameServer/Game/MsgServer/TeamPk/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgTeam",
+        "GameServer.Game.MsgServer.MsgTeamElitePKBrackets",
+        "GameServer.Game.MsgServer.MsgTeamElitePKMatchUI",
+        "GameServer.Game.MsgServer.MsgTeamElitePkRanking",
+        "GameServer.Game.MsgServer.MsgTeamEliteSetTeamName",
+        "GameServer.Game.MsgServer.MsgTeamLeadership",
+        "GameServer.Game.MsgServer.MsgTeamMemberInfo",
+        "GameServer.Game.MsgServer.TeamLeadership",
+        "GameServer.Game.MsgServer.TeamMemberInfo"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.trade",
+      "name": "Troca e barracas",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgTrade.cs",
+        "DFGameServer/Game/MsgServer/MsgTrade/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgTrade"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.friends",
+      "name": "Amigos / conhecidos",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgKnowPersons*",
+        "DFGameServer/Game/MsgServer/MsgKnownPersonInfo*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgKnowPersons"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.guild",
+      "name": "Guild",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgGuild*",
+        "DFGameServer/Database/GuildTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.GuildTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgGuildArsenalInfo",
+        "GameServer.Game.MsgServer.MsgGuildArsenalList",
+        "GameServer.Game.MsgServer.MsgGuildFastArsenal",
+        "GameServer.Game.MsgServer.MsgGuildInformation",
+        "GameServer.Game.MsgServer.MsgGuildMembers",
+        "GameServer.Game.MsgServer.MsgGuildMinDonations",
+        "GameServer.Game.MsgServer.MsgGuildProces",
+        "GameServer.Game.MsgServer.MsgGuildProfile",
+        "GameServer.Game.MsgServer.MsgGuildRanks"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.clan",
+      "name": "Clan / familia",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgClan.cs",
+        "DFGameServer/Game/MsgServer/MsgFamilyOccupy*",
+        "DFGameServer/Database/ClanTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "Clan existia na era 5017, mas conferir funcoes de FamilyOccupy",
+      "types": [
+        "GameServer.Database.ClanTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgClan",
+        "GameServer.Game.MsgServer.MsgFamilyOccupy"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.mentor",
+      "name": "Mentor / aprendiz",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgMentorApprentice*",
+        "DFGameServer/Game/MsgServer/MsgApprenticeInformation*",
+        "DFGameServer/Database/TutorInfo.cs"
+      ],
+      "dbFiles": [
+        "cq_tutor_type.txt",
+        "cq_tutor_battle_limit_type.txt"
+      ],
+      "note": "Ja existe toggle EnabledMentor no config",
+      "types": [
+        "GameServer.Database.TutorInfo",
+        "GameServer.Game.MsgServer.MsgApprenticeInformation",
+        "GameServer.Game.MsgServer.MsgMentorApprentice"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.flowers",
+      "name": "Flores",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgFlower*",
+        "DFGameServer/Database/FlowersTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.FlowersTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgFlower"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.nobility",
+      "name": "Nobreza",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/DaysNobility.cs",
+        "DFGameServer/Game/MsgServer/MsgNobility*",
+        "DFGameServer/Database/NobilityTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.NobilityTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgNobility",
+        "GameServer.Role.Instance.DaysNobility"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.ranking",
+      "name": "Rankings",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgGenericRanking*",
+        "DFGameServer/Game/MsgServer/MsgCountryFlag*",
+        "DFGameServer/Role/KOBoard.cs"
+      ],
+      "dbFiles": [
+        "KOBoardRanks.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgGenericRanking",
+        "GameServer.Role.KOBoard"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "social.houses",
+      "name": "Casas",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Database/HouseTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.HouseTable"
+      ],
+      "npcs": [
+        "HouseAdmin",
+        "Class6House"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "progression.reborn",
+      "name": "Reencarnacao",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgReincarnation*",
+        "DFGameServer/Database/RebornInfomations.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.RebornInfomations",
+        "GameServer.Game.MsgServer.MsgReincarnation"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "progression.enlight",
+      "name": "Enlight",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgEnlight*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgEnlight"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "progression.subclass",
+      "name": "SubClass (subprofissao)",
+      "origin": "Posterior",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgSubClass*",
+        "DFGameServer/Database/SubProfessionInfo.cs"
+      ],
+      "dbFiles": [
+        "SubProfessionInfo.ini"
+      ],
+      "note": "Ja existe toggle EnabledSubclass no config",
+      "types": [
+        "GameServer.Database.SubProfessionInfo",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgSubClass"
+      ],
+      "npcs": [
+        "Sage",
+        "Warlock",
+        "MartialArtist",
+        "ApothecarySubClass",
+        "Performer",
+        "SubClassManager"
+      ],
+      "items": [
+        723342,
+        723094,
+        720774,
+        720775
+      ],
+      "quests": []
+    },
+    {
+      "id": "progression.chi",
+      "name": "Chi",
+      "origin": "Posterior",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgChiInfo*",
+        "DFGameServer/Database/ChiTable.cs"
+      ],
+      "dbFiles": [],
+      "note": "Ja existe toggle EnabledChi no config",
+      "types": [
+        "GameServer.Database.ChiTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgChiInfo"
+      ],
+      "npcs": [
+        "ChiMaster",
+        "ChiToken"
+      ],
+      "items": [
+        729304,
+        729476,
+        729477,
+        729478,
+        729479,
+        729572,
+        729659,
+        729660
+      ],
+      "quests": []
+    },
+    {
+      "id": "progression.achievements",
+      "name": "Conquistas",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgAchievement*",
+        "DFGameServer/Database/AchievementCollection.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.AchievementCollection",
+        "GameServer.Game.MsgServer.Achievement",
+        "GameServer.Game.MsgServer.ClientAchievement"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "progression.titles",
+      "name": "Titulos",
+      "origin": "Posterior",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgTitle*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgTitle"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "progression.transform",
+      "name": "Transformacao / fairy",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgTransformFairy*",
+        "DFGameServer/Database/Tranformation.cs"
+      ],
+      "dbFiles": [
+        "TransformInfo.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.Tranformation",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgTransformFairy"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.vip",
+      "name": "VIP",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgVipHandler*",
+        "DFGameServer/Game/MsgServer/MsgVipStatus*",
+        "DFGameServer/Database/ShareVIP.cs"
+      ],
+      "dbFiles": [
+        "Share.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.ShareVIP",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgVipHandler",
+        "GameServer.Game.MsgServer.MsgVipStatus"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.osshop",
+      "name": "Loja OsShop",
+      "origin": "Custom",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgOsShop*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgOsShop"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.advertise",
+      "name": "Anuncios (Advertise)",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgAdvertise*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgAdvertise",
+        "GameServer.Game.MsgServer.MsgAdvertiseGui",
+        "GameServer.Game.MsgServer.MsgAdvertiseOpenGui",
+        "GameServer.Game.MsgServer.MsgBuilder"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.lottery",
+      "name": "Loteria",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Database/Lottery.cs",
+        "DFGameServer/LotteryTable.cs",
+        "DFGameServer/MsgLottery.cs"
+      ],
+      "dbFiles": [
+        "lottery.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.Lottery",
+        "GameServer.Database.LotteryTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgLottery"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.mining",
+      "name": "Mineracao",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Base/Mining/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Base.Mining.Process"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.poker",
+      "name": "Poker",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Base/Poker/**",
+        "DFGameServer/Base/PokerHandler.cs"
+      ],
+      "dbFiles": [
+        "PokerTables.ini",
+        "PokerTables.txt"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.PokerHandler",
+        "HoldemHand.Hand",
+        "Poker.Database",
+        "Poker.Enums",
+        "Poker.Packets.General",
+        "Poker.Packets.MsgShowHandCallAction",
+        "Poker.Packets.MsgShowHandEnter",
+        "Poker.Packets.MsgShowHandExit",
+        "Poker.Packets.MsgTexasInteractive",
+        "Poker.Packets.Packet",
+        "Poker.Ranks",
+        "Poker.Structures.PokerStructs",
+        "Poker.Structures.PokerTable"
+      ],
+      "npcs": [
+        "PokerMillionaireLee",
+        "PokerMillinaireLee",
+        "PokerCasinoHostess",
+        "PokerWarehouseman",
+        "PokerCpsCasino",
+        "WHPoker"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.memoryagate",
+      "name": "Memory Agate / claim",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgMemoryAgate*",
+        "DFGameServer/Game/MsgServer/MsgClaim*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.AgateEx",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgClaim",
+        "GameServer.Game.MsgServer.MsgMemoryAgate"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.surprisebox",
+      "name": "Surprise Box",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/SurpriseBox*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.SurpriseBox"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.arena",
+      "name": "Arena (1v1)",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/Arena/**",
+        "DFGameServer/Game/MsgServer/Arena Gui/MsgArena*",
+        "DFGameServer/Game/MsgTournaments/MsgArena.cs",
+        "DFGameServer/Database/ArenaTable.cs"
+      ],
+      "dbFiles": [
+        "Arena.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.ArenaTable",
+        "GameServer.Game.MsgServer.MsgArenaInfo",
+        "GameServer.Game.MsgServer.MsgArenaMatches",
+        "GameServer.Game.MsgServer.MsgArenaRank10",
+        "GameServer.Game.MsgServer.MsgArenaRanking",
+        "GameServer.Game.MsgServer.MsgArenaSignup",
+        "GameServer.Game.MsgServer.MsgArenaWatchers",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgTournaments.MsgArena"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.teamarena",
+      "name": "Team Arena",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/Arena Gui/MsgTeamArena*",
+        "DFGameServer/Game/MsgTournaments/MsgTeamArena.cs",
+        "DFGameServer/Database/TeamArenaTable.cs"
+      ],
+      "dbFiles": [
+        "TeamArena.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Database.TeamArenaTable",
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgTeamArenaInfo",
+        "GameServer.Game.MsgServer.MsgTeamArenaInfoPlayers",
+        "GameServer.Game.MsgServer.MsgTeamArenaMatches",
+        "GameServer.Game.MsgServer.MsgTeamArenaRank10",
+        "GameServer.Game.MsgServer.MsgTeamArenaRanking",
+        "GameServer.Game.MsgServer.MsgTeamArenaSignup",
+        "GameServer.Game.MsgTournaments.MsgTeamArena"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.elitepk",
+      "name": "Elite PK",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/ElitePk/**",
+        "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgElite*",
+        "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgTeamElite*"
+      ],
+      "dbFiles": [
+        "Elite.ini",
+        "ElitePk.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgElitePKBrackets",
+        "GameServer.Game.MsgServer.MsgElitePKMatchUI",
+        "GameServer.Game.MsgServer.MsgElitePkRanking",
+        "GameServer.Game.MsgTournaments.MsgEliteGroup",
+        "GameServer.Game.MsgTournaments.MsgEliteTournament",
+        "GameServer.Game.MsgTournaments.MsgTeamEliteGroup"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.guildwar",
+      "name": "Guild War",
+      "origin": "Original5017",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgGuildWar.cs"
+      ],
+      "dbFiles": [
+        "GuildWarInfo.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgGuildWar"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.eliteguildwar",
+      "name": "Elite Guild War",
+      "origin": "Posterior",
+      "confidence": "medium",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgEliteGuildWar.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgEliteGuildWar"
+      ],
+      "npcs": [
+        "EliteGuildOfficer"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.citywar",
+      "name": "City War",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/CityWars.cs"
+      ],
+      "dbFiles": [
+        "CityWar.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.CityWars"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.clanwar",
+      "name": "Clan War (classica e nova)",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgClanWar.cs",
+        "DFGameServer/Game/MsgTournaments/MsgClassicClanWar.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgClanWar",
+        "GameServer.Game.MsgTournaments.MsgClassicClanWar"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.classpkwar",
+      "name": "Class PK War",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgClassPKWar.cs"
+      ],
+      "dbFiles": [
+        "ClassPkWar.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgClassPKWar"
+      ],
+      "npcs": [
+        "ClassPkEnvoy",
+        "ClassPkWar"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.pkwar",
+      "name": "PK War",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgPkWar.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgPkWar"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.poledomination",
+      "name": "Pole Domination",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgPoleDomination*"
+      ],
+      "dbFiles": [
+        "GuildWarMap.bmp"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.Coordinate",
+        "GameServer.Game.MsgTournaments.CoordinateBI",
+        "GameServer.Game.MsgTournaments.MsgPoleDomination",
+        "GameServer.Game.MsgTournaments.MsgPoleDominationBI",
+        "GameServer.Game.MsgTournaments.MsgPoleDominationDC",
+        "GameServer.Game.MsgTournaments.MsgPoleDominationPC"
+      ],
+      "npcs": [
+        "PoleDominationAC",
+        "PoleDominationBI",
+        "PoleDominationDC",
+        "PoleDominationPC"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.ctf",
+      "name": "Capture the Flag",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgCaptureTheFlag.cs",
+        "DFGameServer/Game/MsgServer/Arena Gui/MsgCaptureTheFlag*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgCaptureTheFlagRankings",
+        "GameServer.Game.MsgServer.MsgCaptureTheFlagUpdate",
+        "GameServer.Game.MsgTournaments.MsgCaptureTheFlag"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.fortress",
+      "name": "Fortress Wars",
+      "origin": "Posterior",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/FortressWars.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgFortressWar"
+      ],
+      "npcs": [
+        "FortesWar"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.quizshow",
+      "name": "Quiz Show",
+      "origin": "Original5017",
+      "confidence": "medium",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgQuizShow.cs",
+        "DFGameServer/Database/QuizShow.cs",
+        "DFGameServer/Game/MsgServer/MsgQuizShow*"
+      ],
+      "dbFiles": [
+        "quizquestins.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgQuizShow"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.skilltournament",
+      "name": "Skill Tournament / Skill Team PK",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgSkillTournament.cs",
+        "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs",
+        "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgTeamPkTournament.cs"
+      ],
+      "dbFiles": [
+        "SkillTeamPK.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgSkillTeamPkTournament",
+        "GameServer.Game.MsgTournaments.MsgSkillTournament",
+        "GameServer.Game.MsgTournaments.MsgTeamPkTournament"
+      ],
+      "npcs": [
+        "SkillTournament",
+        "SkillTeamPkManager"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.couples",
+      "name": "Couples PK",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgCouples.cs"
+      ],
+      "dbFiles": [
+        "CouplesPK.ini"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.MsgCouples"
+      ],
+      "npcs": [
+        "CouplesPK"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.demonexterminator",
+      "name": "Demon Exterminator",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Database/InfoDemonExterminators.cs"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Database.InfoDemonExterminators"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.race",
+      "name": "Race (corrida)",
+      "origin": "Original5017",
+      "confidence": "low",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgRacePotion*",
+        "DFGameServer/Game/MsgServer/MsgRaceRecord*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgRacePotion"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.custom-minigames",
+      "name": "Minigames customizados",
+      "origin": "Custom",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/MsgLastManStand.cs",
+        "DFGameServer/Game/MsgTournaments/KingOfTheHill.cs",
+        "DFGameServer/Game/MsgTournaments/PassTheBomb.cs",
+        "DFGameServer/Game/MsgTournaments/Fivenout.cs",
+        "DFGameServer/Game/MsgTournaments/FrozenSky.cs",
+        "DFGameServer/Game/MsgTournaments/KillerSystem.cs",
+        "DFGameServer/Game/MsgTournaments/MsgTopFight.cs",
+        "DFGameServer/Game/MsgTournaments/MsgTreasureThief.cs",
+        "DFGameServer/Game/MsgEvents/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.DragonWar",
+        "GameServer.Game.MsgTournaments.Fivenout",
+        "GameServer.Game.MsgTournaments.FrozenSky",
+        "GameServer.Game.MsgTournaments.MsgKingOfTheHill",
+        "GameServer.Game.MsgTournaments.MsgLastManStand",
+        "GameServer.Game.MsgTournaments.MsgTopFight",
+        "GameServer.Game.MsgTournaments.MsgTreasureThief",
+        "GameServer.Game.MsgTournaments.PassTheBomb"
+      ],
+      "npcs": [
+        "PassTheBomb",
+        "FiveNOut",
+        "FrozenSky",
+        "KingOfTheHill",
+        "TreasureThief",
+        "LastManStand",
+        "DragonWar",
+        "TeamDeathMatch",
+        "HideNSeek",
+        "KillTheCaptain",
+        "FreezeWar",
+        "Football",
+        "KillerOfElite",
+        "ExtremePk"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.framework",
+      "name": "Framework de torneios",
+      "origin": "Base",
+      "confidence": "high",
+      "decision": "keep",
+      "paths": [
+        "DFGameServer/Game/MsgTournaments/ITournament.cs",
+        "DFGameServer/Game/MsgTournaments/OfficialTournaments.cs",
+        "DFGameServer/Game/MsgTournaments/ProcesType.cs",
+        "DFGameServer/Game/MsgTournaments/TournamentType.cs",
+        "DFGameServer/Game/MsgTournaments/MsgNone.cs",
+        "DFGameServer/Game/MsgTournaments/MsgCheckLine.cs"
+      ],
+      "dbFiles": [
+        "ClanWar/**"
+      ],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgTournaments.ITournament",
+        "GameServer.Game.MsgTournaments.MsgCheckLine",
+        "GameServer.Game.MsgTournaments.ProcesType",
+        "GameServer.Game.MsgTournaments.TournamentType"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "extras.interserver",
+      "name": "InterServer (multi-servidor)",
+      "origin": "Custom",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgInterServer/**",
+        "DFGameServer/Game/MsgServer/MsgInterServerIdentifier*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.MsgInterServer.Instance.Guilds",
+        "GameServer.MsgInterServer.PacketTypes",
+        "GameServer.MsgInterServer.Packets.AchievementInfo",
+        "GameServer.MsgInterServer.Packets.ChiInfo",
+        "GameServer.MsgInterServer.Packets.ConnectionInfo",
+        "GameServer.MsgInterServer.PipeClient",
+        "GameServer.MsgInterServer.PipeServer"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "extras.autohunting",
+      "name": "Auto Hunting",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/AutoHunting/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.AutoHunting",
+        "GameServer.Catching"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "extras.bot",
+      "name": "Bots / IA",
+      "origin": "Custom",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/Bot/**"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Bot.AI",
+        "GameServer.Bot.Dynamic",
+        "GameServer.Bot.Equipment",
+        "GameServer.Bot.EquipmentType"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "extras.offlinetg",
+      "name": "Offline Training Ground",
+      "origin": "Posterior",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgOfflineTG*"
+      ],
+      "dbFiles": [],
+      "note": "",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgOfflineTG"
+      ],
+      "npcs": [
+        "OflineTGNpc"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "extras.machine",
+      "name": "Slot Machine (cassino)",
+      "origin": "Verify",
+      "confidence": "low",
+      "decision": "review",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgMachine*",
+        "DFGameServer/Role/Instance/SlotMachine.cs"
+      ],
+      "dbFiles": [],
+      "note": "Corrigido: MsgMachine e o caca-niqueis (SlotMachine), nao anti-cheat",
+      "types": [
+        "GameServer.Game.MsgServer.MsgBuilder",
+        "GameServer.Game.MsgServer.MsgMachine"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+Commands Source COServer 5693 (ShadowConquer)
+/cps 99999
+/level 140
+/money 99999
+/reborns 2
+/item id plus bless enchant socketone sockettwo
+/ban charactername
+/banip IP
+/kick
+/rev (Revive the character)
+/online (Show online players quantity)
+/vip charactername 6 (Vip 30 days more)
+/scroll tc (Teleport to TwinCity) [tc/tc/pc/ac/am/dc/bi/pka/ma/ja]
+/bring todos (Teleport all players to your location)
+/life (HP And MP 100%)

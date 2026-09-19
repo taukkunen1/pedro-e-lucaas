@@ -1,0 +1,10 @@
+<Project>
+  <!-- Loader/Hook (cliente, projetos legados que definem OutputPath por conta propria) vao para a raiz do Placebo -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'TrinityConquerLoader' Or '$(MSBuildProjectName)' == 'ConquerHook'">
+    <OutDir>$(PlaceboDir)\</OutDir>
+  </PropertyGroup>
+  <!-- Embute o caminho da Database no Core.dll (usado por DatabasePaths) -->
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'Core'">
+    <AssemblyMetadata Include="DatabaseDir" Value="$(DatabaseDir)" />
+  </ItemGroup>
+</Project>

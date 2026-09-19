@@ -1,0 +1,36 @@
+﻿@model ConquerSite.Models.DTOs.DowloadsSettings
+
+@{
+    ViewData["Title"] = "Downloads";
+}
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <h1>@ViewData["Title"]</h1>
+            <hr />
+            <div class="text-center my-3" id="download-client">
+                <div class="container padding-top-2x padding-bottom-5x mb-2">
+                    <h3 class="text-center mb-30">Game Client Download</h3>
+                    <div class="row padding-bottom-1x">
+                        <div class="col-md-6 offset-md-3">
+                            <p>You can download and install Classic Conquer using the following download link. Once downloaded, simply install and run the game from the new desktop shortcut.</p>
+                            <p>Client Patch Number: @Model.GetLastPatch()</p>
+                            <div class="text-center">
+                                @if (Model.GetClientMegaUrl() != null && Model.GetClientMegaUrl().Length > 0)
+                                {
+                                   <a class="market-button windows-button" href="@Model.GetClientMegaUrl()"><span class="mb-subtitle">Download for</span><span class="mb-title">Windows</span><small>(MEGA)</small></a>
+                                }
+                                @if (Model.GetClientMediafireUrl() != null && Model.GetClientMediafireUrl().Length > 0)
+                                {
+                                    <a class="market-button windows-button" href="@Model.GetClientMediafireUrl()"><span class="mb-subtitle">Download for</span><span class="mb-title">Windows</span><small>(Mediafire)</small></a>
+                                }
+                            </div>
+                            <a href="https://mega.nz/file/g4hygToJ#7IBMsVGzIOpra4uL3v-On19ca16f2Jh9wvbFk14nRfM" target="_blank" style="color:darkred;">If have problems with flash install this!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

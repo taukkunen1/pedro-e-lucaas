@@ -1,0 +1,106 @@
+name: CI/CD
+
+# develop  -> ambiente de DESENVOLVIMENTO (build Debug, artefato "dev")
+# main/tag -> ambiente de PRODUCAO       (build Release, artefato "prod" + GitHub Release nas tags v*)
+# Sem VPS por enquanto: producao = uso local (pasta Placebo) + release no GitHub
+on:
+  push:
+    branches: [develop, main]
+    tags: ['v*']
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Ambiente'
+        type: choice
+        options: [development, production]
+        default: development
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.env.outputs.environment }}
+      configuration: ${{ steps.env.outputs.configuration }}
+    steps:
+      - id: env
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            ENVIRONMENT="${{ inputs.environment }}"
+          elif [[ "${{ github.ref }}" == "refs/heads/main" || "${{ github.ref }}" == refs/tags/v* ]]; then
+            ENVIRONMENT="production"
+          else
+            ENVIRONMENT="development"
+          fi
+          if [[ "$ENVIRONMENT" == "production" ]]; then CONFIG="Release"; else CONFIG="Debug"; fi
+          echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
+          echo "configuration=$CONFIG" >> "$GITHUB_OUTPUT"
+          echo "Ambiente: $ENVIRONMENT ($CONFIG)"
+
+  build:
+    needs: setup
+    runs-on: windows-latest
+    env:
+      ASPNETCORE_ENVIRONMENT: ${{ needs.setup.outputs.environment == 'production' && 'Production' || 'Development' }}
+      # Directory.Build.props usa PLACEBO_DIR; no CI a saida vai para uma pasta temporaria
+      PLACEBO_DIR: ${{ runner.temp }}\Placebo
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        shell: pwsh
+        run: |
+          foreach ($p in 'DFAccountServer/AccountServer.csproj','DFGameServer/GameServer.csproj','DFAPI/API.csproj') {
+            dotnet restore "COServer/$p"
+          }
+
+      - name: Build + Publish (${{ needs.setup.outputs.configuration }})
+        shell: pwsh
+        run: |
+          $cfg = "${{ needs.setup.outputs.configuration }}"
+          $out = Join-Path $env:RUNNER_TEMP 'publish'
+          foreach ($p in @(
+            @('DFAccountServer/AccountServer.csproj','AccountServer'),
+            @('DFGameServer/GameServer.csproj','GameServer'),
+            @('DFAPI/API.csproj','API'))) {
+            dotnet publish "COServer/$($p[0])" -c $cfg --no-restore -o "$out\$($p[1])" -p:OutDir="$out\obj-$($p[1])\"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          # Producao NAO leva a Database (dados de jogadores ficam so no servidor)
+          if ("${{ needs.setup.outputs.environment }}" -eq "development") {
+            Copy-Item "COServer/Database5700" "$out\Database5700" -Recurse
+          }
+          Get-ChildItem $out -Directory -Filter 'obj-*' | Remove-Item -Recurse -Force
+
+      - name: Compactar
+        shell: pwsh
+        run: |
+          $name = "TrinityConquer-${{ needs.setup.outputs.environment }}-${{ github.sha }}.zip"
+          Compress-Archive -Path "$env:RUNNER_TEMP\publish\*" -DestinationPath $name
+          "ZIP_NAME=$name" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.setup.outputs.environment == 'production' && 'prod' || 'dev' }}
+          path: ${{ env.ZIP_NAME }}
+          retention-days: ${{ needs.setup.outputs.environment == 'production' && 90 || 7 }}
+
+      - name: GitHub Release (somente tags v*)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+          generate_release_notes: true

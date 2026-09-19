@@ -1,0 +1,46 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <h1>@ViewData["Title"]</h1>
+            <p>Register now your account.</p>
+            <form asp-action="RegisterPost">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Username)
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Input Username" })
+                    <small id="Username" class="form-text text-muted">We'll never share your username with anyone else.</small>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Input password" })
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Email)
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Input email" })
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create account</button>
+            </form>
+            @if (ViewBag.Message != null)
+            {
+                @foreach (Message msg in ViewBag.Message)
+                {
+                    <div class="alert alert-@msg.Type.ToString().ToLower() mt-5" role="alert">
+                        @msg.Text
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
