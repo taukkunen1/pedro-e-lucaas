@@ -160,7 +160,7 @@ namespace GameServer.Game.MsgServer
         public static bool ExitClass(byte cls)
         {
             return (cls == 10 || cls == 20 || cls == 40
-                || cls == 50 || cls == 60 || cls == 70 || cls == 100);
+                || cls == 100);
         }
     }
 }
