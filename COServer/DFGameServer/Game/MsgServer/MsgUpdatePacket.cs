@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace GameServer.Game.MsgServer
 {
@@ -7,12 +7,14 @@ namespace GameServer.Game.MsgServer
 
         public static void GetUpdatePacket(this ServerSockets.Packet stream, out MsgUpdate.DataType ID, out ulong Value)
         {
-            stream.Seek(sizeof(uint));
+            // 10017: +0x04 UID, +0x08 count, then 24-byte update records.
+            // Callers normally enter with Position == 4, but seek explicitly so
+            // inter-server forwarding cannot accidentally skip the UID.
+            stream.Seek(4);
             uint uid = stream.ReadUInt32();
             uint count = stream.ReadUInt32();
             ID = (MsgUpdate.DataType)stream.ReadUInt32();
             Value = stream.ReadUInt64();
-
         }
     }
 
