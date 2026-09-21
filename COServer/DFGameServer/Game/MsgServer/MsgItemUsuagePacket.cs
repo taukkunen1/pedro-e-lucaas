@@ -64,10 +64,9 @@ namespace GameServer.Game.MsgServer
 
         public static void GetUsageItem(this ServerSockets.Packet msg, out ItemUsageID action, out uint id, out ulong dwParam, out uint timestamp, out uint dwParam2, out uint dwParam3, out uint dwparam4, out List<uint> args)
         {
-            //MyConsole.PrintPacketAdvanced(msg.Memory);
-            //uint timer = msg.ReadUInt32();//4
-            msg.Seek(48);
-            //byte _LoaderMessage = msg.ReadUInt8();
+            msg.Seek(0);
+            ushort declaredLength = msg.ReadUInt16();
+
             msg.Seek(4);
             id = msg.ReadUInt32();//8
             dwParam = msg.ReadUInt32();//12
@@ -77,19 +76,18 @@ namespace GameServer.Game.MsgServer
             dwParam3 = msg.ReadUInt32();//26
             dwparam4 = msg.ReadUInt32();
 
-
-            msg.SeekForward(12 * sizeof(int));
-
-
             args = new List<uint>();
 
             if (dwParam2 > 0 && dwParam2 < 50)
             {
-
-                msg.SeekForward(4);
-                for (int i = 0; i < dwParam2; i++)
+                uint requiredLength = 0x58u + (dwParam2 * sizeof(uint));
+                if (declaredLength >= requiredLength)
                 {
-                    args.Add(msg.ReadUInt32());
+                    msg.Seek(0x54);
+                    for (int i = 0; i < dwParam2; i++)
+                    {
+                        args.Add(msg.ReadUInt32());
+                    }
                 }
             }
         }
@@ -111,14 +109,14 @@ namespace GameServer.Game.MsgServer
             msg.Write(dwParam3);//24
             msg.Write(dwparam4);// 28
 
-            msg.SeekForward(12 * sizeof(int));
-            // msg.SeekForward(sizeof(int));
+            msg.SeekForward(13 * sizeof(int));
 
             if (args != null)
             {
                 foreach (int arg in args)
                     msg.Write(arg);
             }
+            msg.Write(0u);
             msg.Finalize(GamePackets.Usage);
 
 

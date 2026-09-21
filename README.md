@@ -7,7 +7,7 @@ Este repositório é a base compartilhada para desenvolvimento do servidor. O ob
 ## Estado atual do projeto
 
 - MySQL foi removido do fluxo ativo.
-- MongoDB 7 é usado para contas/autenticação.
+- JSON local é usado para contas/autenticação.
 - O GameServer continua usando arquivos em `COServer/Database5700`.
 - API, AccountServer e GameServer compilam para `C:\Users\hecto\OneDrive\Desktop\Placebo`.
 - Telemetria de economia está ativa para CPs, Bound CPs e Gold.
@@ -17,27 +17,13 @@ Este repositório é a base compartilhada para desenvolvimento do servidor. O ob
 ## Como rodar localmente
 
 1. Instale o .NET 10 SDK.
-2. Instale Docker Desktop ou MongoDB 7.
-3. Crie um arquivo `.env` local com:
-
-```env
-MONGO_USER=seu_usuario
-MONGO_PASSWORD=sua_senha
-```
-
-4. Suba o MongoDB:
-
-```powershell
-docker compose up -d
-```
-
-5. Compile a solução:
+2. Compile a solução:
 
 ```powershell
 dotnet build .\COServer\TrinityConquerServer.sln
 ```
 
-6. Inicie os serviços gerados na pasta Placebo:
+3. Inicie os serviços gerados na pasta Placebo:
 
 ```powershell
 cd "C:\Users\hecto\OneDrive\Desktop\Placebo\API"
@@ -55,7 +41,7 @@ Portas esperadas:
 - API: `8080`
 - AccountServer: `9958`
 - GameServer: `5816`
-- MongoDB: `27017`
+- Autenticação JSON local: `API\AuthJson\*.json`
 
 ## Modo DEV e producao
 
@@ -169,11 +155,11 @@ Can get last patches from COServer\ConquerSite\wwwroot\patches (Contain fixes fo
 If you have purchased the source from official distributors can access to the repository and have all the future updates for free
 
 ## Easy configuration
-1 - Install MongoDB 7 (enable authentication and create a user, or run `docker compose up -d` with a `.env` containing MONGO_USER and MONGO_PASSWORD). MySQL is no longer used. Passwords are stored as PBKDF2 hashes.
+1 - MongoDB/MySQL are no longer used for auth. Accounts, server registry, votes, online counts and configurations are stored as local JSON under the API output folder. Passwords are stored as PBKDF2 hashes.
 
 2 - Compile the project (No run yet)
 
-3 - Start the API once: it asks for the MongoDB host/port/database/user, creates the indexes and registers the server. Existing MySQL accounts can be imported with `python tools/migrate_mysql_to_mongo.py` (dry-run by default, `--apply` to write).
+3 - Start the API once: it creates the local JSON auth store and registers the server.
 
 4 - BadMsg.txt now lives inside the Database folder (COServer\Database5700) - nothing to copy. Builds always go to the Placebo folder (see Directory.Build.props).
 
@@ -210,7 +196,6 @@ If you have purchased the source from official distributors can access to the re
 - Statue System (Not working good if you use Statue Guild, maybe is a client issue)
 
 ## Requeriments
-- MongoDB 7
 - .NET 10 SDK
 
 ## Enabling Slot Machines (Default not added in NPCs)

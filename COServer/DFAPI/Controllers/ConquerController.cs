@@ -7,7 +7,6 @@ using Core.Models.GameServer;
 using Core.Models.SharedConfig;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 
 namespace API.Controllers
 {
@@ -16,14 +15,14 @@ namespace API.Controllers
     public class ConquerController : ControllerBase
     {
         private readonly ILogger<ConquerController> _logger;
-        private readonly AuthMongo _Auth;
+        private readonly JsonAuthStore _Auth;
         private readonly GameDbContext _GameDbContext;
         private readonly IMapper _mapper;
 
-        public ConquerController(ILogger<ConquerController> logger, AuthMongo authMongo, GameDbContext gameDbContext, IMapper mapper)
+        public ConquerController(ILogger<ConquerController> logger, JsonAuthStore authStore, GameDbContext gameDbContext, IMapper mapper)
         {
             _logger = logger;
-            _Auth = authMongo;
+            _Auth = authStore;
             _GameDbContext = gameDbContext;
             _mapper = mapper;
         }
@@ -39,19 +38,19 @@ namespace API.Controllers
         [HttpGet("Accounts")]
         public async Task<List<Account>> GetAccounts()
         {
-            return (await _Auth.Accounts.Find(_ => true).ToListAsync()).Select(Sanitize).ToList();
+            return (await _Auth.GetAccountsAsync()).Select(Sanitize).ToList();
         }
 
         [HttpGet("Account")]
         public async Task<Account> GetAccountByUsername(string Username)
         {
-            return Sanitize(await _Auth.Accounts.Find(x => x.Username == Username).FirstOrDefaultAsync());
+            return Sanitize(await _Auth.GetAccountByUsernameAsync(Username));
         }
 
         [HttpGet("AccountByUID")]
         public async Task<Account> GetAccountByUID(uint UID)
         {
-            return Sanitize(await _Auth.Accounts.Find(x => x.EntityID == UID).FirstOrDefaultAsync());
+            return Sanitize(await _Auth.GetAccountByUidAsync(UID));
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace API.Controllers
         public async Task<ActionResult<Account>> AccountLogin([FromBody] LoginRequest Login)
         {
             if (Login == null || string.IsNullOrEmpty(Login.Username) || Login.Password == null) return Unauthorized();
-            Account acc = await _Auth.Accounts.Find(x => x.Username == Login.Username).FirstOrDefaultAsync();
+            Account acc = await _Auth.GetAccountByUsernameAsync(Login.Username);
             if (acc == null)
             {
                 // gasta o mesmo tempo de um login real, para nao revelar se o usuario existe
@@ -71,7 +70,10 @@ namespace API.Controllers
             }
             if (!Core.Security.PasswordHasher.Verify(acc.Password, Login.Password, out bool needsUpgrade)) return Unauthorized();
             if (needsUpgrade)
-                await _Auth.Accounts.UpdateOneAsync(x => x.EntityID == acc.EntityID, Builders<Account>.Update.Set(x => x.Password, Core.Security.PasswordHasher.Hash(Login.Password)));
+            {
+                acc.Password = Core.Security.PasswordHasher.Hash(Login.Password);
+                await _Auth.SaveAccountAsync(acc, false);
+            }
             return Sanitize(acc);
         }
 
@@ -83,18 +85,16 @@ namespace API.Controllers
         public async Task<ActionResult<Account>> PostAccount([FromBody]Account Account)
         {
             if (Account == null || string.IsNullOrWhiteSpace(Account.Username)) return BadRequest();
-            Account acc = await _Auth.Accounts.Find(x => x.Username == Account.Username).FirstOrDefaultAsync();
+            Account acc = await _Auth.GetAccountByUsernameAsync(Account.Username);
             if (acc != null)
             {
-                await _Auth.Accounts.UpdateOneAsync(x => x.EntityID == acc.EntityID, Builders<Account>.Update.Set(x => x.IP, Account.IP).Set(x => x.State, Account.State));
-                return Ok(Sanitize(await _Auth.Accounts.Find(x => x.EntityID == acc.EntityID).FirstOrDefaultAsync()));
+                acc.IP = Account.IP;
+                acc.State = Account.State;
+                return Ok(Sanitize(await _Auth.SaveAccountAsync(acc, false)));
             }
             if (string.IsNullOrEmpty(Account.Password)) return BadRequest("Password required");
-            Account.EntityID = await _Auth.NextIdAsync("accounts", AuthMongo.FirstAccountId);
             Account.Password = Core.Security.PasswordHasher.Hash(Account.Password);
-            try { await _Auth.Accounts.InsertOneAsync(Account); }
-            catch (MongoDB.Driver.MongoWriteException ex) when (ex.WriteError.Category == MongoDB.Driver.ServerErrorCategory.DuplicateKey) { return Conflict(); }
-            return Ok(Sanitize(Account));
+            return Ok(Sanitize(await _Auth.SaveAccountAsync(Account, true)));
         }
 
         /// <summary>Troca de senha: exige a senha atual.</summary>
@@ -102,17 +102,17 @@ namespace API.Controllers
         public async Task<IActionResult> AccountChangePassword([FromBody] ChangePasswordRequest r)
         {
             if (r == null || string.IsNullOrEmpty(r.Username) || string.IsNullOrEmpty(r.NewPassword)) return BadRequest();
-            Account acc = await _Auth.Accounts.Find(x => x.Username == r.Username).FirstOrDefaultAsync();
+            Account acc = await _Auth.GetAccountByUsernameAsync(r.Username);
             if (acc == null || !Core.Security.PasswordHasher.Verify(acc.Password, r.OldPassword, out _)) return Unauthorized();
-            await _Auth.Accounts.UpdateOneAsync(x => x.EntityID == acc.EntityID, Builders<Account>.Update.Set(x => x.Password, Core.Security.PasswordHasher.Hash(r.NewPassword)));
+            acc.Password = Core.Security.PasswordHasher.Hash(r.NewPassword);
+            await _Auth.SaveAccountAsync(acc, false);
             return NoContent();
         }
 
         [HttpDelete("Account/Delete")]
         public async Task<IActionResult> DeleteAccount([FromBody] Account Account)
         {
-            var r = await _Auth.Accounts.DeleteOneAsync(x => x.Username == Account.Username);
-            return r.DeletedCount > 0 ? NoContent() : Forbid();
+            return await _Auth.DeleteAccountAsync(Account.Username) ? NoContent() : Forbid();
         }
         #endregion
 
@@ -120,30 +120,18 @@ namespace API.Controllers
         [HttpGet("Configurations")]
         public async Task<List<Configuration>> GetConfigurations()
         {
-            return await _Auth.Configurations.Find(_ => true).ToListAsync();
+            return await _Auth.GetConfigurationsAsync();
         }
         [HttpGet("Configuration")]
         public async Task<Configuration> GetConfiguration(string Key)
         {
-            return await _Auth.Configurations.Find(x => x.Key == Key).FirstOrDefaultAsync();
+            return await _Auth.GetConfigurationAsync(Key);
         }
 
         [HttpPost("Configuration")]
         public async Task<Configuration> PostConfiguration([FromBody] Configuration Configuration)
         {
-            Configuration c = await _Auth.Configurations.Find(x => x.Key == Configuration.Key).FirstOrDefaultAsync();
-            if (c != null)
-            {
-                c.Value = Configuration.Value;
-                await _Auth.Configurations.ReplaceOneAsync(x => x.Id == c.Id, c);
-            }
-            else
-            {
-                Configuration.Id = await _Auth.NextIdAsync("configurations");
-                await _Auth.Configurations.InsertOneAsync(Configuration);
-                c = Configuration;
-            }
-            return c;
+            return await _Auth.SaveConfigurationAsync(Configuration);
         }
         #endregion
 
@@ -1055,13 +1043,13 @@ namespace API.Controllers
         [HttpGet("Servers")]
         public async Task<List<Server>> GetServerByName()
         {
-            return await _Auth.Servers.Find(_ => true).ToListAsync();
+            return await _Auth.GetServersAsync();
         }
 
         [HttpGet("Server")]
         public async Task<Server> GetServerByName(string Name)
         {
-            return await _Auth.Servers.Find(x => x.Name == Name).FirstOrDefaultAsync();
+            return await _Auth.GetServerByNameAsync(Name);
         }
         #endregion
 
@@ -1070,24 +1058,13 @@ namespace API.Controllers
         [HttpGet("Votes/Get")]
         public async Task<Vote> GetVotesByUID(uint UID)
         {
-            return await _Auth.Votes.Find(x => x.EntityID == UID).FirstOrDefaultAsync();
+            return await _Auth.GetVoteByUidAsync(UID);
         }
 
         [HttpPost("Votes/Add")]
         public async Task<Vote> AddVoteByUID([FromBody]Core.Models.AddVote AddVote)
         {
-            Vote v = await GetVotesByUID(AddVote.UID);
-            if (v != null)
-            {
-                v.Votes++;
-                v.LastVoteDate = DateTime.Now;
-                await _Auth.Votes.ReplaceOneAsync(x => x.ID == v.ID, v);
-            } else
-            {
-                v = new Vote() { ID = await _Auth.NextIdAsync("votes"), EntityID = AddVote.UID, Votes = 1, LastVoteDate = DateTime.Now };
-                await _Auth.Votes.InsertOneAsync(v);
-            }
-            return v;
+            return await _Auth.AddVoteAsync(AddVote.UID);
         }
         /// <summary>
         /// Remove a vote.
@@ -1105,14 +1082,7 @@ namespace API.Controllers
         [HttpPost("Votes/Remove")]
         public async Task<Vote> RemoveVotesByUID([FromBody] RemoveVote RemoveVote)
         {
-            Vote v = await GetVotesByUID(RemoveVote.UID);
-            if (v != null)
-            {
-                v.Votes = v.Votes >= RemoveVote.VotesToRemove ? v.Votes - RemoveVote.VotesToRemove : 0;
-                v.LastVoteDate = DateTime.Now;
-                await _Auth.Votes.ReplaceOneAsync(x => x.ID == v.ID, v);
-            }
-            return v;
+            return await _Auth.RemoveVotesAsync(RemoveVote.UID, RemoveVote.VotesToRemove);
         }
         #endregion
 
@@ -1551,31 +1521,22 @@ namespace API.Controllers
         [HttpGet("GetOnlinePlayers")]
         public async Task<Online> GetOnlinePlayers(string Servername)
         {
-            return await _Auth.Onlines.Find(x => x.Name == Servername).FirstOrDefaultAsync();
+            return await _Auth.GetOnlineAsync(Servername);
         }
         [HttpPost("SetOnlinePlayers")]
         public async Task<Online> SetOnlinePlayers(Online Online)
         {
-            Online o = await _Auth.Onlines.Find(x => x.Name == Online.Name).FirstOrDefaultAsync();
-            if (o != null)
-            {
-                await _Auth.Onlines.UpdateOneAsync(x => x.Id == o.Id, Builders<Online>.Update.Set(x => x.OnlineCount, Online.OnlineCount));
-            } else
-            {
-                Online.Id = await _Auth.NextIdAsync("online");
-                await _Auth.Onlines.InsertOneAsync(Online);
-            }
-            return o;
+            return await _Auth.SaveOnlineAsync(Online);
         }
         [HttpGet("GetServerByName")]
         public async Task<Server> SetServerNameAsync(string serverName)
         {
-            return await _Auth.Servers.Find(x => x.Name == serverName).FirstOrDefaultAsync();
+            return await _Auth.GetServerByNameAsync(serverName);
         }
         [HttpPost("SetServerName")]
         public async Task SetServerNameAsync(SetServerName setServerName)
         {
-            await _Auth.Servers.UpdateOneAsync(x => x.Id == setServerName.ServerID, Builders<Server>.Update.Set(x => x.Name, setServerName.ServerName));
+            await _Auth.SetServerNameAsync(setServerName.ServerID, setServerName.ServerName);
         }
         [HttpGet("GetASConfig")]
         public async Task<AccountServerConfig> GetASConfig()

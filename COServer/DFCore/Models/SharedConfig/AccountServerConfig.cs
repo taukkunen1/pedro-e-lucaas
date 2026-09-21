@@ -7,7 +7,7 @@
         public string DatabaseUsername { get; set; }
         public string DatabasePassword { get; set; }
         public string DatabaseName { get; set; }
-        /// <summary>Banco onde o usuario do MongoDB foi criado (padrao "admin").</summary>
+        /// <summary>Origem de autenticacao legada. No fluxo atual, a API usa JSON local.</summary>
         public string DatabaseAuthSource { get; set; } = "admin";
         public string ServerName { get; set; } = "TrinityConquer";
 

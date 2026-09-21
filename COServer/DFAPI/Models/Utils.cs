@@ -1,7 +1,6 @@
-﻿using Core;
+using Core;
 using Core.Models.SharedConfig;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -42,41 +41,18 @@ namespace API.Models
                 {
                     aServConf.ServerName = ServerNameInput;
                 }
-                // Specify db hostname
-                Console.Write("Input your MongoDB Hostname[localhost]: ");
-                string dbHostname = Console.ReadLine();
-                aServConf.DatabaseHostname = dbHostname.Length > 0 ? dbHostname : "localhost";
-                // Specify db port
-                Console.Write("Input your MongoDB Port[27017]: ");
-                string dbPort = Console.ReadLine();
-                aServConf.DatabasePort = dbPort.Length > 0 ? uint.Parse(dbPort) : 27017;
-                // Specify db name
-                Console.Write("Input your MongoDB Database Name[cq_auth]: ");
-                string dbName = Console.ReadLine();
-                aServConf.DatabaseName = dbName.Length > 0 ? dbName : "cq_auth";
-                // Specify db username
-                Console.Write("Input your MongoDB Username[empty = no authentication]: ");
-                string dbUsername = Console.ReadLine();
-                aServConf.DatabaseUsername = dbUsername;
-                // Specify db password
-                Console.Write("Input your MongoDB Password: ");
-                string dbPassword = Console.ReadLine();
-                aServConf.DatabasePassword = dbPassword.Length > 0 ? dbPassword : "";
+                aServConf.DatabaseHostname = "";
+                aServConf.DatabasePort = 0;
+                aServConf.DatabaseName = "json";
+                aServConf.DatabaseUsername = "";
+                aServConf.DatabasePassword = "";
+                aServConf.DatabaseAuthSource = "";
                 try
                 {
-                    if (aServConf.DatabaseUsername.Length == 0)
-                        Console.WriteLine("WARNING: MongoDB without authentication. Create a user and enable 'security.authorization' before going public.");
-                    else
-                    {
-                        Console.Write("Input the MongoDB authentication database[admin]: ");
-                        string authSrc = Console.ReadLine();
-                        aServConf.DatabaseAuthSource = authSrc.Length > 0 ? authSrc : "admin";
-                    }
-                    // Check connection (Mongo creates the database on first write)
-                    var mongoCheck = new AuthMongo(aServConf);
-                    if (!mongoCheck.PingAsync().GetAwaiter().GetResult())
-                        throw new Exception("Cannot connect to MongoDB with the provided data.");
-                    mongoCheck.EnsureIndexesAsync().GetAwaiter().GetResult();
+                    var authStore = new JsonAuthStore();
+                    if (!authStore.PingAsync().GetAwaiter().GetResult())
+                        throw new Exception("Cannot initialize local JSON auth store.");
+                    authStore.EnsureIndexesAsync().GetAwaiter().GetResult();
                     configValid = true;
                 } catch(Exception ex)
                 {
@@ -188,17 +164,17 @@ namespace API.Models
                 try
                 {
                     configValid = true;
-                    var authMongo = new AuthMongo();
-                    var serverExisting = authMongo.Servers.Find(x => x.Name == gameServConf.ServerName).FirstOrDefault();
-                    if (serverExisting != null)
+                    var authStore = new JsonAuthStore();
+                    var serverExisting = authStore.GetServerByNameAsync(gameServConf.ServerName).GetAwaiter().GetResult();
+                    authStore.SaveServerAsync(new AccountServer.Server()
                     {
-                        authMongo.Servers.UpdateOne(x => x.Id == serverExisting.Id, MongoDB.Driver.Builders<AccountServer.Server>.Update
-                            .Set(x => x.IP, gameServConf.ServerIPAddres).Set(x => x.Port, gameServConf.ServerGamePort)
-                            .Set(x => x.TransferKey, GenerateRandomTransferKey()).Set(x => x.TransferSalt, GenerateRandomTransferKey()));
-                    } else
-                    {
-                        authMongo.Servers.InsertOne(new AccountServer.Server() { Id = authMongo.NextIdAsync("servers").GetAwaiter().GetResult(), Name = gameServConf.ServerName, IP = gameServConf.ServerIPAddres, Port = gameServConf.ServerGamePort, TransferKey = GenerateRandomTransferKey(), TransferSalt = GenerateRandomTransferKey() });
-                    }
+                        Id = serverExisting?.Id ?? 0,
+                        Name = gameServConf.ServerName,
+                        IP = gameServConf.ServerIPAddres,
+                        Port = gameServConf.ServerGamePort,
+                        TransferKey = GenerateRandomTransferKey(),
+                        TransferSalt = GenerateRandomTransferKey()
+                    }).GetAwaiter().GetResult();
                 }
                 catch (Exception ex)
                 {
@@ -270,3 +246,4 @@ namespace API.Models
         }
     }
 }
+

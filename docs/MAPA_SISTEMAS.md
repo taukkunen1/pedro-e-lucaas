@@ -8,7 +8,7 @@ Números: ~465k linhas de C# no total (GameServer ~252k).
 | Projeto | Tipo | Papel | Tamanho |
 |---|---|---|---|
 | DFGameServer | Exe net10.0 | Servidor de jogo (toda a lógica) | 460 arquivos / ~252k linhas |
-| DFAccountServer | Exe net10.0 | Autenticação/login (MongoDB `cq_auth`) | 36 / ~3,4k |
+| DFAccountServer | Exe net10.0 | Autenticação/login via API com JSON local | 36 / ~3,4k |
 | DFAPI | Web API net10.0 | Entrega os configs e dados (ex.: Characters) ao GameServer/Site | 124 / ~43k |
 | DFCore | Biblioteca | Config compartilhada, INI, REST, `DatabasePaths` | 119 / ~7,4k |
 | ConquerSite | ASP.NET | Site (Home, Account) | 16 |
@@ -60,7 +60,7 @@ Fluxo: Cliente → AccountServer (login) → GameServer. GameServer e Site pegam
 
 - Todo acesso do GameServer passa por `ServerConfig.DbLocation` (ItemType, MagicType, Npcs, Users, GameMapEx, levexp, BadMsg...). O valor vem da API e é resolvido por `Core.DatabasePaths` para `COServer\Database5700` (caminho embutido no build; `TRINITY_DATABASE` tem prioridade).
 - A API lê da Database só o endpoint de personagens (`Users\<id>.ini`).
-- Armazenamento: arquivos (INI/TXT/.dat) na Database; auth (contas, servidores, votos, online, configurações) em MongoDB via `AuthMongo` na API; contas com hash PBKDF2-SHA256 (`Core.Security.PasswordHasher`, conta antiga em texto puro é convertida no primeiro login). O modo `DbFromFiles=false` (dados do jogo pela API) também usa MongoDB (`GameDbContext` com o provider oficial `MongoDB.EntityFrameworkCore`); MySQL não é mais usado. Importação: `tools/migrate_mysql_to_mongo.py`.
+- Armazenamento: arquivos (INI/TXT/.dat) na Database; auth (contas, servidores, votos, online, configurações) em JSON local via `JsonAuthStore` na API; contas com hash PBKDF2-SHA256 (`Core.Security.PasswordHasher`, conta antiga em texto puro é convertida no primeiro login). O modo ativo do jogo segue `DbFromFiles=true`; MySQL e MongoDB não são usados no fluxo atual.
 - Fora da Database (não é dado do jogo): 3 gravações de debug em `C:\PacketSniffing\` (MyConsole.cs, MsgMessage.cs) e os logs de exceção, que vão para a pasta do executável (Placebo\GameServer).
 
 ## 5. Classificação 5017 (sistema de identificação)
@@ -85,4 +85,4 @@ Ainda sem gate: itens fora das listas acima (por exemplo o ChiToken 3003747, usa
 
 ## 6. Plataforma
 
-Alvo `net10.0` (API, AccountServer, Core, GameServer, ConquerSite); loaders em .NET Framework 4.8. EF Core 10 com `MongoDB.EntityFrameworkCore` 10.0.4 e `MongoDB.Driver` 3.12 (sem Pomelo/MySQL). AutoMapper segue em 14.0.0: a 16 exige mudar o código e licença. O CI usa `dotnet-version: 10.0.x`; a máquina de build precisa do SDK do .NET 10.
+Alvo `net10.0` (API, AccountServer, Core, GameServer, ConquerSite); loaders em .NET Framework 4.8. EF Core InMemory para endpoints de dados da API quando usados; autenticação/configuração em JSON local. AutoMapper atualizado para 16.2.0. O CI usa `dotnet-version: 10.0.x`; a máquina de build precisa do SDK do .NET 10.

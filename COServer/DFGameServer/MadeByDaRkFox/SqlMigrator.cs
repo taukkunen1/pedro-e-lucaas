@@ -76,7 +76,7 @@ namespace GameServer.MadeByDaRkFox
                     dest => dest.ClanID,
                     opt => opt.MapFrom(src => src.ID)
                 ).ReverseMap();
-            }).CreateMapper();
+            }, null).CreateMapper();
         }
         public List<Player> GeneratePlayerObjFromFiles(uint PlayerUID = 0)
         {

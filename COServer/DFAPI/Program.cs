@@ -14,9 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.IncludeXmlComments(Utils.XmlCommentsFilePath);
 });
-builder.Services.AddSingleton<AuthMongo>();
+builder.Services.AddSingleton<JsonAuthStore>();
 builder.Services.AddDbContext<GameDbContext>();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
 
 
 var app = builder.Build();

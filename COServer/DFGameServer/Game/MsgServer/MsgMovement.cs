@@ -11,6 +11,7 @@ namespace GameServer.Game.MsgServer
         public uint UID;       
         public uint Running;       
         public uint TimeStamp;
+        public uint Unknown;
     }
     public static unsafe class MsgMovement
     {

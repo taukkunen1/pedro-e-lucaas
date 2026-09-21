@@ -7,7 +7,7 @@ namespace GameServer.Game.MsgServer
 
         public static void GetUpdatePacket(this ServerSockets.Packet stream, out MsgUpdate.DataType ID, out ulong Value)
         {
-            stream.SeekForward(sizeof(uint));
+            stream.Seek(sizeof(uint));
             uint uid = stream.ReadUInt32();
             uint count = stream.ReadUInt32();
             ID = (MsgUpdate.DataType)stream.ReadUInt32();
