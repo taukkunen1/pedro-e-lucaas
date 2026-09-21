@@ -58,7 +58,7 @@
             STARTUPINFO lpStartupInfo = new STARTUPINFO();
             structure.nLength = Marshal.SizeOf(structure);
             security_attributes2.nLength = Marshal.SizeOf(security_attributes2);
-            if (!CreateProcess(Application.StartupPath + @"\TrinityConquer.exe", " blacknull", ref structure, ref security_attributes2, false, 0x4000000, IntPtr.Zero, null, ref lpStartupInfo, out lpProcessInformation))
+            if (!CreateProcess(Application.StartupPath + @"\Conquer.exe", " blacknull", ref structure, ref security_attributes2, false, 0x4000000, IntPtr.Zero, null, ref lpStartupInfo, out lpProcessInformation))
             {
                 MessageBox.Show("Conquer executable not found or cannot execute (Try with Administrator Privilegies)", "Bo0oM-Loader", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 Application.Exit();
@@ -86,7 +86,7 @@
 
         private void ConquerProcess_Exited(object sender, EventArgs e)
         {
-            if (Process.GetProcessesByName("TrinityConquer").Length <= 0)
+            if (Process.GetProcessesByName("Conquer").Length <= 0)
             {
                 Application.Exit(); // Normal close app
                 Environment.Exit(0); // Force close
@@ -350,4 +350,3 @@
         }
     }
 }
-

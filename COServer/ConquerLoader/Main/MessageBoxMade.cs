@@ -39,7 +39,7 @@
                 Verb = "runas",
                 Arguments = string.Format("{0} {1} {2}",
                 Application.StartupPath, // Path to top directory
-                "TrinityConquer.exe", // Conquer.exe
+                "Conquer.exe",
                  "blacknull"), // blacknull
             });
 
@@ -241,9 +241,9 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists("TrinityConquer.exe"))
+            if (!System.IO.File.Exists("Conquer.exe"))
             {
-                MessageBox.Show("TrinityConquer.exe not found!", "TrinityConquerLoader", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Conquer.exe not found!", "TrinityConquerLoader", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             } else
             {
                 label1.Visible = true;
@@ -307,4 +307,3 @@
         }
     }
 }
-
