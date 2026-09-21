@@ -6,11 +6,14 @@ namespace GameServer.Game.MsgServer
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public unsafe struct WalkQuery
-    {       
-        public uint Direction;       
-        public uint UID;       
-        public uint Running;       
-        public uint TimeStamp;
+    {
+        // CMsgWalk (10005) payload starts at packet offset 0x04.
+        // The 5695 client declares a 0x18-byte packet, so the payload is 20 bytes.
+        public uint Direction;  // +0x04
+        public uint UID;        // +0x08
+        public uint Running;    // +0x0C (0=walk, 1=run, 9=steed)
+        public uint TimeStamp;  // +0x10
+        public uint Unknown;    // +0x14, present in the 5695 client layout
     }
     public static unsafe class MsgMovement
     {
