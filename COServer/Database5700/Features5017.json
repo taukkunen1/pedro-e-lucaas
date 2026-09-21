@@ -853,12 +853,12 @@
       "name": "Casas",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Database/HouseTable.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Database.HouseTable"
       ],
@@ -1151,7 +1151,7 @@
       "name": "Poker",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Base/Poker/**",
         "DFGameServer/Base/PokerHandler.cs"
@@ -1160,7 +1160,7 @@
         "PokerTables.ini",
         "PokerTables.txt"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.PokerHandler",
         "HoldemHand.Hand",
@@ -1192,13 +1192,13 @@
       "name": "Memory Agate / claim",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgMemoryAgate*",
         "DFGameServer/Game/MsgServer/MsgClaim*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgServer.AgateEx",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -1214,12 +1214,12 @@
       "name": "Surprise Box",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/MsgServer/SurpriseBox*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Game.MsgServer.SurpriseBox"
       ],
@@ -1263,7 +1263,7 @@
       "name": "Team Arena",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/MsgServer/Arena Gui/MsgTeamArena*",
         "DFGameServer/Game/MsgTournaments/MsgTeamArena.cs",
@@ -1272,7 +1272,7 @@
       "dbFiles": [
         "TeamArena.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Database.TeamArenaTable",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -1402,14 +1402,14 @@
       "name": "Class PK War",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgClassPKWar.cs"
       ],
       "dbFiles": [
         "ClassPkWar.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgClassPKWar"
       ],
@@ -1443,14 +1443,14 @@
       "name": "Pole Domination",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgPoleDomination*"
       ],
       "dbFiles": [
         "GuildWarMap.bmp"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgTournaments.Coordinate",
         "GameServer.Game.MsgTournaments.CoordinateBI",
@@ -1495,12 +1495,12 @@
       "name": "Fortress Wars",
       "origin": "Posterior",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/MsgTournaments/FortressWars.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgFortressWar"
       ],
@@ -1564,14 +1564,14 @@
       "name": "Couples PK",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgCouples.cs"
       ],
       "dbFiles": [
         "CouplesPK.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgCouples"
       ],
@@ -1586,12 +1586,12 @@
       "name": "Demon Exterminator",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Database/InfoDemonExterminators.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Database.InfoDemonExterminators"
       ],
@@ -1725,12 +1725,12 @@
       "name": "Auto Hunting",
       "origin": "Posterior",
       "confidence": "high",
-      "decision": "review",
+      "decision": "keep",
       "paths": [
         "DFGameServer/Game/AutoHunting/**"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: manter.",
       "types": [
         "GameServer.AutoHunting",
         "GameServer.Catching"
@@ -1786,13 +1786,13 @@
       "name": "Slot Machine (cassino)",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgMachine*",
         "DFGameServer/Role/Instance/SlotMachine.cs"
       ],
       "dbFiles": [],
-      "note": "Corrigido: MsgMachine e o caca-niqueis (SlotMachine), nao anti-cheat",
+      "note": "Corrigido: MsgMachine e o caca-niqueis (SlotMachine), nao anti-cheat. Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgMachine"
