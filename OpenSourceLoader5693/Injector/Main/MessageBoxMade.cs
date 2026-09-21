@@ -135,7 +135,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Loading TrinityConquer...";
+            this.label1.Text = "Loading Placebo...";
             // 
             // backgroundWorker1
             // 
@@ -178,7 +178,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageBoxMade";
             this.ShowIcon = false;
-            this.Text = "TrinityConquerLoader";
+            this.Text = "PlaceboLauncher";
             this.Load += new System.EventHandler(this.MessageBoxMade_Load);
             this.ResumeLayout(false);
 
@@ -341,7 +341,7 @@
                         if (TargetProgram.MainWindowTitle.Contains(pName) || TargetProgram.ProcessName.Contains(pName) || TargetProgram.ProcessName.StartsWith(pName))
                         {
                             TargetProgram.Kill();
-                            MessageBox.Show($"TrinityConquerLoader has detected a Cheat. Report if this is a false positive. [Detected:{TargetProgram.ProcessName}]", "TrinityConquerLoader", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+                            MessageBox.Show($"PlaceboLauncher has detected a Cheat. Report if this is a false positive. [Detected:{TargetProgram.ProcessName}]", "PlaceboLauncher", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                         }
                     }
                 }

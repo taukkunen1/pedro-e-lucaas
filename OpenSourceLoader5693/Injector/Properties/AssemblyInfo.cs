@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("TrinityConquerLoader")]
-[assembly: AssemblyDescription("Loader for TrinityConquer")]
+[assembly: AssemblyTitle("PlaceboLauncher")]
+[assembly: AssemblyDescription("Loader for Placebo")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TrinityConquer.eu")]
-[assembly: AssemblyProduct("TrinityConquerLoader")]
-[assembly: AssemblyCopyright("TrinityConquer.eu")]
+[assembly: AssemblyCompany("Placebo")]
+[assembly: AssemblyProduct("PlaceboLauncher")]
+[assembly: AssemblyCopyright("Placebo")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

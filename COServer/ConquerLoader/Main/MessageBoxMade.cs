@@ -45,7 +45,7 @@
 
             if (launch == null)
             {
-                MessageBox.Show("Conquer executable not found or cannot execute (Try with Administrator Privilegies)", "TrinityConquerLoader", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Conquer executable not found or cannot execute (Try with Administrator Privilegies)", "PlaceboLauncher", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
             Application.Exit();
             Environment.Exit(0);
@@ -92,7 +92,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Loading TrinityConquer...";
+            this.label1.Text = "Loading Placebo...";
             this.label1.Visible = false;
             // 
             // backgroundWorker1
@@ -182,7 +182,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageBoxMade";
             this.ShowIcon = false;
-            this.Text = "TrinityConquerLoader";
+            this.Text = "PlaceboLauncher";
             this.Load += new System.EventHandler(this.MessageBoxMade_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelBar.ResumeLayout(false);
@@ -243,7 +243,7 @@
         {
             if (!System.IO.File.Exists("Conquer.exe"))
             {
-                MessageBox.Show("Conquer.exe not found!", "TrinityConquerLoader", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Conquer.exe not found!", "PlaceboLauncher", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             } else
             {
                 label1.Visible = true;
