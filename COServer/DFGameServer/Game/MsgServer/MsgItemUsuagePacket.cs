@@ -62,35 +62,36 @@ namespace GameServer.Game.MsgServer
             SplitStack = 49
         }
 
+        // 5695 CMsgItem (1009), client layout:
+        // +0x04 id, +0x08 dwParam, +0x0C action, +0x10 timestamp,
+        // +0x14 argCount/dwParam2, +0x18 dwParam3, +0x1C dwParam4,
+        // args start at +0x54 and a trailing DWORD is reserved after the args.
+        public const int ItemUsageBaseLength = 0x58;
+        public const int ItemUsageArgsOffset = 0x54;
+        public const int ItemUsageMaxArgs = 49;
+
         public static void GetUsageItem(this ServerSockets.Packet msg, out ItemUsageID action, out uint id, out ulong dwParam, out uint timestamp, out uint dwParam2, out uint dwParam3, out uint dwparam4, out List<uint> args)
         {
-            //MyConsole.PrintPacketAdvanced(msg.Memory);
-            //uint timer = msg.ReadUInt32();//4
-            msg.Seek(48);
-            //byte _LoaderMessage = msg.ReadUInt8();
             msg.Seek(4);
-            id = msg.ReadUInt32();//8
-            dwParam = msg.ReadUInt32();//12
-            action = (ItemUsageID)msg.ReadInt32();//16
-            timestamp = msg.ReadUInt32();//20
-            dwParam2 = msg.ReadUInt32();//24
-            dwParam3 = msg.ReadUInt32();//26
+            id = msg.ReadUInt32();
+            dwParam = msg.ReadUInt32();
+            action = (ItemUsageID)msg.ReadUInt32();
+            timestamp = msg.ReadUInt32();
+            dwParam2 = msg.ReadUInt32();
+            dwParam3 = msg.ReadUInt32();
             dwparam4 = msg.ReadUInt32();
 
-
-            msg.SeekForward(12 * sizeof(int));
-
-
             args = new List<uint>();
-
-            if (dwParam2 > 0 && dwParam2 < 50)
+            if (dwParam2 > 0 && dwParam2 <= ItemUsageMaxArgs)
             {
+                ushort declaredLength = *((ushort*)msg.Memory);
+                int requiredLength = ItemUsageBaseLength + ((int)dwParam2 * sizeof(uint));
+                if (declaredLength < requiredLength)
+                    return;
 
-                msg.SeekForward(4);
+                msg.Seek(ItemUsageArgsOffset);
                 for (int i = 0; i < dwParam2; i++)
-                {
                     args.Add(msg.ReadUInt32());
-                }
             }
         }
         public unsafe static ServerSockets.Packet ItemUsageCreate(this ServerSockets.Packet msg, ItemUsageID action, uint id, ulong dwParam1, uint timestamp, uint dwParam2, uint dwParam3, uint dwparam4, List<uint> args = null)
@@ -111,14 +112,17 @@ namespace GameServer.Game.MsgServer
             msg.Write(dwParam3);//24
             msg.Write(dwparam4);// 28
 
-            msg.SeekForward(12 * sizeof(int));
-            // msg.SeekForward(sizeof(int));
+            // Client 5695 reserves bytes 0x20..0x53. The variable argument list
+            // begins at 0x54, followed by one reserved DWORD.
+            msg.ZeroFill(ItemUsageArgsOffset - msg.Position);
 
             if (args != null)
             {
-                foreach (int arg in args)
+                foreach (uint arg in args)
                     msg.Write(arg);
             }
+
+            msg.ZeroFill(sizeof(uint));
             msg.Finalize(GamePackets.Usage);
 
 
