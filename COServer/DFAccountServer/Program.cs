@@ -245,15 +245,18 @@ namespace AccountServer
                                 Program.AcceptedLogins++;
                                 Fw.Identifier = encrypted[0];
                                 Fw.State = (uint)encrypted[1];
-                                if (Server.IP == "127.0.0.1")
-                                {
-                                    Server.IP = Utils.GetPrivateLocalIP();
-                                }
-                                Fw.IP = Server.IP;
+                                string forwardIp = Server.IP;
+                                Fw.IP = forwardIp;
                                 Fw.Port = Server.Port;
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 RestApiHelper.PostRequestSuccessful("Account", player.Account);
-                                Console.WriteLine("{0} has been Login to server {1}! IP:[{2}].", player.Info.Username, player.Info.Server, player.IP);
+                                Console.WriteLine("{0} authenticated. selected={1}, routed={2}, game={3}:{4}, IP:[{5}].",
+                                    player.Info.Username,
+                                    player.Info.Server,
+                                    ServerSelected,
+                                    forwardIp,
+                                    Server.Port,
+                                    player.IP);
                             }
                             player.Send(Fw);
                         }
