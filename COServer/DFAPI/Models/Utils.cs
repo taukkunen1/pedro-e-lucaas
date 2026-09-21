@@ -33,9 +33,9 @@ namespace API.Models
                 Console.WriteLine("Cannot read AccountServerConfig.json.");
                 Console.WriteLine("Creating a new configuration for AccountServer. Follow the instructions.");
                 bool configValid = false;
-                aServConf.ServerName = "TrinityConquer";
+                aServConf.ServerName = "Placebo";
                 // Specify servername
-                Console.Write("Input your ServerName[TrinityConquer]: ");
+                Console.Write("Input your ServerName[Placebo]: ");
                 string ServerNameInput = Console.ReadLine();
                 if (ServerNameInput.Length > 0)
                 {
@@ -92,9 +92,9 @@ namespace API.Models
                 gameServConf.GeneralDay = 0;
                 gameServConf.GeneralPKWarWinnerUID = 0;
                 gameServConf.ServerGamePort = 5816;
-                gameServConf.ServerName = "TrinityConquer";
+                gameServConf.ServerName = "Placebo";
                 // Specify servername
-                Console.Write("Input your ServerName [TrinityConquer]: ");
+                Console.Write("Input your ServerName [Placebo]: ");
                 string ServerNameInput = Console.ReadLine();
                 if (ServerNameInput.Length > 0)
                 {

@@ -12,8 +12,9 @@ namespace API.Models
 
         public JsonAuthStore()
         {
-            _authDir = Path.Combine(AppContext.BaseDirectory, "AuthJson");
+            _authDir = Path.Combine(AppContext.BaseDirectory, "LocalData", "Auth");
             Directory.CreateDirectory(_authDir);
+            MigrateLegacyAuthJson();
         }
 
         public Task<bool> PingAsync()
@@ -323,6 +324,20 @@ namespace API.Models
         }
 
         private string PathFor(string name) => Path.Combine(_authDir, name + ".json");
+
+        private void MigrateLegacyAuthJson()
+        {
+            string legacyDir = Path.Combine(AppContext.BaseDirectory, "AuthJson");
+            if (!Directory.Exists(legacyDir))
+                return;
+
+            foreach (string legacyFile in Directory.GetFiles(legacyDir, "*.json"))
+            {
+                string targetFile = Path.Combine(_authDir, Path.GetFileName(legacyFile));
+                if (!File.Exists(targetFile))
+                    File.Copy(legacyFile, targetFile);
+            }
+        }
 
         private class Counter
         {

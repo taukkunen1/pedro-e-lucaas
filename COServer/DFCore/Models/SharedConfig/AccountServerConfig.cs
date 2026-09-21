@@ -9,7 +9,7 @@
         public string DatabaseName { get; set; }
         /// <summary>Origem de autenticacao legada. No fluxo atual, a API usa JSON local.</summary>
         public string DatabaseAuthSource { get; set; } = "admin";
-        public string ServerName { get; set; } = "TrinityConquer";
+        public string ServerName { get; set; } = "Placebo";
 
         public AccountServerConfig()
         {
