@@ -1021,7 +1021,7 @@
       "name": "Transformacao / fairy",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgTransformFairy*",
         "DFGameServer/Database/Tranformation.cs"
@@ -1029,7 +1029,7 @@
       "dbFiles": [
         "TransformInfo.txt"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Database.Tranformation",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -1087,12 +1087,12 @@
       "name": "Anuncios (Advertise)",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgAdvertise*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgServer.MsgAdvertise",
         "GameServer.Game.MsgServer.MsgAdvertiseGui",
@@ -1342,12 +1342,12 @@
       "name": "Elite Guild War",
       "origin": "Posterior",
       "confidence": "medium",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgEliteGuildWar.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgEliteGuildWar"
       ],
@@ -1537,7 +1537,7 @@
       "name": "Skill Tournament / Skill Team PK",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "review",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgSkillTournament.cs",
         "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgSkillTeamPkTournament.cs",
@@ -1546,7 +1546,7 @@
       "dbFiles": [
         "SkillTeamPK.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-21: retirar.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgSkillTeamPkTournament",
         "GameServer.Game.MsgTournaments.MsgSkillTournament",
