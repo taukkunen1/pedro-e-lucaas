@@ -440,6 +440,20 @@ namespace GameServer
                     else
                     {
                         Action<Client.GameClient, ServerSockets.Packet> hinvoker;
+                        if (!Game.MsgServer.PacketGuards.ValidateClientPacket(obj.Game, stream, PacketID, out string guardReason))
+                        {
+                            Telemetry.ServerLog.Packet("blocked_packet", obj.Game, PacketID, stream);
+                            Telemetry.ServerLog.System("blocked_packet_reason", guardReason, new Dictionary<string, object>
+                            {
+                                ["packetId"] = PacketID,
+                                ["connectionUid"] = obj.Game.ConnectionUID
+                            });
+                            if (Program.TestServer || System.Diagnostics.Debugger.IsAttached)
+                            {
+                                Console.WriteLine("[PacketGuard] Blocked " + PacketID + ": " + guardReason);
+                            }
+                            return;
+                        }
                         if (MsgInvoker.TryGetInvoker(PacketID, out hinvoker))
                         {
                             hinvoker(obj.Game, stream);
