@@ -7,6 +7,7 @@ using GameServer.Database;
 using GameServer.Database.DBActions;
 using GameServer.Game.MsgServer;
 using GameServer.Game.MsgTournaments;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -76,7 +77,7 @@ namespace GameServer.MadeByDaRkFox
                     dest => dest.ClanID,
                     opt => opt.MapFrom(src => src.ID)
                 ).ReverseMap();
-            }, null).CreateMapper();
+            }, NullLoggerFactory.Instance).CreateMapper();
         }
         public List<Player> GeneratePlayerObjFromFiles(uint PlayerUID = 0)
         {
