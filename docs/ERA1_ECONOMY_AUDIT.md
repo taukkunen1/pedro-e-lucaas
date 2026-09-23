@@ -163,5 +163,11 @@ A auditoria histórica mostrou que `Composition Points` não pertence ao 5017: e
 - Refinery/Purification/Stabilization em `MsgItemExtra` ficam atrás de `EnablePost5017ItemExtra = false`.
 - Steed composition e reward de mentor ligados à composição permanecem fora da Era 1.
 - Stabilization Stones foram retiradas do handler `BuyItemFromForging`.
+- A ação `DegradeEquipment` por 54 CPs fica bloqueada; a documentação oficial associa esse serviço à reorganização de NPCs de 2011, portanto é posterior ao 5017.
+- A segunda rota de upgrade em `MsgItemUsuagePacket` foi fechada: `UpgradeDragonball` só aceita DB para qualidade, `UpgradeMeteor` só aceita Meteor/Tear/Scroll para nível, ambas exigem alvo clássico e não podem mais gerar sockets aleatórios.
 
 A leitura operacional passa a ser **faucet -> inventário -> transformação/sink**. Para cada recurso, compare `minted`, `burned`, `net`, origem por sistema e por mapa. Para progressão, acompanhe também as transições `Equipment.PlusN`, qualidade e sockets.
+
+
+### Estado de gems socketadas
+A inserção consome a gem física (`Gem.*`) e cria o estado `EmbeddedGem.*`. Remover uma gem destrói esse estado e não recria a gem física. Assim a telemetria distingue estoque negociável de valor já incorporado a equipamento.
