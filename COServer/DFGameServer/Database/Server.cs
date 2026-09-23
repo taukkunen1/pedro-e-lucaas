@@ -234,7 +234,10 @@ namespace GameServer.Database
             Role.GameMap.LoadMaps();
             Magic.Load();
             LoadMonsters();
-            Booth.Load();
+            // Economy V4: classic Market is player vending. The legacy Booths.txt
+            // layer is a custom infinite-supply shop system and stays disabled.
+            if (Game.Era1.Era1Services.EnablePost5017StaticBooths)
+                Booth.Load();
             Tranformation.Int();
             QuestInfo.Init();
             SubClassInfo.Load();
