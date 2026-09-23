@@ -121,6 +121,59 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 AddReward(client, stream, reward.ItemId, reward.SocketOne);
         }
 
+        public static void RunSelfTest()
+        {
+            var cases = new (byte Class, int Required, byte Next)[]
+            {
+                (10,15,11),(11,40,12),(12,70,13),(13,100,14),(14,110,15),
+                (20,15,21),(21,40,22),(22,70,23),(23,100,24),(24,110,25),
+                (40,15,41),(41,40,42),(42,70,43),(43,100,44),(44,110,45),
+                (100,15,101),
+                (132,70,133),(133,100,134),(134,110,135),
+                (142,70,143),(143,100,144),(144,110,145)
+            };
+
+            foreach (var test in cases)
+            {
+                if (RequiredPromotionLevel(test.Class) != test.Required)
+                    throw new InvalidOperationException("Era1 promotion gate mismatch for class " + test.Class);
+                if (NextLinearClass(test.Class) != test.Next)
+                    throw new InvalidOperationException("Era1 next-class mismatch for class " + test.Class);
+            }
+
+            if (RequiredPromotionLevel(101) != 40 || NextLinearClass(101) != 0)
+                throw new InvalidOperationException("Era1 Taoist level-40 branch gate mismatch.");
+
+            AssertReward("Archer", 15, 133003, Role.Flags.Gem.NoSocket);
+            AssertReward("Archer", 40, 500073, Role.Flags.Gem.EmptySocket);
+            AssertReward("Trojan", 40, 410073, Role.Flags.Gem.NoSocket);
+            AssertReward("Trojan", 70, 130063, Role.Flags.Gem.NoSocket);
+            AssertReward("Warrior", 40, 900003, Role.Flags.Gem.NoSocket);
+            AssertReward("Warrior", 70, 131063, Role.Flags.Gem.NoSocket);
+            AssertReward("Taoist", 15, 134003, Role.Flags.Gem.NoSocket);
+            AssertReward("Taoist", 40, 421073, Role.Flags.Gem.NoSocket);
+            AssertReward("Taoist", 70, 134063, Role.Flags.Gem.NoSocket);
+
+            foreach (var profession in new[] { "Trojan", "Warrior", "Archer", "Taoist" })
+            {
+                AssertReward(profession, 100, 700031, Role.Flags.Gem.NoSocket);
+                AssertReward(profession, 110, Database.ItemType.DragonBall, Role.Flags.Gem.NoSocket);
+            }
+
+            if (Database.ItemType.EuxeniteOre != 1072031 || Database.ItemType.Emerald != 1080001 ||
+                Database.ItemType.Meteor != 1088001 || Database.ItemType.MoonBox != 721020)
+                throw new InvalidOperationException("Era1 promotion material IDs changed unexpectedly.");
+
+            Console.WriteLine("[ERA1 SELFTEST] PASS - promotion gates, class transitions, materials and physical rewards.");
+        }
+
+        private static void AssertReward(string profession, int level, uint itemId, Role.Flags.Gem socket)
+        {
+            var rewards = GetClassicPhysicalRewards(profession, level);
+            if (rewards.Length != 1 || rewards[0].ItemId != itemId || rewards[0].SocketOne != socket)
+                throw new InvalidOperationException("Era1 reward mismatch for " + profession + " level " + level);
+        }
+
         private static bool ConsumePromotionMaterial(Client.GameClient client, ServerSockets.Packet stream, int level, bool archer)
         {
             uint itemId = 0;
