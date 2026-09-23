@@ -629,7 +629,7 @@ namespace GameServer
                     dwItemSort = MobItemGenerator.OneHanderType[BaseFunc.RandGet(MobItemGenerator.OneHanderType.Length, false)];
                     dwItemLev = Mob.Family.DropWeapon;
                 }
-                else if (nRand >= 80 && nRand < 100)// 20% of 45% (= 9%) - Two handers (and shield)
+                else if (nRate >= 80 && nRate < 100)// 20% of 45% (= 9%) - Two handers (and shield)
                 {
                     dwItemSort = MobItemGenerator.TwoHanderType[BaseFunc.RandGet(MobItemGenerator.TwoHanderType.Length, false)];
                     dwItemLev = ((dwItemSort == 900) ? Mob.Family.DropShield : Mob.Family.DropWeapon);
