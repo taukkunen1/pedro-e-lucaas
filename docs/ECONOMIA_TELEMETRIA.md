@@ -28,3 +28,9 @@
 O resumo diário de `resources` também contém `byMap`, com MINT, BURN, líquido, transferências e número de eventos por mapa. Isso permite localizar faucets excessivas de Meteor, Dragon Ball, gems, equipamentos de qualidade e +N usando dados reais de produção.
 
 Para a auditoria estática por monstro/mapa, use `python tools/era1_drop_audit.py`. O relatório cruza `Monsters/*.ini` com `MobSpawns/**/*` e grava os CSVs em `docs/catalogo/`.
+
+
+## MINT de recursos: criação física x oferta efetiva
+Para Meteor, Dragon Ball, gems e equipamentos raros, a telemetria operacional contabiliza o MINT no limite do inventário. Portanto, um item criado no chão e abandonado/desaparecido não entra como oferta econômica efetiva. Quando o item é coletado, o evento carrega o mapa atual e entra nos agregados `resources.byMap`.
+
+A auditoria estática em `tools/era1_drop_audit.py` mede a faucet teórica/configurada por monstro e mapa; a telemetria mede o que de fato chegou à economia dos jogadores. A diferença entre as duas é útil para enxergar perdas no chão, comportamento de farming e efeitos de densidade/velocidade de kill.
