@@ -76,12 +76,12 @@ namespace GameServer.Game.MsgMonster
             // Era 1 hunting: rare quality/+ drops must remain scarce.
             // These deterministic watchers are intentionally conservative and replace
             // the 5695 test-like rates (1/10..1/30) that flooded the economy.
-            Refined = new MobRateWatcher(650);
-            Unique = new MobRateWatcher(1500);
-            Elite = new MobRateWatcher(7500);
-            Super = new MobRateWatcher(30000);
-            PlusOne = new MobRateWatcher(7500);
-            PlusTwo = new MobRateWatcher(60000);
+            Refined = new MobRateWatcher(Game.Era1.Era1Economy.RefinedDropEvery);
+            Unique = new MobRateWatcher(Game.Era1.Era1Economy.UniqueDropEvery);
+            Elite = new MobRateWatcher(Game.Era1.Era1Economy.EliteDropEvery);
+            Super = new MobRateWatcher(Game.Era1.Era1Economy.SuperDropEvery);
+            PlusOne = new MobRateWatcher(Game.Era1.Era1Economy.PlusOneDropEvery);
+            PlusTwo = new MobRateWatcher(Game.Era1.Era1Economy.PlusTwoDropEvery);
 
             DropHp = new MobRateWatcher(50);
             DropMp = new MobRateWatcher(50);
@@ -94,7 +94,7 @@ namespace GameServer.Game.MsgMonster
             Study20 = new MobRateWatcher(int.MaxValue);
             Bomb = new MobRateWatcher(int.MaxValue);
             CuteCPPack = new MobRateWatcher(int.MaxValue);
-            DragonBalls = new MobRateWatcher(50000);
+            DragonBalls = new MobRateWatcher(Game.Era1.Era1Economy.DragonBallDropEvery);
         }
 
         public uint GeneratePotionExtra(bool Special = false)
