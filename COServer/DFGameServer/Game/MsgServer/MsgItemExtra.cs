@@ -237,6 +237,8 @@ namespace GameServer.Game.MsgServer
         [PacketAttribute(GamePackets.Stabilization)]
         public unsafe static void Stabilization(Client.GameClient client, ServerSockets.Packet packet)
         {
+            if (!Game.Era1.Era1Economy.EnablePost5017ItemExtra)
+                return;
             uint Mode;
             uint ItemUID;
             uint Count;
@@ -347,6 +349,8 @@ namespace GameServer.Game.MsgServer
         [PacketAttribute(GamePackets.AddExtra)]
         public unsafe static void AddExtra(Client.GameClient client, ServerSockets.Packet packet)
         {
+            if (!Game.Era1.Era1Economy.EnablePost5017ItemExtra)
+                return;
             uint Mode = packet.ReadUInt32();
             uint ItemUID = packet.ReadUInt32();
             uint ItemArtfact = packet.ReadUInt32();
