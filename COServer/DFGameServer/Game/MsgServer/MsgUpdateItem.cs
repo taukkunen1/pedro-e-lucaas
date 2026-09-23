@@ -250,180 +250,121 @@ namespace GameServer.Game.MsgServer
                     }
                 default:
                     {
-                        if (Action != ActionType.Plus && Action != ActionType.ChanceUpgrade)
+                        if (Action == ActionType.ChanceUpgrade)
+                        {
+                            client.SendSysMesage("Quick Compose is not available in Era 1.");
+                            return;
+                        }
+                        if (Action != ActionType.Plus)
                             return;
 
                         MsgGameItem DataItem;
-                        if (client.TryGetItem(ItemUID, out DataItem))
+                        if (!client.TryGetItem(ItemUID, out DataItem))
+                            break;
+                        if (!Game.Era1.Era1Economy.CanComposeTarget(DataItem.ITEM_ID))
+                            return;
+                        if (DataItem.Plus >= 12)
+                            return;
+
+                        // Patch 5002-era +10/+11/+12 refining: fixed Dragon Ball costs.
+                        if (DataItem.Plus >= 9)
                         {
-                            if (!Game.Era1.Era1Economy.CanComposeTarget(DataItem.ITEM_ID))
+                            if (client.Player.Level < Game.Era1.Era1Economy.ClassicHighPlusPlayerLevel)
+                            {
+                                client.SendSysMesage("You must be level 130 or higher to refine +9 equipment further.");
                                 return;
-                            ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
-                            //anti proxy --------------------
-                            if (Position != (ushort)Role.Flags.ConquerItem.Fan && Position != (ushort)Role.Flags.ConquerItem.Steed
-                                && Position != (ushort)Role.Flags.ConquerItem.Tower && Position != (ushort)Role.Flags.ConquerItem.RidingCrop)
-                            {
-                                if (!Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)Position))
-                                {
-                                    client.SendSysMesage("This item's Plus cannot be upgraded anymore.");
-                                    return;
-                                }
                             }
-                            //------------------------
 
-                            if (Action == ActionType.ChanceUpgrade)
+                            byte dragonBallCost = Game.Era1.Era1Economy.ClassicHighPlusDragonBallCost(DataItem.Plus);
+                            if (dragonBallCost == 0 || !client.Inventory.CheckDragonBalls(dragonBallCost, false, stream))
                             {
-                                if (DataItem.Plus < 12 && DataItem.PlusProgress != 0)
-                                {
+                                client.SendSysMesage("You do not have enough Dragon Balls for this refinement.");
+                                return;
+                            }
 
-                                    byte oldplus = DataItem.Plus;
+                            byte oldplus = DataItem.Plus;
+                            if (!client.Inventory.CheckDragonBalls(dragonBallCost, true, stream))
+                                return;
 
-                                    double percent = (double)DataItem.PlusProgress / (double)Database.ItemType.ComposePlusPoints(DataItem.Plus);
-                                
-                                    if (Role.Core.Rate(percent) && new Random().Next(1, 100) < 10)
-                                    {
-                                        DataItem.Plus++;
-                                    }
-                                    DataItem.PlusProgress = 0;
-                                    DataItem.Mode = Role.Flags.ItemMode.Update;
-                                    DataItem.Send(client, stream);
-                                    if (oldplus != DataItem.Plus)
-                                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, oldplus, DataItem.ITEM_ID, DataItem.Plus);
-                                    if (oldplus != DataItem.Plus && DataItem.Plus >= 6)
-                                    {
-                                        client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded His " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to + " + DataItem.Plus + " and " + DataItem.PlusProgress + " in Progress!");
-                                    }
-                                }
+                            DataItem.Plus++;
+                            DataItem.PlusProgress = 0;
+                            DataItem.Mode = Role.Flags.ItemMode.Update;
+                            DataItem.Send(client, stream);
+                            Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, oldplus, DataItem.ITEM_ID, DataItem.Plus);
+
+                            client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to +" + DataItem.Plus + "!");
+                            if (DataItem.Position != 0)
+                                client.Equipment.QueryEquipment(client.Equipment.Alternante);
+                            break;
+                        }
+
+                        // 5017 composition uses one main item + two compatible minor items.
+                        // Composition Points/Quick Compose are post-5017 (patch 5066+) and are not used.
+                        Queue<MsgGameItem> MinorItems = new Queue<MsgGameItem>();
+                        Queue<MsgGameItem> GemItems = new Queue<MsgGameItem>();
+                        HashSet<uint> UniqueItems = new HashSet<uint>();
+                        bool valid = true;
+                        byte requiredMinorPlus = DataItem.Plus == 0 ? (byte)1 : DataItem.Plus;
+
+                        for (int x = 0; x < ItemsUIDS.Count; x++)
+                        {
+                            MsgGameItem itemuse;
+                            if (!UniqueItems.Add(ItemsUIDS[x])
+                                || !client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
+                                || itemuse.UID == DataItem.UID
+                                || itemuse.Locked != 0)
+                            {
+                                valid = false;
                                 break;
                             }
 
-
-                            Queue<MsgGameItem> UseItems = new Queue<MsgGameItem>();
-                            HashSet<uint> UniqueItems = new HashSet<uint>();
-                            bool EmbedUpdate = false;
-                            for (int x = 0; x < ItemsUIDS.Count; x++)
+                            if (Game.Era1.Era1Economy.IsClassicGem(itemuse.ITEM_ID))
                             {
-                                MsgGameItem itemuse;
-                                if (UniqueItems.Add(ItemsUIDS[x])
-                                    && client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
-                                    && itemuse.UID != DataItem.UID
-                                    && Game.Era1.Era1Economy.IsAllowedCompositionMaterial(DataItem.ITEM_ID, itemuse.ITEM_ID)
-                                    && itemuse.Plus <= 8
-                                    && itemuse.Locked == 0
-                                    && (Game.Era1.Era1Economy.IsPlusStone(itemuse.ITEM_ID) || itemuse.Plus > 0))
-                                {
-                                    UseItems.Enqueue(itemuse);
-                                    EmbedUpdate = true;
-                                }
-                                else { EmbedUpdate = false; break; }
+                                GemItems.Enqueue(itemuse);
+                                continue;
                             }
-                            if (EmbedUpdate && UseItems.Count > 0)
+
+                            if (!Game.Era1.Era1Economy.IsAllowedCompositionMaterial(DataItem.ITEM_ID, itemuse.ITEM_ID))
                             {
-                                switch (Action)
-                                {
-                                    case ActionType.CurrentSteed:
-                                    case ActionType.Plus:
-                                        {
-                                            if (Action == ActionType.CurrentSteed)
-                                            {
-                                                if (Database.ItemType.ItemPosition(DataItem.ITEM_ID) != (ushort)Role.Flags.ConquerItem.Steed)
-                                                    return;
-                                            } else
-                                            {
-                                                if (Database.ItemType.ItemPosition(DataItem.ITEM_ID) == (ushort)Role.Flags.ConquerItem.Steed)
-                                                    return;
-                                            }
-                                            if (DataItem.Plus < 12)
-                                            {
-                                                while (UseItems.Count > 0)
-                                                {
-                                                    byte oldplus = DataItem.Plus;
-
-                                                    var Stone = UseItems.Dequeue();
-
-                                                    DataItem.PlusProgress += Database.ItemType.StonePlusPoints(Stone.Plus);
-                                                    while (DataItem.PlusProgress >= Database.ItemType.ComposePlusPoints(DataItem.Plus) && DataItem.Plus != 12)
-                                                    {
-                                                        DataItem.PlusProgress -= Database.ItemType.ComposePlusPoints(DataItem.Plus);
-                                                        DataItem.Plus++;
-                                                        if (DataItem.Plus == 12)
-                                                            DataItem.PlusProgress = 0;
-                                                    }
-                                                    DataItem.Mode = Role.Flags.ItemMode.Update;
-                                                    DataItem.Send(client,stream).Update(Stone, Instance.AddMode.REMOVE,stream);
-                                                    if (oldplus != DataItem.Plus)
-                                                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, oldplus, DataItem.ITEM_ID, DataItem.Plus);
-                                                    if (oldplus != DataItem.Plus && DataItem.Plus >= 6)
-                                                    {
-                                                        client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded His " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to + " + DataItem.Plus + " and " + DataItem.PlusProgress + " in Progress!");
-                                                   }
-
-                                                    if (Game.Era1.Era1Economy.EnablePost5017CompositionMentorRewards && client.Player.MyMentor != null)
-                                                    {
-                                                        client.Player.MyMentor.Mentor_Blessing += (uint)(Database.ItemType.StonePlusPoints(Stone.Plus) / 100);
-                                                        Role.Instance.AssociateGS.Member mee;
-                                                        if (client.Player.MyMentor.Associat.ContainsKey(Role.Instance.AssociateGS.Apprentice))
-                                                        {
-                                                            if (client.Player.MyMentor.Associat[Role.Instance.AssociateGS.Apprentice].TryGetValue(client.Player.UID, out mee))
-                                                            {
-                                                                mee.Blessing += (uint)(Database.ItemType.ComposePlusPoints(Stone.Plus) / 100);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        }
-                                    case ActionType.NewSteed:
-                                        {
-                                            if (Database.ItemType.ItemPosition(DataItem.ITEM_ID) != (ushort)Role.Flags.ConquerItem.Steed)
-                                                return;
-                                            while (UseItems.Count > 0)
-                                            {
-                                                
-                                                var Stone = UseItems.Dequeue();
-                                                if (DataItem.Plus < 12)
-                                                {
-                                                    DataItem.PlusProgress += Database.ItemType.StonePlusPoints(Stone.Plus);
-                                                    while (DataItem.PlusProgress >= Database.ItemType.ComposePlusPoints(DataItem.Plus) && DataItem.Plus != 12)
-                                                    {
-                                                        DataItem.PlusProgress -= Database.ItemType.ComposePlusPoints(DataItem.Plus);
-                                                        DataItem.Plus++;
-                                                        if (DataItem.Plus == 12)
-                                                            DataItem.PlusProgress = 0;
-                                                    }
-                                                }
-                                                int color1 = (int)DataItem.SocketProgress;
-                                                int color2 = (int)Stone.SocketProgress;
-
-                                                int G1 = color1 & 0xFF;
-                                                int G2 = color2 & 0xFF;
-                                                int B1 = (color1 >> 8) & 0xFF;
-                                                int B2 = (color2 >> 8) & 0xFF;
-                                                int R1 = (color1 >> 16) & 0xFF;
-                                                int R2 = (color2 >> 16) & 0xFF;
-                                                byte ProgresGreen = (byte)((int)Math.Floor(0.9 * G1) + (int)Math.Floor(0.1 * G2) + 1);
-                                                byte ProgresBlue = (byte)((int)Math.Floor(0.9 * B1) + (int)Math.Floor(0.1 * B2) + 1);
-                                                byte ProgresRed = (byte)((int)Math.Floor(0.9 * R1) + (int)Math.Floor(0.1 * R2) + 1);
-
-                                                DataItem.ProgresGreen = ProgresGreen;
-                                                DataItem.Enchant = ProgresBlue;
-                                                DataItem.Bless = ProgresRed;
-
-                                                DataItem.SocketProgress = (uint)(ProgresBlue | (ProgresGreen << 8) | (ProgresRed << 16));
-
-                                                DataItem.Mode = Role.Flags.ItemMode.Update;
-                                                DataItem.Send(client,stream).Update(Stone, Instance.AddMode.REMOVE,stream);
-                                            }
-                                            break;
-                                        }
-
-                                }
-                                if (DataItem.Position != 0)
-                                    client.Equipment.QueryEquipment(client.Equipment.Alternante);
+                                valid = false;
+                                break;
                             }
+
+                            byte materialPlus = Game.Era1.Era1Economy.CompositionMaterialPlus(itemuse.ITEM_ID, itemuse.Plus);
+                            if (materialPlus == 0 || materialPlus > 8 || materialPlus < requiredMinorPlus)
+                            {
+                                valid = false;
+                                break;
+                            }
+                            MinorItems.Enqueue(itemuse);
                         }
 
+                        byte gemCost = Game.Era1.Era1Economy.ClassicComposeGemCost(DataItem.ITEM_ID, DataItem.Plus);
+                        if (!valid
+                            || MinorItems.Count != Game.Era1.Era1Economy.ClassicComposeMinorCount
+                            || GemItems.Count != gemCost)
+                        {
+                            client.SendSysMesage("Invalid Era 1 composition materials.");
+                            return;
+                        }
+
+                        byte previousPlus = DataItem.Plus;
+                        while (MinorItems.Count > 0)
+                            client.Inventory.Update(MinorItems.Dequeue(), Instance.AddMode.REMOVE, stream);
+                        while (GemItems.Count > 0)
+                            client.Inventory.Update(GemItems.Dequeue(), Instance.AddMode.REMOVE, stream);
+
+                        DataItem.Plus++;
+                        DataItem.PlusProgress = 0;
+                        DataItem.Mode = Role.Flags.ItemMode.Update;
+                        DataItem.Send(client, stream);
+                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, previousPlus, DataItem.ITEM_ID, DataItem.Plus);
+
+                        if (DataItem.Plus >= 6)
+                            client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to +" + DataItem.Plus + "!");
+
+                        if (DataItem.Position != 0)
+                            client.Equipment.QueryEquipment(client.Equipment.Alternante);
                         break;
                     }
 
