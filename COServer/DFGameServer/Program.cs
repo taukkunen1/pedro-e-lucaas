@@ -129,6 +129,7 @@ namespace GameServer
             {
                 Game.MsgNpc.Dialogs.Era1JobCenter.RunSelfTest();
                 Game.Era1.Era1Progression.RunSelfTest();
+                Game.Era1.Era1Items.RunSelfTest();
                 return;
             }
 
