@@ -110,7 +110,7 @@ namespace GameServer.Base.Mining
                     {
                         itemid = Gems[Role.Core.Random.Next(0, Gems.Length)];
                         // Refined gems are rare; super gems remain exceptional.
-                        if (PercentSuccess(0.05))
+                        if (PercentSuccess(Game.Era1.Era1Economy.MiningSuperGemPercent))
                             itemid += 2;
                         else if (PercentSuccess(Game.Era1.Era1Economy.MiningRefinedGemPercent))
                             itemid += 1;
