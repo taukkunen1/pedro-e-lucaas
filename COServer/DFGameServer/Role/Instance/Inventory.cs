@@ -1054,12 +1054,17 @@ namespace GameServer.Role.Instance
                             break;
                         }
                 }
-                var era1Resource = Game.Era1.Era1Economy.TrackedResource(ItemDat.ITEM_ID, ItemDat.Plus);
-                if (era1Resource != null && (mode == AddMode.ADD || mode == AddMode.REMOVE))
+                if (mode == AddMode.ADD || mode == AddMode.REMOVE)
                 {
-                    long units = mode == AddMode.REMOVE && !Removefull ? 1 : (ItemDat.StackSize > 1 ? ItemDat.StackSize : 1);
-                    Telemetry.Economy.RecordResource(Owner.Player.UID, Owner.Player.Name, Owner.Player.Map,
-                        era1Resource, mode == AddMode.ADD ? units : -units);
+                    var era1Resources = Game.Era1.Era1Economy.TrackedResources(ItemDat.ITEM_ID, ItemDat.Plus);
+                    if (era1Resources.Length != 0)
+                    {
+                        long units = mode == AddMode.REMOVE && !Removefull ? 1 : (ItemDat.StackSize > 1 ? ItemDat.StackSize : 1);
+                        units *= Game.Era1.Era1Economy.TrackedResourceUnitMultiplier(ItemDat.ITEM_ID);
+                        for (int resourceIndex = 0; resourceIndex < era1Resources.Length; resourceIndex++)
+                            Telemetry.Economy.RecordResource(Owner.Player.UID, Owner.Player.Name, Owner.Player.Map,
+                                era1Resources[resourceIndex], mode == AddMode.ADD ? units : -units);
+                    }
                 }
 
                 if (ItemDat.ITEM_ID == 750000)
