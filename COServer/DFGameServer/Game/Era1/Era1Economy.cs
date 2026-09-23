@@ -53,7 +53,8 @@ namespace GameServer.Game.Era1
         {
             return action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithCPs
                 || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithItem
-                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.UpdatePurity;
+                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.UpdatePurity
+                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.DegradeEquipment;
         }
 
         public static bool IsAllowedForgingShopItem(uint itemId)
@@ -345,6 +346,7 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 socket policy failed.");
             if (!IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithCPs)
                 || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithItem)
+                || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.DegradeEquipment)
                 || EnablePost5017ItemExtra || EnablePost5017CompositionMentorRewards
                 || EnableDirectLevelUpgradeWithCps)
                 throw new System.InvalidOperationException("Post-5017 item systems must stay disabled in Era 1.");
