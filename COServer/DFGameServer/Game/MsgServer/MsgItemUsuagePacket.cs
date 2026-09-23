@@ -996,10 +996,15 @@ namespace GameServer.Game.MsgServer
                         {
                             if (args == null || args.Count < 1)
                                 break;
-                            if (socketTarget.SocketOne == Role.Flags.Gem.NoSocket && !weaponSocketTarget)
-                                break;
-                            if (socketTarget.SocketOne != Role.Flags.Gem.NoSocket
-                                && socketTarget.SocketTwo == Role.Flags.Gem.NoSocket && !equipmentSocketTarget)
+
+                            bool openingWeaponFirst = weaponSocketTarget
+                                && socketTarget.SocketOne == Role.Flags.Gem.NoSocket
+                                && socketTarget.SocketTwo == Role.Flags.Gem.NoSocket;
+                            bool tryingEquipmentSecond = equipmentSocketTarget
+                                && socketTarget.SocketOne != Role.Flags.Gem.NoSocket
+                                && socketTarget.SocketTwo == Role.Flags.Gem.NoSocket;
+
+                            if (!openingWeaponFirst && !tryingEquipmentSecond)
                                 break;
                         }
                         else if (dwParam2 == Game.Era1.Era1Economy.WeaponSecondSocketDragonBalls)
