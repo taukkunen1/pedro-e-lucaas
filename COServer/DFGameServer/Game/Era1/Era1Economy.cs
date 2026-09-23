@@ -39,6 +39,8 @@ namespace GameServer.Game.Era1
         // composition rewards belong to later patches and stay outside Era 1.
         public static bool EnablePost5017ItemExtra => false;
         public static bool EnablePost5017CompositionMentorRewards => false;
+        // Later-patch convenience route that skips the classic material economy.
+        public static bool EnableDirectLevelUpgradeWithCps => false;
 
         // Classic socket costs used by the 5017-era blacksmith/Wu Xing paths.
         public const byte WeaponFirstSocketDragonBalls = 1;
@@ -287,6 +289,20 @@ namespace GameServer.Game.Era1
                 "Equipment.Socket" + slot, 1);
         }
 
+        public static void RecordEmbeddedGem(GameServer.Client.GameClient client, Role.Flags.Gem gem, long delta)
+        {
+            if (client == null || delta == 0 || gem == Role.Flags.Gem.NoSocket || gem == Role.Flags.Gem.EmptySocket)
+                return;
+
+            uint gemItemId = Database.ItemType.GetGemID(gem);
+            string gemResource = TrackedResource(gemItemId);
+            if (gemResource == null || !gemResource.StartsWith("Gem."))
+                return;
+
+            Telemetry.Economy.RecordResource(client.Player.UID, client.Player.Name, client.Player.Map,
+                "Embedded" + gemResource, delta);
+        }
+
         public static bool IsClassicMiningGem(uint id)
         {
             uint family = id / 10;
@@ -329,7 +345,8 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 socket policy failed.");
             if (!IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithCPs)
                 || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithItem)
-                || EnablePost5017ItemExtra || EnablePost5017CompositionMentorRewards)
+                || EnablePost5017ItemExtra || EnablePost5017CompositionMentorRewards
+                || EnableDirectLevelUpgradeWithCps)
                 throw new System.InvalidOperationException("Post-5017 item systems must stay disabled in Era 1.");
             if (Game.Era1.Era1Items.IsBlockedEquipment(410073)
                 || !Game.Era1.Era1Items.IsBlockedEquipment(201003))
