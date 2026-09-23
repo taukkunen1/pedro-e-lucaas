@@ -44,7 +44,7 @@ namespace GameServer.Game.MsgMonster
         public static ushort[] RingType = new ushort[] { 150, 151 };
         public static ushort[] ArmetType = new ushort[] { 111, 112, 113, 114, 117, 118 };
         public static ushort[] ArmorType = new ushort[] { 130, 131, 132, 133, 134 };
-        public static ushort[] OneHanderType = new ushort[] { 410, 420, 421, 430, 440, 450, 460, 480, 481, 490, 500, 601 };
+        public static ushort[] OneHanderType = new ushort[] { 410, 420, 421, 430, 440, 450, 460, 480, 481, 490, 500 };
         public static ushort[] TwoHanderType = new ushort[] { 510, 530, 560, 561, 580, 900, };
         public static uint[] SeaPotions = new uint[] { 3004230, 3004231, 3004232, 3004233, 3004234, 3004235, 3004236, 3004237, 3004238 };
         private MonsterFamily Family;
