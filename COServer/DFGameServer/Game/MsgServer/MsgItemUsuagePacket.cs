@@ -857,9 +857,6 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.Player.Money >= 100000)
                         {
-                            client.Player.Money -= 100000;
-                            client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
-
                             bool HaveAllGems = false;
                             for (uint x = 0; x < 7; x++)
                             {
@@ -874,6 +871,9 @@ namespace GameServer.Game.MsgServer
                             }
                             if (HaveAllGems)
                             {
+                                client.Player.Money -= 100000;
+                                client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
+
                                 for (uint x = 0; x < 7; x++)
                                 {
                                     uint ItemID = 700002 + x * 10;
@@ -1640,8 +1640,9 @@ namespace GameServer.Game.MsgServer
                             }
                             else if (item.Durability == 0)
                             {
-                                if (client.Inventory.Remove(1088001, 5, stream))
+                                if (client.Inventory.CheckMeteors(5, false, stream))
                                 {
+                                    client.Inventory.CheckMeteors(5, true, stream);
                                     item.Durability = item.MaximDurability;
                                     item.Mode = Role.Flags.ItemMode.Update;
                                     item.Send(client, stream);
