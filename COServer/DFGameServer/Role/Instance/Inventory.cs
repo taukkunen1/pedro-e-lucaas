@@ -1054,6 +1054,14 @@ namespace GameServer.Role.Instance
                             break;
                         }
                 }
+                var era1Resource = Game.Era1.Era1Economy.TrackedResource(ItemDat.ITEM_ID, ItemDat.Plus);
+                if (era1Resource != null && (mode == AddMode.ADD || mode == AddMode.REMOVE))
+                {
+                    long units = ItemDat.StackSize > 1 ? ItemDat.StackSize : 1;
+                    Telemetry.Economy.RecordResource(Owner.Player.UID, Owner.Player.Name, Owner.Player.Map,
+                        era1Resource, mode == AddMode.ADD ? units : -units);
+                }
+
                 if (ItemDat.ITEM_ID == 750000)
                 {
                     Owner.DemonExterminator.ItemUID = ItemDat.UID;
