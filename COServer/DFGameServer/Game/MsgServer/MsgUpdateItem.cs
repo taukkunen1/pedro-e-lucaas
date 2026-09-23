@@ -58,8 +58,13 @@ namespace GameServer.Game.MsgServer
             uint dwParam1 = 2;
 
             stream.GetUpdateItem(out Action, out ItemUID, out ItemsUIDS);
+            using var _econScope = GameServer.Telemetry.Economy.Scope(GameServer.Telemetry.SourceKind.Compose, (uint)Action);
 
-
+            if (Action == ActionType.CurrentSteed || Action == ActionType.NewSteed)
+            {
+                client.SendSysMesage("Steed composition is not available in Era 1.");
+                return;
+            }
 
             switch (Action)
             {
@@ -109,6 +114,7 @@ namespace GameServer.Game.MsgServer
                                              DataItem.Send(client, stream);//.Update(itemuse, Instance.AddMode.REMOVE,stream);
                                              if (succesed && oldid != DataItem.ITEM_ID)
                                              {
+                                                 Game.Era1.Era1Economy.RecordEquipmentTransformation(client, oldid, DataItem.Plus, DataItem.ITEM_ID, DataItem.Plus);
                                                  client.Inventory.Update(itemuse, Instance.AddMode.REMOVE, stream);
                                              }
                                              else
@@ -140,9 +146,12 @@ namespace GameServer.Game.MsgServer
                                                 if (Database.ItemType.UpItemMeteors(DataItem.ITEM_ID, (uint)ItemsUIDS.Count))
                                                 {
                                                     dwParam1 = 1;
+                                                    uint oldid = DataItem.ITEM_ID;
                                                     DataItem.ITEM_ID = Pool.ItemsBase.UpdateItem(DataItem.ITEM_ID, out succesed);
                                                     DataItem.Mode = Role.Flags.ItemMode.Update;
                                                     DataItem.Send(client, stream);
+                                                    if (succesed && oldid != DataItem.ITEM_ID)
+                                                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, oldid, DataItem.Plus, DataItem.ITEM_ID, DataItem.Plus);
 
                                                 }
 #if TEST
@@ -188,7 +197,8 @@ namespace GameServer.Game.MsgServer
                             for (int x = 0; x < ItemsUIDS.Count; x++)
                             {
                                 MsgGameItem itemuse;
-                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse))
+                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
+                                    && itemuse.ITEM_ID == Database.ItemType.DragonBall)
                                 {
                                     UseItems.Enqueue(itemuse);
                                     EmbedUpdate = true;
@@ -206,11 +216,13 @@ namespace GameServer.Game.MsgServer
                                         if (Database.ItemType.UpQualityDB(DataItem.ITEM_ID, (uint)(UseItems.Count + 1)))
                                         {
                                             dwParam1 = 1;
+                                            uint oldid = DataItem.ITEM_ID;
                                             if (DataItem.ITEM_ID % 10 < 5)
                                                 DataItem.ITEM_ID += 5 - DataItem.ITEM_ID % 10;
                                             DataItem.ITEM_ID++;
                                             DataItem.Mode = Role.Flags.ItemMode.Update;
                                             DataItem.Send(client,stream);
+                                            Game.Era1.Era1Economy.RecordEquipmentTransformation(client, oldid, DataItem.Plus, DataItem.ITEM_ID, DataItem.Plus);
                                         }
 
 
@@ -231,10 +243,15 @@ namespace GameServer.Game.MsgServer
                     }
                 default:
                     {
-                 
+                        if (Action != ActionType.Plus && Action != ActionType.ChanceUpgrade)
+                            return;
+
                         MsgGameItem DataItem;
                         if (client.TryGetItem(ItemUID, out DataItem))
                         {
+                            if (!Game.Era1.Era1Economy.IsClassicEquipment(DataItem.ITEM_ID)
+                                || Game.Era1.Era1Items.IsBlockedEquipment(DataItem.ITEM_ID))
+                                return;
                             ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                             //anti proxy --------------------
                             if (Position != (ushort)Role.Flags.ConquerItem.Fan && Position != (ushort)Role.Flags.ConquerItem.Steed
@@ -264,6 +281,8 @@ namespace GameServer.Game.MsgServer
                                     DataItem.PlusProgress = 0;
                                     DataItem.Mode = Role.Flags.ItemMode.Update;
                                     DataItem.Send(client, stream);
+                                    if (oldplus != DataItem.Plus)
+                                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, oldplus, DataItem.ITEM_ID, DataItem.Plus);
                                     if (oldplus != DataItem.Plus && DataItem.Plus >= 6)
                                     {
                                         client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded His " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to + " + DataItem.Plus + " and " + DataItem.PlusProgress + " in Progress!");
@@ -278,7 +297,10 @@ namespace GameServer.Game.MsgServer
                             for (int x = 0; x < ItemsUIDS.Count; x++)
                             {
                                 MsgGameItem itemuse;
-                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse))
+                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
+                                    && itemuse.UID != DataItem.UID
+                                    && Game.Era1.Era1Economy.IsAllowedCompositionMaterial(DataItem.ITEM_ID, itemuse.ITEM_ID)
+                                    && (Game.Era1.Era1Economy.IsPlusStone(itemuse.ITEM_ID) || itemuse.Plus > 0 || itemuse.PlusProgress > 0))
                                 {
                                     UseItems.Enqueue(itemuse);
                                     EmbedUpdate = true;
@@ -320,12 +342,14 @@ namespace GameServer.Game.MsgServer
                                                     }
                                                     DataItem.Mode = Role.Flags.ItemMode.Update;
                                                     DataItem.Send(client,stream).Update(Stone, Instance.AddMode.REMOVE,stream);
+                                                    if (oldplus != DataItem.Plus)
+                                                        Game.Era1.Era1Economy.RecordEquipmentTransformation(client, DataItem.ITEM_ID, oldplus, DataItem.ITEM_ID, DataItem.Plus);
                                                     if (oldplus != DataItem.Plus && DataItem.Plus >= 6)
                                                     {
                                                         client.Map.SendSysMesage("Congratulations, " + client.Player.Name + " has upgraded His " + Pool.ItemsBase[DataItem.ITEM_ID].Name + " to + " + DataItem.Plus + " and " + DataItem.PlusProgress + " in Progress!");
                                                    }
 
-                                                    if (client.Player.MyMentor != null)
+                                                    if (Game.Era1.Era1Economy.EnablePost5017CompositionMentorRewards && client.Player.MyMentor != null)
                                                     {
                                                         client.Player.MyMentor.Mentor_Blessing += (uint)(Database.ItemType.StonePlusPoints(Stone.Plus) / 100);
                                                         Role.Instance.AssociateGS.Member mee;
