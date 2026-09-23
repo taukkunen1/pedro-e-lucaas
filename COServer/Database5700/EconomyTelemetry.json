@@ -68,6 +68,11 @@
       "flow": "auto"
     },
     {
+      "match": "^Npc:10003#3$",
+      "system": "GuildCreation",
+      "flow": "auto"
+    },
+    {
       "match": "^Npc:",
       "system": "Npc",
       "flow": "auto"
