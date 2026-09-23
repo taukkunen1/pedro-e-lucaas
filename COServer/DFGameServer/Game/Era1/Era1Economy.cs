@@ -111,14 +111,19 @@ namespace GameServer.Game.Era1
             return 1000 + (int)type;                  // equipment category/type
         }
 
-        public static bool CanComposeTarget(uint itemId)
+        public static bool IsClassicForgeTarget(uint itemId)
         {
             if (!IsClassicEquipment(itemId) || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
                 return false;
-            if (!Pool.ItemsBase.TryGetValue(itemId, out var dbItem) || dbItem.Level < 15)
-                return false;
             ushort position = Database.ItemType.ItemPosition(itemId);
             return position != 0 && Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)position);
+        }
+
+        public static bool CanComposeTarget(uint itemId)
+        {
+            if (!IsClassicForgeTarget(itemId))
+                return false;
+            return Pool.ItemsBase.TryGetValue(itemId, out var dbItem) && dbItem.Level >= 15;
         }
 
         public static bool IsAllowedCompositionMaterial(uint mainItemId, uint materialItemId)
