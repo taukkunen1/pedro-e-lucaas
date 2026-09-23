@@ -125,6 +125,12 @@ namespace GameServer
 
         public static void Main(string[] args)
         {
+            if (args.Length > 0 && string.Equals(args[0], "era1-selftest", StringComparison.OrdinalIgnoreCase))
+            {
+                Game.MsgNpc.Dialogs.Era1JobCenter.RunSelfTest();
+                return;
+            }
+
             bool InitAutoMaintenance = false;
             try
             {
