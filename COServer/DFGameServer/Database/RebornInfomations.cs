@@ -50,6 +50,15 @@ namespace GameServer.Database
                 byte Reborn = byte.Parse(data[1]);
                 byte MyClass = byte.Parse(data[2]);
                 byte RebornClass = byte.Parse(data[3]);
+
+                // 5017 Era 1: load only first/second rebirth rules for the five
+                // classic profession lines. Ignore reincarnation/pure-skill metadata
+                // and every later profession embedded in the 5695 data file.
+                if (Reborn != 1 && Reborn != 2)
+                    continue;
+                if (!IsEra1DataClass(MyClass) || !IsEra1DataClass(RebornClass))
+                    continue;
+
                 Action Info = (Action)byte.Parse(data[4]);
                 List<ushort> Spells = new List<ushort>();
                 for (int x = 5; x < data.Length; x++)
@@ -107,6 +116,16 @@ namespace GameServer.Database
                 }
             }
         }
+        private static bool IsEra1DataClass(byte cls)
+        {
+            return (cls >= 10 && cls <= 15)
+                || (cls >= 20 && cls <= 25)
+                || (cls >= 40 && cls <= 45)
+                || cls == 100 || cls == 101
+                || (cls >= 132 && cls <= 135)
+                || (cls >= 142 && cls <= 145);
+        }
+
         private static bool IsEra1Class(byte cls)
         {
             return cls == 11 || cls == 21 || cls == 41 || cls == 132 || cls == 142;
