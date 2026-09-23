@@ -113,3 +113,36 @@ A chance global de tentativa de equipamento é 1,2%, porém a chance de item rea
 - `special_drops`: entradas de `[SpecialDrop]` que exigem revisão explícita.
 
 Isso impede usar 1,2% como se fosse a taxa efetiva para qualquer monstro/mapa.
+
+
+## Economy V2: BURN, composição e sockets
+
+O fechamento do lado de consumo da economia cobre agora os principais caminhos de forja da Era 1:
+
+- `MsgUpdateItem.Compose` abre um escopo próprio de telemetria (`Compose:<acao>`).
+- Upgrade de qualidade só aceita Dragon Balls em **todos** os UIDs enviados. Um DB seguido de itens arbitrários não pode mais inflar a chance de upgrade.
+- Composição +N rejeita o próprio item-alvo, equipamentos pós-5017, categorias incompatíveis e materiais sem pontos de composição.
+- O alvo da composição é tratado como transformação: por exemplo, passar de +1 para +2 registra BURN de `Equipment.Plus1` e MINT de `Equipment.Plus2`, além do BURN dos materiais consumidos.
+- Mudanças Refined -> Unique -> Elite -> Super também registram a qualidade anterior como BURN e a nova qualidade como MINT.
+- `StonePlusPoints(+0)` foi corrigido para zero. A tabela de +1..+8 permanece 10/40/120/360/1080/3240/9720/29160.
+- Meteor Scroll e Dragon Ball Scroll são contabilizados como 10 unidades do recurso-base, evitando subcontagem de BURN/MINT.
+- Tough Drill e Star Drill entram na telemetria como `Drill.Tough` e `Drill.Star`.
+- +Stones entram como `PlusStone.PlusN`.
+
+### Socket policy
+
+- Armas clássicas: 1 Dragon Ball para o primeiro socket e 5 Dragon Balls para o segundo.
+- Equipamentos clássicos não-arma: 12 Dragon Balls para o primeiro socket; segundo socket por Tough Drill (20% no código existente) ou 7 Star Drills.
+- Cada socket efetivamente criado gera `Equipment.Socket1` ou `Equipment.Socket2` na telemetria.
+- Equipamentos bloqueados da Era 1 não podem usar essas rotas.
+- `MsgEmbedSocket` possui escopo próprio (`EmbedSocket:<acao>#<slot>`), portanto o BURN de gems inseridas deixa de cair em `Other`.
+
+### Fechamento de rotas posteriores/exploits
+
+- Socket de talismã por CP/item é rejeitado na fronteira de `ItemUsage`.
+- Refinery/Purification/Stabilization em `MsgItemExtra` ficam atrás de `EnablePost5017ItemExtra = false`.
+- Steed composition fica bloqueada e o reward de mentor ligado à composição fica desativado.
+- Stabilization Stones pós-5017 deixaram de ser compráveis pelo handler `BuyItemFromForging`.
+- Foi removido o ramo de `GemCompose` que aceitava parâmetros especiais e adicionava um item ao inventário sem executar o débito correspondente.
+
+A leitura operacional passa a ser **faucet -> inventário -> transformação/sink**. Para cada recurso, compare `minted`, `burned`, `net` e `burnCoveragePct`; para progressão, observe também os pares de transformação de qualidade, +N e sockets.
