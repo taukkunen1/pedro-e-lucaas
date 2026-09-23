@@ -42,14 +42,18 @@ namespace GameServer.Game.Era1
             if (client == null || client.IsConnectedInterServer())
                 return false;
 
-            if (!IsClassicWarehouseNpc(npcId))
+            // Some client builds echo the warehouse NPC in ItemUsage.id while
+            // others rely on the last interacted NPC. Resolve both, but always
+            // require the actual warehouse to still be in screen.
+            uint resolvedNpc = IsClassicWarehouseNpc(npcId) ? npcId : client.ActiveNpc;
+            if (!IsClassicWarehouseNpc(resolvedNpc))
                 return false;
 
             if (EnablePost5017RemoteWarehouse)
                 return true;
 
             Game.MsgNpc.Npc npc;
-            return client.Map.SearchNpcInScreen(npcId, client.Player.X, client.Player.Y, out npc);
+            return client.Map.SearchNpcInScreen(resolvedNpc, client.Player.X, client.Player.Y, out npc);
         }
 
         public static bool CanCreatePlayerBooth(Client.GameClient client)
