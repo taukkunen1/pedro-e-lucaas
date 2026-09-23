@@ -107,14 +107,14 @@ namespace GameServer.Telemetry
         struct Ev
         {
             public DateTime T; public uint Uid; public string Name; public uint Map; public Currency Cur;
-            public long Before, After; public string Flow, System, Reason; public bool Alert;
+            public long Before, After; public string Flow, System, Reason, Resource; public bool Alert;
         }
         class Agg { public long Count, In, Out; }
         class PlayerAgg { public string Name; public readonly long[] Mint = new long[3]; public readonly long[] Burn = new long[3]; }
 
         static ConcurrentDictionary<(Currency cur, string system, string reason, bool transfer), Agg> _agg = new();
         static ConcurrentDictionary<uint, PlayerAgg> _players = new();
-        static ConcurrentDictionary<(string resource, string system, string reason, bool transfer), Agg> _resources = new();
+        static ConcurrentDictionary<(string resource, string system, string reason, bool transfer, uint map), Agg> _resources = new();
         static DateTime _day = DateTime.Now.Date;
         static readonly object _swap = new();
         #endregion
@@ -206,14 +206,14 @@ namespace GameServer.Telemetry
                 if (flowMode == "ignore") return;
                 bool transfer = flowMode == "transfer";
                 long abs = System.Math.Abs(delta);
-                var a = _resources.GetOrAdd((resource, system, reason, transfer), _ => new Agg());
+                var a = _resources.GetOrAdd((resource, system, reason, transfer, map), _ => new Agg());
                 Interlocked.Increment(ref a.Count);
                 if (delta > 0) Interlocked.Add(ref a.In, abs); else Interlocked.Add(ref a.Out, abs);
 
                 string flow = transfer ? "Transfer" : (delta > 0 ? "Mint" : "Burn");
                 if (!_queue.TryAdd(new Ev { T = DateTime.Now, Uid = uid, Name = name, Map = map,
                     Cur = Currency.Gold, Before = 0, After = delta, Flow = flow,
-                    System = "Resource:" + resource + "/" + system, Reason = reason }))
+                    System = "Resource:" + resource + "/" + system, Reason = reason, Resource = resource }))
                     Interlocked.Increment(ref _dropped);
             }
             catch { }
@@ -341,7 +341,10 @@ namespace GameServer.Telemetry
             var sb = new StringBuilder(220);
             sb.Append("{\"t\":\"").Append(e.T.ToString("yyyy-MM-ddTHH:mm:ss.fff")).Append("\",\"uid\":").Append(e.Uid)
               .Append(",\"name\":").Append(JsonConvert.ToString(e.Name ?? "")).Append(",\"map\":").Append(e.Map)
-              .Append(",\"cur\":\"").Append(e.Cur).Append("\",\"before\":").Append(e.Before).Append(",\"after\":").Append(e.After)
+              .Append(",\"cur\":\"").Append(e.Cur).Append("\"");
+            if (!string.IsNullOrEmpty(e.Resource))
+                sb.Append(",\"resource\":").Append(JsonConvert.ToString(e.Resource));
+            sb.Append(",\"before\":").Append(e.Before).Append(",\"after\":").Append(e.After)
               .Append(",\"delta\":").Append(e.After - e.Before)
               .Append(",\"flow\":\"").Append(e.Flow).Append("\",\"system\":").Append(JsonConvert.ToString(e.System))
               .Append(",\"reason\":").Append(JsonConvert.ToString(e.Reason));
@@ -411,6 +414,16 @@ namespace GameServer.Telemetry
                             minted = s.Where(r => !r.Key.transfer).Sum(r => r.Value.In),
                             burned = s.Where(r => !r.Key.transfer).Sum(r => r.Value.Out),
                             events = s.Sum(r => r.Value.Count)
+                        }).OrderByDescending(x => x.minted + x.burned).ToList(),
+                        byMap = g.GroupBy(r => r.Key.map).Select(m => new
+                        {
+                            map = m.Key,
+                            minted = m.Where(r => !r.Key.transfer).Sum(r => r.Value.In),
+                            burned = m.Where(r => !r.Key.transfer).Sum(r => r.Value.Out),
+                            net = m.Where(r => !r.Key.transfer).Sum(r => r.Value.In - r.Value.Out),
+                            transferIn = m.Where(r => r.Key.transfer).Sum(r => r.Value.In),
+                            transferOut = m.Where(r => r.Key.transfer).Sum(r => r.Value.Out),
+                            events = m.Sum(r => r.Value.Count)
                         }).OrderByDescending(x => x.minted + x.burned).ToList()
                     };
                 });
