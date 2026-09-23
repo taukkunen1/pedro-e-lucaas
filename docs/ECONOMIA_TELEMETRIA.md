@@ -40,3 +40,11 @@ A auditoria estática em `tools/era1_drop_audit.py` mede a faucet teórica/confi
 Além da remoção física de materiais, a Economy V2 registra mutações do próprio equipamento. Se um alvo passa de Refined para Unique ou de +N para +(N+1), o estado anterior é registrado como BURN e o novo como MINT. A abertura de socket registra `Equipment.Socket1`/`Equipment.Socket2`.
 
 Isso evita o falso cenário em que Dragon Balls, Meteors ou +Stones aparecem como consumidos, mas a saída econômica produzida pela forja fica invisível no resumo.
+
+
+### Gems inseridas em sockets
+A Economy V2 separa a gem física da gem incorporada ao equipamento. Ao inserir uma gem, o item `Gem.*` físico sofre BURN e nasce `EmbeddedGem.*`; ao remover a gem do socket, `EmbeddedGem.*` sofre BURN e nenhuma gem física é devolvida. Isso permite medir inserção e remoção sem tratar a mesma unidade como se ainda estivesse disponível no inventário.
+
+
+### Rotas de upgrade
+As ações legadas `UpgradeMeteor` e `UpgradeDragonball` do pacote de uso de item também passam pela política Era 1. A rota alternativa de `UpgradeMeteor` não pode mais criar sockets aleatórios durante upgrade de nível; sockets só nascem pelos sinks explícitos de socket. Alterações de nível/qualidade feitas por essa rota também entram em `RecordEquipmentTransformation`.
