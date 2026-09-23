@@ -43,7 +43,7 @@ namespace GameServer.Game.MsgServer.AttackHandler
             MsgGameItem DataItem;
             if (user.TryGetItem(ItemUID, out DataItem))
             {
-                if (Game.Era1.Era1Items.IsBlockedEquipment(DataItem.ITEM_ID))
+                if (!Game.Era1.Era1Economy.IsClassicForgeTarget(DataItem.ITEM_ID))
                     return;
                 ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                 //anti-proxy-----------------------
@@ -95,6 +95,7 @@ namespace GameServer.Game.MsgServer.AttackHandler
                                                     DataItem.SocketOne = GemType;
                                                     DataItem.Mode = Role.Flags.ItemMode.Update;
                                                     DataItem.Send(user,stream).Update(Gem, Instance.AddMode.REMOVE,stream);
+                                                    Game.Era1.Era1Economy.RecordEmbeddedGem(user, GemType, 1);
                                                     if (DataItem.Position != 0)
                                                         user.Equipment.QueryEquipment(user.Equipment.Alternante);
                                                 }
@@ -110,6 +111,7 @@ namespace GameServer.Game.MsgServer.AttackHandler
                                                         DataItem.SocketTwo = GemType;
                                                         DataItem.Mode = Role.Flags.ItemMode.Update;
                                                         DataItem.Send(user,stream).Update(Gem, Instance.AddMode.REMOVE,stream);
+                                                        Game.Era1.Era1Economy.RecordEmbeddedGem(user, GemType, 1);
                                                         if (DataItem.Position != 0)
                                                             user.Equipment.QueryEquipment(user.Equipment.Alternante);
                                                     }
@@ -136,6 +138,7 @@ namespace GameServer.Game.MsgServer.AttackHandler
                                     {
                                         if (DataItem.SocketOne != Role.Flags.Gem.NoSocket)
                                         {
+                                            Role.Flags.Gem removedGem = DataItem.SocketOne;
                                             DataItem.SocketOne = Role.Flags.Gem.EmptySocket;
                                             if (DataItem.SocketTwo != Role.Flags.Gem.NoSocket && DataItem.SocketTwo != Role.Flags.Gem.EmptySocket)
                                             {
@@ -144,6 +147,7 @@ namespace GameServer.Game.MsgServer.AttackHandler
                                             }
                                             DataItem.Mode = Role.Flags.ItemMode.Update;
                                             DataItem.Send(user,stream);
+                                            Game.Era1.Era1Economy.RecordEmbeddedGem(user, removedGem, -1);
                                             if (DataItem.Position != 0)
                                                 user.Equipment.QueryEquipment(user.Equipment.Alternante);
                                         }
@@ -153,17 +157,21 @@ namespace GameServer.Game.MsgServer.AttackHandler
                                     {
                                         if (DataItem.SocketTwo != Role.Flags.Gem.NoSocket && DataItem.SocketTwo != Role.Flags.Gem.EmptySocket)
                                         {
+                                            Role.Flags.Gem removedGem = DataItem.SocketTwo;
                                             DataItem.SocketTwo = Role.Flags.Gem.EmptySocket;
                                             DataItem.Mode = Role.Flags.ItemMode.Update;
                                             DataItem.Send(user,stream);
+                                            Game.Era1.Era1Economy.RecordEmbeddedGem(user, removedGem, -1);
                                             if (DataItem.Position != 0)
                                                 user.Equipment.QueryEquipment(user.Equipment.Alternante);
                                         }
                                         else if (DataItem.SocketOne != Role.Flags.Gem.NoSocket)
                                         {
+                                            Role.Flags.Gem removedGem = DataItem.SocketOne;
                                             DataItem.SocketOne = Role.Flags.Gem.EmptySocket;
                                             DataItem.Mode = Role.Flags.ItemMode.Update;
                                             DataItem.Send(user,stream);
+                                            Game.Era1.Era1Economy.RecordEmbeddedGem(user, removedGem, -1);
                                             if (DataItem.Position != 0)
                                                 user.Equipment.QueryEquipment(user.Equipment.Alternante);
                                         }
