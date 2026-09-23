@@ -95,24 +95,24 @@ namespace GameServer.Base.Mining
                 client.Player.View.SendView(stream.ActionCreate(&daction), true);
                 // Era 1 mining is an ore/gem/meteor/DB faucet only. 5695 +Stone
                 // rewards are deliberately excluded; every successful find consumes one attempt.
-                if (MyMath.Success(50.0))
+                if (MyMath.Success(Game.Era1.Era1Economy.MiningSuccessPercent))
                 {
                     uint itemid;
-                    if (PercentSuccess(0.05))
+                    if (PercentSuccess(Game.Era1.Era1Economy.MiningDragonBallPercent))
                     {
                         itemid = Database.ItemType.DragonBall;
                     }
-                    else if (PercentSuccess(0.75))
+                    else if (PercentSuccess(Game.Era1.Era1Economy.MiningMeteorPercent))
                     {
                         itemid = Database.ItemType.Meteor;
                     }
-                    else if (PercentSuccess(4.0))
+                    else if (PercentSuccess(Game.Era1.Era1Economy.MiningGemPercent))
                     {
                         itemid = Gems[Role.Core.Random.Next(0, Gems.Length)];
                         // Refined gems are rare; super gems remain exceptional.
                         if (PercentSuccess(0.05))
                             itemid += 2;
-                        else if (PercentSuccess(2.0))
+                        else if (PercentSuccess(Game.Era1.Era1Economy.MiningRefinedGemPercent))
                             itemid += 1;
                     }
                     else
