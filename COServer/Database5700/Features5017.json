@@ -494,16 +494,16 @@
     },
     {
       "id": "core.itemextra",
-      "name": "Item extra / item lock",
-      "origin": "Original5017",
-      "confidence": "low",
-      "decision": "keep",
+      "name": "Refinery / purification / item lock",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgItemExtra*",
         "DFGameServer/Game/MsgServer/MsgItemLock*"
       ],
       "dbFiles": [],
-      "note": "Item lock provavelmente veio depois; confirmar",
+      "note": "Revisao Economy V2: refinery/purification ficam bloqueados em runtime na Era 1; item lock deve ser tratado separadamente se necessario.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgItemExtra",
