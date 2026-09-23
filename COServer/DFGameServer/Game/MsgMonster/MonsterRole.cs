@@ -5109,7 +5109,7 @@ namespace GameServer.Game.MsgMonster
                             }
                         }
 
-                        if (Family.ID == 20300)//nemesys
+                        if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Family.ID == 20300)//nemesys
                         {
                             const ushort GetStudyPoints = 500;
                             {
