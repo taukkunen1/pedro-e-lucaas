@@ -270,13 +270,24 @@ namespace GameServer
         }
         public static uint GenerateGold(out uint ItemID, MonsterRole Mob, MoneyDrop MoneyDrop)
         {
-            uint amount;
-            if (Mob.Boss != 0)
-                amount = (uint)Pool.GetRandom.Next(Mob.Family.DropMoney, Mob.Family.DropMoney * 10);
-            else
+            // Era 1: the monster database is the source of truth for Gold.
+            // The old 5695/custom path used the same global 1,000-2,000 range for every
+            // normal monster, which made low-level hunting an oversized Gold faucet.
+            uint baseAmount = Mob.Family.DropMoney;
+            if (baseAmount == 0)
             {
-                amount = (uint)Pool.GetRandom.Next((int)MoneyDrop.Min, (int)MoneyDrop.Max);
+                ItemID = 0;
+                return 0;
             }
+
+            uint amount = baseAmount;
+            if (Mob.Boss != 0)
+            {
+                int min = (int)baseAmount;
+                int max = (int)System.Math.Min(int.MaxValue, (long)baseAmount * 10L);
+                amount = max > min ? (uint)Pool.GetRandom.Next(min, max) : baseAmount;
+            }
+
             ItemID = Database.ItemType.MoneyItemID(amount);
             return amount;
         }
