@@ -35,6 +35,11 @@ namespace GameServer.Game.Era1
             return 3;
         }
 
+        public static byte RollHuntingPlus()
+        {
+            return Pool.GetRandom.Next(1, PlusOneDropEvery + 1) == 1 ? (byte)1 : (byte)0;
+        }
+
         public static bool IsLaterEconomyDrop(MadeByDaRkFox.ConfigurableDropSystem.DropType type)
         {
             return type == MadeByDaRkFox.ConfigurableDropSystem.DropType.Stone
