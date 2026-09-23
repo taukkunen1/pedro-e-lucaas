@@ -15,6 +15,25 @@ namespace GameServer.Game.MsgNpc.Dialogs
 
         private static bool InJobCenter(Client.GameClient client) => client.Player.Map == JobCenterMap;
 
+        internal static int RequiredPromotionLevel(byte cls)
+        {
+            if (cls >= 10 && cls <= 14) return cls == 10 ? 15 : cls == 11 ? 40 : cls == 12 ? 70 : cls == 13 ? 100 : 110;
+            if (cls >= 20 && cls <= 24) return cls == 20 ? 15 : cls == 21 ? 40 : cls == 22 ? 70 : cls == 23 ? 100 : 110;
+            if (cls >= 40 && cls <= 44) return cls == 40 ? 15 : cls == 41 ? 40 : cls == 42 ? 70 : cls == 43 ? 100 : 110;
+            if (cls == 100) return 15;
+            if (cls == 101) return 40;
+            if (cls >= 132 && cls <= 134) return cls == 132 ? 70 : cls == 133 ? 100 : 110;
+            if (cls >= 142 && cls <= 144) return cls == 142 ? 70 : cls == 143 ? 100 : 110;
+            return 0;
+        }
+
+        internal static byte NextLinearClass(byte cls)
+        {
+            var required = RequiredPromotionLevel(cls);
+            if (required == 0 || cls == 101) return 0;
+            return (byte)(cls + 1);
+        }
+
         private static void AddSpell(Client.GameClient client, ServerSockets.Packet stream, Role.Flags.SpellID spell)
         {
             var id = (ushort)spell;
@@ -166,7 +185,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
 
             byte cls = client.Player.Class;
-            int required = cls <= 10 ? 15 : cls == 11 ? 40 : cls == 12 ? 70 : cls == 13 ? 100 : cls == 14 ? 110 : 0;
+            int required = RequiredPromotionLevel(cls);
             if (required == 0)
             {
                 Done(client, stream, "Trojan Master");
@@ -207,7 +226,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
 
             byte cls = client.Player.Class;
-            int required = cls <= 20 ? 15 : cls == 21 ? 40 : cls == 22 ? 70 : cls == 23 ? 100 : cls == 24 ? 110 : 0;
+            int required = RequiredPromotionLevel(cls);
             if (required == 0)
             {
                 Done(client, stream, "Warrior Master");
@@ -248,7 +267,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
 
             byte cls = client.Player.Class;
-            int required = cls <= 40 ? 15 : cls == 41 ? 40 : cls == 42 ? 70 : cls == 43 ? 100 : cls == 44 ? 110 : 0;
+            int required = RequiredPromotionLevel(cls);
             if (required == 0)
             {
                 Done(client, stream, "Archer Master");
