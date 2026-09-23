@@ -54,6 +54,16 @@ namespace GameServer.MadeByDaRkFox
                 if (drop.Type == DropType.Money && drop.MoneyDrop != null
                     && drop.MoneyDrop.Type != MoneyType.Money)
                     drop.Enabled = false;
+
+                // Always normalize legacy/custom config files to the Era 1 faucet policy.
+                if (drop.Type == DropType.Money && drop.MoneyDrop != null && drop.MoneyDrop.Type == MoneyType.Money)
+                    drop.Percent = Game.Era1.Era1Economy.MonsterMoneyPercent;
+                else if (drop.Type == DropType.Item)
+                    drop.Percent = Game.Era1.Era1Economy.MonsterEquipmentPercent;
+                else if (drop.Type == DropType.MeteorScroll)
+                    drop.Percent = Game.Era1.Era1Economy.MonsterMeteorPercent;
+                else if (drop.Type == DropType.DragonBall)
+                    drop.Percent = Game.Era1.Era1Economy.MonsterDragonBallPercent;
             }
         }
         public enum DropType
