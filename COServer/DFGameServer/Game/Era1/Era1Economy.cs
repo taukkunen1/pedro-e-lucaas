@@ -16,6 +16,13 @@ namespace GameServer.Game.Era1
         public const int PlusTwoDropEvery = int.MaxValue;
         public const int DragonBallDropEvery = 50000;
 
+        // Baseline hunting faucets. These are intentionally centralized/tunable:
+        // historical sources establish relative rarity, not an authoritative 5017 RNG table.
+        public const double MonsterMoneyPercent = 15.0;
+        public const double MonsterEquipmentPercent = 1.2;
+        public const double MonsterMeteorPercent = 0.20;
+        public const double MonsterDragonBallPercent = 0.002;
+
         public const double MiningSuccessPercent = 50.0;
         public const double MiningDragonBallPercent = 0.05;
         public const double MiningMeteorPercent = 0.75;
@@ -61,7 +68,8 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 quality rarity ordering failed.");
             if (PlusOneDropEvery <= 0 || PlusTwoDropEvery <= PlusOneDropEvery)
                 throw new System.InvalidOperationException("Era 1 +item rarity ordering failed.");
-            if (MiningDragonBallPercent >= MiningMeteorPercent || MiningMeteorPercent >= MiningGemPercent)
+            if (MonsterDragonBallPercent >= MonsterMeteorPercent
+                || MiningDragonBallPercent >= MiningMeteorPercent || MiningMeteorPercent >= MiningGemPercent)
                 throw new System.InvalidOperationException("Era 1 mining faucet ordering failed.");
             if (Game.Era1.Era1Items.IsBlockedEquipment(410073)
                 || !Game.Era1.Era1Items.IsBlockedEquipment(201003))
