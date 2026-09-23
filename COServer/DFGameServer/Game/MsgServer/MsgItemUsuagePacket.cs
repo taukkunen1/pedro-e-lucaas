@@ -151,165 +151,105 @@ namespace GameServer.Game.MsgServer
                         uint ItemUID = (uint)dwParam;
 
                         MsgGameItem DataItem;
-                        MsgGameItem itemuse;
+                        MsgGameItem material;
+                        if (!client.TryGetItem(ItemUID, out material) || !client.TryGetItem(id, out DataItem))
+                            break;
+                        if (!Game.Era1.Era1Economy.IsClassicForgeTarget(DataItem.ITEM_ID))
+                            return;
 
-                        if (client.TryGetItem(ItemUID, out itemuse) && client.TryGetItem(id, out DataItem))
+                        bool worked = false;
+
+                        if (action == ItemUsageID.UpgradeDragonball)
                         {
-                            ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
-                            //anti proxy --------------------
-                            if (!Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)Position))
+                            if (material.ITEM_ID != Database.ItemType.DragonBall || DataItem.ITEM_ID % 10 >= 9)
+                                return;
+
+                            Database.ItemType.DBItem DBItem;
+                            if (!Pool.ItemsBase.TryGetValue(DataItem.ITEM_ID, out DBItem) || DBItem.Level == 1)
+                                return;
+
+                            uint oldid = DataItem.ITEM_ID;
+                            if (Database.ItemType.UpQualityDB(DataItem.ITEM_ID, 1))
                             {
-                                client.SendSysMesage("This item's level cannot be upgraded anymore.");
+                                if (DataItem.ITEM_ID % 10 < 5)
+                                    DataItem.ITEM_ID += 5 - DataItem.ITEM_ID % 10;
+                                DataItem.ITEM_ID++;
+                                DataItem.Mode = Role.Flags.ItemMode.Update;
+                                DataItem.Send(client, stream);
+                                worked = oldid != DataItem.ITEM_ID;
+                                if (worked)
+                                    Game.Era1.Era1Economy.RecordEquipmentTransformation(client, oldid, DataItem.Plus, DataItem.ITEM_ID, DataItem.Plus);
+                            }
+                            else
+                            {
+                                if (DataItem.Durability > 0)
+                                    DataItem.Durability = (ushort)Role.Core.Random.Next(0, DataItem.Durability);
+                                DataItem.Mode = Role.Flags.ItemMode.Update;
+                                DataItem.Send(client, stream);
+                            }
+
+                            client.Inventory.Update(material, Instance.AddMode.REMOVE, stream);
+                        }
+                        else
+                        {
+                            if (material.ITEM_ID != Database.ItemType.Meteor
+                                && material.ITEM_ID != Database.ItemType.MeteorTear
+                                && material.ITEM_ID != Database.ItemType.MeteorScroll)
+                                return;
+                            if (!client.Inventory.CheckMeteors(1, false, stream))
+                                return;
+
+                            Database.ItemType.DBItem DBItem;
+                            if (!Pool.ItemsBase.TryGetValue(DataItem.ITEM_ID, out DBItem))
+                                return;
+
+                            bool canUpdate = false;
+                            uint nextItemId = Pool.ItemsBase.UpdateItem(DataItem.ITEM_ID, out canUpdate);
+                            if (!canUpdate || nextItemId == DataItem.ITEM_ID)
+                                return;
+
+                            if ((DBItem.Level >= 70 && !Database.ItemType.Equipable(nextItemId, client))
+                                && (Database.ItemType.ItemPosition(DataItem.ITEM_ID) == (ushort)Role.Flags.ConquerItem.RightWeapon
+                                    || Database.ItemType.ItemPosition(DataItem.ITEM_ID) == (ushort)Role.Flags.ConquerItem.LeftWeapon))
+                            {
+                                client.CreateBoxDialog("You can’t update this item.");
                                 return;
                             }
-                            bool worked = true;
-                            //------------------------
-                            if (itemuse.ITEM_ID == Database.ItemType.DragonBall)
+
+                            if (DataItem.Durability == 0)
                             {
-                                Database.ItemType.DBItem DBItem;
-                                if (Pool.ItemsBase.TryGetValue(DataItem.ITEM_ID, out DBItem))
+                                client.CreateBoxDialog("Go repair this item.");
+                                return;
+                            }
+
+                            uint oldid = DataItem.ITEM_ID;
+                            if (Database.ItemType.UpItemMeteors(DataItem.ITEM_ID, 1))
+                            {
+                                bool succeeded = false;
+                                DataItem.ITEM_ID = Pool.ItemsBase.UpdateItem(DataItem.ITEM_ID, out succeeded);
+                                if (succeeded && oldid != DataItem.ITEM_ID)
                                 {
-                                    if (DataItem.ITEM_ID % 10 == 9)
-                                    {
-                                        client.SendSysMesage("This item's cant be upgraded anymore.");
-                                        return;
-                                    }
-                                    if (DBItem.Level == 1)
-                                    {
-                                        client.SendSysMesage("Items with level 1 cannot be upgraded.");
-                                        return;
-                                    }
-                                    sbyte Chance = (sbyte)(100 - (DBItem.Level / 3));
-                                    byte Quality = (byte)(DBItem.ID % 10);
-
-                                    if (Quality == 6)
-                                        Chance -= 25;
-                                    else if (Quality == 7)
-                                        Chance -= 40;
-                                    else if (Quality == 8)
-                                        Chance -= 70;
-                                    if (client.Inventory.Contain(Database.ItemType.DragonBall, 1, 0))
-                                    {
-                                        if (Role.Core.Rate(Chance))
-                                        {
-                                            dwParam = 1;
-                                            uint oldid = DataItem.ITEM_ID;
-                                            if (DataItem.ITEM_ID % 10 < 5)
-                                                DataItem.ITEM_ID += 5 - DataItem.ITEM_ID % 10;
-                                            DataItem.ITEM_ID = (uint)(DataItem.ITEM_ID + 1);
-                                            DataItem.Mode = Role.Flags.ItemMode.Update;
-                                            if (oldid != DataItem.ITEM_ID)
-                                            {
-                                                if (DataItem.SocketOne == Role.Flags.Gem.NoSocket)
-                                                {
-                                                    if (Role.Core.Rate(0.07))
-                                                    {
-                                                        DataItem.SocketOne = Role.Flags.Gem.EmptySocket;
-                                                        client.SendSysMesage("You successfully opened the first socket.", MsgMessage.ChatMode.TopLeft);
-                                                    }
-                                                }
-
-                                                if (DataItem.SocketOne != Role.Flags.Gem.NoSocket && DataItem.SocketTwo != Role.Flags.Gem.NoSocket)
-                                                {
-                                                    if (Role.Core.Rate(0.05))
-                                                    {
-                                                        DataItem.SocketTwo = Role.Flags.Gem.EmptySocket;
-                                                        client.SendSysMesage("You successfully opened the second socket.", MsgMessage.ChatMode.TopLeft);
-                                                    }
-                                                }
-                                                DataItem.Send(client, stream);//.Update(itemuse, Instance.AddMode.REMOVE,stream);
-
-                                                //client.Inventory.Update(itemuse, Instance.AddMode.REMOVE, stream);
-                                                client.SendSysMesage("Successfully upgraded item.", MsgMessage.ChatMode.TopLeft);
-
-                                            }
-                                            else
-                                            {
-                                                client.SendSysMesage("This item's level cannot be upgraded anymore.");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            int RandomDura = Role.Core.Random.Next(0, DataItem.Durability);
-                                            DataItem.Durability = (ushort)RandomDura;
-                                            DataItem.Mode = Role.Flags.ItemMode.Update;
-                                            DataItem.Send(client, stream);
-                                            client.SendSysMesage("Failed to upgrade item.", MsgMessage.ChatMode.TopLeft);
-                                        }
-                                        client.Inventory.Remove(Database.ItemType.DragonBall, 1, stream);
-
-                                    }
+                                    DataItem.Mode = Role.Flags.ItemMode.Update;
+                                    DataItem.Send(client, stream);
+                                    worked = true;
+                                    Game.Era1.Era1Economy.RecordEquipmentTransformation(client, oldid, DataItem.Plus, DataItem.ITEM_ID, DataItem.Plus);
                                 }
                             }
-                            else if (itemuse.ITEM_ID == Database.ItemType.Meteor)
+                            else
                             {
-                                if (client.Inventory.CheckMeteors(1, false, stream))
-                                {
-                                    Database.ItemType.DBItem DBItem;
-                                    if (Pool.ItemsBase.TryGetValue(DataItem.ITEM_ID, out DBItem))
-                                    {
-                                        bool succesed = false;
-
-                                        uint nextItemId = Pool.ItemsBase.UpdateItem(DataItem.ITEM_ID, out succesed);
-
-                                        if ((DBItem.Level >= 70 && Database.ItemType.Equipable(nextItemId, client) == false)
-                                         && (Database.ItemType.ItemPosition(DataItem.ITEM_ID) == (ushort)Role.Flags.ConquerItem.RightWeapon
-                                         || Database.ItemType.ItemPosition(DataItem.ITEM_ID) == (ushort)Role.Flags.ConquerItem.LeftWeapon))
-                                        {
-                                            client.CreateBoxDialog("You can`t update this item.");
-                                        }
-                                        else
-                                        {
-                                            if (DBItem.Durability == 0)
-                                                client.CreateBoxDialog("Go repair this item.");
-                                            else
-                                            {
-                                                if (Database.ItemType.UpItemMeteors(DataItem.ITEM_ID, 1))
-                                                {
-                                                    dwParam = 1;
-                                                    DataItem.ITEM_ID = Pool.ItemsBase.UpdateItem(DataItem.ITEM_ID, out succesed);
-                                                    DataItem.Mode = Role.Flags.ItemMode.Update;
-                                                    if (DataItem.SocketOne == Role.Flags.Gem.NoSocket)
-                                                    {
-                                                        if (Role.Core.Rate(0.01))
-                                                        {
-                                                            DataItem.SocketOne = Role.Flags.Gem.EmptySocket;
-                                                            client.SendSysMesage("You successfully opened the first socket.", MsgMessage.ChatMode.TopLeft);
-                                                        }
-                                                    }
-                                                    if (DataItem.SocketOne != Role.Flags.Gem.NoSocket && DataItem.SocketTwo != Role.Flags.Gem.NoSocket)
-                                                    {
-                                                        if (Role.Core.Rate(0.005))
-                                                        {
-                                                            DataItem.SocketTwo = Role.Flags.Gem.EmptySocket;
-                                                            client.SendSysMesage("You successfully opened the second socket.", MsgMessage.ChatMode.TopLeft);
-                                                        }
-                                                    }
-                                                    DataItem.Send(client, stream);
-                                                    client.SendSysMesage("Successfully upgraded item.", MsgMessage.ChatMode.TopLeft);
-                                                }
-                                                else
-                                                {
-                                                    worked = false;
-                                                    int RandomDura = Role.Core.Random.Next(0, DataItem.Durability);
-                                                    DataItem.Durability = (ushort)RandomDura;
-                                                    DataItem.Mode = Role.Flags.ItemMode.Update;
-                                                    DataItem.Send(client, stream);
-                                                    client.SendSysMesage("Failed to upgrade go repair it.", MsgMessage.ChatMode.TopLeft);
-                                                }
-
-                                                client.Inventory.CheckMeteors(1, true, stream);
-                                            }
-                                        }
-                                    }
-                                }
+                                if (DataItem.Durability > 0)
+                                    DataItem.Durability = (ushort)Role.Core.Random.Next(0, DataItem.Durability);
+                                DataItem.Mode = Role.Flags.ItemMode.Update;
+                                DataItem.Send(client, stream);
                             }
-                            if (DataItem.Position != 0)
-                                client.Equipment.QueryEquipment(client.Equipment.Alternante);
-                            if (worked)
-                                client.Send(stream.ItemUsageCreate(MsgItemUsuagePacket.ItemUsageID.UpgradeMeteor, ItemUID, dwParam, 0, 0, 0, 0));
 
+                            client.Inventory.CheckMeteors(1, true, stream);
                         }
+
+                        if (DataItem.Position != 0)
+                            client.Equipment.QueryEquipment(client.Equipment.Alternante);
+
+                        client.Send(stream.ItemUsageCreate(action, ItemUID, worked ? 1u : 0u, 0, 0, 0, 0));
                         break;
                     }
                 case ItemUsageID.ReturnedItems:
