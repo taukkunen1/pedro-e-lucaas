@@ -63,6 +63,8 @@ namespace GameServer.Game.MsgServer.AttackHandler
                             MsgGameItem Gem;
                             if (user.TryGetItem(GemUID, out Gem))
                             {
+                                if (!Game.Era1.Era1Economy.IsClassicMiningGem(Gem.ITEM_ID))
+                                    return;
 
                                 if (Enum.IsDefined(typeof(Role.Flags.Gem), (byte)(Gem.ITEM_ID % 1000)))
                                 {
