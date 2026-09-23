@@ -22,3 +22,9 @@
 - Drop de ouro do jogador (morte/`DropGold`) aparece como burn `FloorDrop`; quem pega vê mint `FloorPickup`. O par se anula no líquido.
 - O `Other` deve ficar pequeno: olhe "maiores motivos" no relatório e adicione regras.
 - A regra de `Code:*` depende do nome da classe/método do código; se renomear, ajuste o JSON.
+
+
+## Recursos escassos por mapa
+O resumo diário de `resources` também contém `byMap`, com MINT, BURN, líquido, transferências e número de eventos por mapa. Isso permite localizar faucets excessivas de Meteor, Dragon Ball, gems, equipamentos de qualidade e +N usando dados reais de produção.
+
+Para a auditoria estática por monstro/mapa, use `python tools/era1_drop_audit.py`. O relatório cruza `Monsters/*.ini` com `MobSpawns/**/*` e grava os CSVs em `docs/catalogo/`.
