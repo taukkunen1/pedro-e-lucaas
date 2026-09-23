@@ -1,14 +1,15 @@
-# Telemetria de economia (mint / burn) — Gold, CPs e Bound CPs
+# Telemetria de economia (mint / burn) — moedas e recursos Era 1
 
 ## Como funciona
-- **Captura única:** os setters `Player.Money`, `Player.ConquerPoints` e `Player.BoundConquerPoints` chamam `Economy.Record(...)` (só depois do login completo, `Owner.FullLoading`). Nenhum dos ~840 pontos do código precisa ser alterado: toda mudança de saldo passa por esses setters.
+- **Moedas:** os setters `Player.Money`, `Player.ConquerPoints` e `Player.BoundConquerPoints` chamam `Economy.Record(...)`.
+- **Recursos escassos:** a fronteira do inventário chama `Economy.RecordResource(...)` para Meteor/MeteorTear, DragonBall, gems Normal/Refined/Super, equipamentos Refined/Unique/Elite/Super e equipamentos +N. Isso permite medir o MINT/BURN real dos principais recursos da Era 1.
 - **Motivo (reason):** vem do escopo aberto no ponto de entrada — `Npc:<NpcID>#<opção>` (Procesor), `ItemUsage:<ação>` (pacote de item), `ItemUse:<id> <nome>` (usar item) — ou, sem escopo, do stack de chamadas (`Code:Classe.Método`).
 - **Classificação:** `Database5700/EconomyTelemetry.json` (criado no primeiro start) tem regras regex `reason -> system` e `flow` (`auto` = sinal do delta, `transfer`, `ignore`). Primeira regra que casa vence; sem regra => `Other`.
 - **Mint** = moeda criada (delta > 0) · **Burn** = destruída (delta < 0) · **Transfer** = troca/armazém/barraca/poker/inter-server: a soma deve dar ~0; o resíduo aponta vazamento (imposto ou exploit).
 
 ## Saídas (`Database5700/Telemetry/economy/`, ignorada no git)
 - `yyyy-MM-dd.ndjson`: um evento por linha (hora, uid, nome, mapa, moeda, antes, depois, delta, flow, system, reason, alert).
-- `summary-yyyy-MM-dd.json`: a cada 5 min e à meia-noite — mint/burn/líquido por moeda, por sistema, top motivos, top jogadores.
+- `summary-yyyy-MM-dd.json`: a cada 5 min e à meia-noite — mint/burn/líquido por moeda e por recurso, razão MINT/BURN, cobertura de burn, sistemas, top motivos e top jogadores.
 - Alertas no console e `"alert":true` para eventos acima de `alertGold` (500M) / `alertCps` (5.000).
 
 ## Ferramentas
