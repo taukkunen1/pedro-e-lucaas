@@ -1,3 +1,4 @@
+using System;
 using GameServer.Game.MsgServer;
 
 namespace GameServer.Game.MsgNpc.Dialogs
