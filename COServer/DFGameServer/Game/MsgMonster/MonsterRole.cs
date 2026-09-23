@@ -5077,7 +5077,7 @@ namespace GameServer.Game.MsgMonster
                             }
                         }
                     }
-                    if (Map == 3846)
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Map == 3846)
                     {
                         uint PostionDrop = Family.ItemGenerator.GeneratePotionExtra();
                         if (Role.Core.Rate(40))
@@ -5205,7 +5205,7 @@ namespace GameServer.Game.MsgMonster
                     //                            }
                     //                        }
                     //                    }
-                    if (Boss > 0 && Family.ID == 20100)//NightmareCaptain
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Boss > 0 && Family.ID == 20100)//NightmareCaptain
                     {
                         uint ItemID = 3004465;
                         if (Role.Core.Rate(20))
@@ -5235,7 +5235,7 @@ namespace GameServer.Game.MsgMonster
                         }
                         return;
                     }
-                    if (Boss > 0 && Family.ID == 20101 && Map == 3851)//PurpleBanshee
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Boss > 0 && Family.ID == 20101 && Map == 3851)//PurpleBanshee
                     {
                         uint ItemID = 3004465;
                         if (Role.Core.Rate(20))
@@ -5268,7 +5268,7 @@ namespace GameServer.Game.MsgMonster
                         }
                         return;
                     }
-                    if (Boss > 0 && Family.ID == 20101 && Map == 3825)//PurpleBanshee
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Boss > 0 && Family.ID == 20101 && Map == 3825)//PurpleBanshee
                     {
                         //3003340 SolarBlade
                         uint ItemID = 3003340;
