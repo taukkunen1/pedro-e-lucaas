@@ -102,42 +102,6 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 AddReward(client, stream, reward.ItemId, reward.SocketOne);
         }
 
-        /* Legacy inline reward map retained below only as source history. */
-        private static void AwardClassicPhysicalReward_LegacyUnused(Client.GameClient client, ServerSockets.Packet stream, string profession, int level)
-        {
-            // IDs verified against Database5700/itemtype.txt.
-            if (profession == "Trojan")
-            {
-                if (level == 40) AddReward(client, stream, 410073);      // Normal lvl 40 Cutlass
-                else if (level == 70) AddReward(client, stream, 130063); // Normal lvl 70 Rage Armor
-            }
-            else if (profession == "Warrior")
-            {
-                if (level == 40) AddReward(client, stream, 900003);      // Normal lvl 40 Soft Shield
-                else if (level == 70) AddReward(client, stream, 131063); // Normal lvl 70 Light Armor
-            }
-            else if (profession == "Archer")
-            {
-                if (level == 15) AddReward(client, stream, 133003); // Normal lvl 15 Deerskin Coat
-                else if (level == 40)
-                    AddReward(client, stream, 500073, Role.Flags.Gem.EmptySocket); // Normal lvl 40 Horn Bow, 1 socket
-            }
-            else if (profession == "Taoist")
-            {
-                if (level == 15) AddReward(client, stream, 134003);      // Normal lvl 15 Tao Robe
-                else if (level == 40) AddReward(client, stream, 421073); // Normal lvl 40 End Backsword
-                else if (level == 70) AddReward(client, stream, 134063); // Normal lvl 70 Crane Vestment
-            }
-
-            // Classic level-100 reward for all four profession lines.
-            if (level == 100)
-                AddReward(client, stream, 700031); // Normal Rainbow Gem
-
-            // Classic level-110 reward is one Dragon Ball after consuming the Moon Box.
-            if (level == 110)
-                AddReward(client, stream, Database.ItemType.DragonBall);
-        }
-
         private static bool ConsumePromotionMaterial(Client.GameClient client, ServerSockets.Packet stream, int level, bool archer)
         {
             uint itemId = 0;
