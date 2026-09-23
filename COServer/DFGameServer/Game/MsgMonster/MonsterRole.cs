@@ -5667,7 +5667,7 @@ namespace GameServer.Game.MsgMonster
                         }
                         return;
                     }
-                    if (Family.ID == 8419) // WaterDevil
+                    if (Game.Era1.Era1Economy.IsClassicDirectDragonBallMonster(Family.ID))
                     {
                         ushort xx = (ushort)X;
                         ushort yy = (ushort)Y;
