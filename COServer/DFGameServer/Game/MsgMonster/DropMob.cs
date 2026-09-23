@@ -4,7 +4,6 @@ using GameServer.Game.MsgMonster;
 using GameServer.Game.MsgServer;
 using GameServer.MadeByDaRkFox;
 using System;
-using System.Threading.Tasks;
 
 namespace GameServer
 {
@@ -19,8 +18,11 @@ namespace GameServer
             ushort xx = Mob.X;
             ushort yy = Mob.Y;
 
-            Parallel.ForEach(ConfigurableDropSystem.Drops, (Drop) => {
-                if (killer == null) return;
+            // A kill has only a handful of configured faucet rolls. Run them sequentially:
+            // xx/yy are mutated by AddGroundItem(ref ...), so the old Parallel.ForEach introduced
+            // a data race inside a single monster death and made drop placement/RNG auditing noisy.
+            foreach (var Drop in ConfigurableDropSystem.Drops)
+            {
                 if (Utils.Rate(Drop.Percent) && Drop.Enabled)
                 {
                     switch (Drop.Type)
@@ -249,7 +251,7 @@ namespace GameServer
                             }
                     }
                 }
-            });
+            }
 
             return returnBoolean;
         }
