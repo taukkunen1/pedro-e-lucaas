@@ -128,6 +128,7 @@ namespace GameServer
             if (args.Length > 0 && string.Equals(args[0], "era1-selftest", StringComparison.OrdinalIgnoreCase))
             {
                 Game.MsgNpc.Dialogs.Era1JobCenter.RunSelfTest();
+                Game.Era1.Era1Progression.RunSelfTest();
                 return;
             }
 
