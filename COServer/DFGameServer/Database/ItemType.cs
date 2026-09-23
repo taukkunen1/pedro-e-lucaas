@@ -388,7 +388,7 @@ namespace GameServer.Database
         {
             return StonePoints[Math.Min((int)plus, 8)];
         }
-        static ushort[] StonePoints = new ushort[9] { 1, 10, 40, 120, 360, 1080, 3240, 9720, 29160 };
+        static ushort[] StonePoints = new ushort[9] { 0, 10, 40, 120, 360, 1080, 3240, 9720, 29160 };
         static ushort[] ComposePoints = new ushort[13] { 20, 20, 80, 240, 720, 2160, 6480, 19440, 58320, 2700, 5500, 9000, 0 };
 
         public static Role.Flags.SoulTyp GetSoulPosition(uint ID)
