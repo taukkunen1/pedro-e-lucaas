@@ -48,3 +48,9 @@ A Economy V2 separa a gem física da gem incorporada ao equipamento. Ao inserir 
 
 ### Rotas de upgrade
 As ações legadas `UpgradeMeteor` e `UpgradeDragonball` do pacote de uso de item também passam pela política Era 1. A rota alternativa de `UpgradeMeteor` não pode mais criar sockets aleatórios durante upgrade de nível; sockets só nascem pelos sinks explícitos de socket. Alterações de nível/qualidade feitas por essa rota também entram em `RecordEquipmentTransformation`.
+
+
+## Integridade do BURN na Economy V2
+A remoção de recursos é contabilizada somente quando o inventário realmente perde unidades. Chamadas repetidas sobre um UID já removido não geram novo BURN. Os helpers de Meteor/Dragon Ball preservam a equivalência de scrolls em 10 unidades e o troco volta como MINT físico, de forma que o líquido corresponda ao custo efetivamente gasto.
+
+Gems inseridas em equipamento deixam o estoque físico `Gem.*` e passam para `EmbeddedGem.*`; a retirada/destruição da gem que estava no socket queima esse estado embutido. A abertura do slot em si continua separada como `Equipment.Socket1` ou `Equipment.Socket2`.
