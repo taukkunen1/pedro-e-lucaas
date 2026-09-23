@@ -29,116 +29,30 @@ namespace GameServer
                             {
                                 if (Drop.MoneyDrop.Type == ConfigurableDropSystem.MoneyType.Money)
                                 {
-                                    uint Money_Itemid;
-                                    uint money_value = GenerateGold(out Money_Itemid, Mob, Drop.MoneyDrop);
-                                    if (killer.Player.VipLevel >= 3)
-                                    {
-                                        if (killer.AutoHunting.Enable)
-                                        {
-                                            if (killer.AutoHunting.LootMoney)
-                                            {
-                                                killer.Player.Money += money_value;
-                                                killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You get {money_value} of Money in Inventory.", MsgMessage.ChatMode.TopLeft);
-                                            }
-                                            else
-                                            {
-                                                if (killer.Map.AddGroundItem(ref xx, ref yy) && Money_Itemid > 0)
-                                                {
-                                                    Mob.DropItem(stream, killer.Player.UID, killer.Map, Money_Itemid, xx, yy, Game.MsgFloorItem.MsgItem.ItemType.Money, money_value, false, 0);
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            killer.Player.Money += money_value;
-                                            killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You get {money_value} of Money in Inventory.", MsgMessage.ChatMode.TopLeft);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (killer.Map.AddGroundItem(ref xx, ref yy) && Money_Itemid > 0)
-                                        {
-                                            Mob.DropItem(stream, killer.Player.UID, killer.Map, Money_Itemid, xx, yy, Game.MsgFloorItem.MsgItem.ItemType.Money, money_value, false, 0);
-                                        }
-                                    }
+                                    uint moneyItemId;
+                                    uint moneyValue = GenerateGold(out moneyItemId, Mob, Drop.MoneyDrop);
+                                    if (killer.Map.AddGroundItem(ref xx, ref yy) && moneyItemId > 0)
+                                        Mob.DropItem(stream, killer.Player.UID, killer.Map, moneyItemId, xx, yy,
+                                            Game.MsgFloorItem.MsgItem.ItemType.Money, moneyValue, false, 0);
                                 }
-                                // Era 1 hunting economy uses silver drops, not direct CP/Bound-CP monster rewards.
                                 returnBoolean = true;
                                 break;
                             }
                         case ConfigurableDropSystem.DropType.MeteorScroll:
                             {
-                                uint ID = 1088001;
-                                if (killer.Player.VipLevel >= 3)
-                                {
-                                    if (killer.AutoHunting.Enable)
-                                    {
-                                        if (killer.AutoHunting.Meteors)
-                                        {
-                                            if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                            {
-                                                killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You got a Meteor in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Mob.DropItemID(killer, ID, stream, 3, true);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                        {
-                                            killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You got a Meteor in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    Mob.DropItemID(killer, ID, stream, 3, true);
-                                }
+                                // Despite the legacy enum name this is one Meteor, not a scroll.
+                                Mob.DropItemID(killer, Database.ItemType.Meteor, stream, 3, true);
                                 returnBoolean = true;
                                 break;
                             }
                         case ConfigurableDropSystem.DropType.Item:
                             {
-                                byte ID_Quality;
-                                bool ID_Special;
-                                uint ID = GenerateItemId(Mob, Mob.Map, out ID_Quality, out ID_Special, out Database.ItemType.DBItem DbItem);
-                                if (killer.Player.VipLevel >= 3 && ID > 0)
-                                {
-                                    if (killer.AutoHunting.Enable)
-                                    {
-                                        if (killer.AutoHunting.MaterialItems)
-                                        {
-                                            if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                            {
-                                                killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You got a RandomItem in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (killer.Map.AddGroundItem(ref xx, ref yy))
-                                            {
-                                                DropItem(stream, Mob, killer.Player.UID, killer.Map, ID, xx, yy, Game.MsgFloorItem.MsgItem.ItemType.Item, 0, ID_Special, ID_Quality, killer, DbItem);
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                        {
-                                            killer.SendSysMesage("[VIP-" + killer.Player.VipLevel + $"] You got a RandomItem in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (killer.Map.AddGroundItem(ref xx, ref yy))
-                                    {
-                                        DropItem(stream, Mob, killer.Player.UID, killer.Map, ID, xx, yy, Game.MsgFloorItem.MsgItem.ItemType.Item, 0, ID_Special, ID_Quality, killer, DbItem);
-                                    }
-                                }
+                                byte quality;
+                                bool special;
+                                uint id = GenerateItemId(Mob, Mob.Map, out quality, out special, out Database.ItemType.DBItem dbItem);
+                                if (id > 0 && killer.Map.AddGroundItem(ref xx, ref yy))
+                                    DropItem(stream, Mob, killer.Player.UID, killer.Map, id, xx, yy,
+                                        Game.MsgFloorItem.MsgItem.ItemType.Item, 0, special, quality, killer, dbItem);
                                 returnBoolean = true;
                                 break;
                             }
