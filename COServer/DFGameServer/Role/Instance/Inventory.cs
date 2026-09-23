@@ -18,7 +18,7 @@ namespace GameServer.Role.Instance
 
         public bool AddAccess(ServerSockets.Packet stream, uint ID, byte count = 1, bool Activate = true, uint DaysRemain = uint.MaxValue, bool bound = false)
         {
-            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID)) return false; // [feature-gate items]
+            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID) || Game.Era1.Era1Items.IsBlockedEquipment(ID)) return false; // [feature-gate items]
             if (ID == 1088000)
             {
 
@@ -527,7 +527,7 @@ namespace GameServer.Role.Instance
              , Role.Flags.Gem socktwo = Flags.Gem.NoSocket, bool bound = false, Role.Flags.ItemEffect Effect = Flags.ItemEffect.None, bool SendMessage = false
             , string another_text = "")
         {
-            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID)) return false; // [feature-gate items]
+            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID) || Game.Era1.Era1Items.IsBlockedEquipment(ID)) return false; // [feature-gate items]
             if (ID == 1088000)
             {
 
@@ -596,7 +596,7 @@ namespace GameServer.Role.Instance
         }
         public bool AddMinute(ServerSockets.Packet stream, uint ID, int minute = 0, byte count = 1, byte plus = 0, bool bound = false)
         {
-            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID)) return false; // [feature-gate items]
+            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID) || Game.Era1.Era1Items.IsBlockedEquipment(ID)) return false; // [feature-gate items]
             if (count == 0)
                 count = 1;
             if (HaveSpace(count))
@@ -657,7 +657,7 @@ namespace GameServer.Role.Instance
         }
         public bool AddItemWitchStack(uint ID, byte Plus, ushort amount, ServerSockets.Packet stream, bool bound = false, int IDEvent = 0)
         {
-            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID)) return false; // [feature-gate items]
+            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ID) || Game.Era1.Era1Items.IsBlockedEquipment(ID)) return false; // [feature-gate items]
             //return Add(stream, ID, (byte)amount, Plus, 0, 0, Flags.Gem.NoSocket, Flags.Gem.NoSocket, bound);
             Database.ItemType.DBItem DbItem;
             bool AllOk = false;
@@ -966,6 +966,9 @@ namespace GameServer.Role.Instance
         }
         public bool Add(Game.MsgServer.MsgGameItem ItemDat, Database.ItemType.DBItem ITEMDB, ServerSockets.Packet stream)
         {
+            if (global::Core.Features.FeatureRegistry.IsBlockedItem(ItemDat.ITEM_ID) || Game.Era1.Era1Items.IsBlockedEquipment(ItemDat.ITEM_ID))
+                return false;
+
             if (ITEMDB.StackSize > 0)
             {
                 foreach (var item in ClientItems.Values)
