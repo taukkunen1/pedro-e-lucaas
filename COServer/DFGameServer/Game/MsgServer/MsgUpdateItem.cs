@@ -80,6 +80,8 @@ namespace GameServer.Game.MsgServer
                         MsgGameItem DataItem;
                         if (client.TryGetItem(ItemUID, out DataItem))
                         {
+                            if (!Game.Era1.Era1Economy.IsClassicForgeTarget(DataItem.ITEM_ID))
+                                return;
                             ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                             //anti proxy --------------------
                             if (!Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)Position))
@@ -180,6 +182,9 @@ namespace GameServer.Game.MsgServer
                         MsgGameItem DataItem;
                         if (client.TryGetItem(ItemUID, out DataItem))
                         {
+                            if (!Game.Era1.Era1Economy.IsClassicForgeTarget(DataItem.ITEM_ID)
+                                || DataItem.ITEM_ID % 10 >= 9)
+                                return;
                             ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                             //anti proxy --------------------
                             if (Position != (ushort)Role.Flags.ConquerItem.Fan
@@ -193,11 +198,13 @@ namespace GameServer.Game.MsgServer
                             }
                             //------------------------
                             Queue<MsgGameItem> UseItems = new Queue<MsgGameItem>();
+                            HashSet<uint> UniqueItems = new HashSet<uint>();
                             bool EmbedUpdate = false;
                             for (int x = 0; x < ItemsUIDS.Count; x++)
                             {
                                 MsgGameItem itemuse;
-                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
+                                if (UniqueItems.Add(ItemsUIDS[x])
+                                    && client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
                                     && itemuse.ITEM_ID == Database.ItemType.DragonBall)
                                 {
                                     UseItems.Enqueue(itemuse);
@@ -292,11 +299,13 @@ namespace GameServer.Game.MsgServer
 
 
                             Queue<MsgGameItem> UseItems = new Queue<MsgGameItem>();
+                            HashSet<uint> UniqueItems = new HashSet<uint>();
                             bool EmbedUpdate = false;
                             for (int x = 0; x < ItemsUIDS.Count; x++)
                             {
                                 MsgGameItem itemuse;
-                                if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
+                                if (UniqueItems.Add(ItemsUIDS[x])
+                                    && client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
                                     && itemuse.UID != DataItem.UID
                                     && Game.Era1.Era1Economy.IsAllowedCompositionMaterial(DataItem.ITEM_ID, itemuse.ITEM_ID)
                                     && itemuse.Plus <= 8
