@@ -397,6 +397,18 @@ namespace GameServer.Game.MsgNpc
                             }
                             return;
                         }
+                        // Era 1 hard gate: post-classic promotion NPCs must never execute,
+                        // even if a stale client/database entry still exposes one.
+                        if (action.npcid == (uint)NpcID.PromotionNinja
+                            || action.npcid == (uint)NpcID.PromotionMonk
+                            || action.npcid == (uint)NpcID.PromotionPirate
+                            || action.npcid == (uint)NpcID.PromotionLeeLong
+                            || action.npcid == (uint)NpcID.PromotionWindWalker)
+                        {
+                            action.client.SendSysMesage("This profession is not available in Era 1.");
+                            return;
+                        }
+
                         if (action.InteractType == (byte)NpcReply.InteractTypes.MessageBox)
                         {
                             if (action.client.Player.StartMessageBox > DateTime.Now)
