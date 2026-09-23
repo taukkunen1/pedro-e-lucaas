@@ -40,6 +40,63 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 .FinalizeDialog();
         }
 
+        private static bool ConsumePromotionMaterial(Client.GameClient client, ServerSockets.Packet stream, int level, bool archer)
+        {
+            uint itemId = 0;
+            uint amount = 1;
+            string itemName = null;
+
+            if (level == 40 && archer)
+            {
+                itemId = Database.ItemType.EuxeniteOre;
+                amount = 5;
+                itemName = "Euxenite Ores";
+            }
+            else if (level == 70)
+            {
+                itemId = Database.ItemType.Emerald;
+                itemName = "Emerald";
+            }
+            else if (level == 100)
+            {
+                itemId = Database.ItemType.Meteor;
+                itemName = "Meteor";
+            }
+            else if (level == 110)
+            {
+                // Moon Boxes exist as a small ID family in the database. HasMoonBox
+                // returns the concrete box ID owned by the player.
+                itemId = client.Inventory.HasMoonBox();
+                itemName = "Moon Box";
+                if (itemId == 0)
+                {
+                    MissingMaterial(client, stream, 1, itemName);
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+
+            if (client.Inventory.GetCountItem(itemId) < amount)
+            {
+                MissingMaterial(client, stream, amount, itemName);
+                return false;
+            }
+
+            return client.Inventory.Remove(itemId, amount, stream);
+        }
+
+        private static void MissingMaterial(Client.GameClient client, ServerSockets.Packet stream, uint amount, string itemName)
+        {
+            new Dialog(client, stream)
+                .Text("This promotion requires " + amount + " " + itemName + (amount > 1 ? "." : "."))
+                .Option("I will return with it.", byte.MaxValue)
+                .AddAvatar(0)
+                .FinalizeDialog();
+        }
+
         [NpcAttribute(NpcID.PromotionTrojan)]
         public static void TrojanStar(Client.GameClient client, ServerSockets.Packet stream, byte option, string input, uint id)
         {
@@ -65,6 +122,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
             }
             if (option != 1) return;
+            if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = (byte)(cls + 1);
             if (required == 15)
@@ -104,6 +162,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
             }
             if (option != 1) return;
+            if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = (byte)(cls + 1);
             if (required == 15)
@@ -143,6 +202,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
             }
             if (option != 1) return;
+            if (!ConsumePromotionMaterial(client, stream, required, true)) return;
 
             client.Player.Class = (byte)(cls + 1);
             if (required == 15)
@@ -242,6 +302,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 return;
             }
             if (option != 1) return;
+            if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = nextClass;
             if (water && required == 70)
