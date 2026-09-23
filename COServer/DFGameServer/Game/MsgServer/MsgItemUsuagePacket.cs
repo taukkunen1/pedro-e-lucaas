@@ -137,6 +137,11 @@ namespace GameServer.Game.MsgServer
 
             stream.GetUsageItem(out action, out id, out dwParam, out timestamp, out dwParam2, out dwParam3, out dwparam4, out args);
             using var _econScope = GameServer.Telemetry.Economy.Scope(GameServer.Telemetry.SourceKind.ItemUsage, (uint)action);
+            if (Game.Era1.Era1Economy.IsBlockedItemUsage(action))
+            {
+                client.SendSysMesage("This feature is not available in Era 1.");
+                return;
+            }
 
             switch (action)
             {
@@ -924,8 +929,6 @@ namespace GameServer.Game.MsgServer
                             else
                                 client.SendSysMesage("Sorry you don`t have 100,000 silver!.");
                         }
-                        else if (dwParam == 7 && dwParam2 == 500000)
-                            client.Inventory.Add(stream, id, 1, (byte)dwParam3, 0, 0);
                         break;
                     }
                 case ItemUsageID.UpdateEnchant:
@@ -1006,8 +1009,7 @@ namespace GameServer.Game.MsgServer
                             break;
                         uint ItemID = (uint)dwParam;
                         uint ItemsCount = dwParam2;
-                        if (ItemID == 1088001 || ItemID == 1088000 || ItemID == 730001 || ItemID == 730003 || ItemID == 730006
-                                            || ItemID == 723694 || ItemID == 723695 || ItemID == 700073 || ItemID == 1200005)
+                        if (Game.Era1.Era1Economy.IsAllowedForgingShopItem(ItemID))
                         {
                             if (client.Inventory.HaveSpace((byte)ItemsCount))
                             {
@@ -1039,6 +1041,41 @@ namespace GameServer.Game.MsgServer
                             break;
                         uint effectuid = 0;
                         uint effectdwparam1 = 0;
+
+                        MsgGameItem socketTarget;
+                        if (!client.TryGetItem(id, out socketTarget)
+                            || Game.Era1.Era1Items.IsBlockedEquipment(socketTarget.ITEM_ID))
+                            break;
+
+                        bool weaponSocketTarget = Game.Era1.Era1Economy.IsClassicWeaponSocketTarget(socketTarget.ITEM_ID);
+                        bool equipmentSocketTarget = Game.Era1.Era1Economy.IsClassicEquipmentSocketTarget(socketTarget.ITEM_ID);
+                        bool hadFirstSocket = socketTarget.SocketOne != Role.Flags.Gem.NoSocket;
+                        bool hadSecondSocket = socketTarget.SocketTwo != Role.Flags.Gem.NoSocket;
+
+                        if (dwParam2 == Game.Era1.Era1Economy.WeaponFirstSocketDragonBalls)
+                        {
+                            if (args == null || args.Count < 1)
+                                break;
+                            if (socketTarget.SocketOne == Role.Flags.Gem.NoSocket && !weaponSocketTarget)
+                                break;
+                            if (socketTarget.SocketOne != Role.Flags.Gem.NoSocket
+                                && socketTarget.SocketTwo == Role.Flags.Gem.NoSocket && !equipmentSocketTarget)
+                                break;
+                        }
+                        else if (dwParam2 == Game.Era1.Era1Economy.WeaponSecondSocketDragonBalls)
+                        {
+                            if (!weaponSocketTarget) break;
+                        }
+                        else if (dwParam2 == Game.Era1.Era1Economy.EquipmentSecondSocketStarDrills)
+                        {
+                            if (!equipmentSocketTarget) break;
+                        }
+                        else if (dwParam2 == Game.Era1.Era1Economy.EquipmentFirstSocketDragonBalls)
+                        {
+                            if (!equipmentSocketTarget) break;
+                        }
+                        else
+                            break;
 
                         switch (dwParam2)
                         {
@@ -1081,7 +1118,7 @@ namespace GameServer.Game.MsgServer
                                                 {
                                                     if (LoseItem.ITEM_ID == Database.ItemType.ToughDrill)
                                                     {
-                                                        if (Role.Core.Rate(20))
+                                                        if (Role.Core.Rate(Game.Era1.Era1Economy.EquipmentSecondSocketToughDrillChancePercent))
                                                         {
                                                             effectdwparam1 = 1;
 
@@ -1232,6 +1269,13 @@ namespace GameServer.Game.MsgServer
                                     }
                                     break;
                                 }
+                        }
+                        if (effectdwparam1 == 1)
+                        {
+                            if (!hadFirstSocket && socketTarget.SocketOne != Role.Flags.Gem.NoSocket)
+                                Game.Era1.Era1Economy.RecordSocketCreated(client, 1);
+                            if (!hadSecondSocket && socketTarget.SocketTwo != Role.Flags.Gem.NoSocket)
+                                Game.Era1.Era1Economy.RecordSocketCreated(client, 2);
                         }
                         client.Send(stream.ItemUsageCreate(ItemUsageID.CreateSocketItem, effectuid, effectdwparam1, 0, 0, 0, 0));
 
