@@ -92,6 +92,7 @@ Equipment Blacksmith usando Meteors; não há motivo para manter o atalho VIP da
 
 - Honor Shop / Race Point Shop / Champion Shop: handlers preservados, interceptação desativada.
 - Bound CP mall: desativado.
+- `MsgOsShop` (Bound CP / fallback para CP normal, item 725065): bloqueado na Era 1.
 - Garment exchange por pontos (`GarmentShop` packet): desativado; garments clássicos são
   compras CP normais do Shopping Mall.
 - Forging-shop purchase: reaproveita a mesma whitelist/preço histórico do Mall.
