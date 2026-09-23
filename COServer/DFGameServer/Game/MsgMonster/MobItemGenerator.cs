@@ -249,11 +249,7 @@ namespace GameServer.Game.MsgMonster
         }
         public byte GeneratePurity()
         {
-            if (PlusOne)
-                return 1;
-            if (PlusTwo)
-                return 2;
-            return 0;
+            return PlusOne ? (byte)1 : (byte)0;
         }
         public byte GenerateBless()
         {
