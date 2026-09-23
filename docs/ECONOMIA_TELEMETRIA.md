@@ -2,8 +2,8 @@
 
 ## Como funciona
 - **Moedas:** os setters `Player.Money`, `Player.ConquerPoints` e `Player.BoundConquerPoints` chamam `Economy.Record(...)`.
-- **Recursos escassos:** a fronteira do inventário chama `Economy.RecordResource(...)` para Meteor/MeteorTear, DragonBall, gems Normal/Refined/Super, equipamentos Refined/Unique/Elite/Super e equipamentos +N. Isso permite medir o MINT/BURN real dos principais recursos da Era 1.
-- **Motivo (reason):** vem do escopo aberto no ponto de entrada — `Npc:<NpcID>#<opção>` (Procesor), `ItemUsage:<ação>` (pacote de item), `ItemUse:<id> <nome>` (usar item) — ou, sem escopo, do stack de chamadas (`Code:Classe.Método`).
+- **Recursos escassos:** a fronteira do inventário chama `Economy.RecordResource(...)` para Meteor/MeteorTear/Scroll, DragonBall/Scroll, gems Normal/Refined/Super, Tough/Star Drill, +Stones, equipamentos Refined/Unique/Elite/Super e equipamentos +N. Scrolls valem 10 unidades do recurso-base. Isso permite medir o MINT/BURN real dos principais recursos da Era 1.
+- **Motivo (reason):** vem do escopo aberto no ponto de entrada — `Npc:<NpcID>#<opção>`, `ItemUsage:<ação>`, `ItemUse:<id> <nome>`, `Compose:<ação>` e `EmbedSocket:<ação>#<slot>` — ou, sem escopo, do stack de chamadas (`Code:Classe.Método`).
 - **Classificação:** `Database5700/EconomyTelemetry.json` (criado no primeiro start) tem regras regex `reason -> system` e `flow` (`auto` = sinal do delta, `transfer`, `ignore`). Primeira regra que casa vence; sem regra => `Other`.
 - **Mint** = moeda criada (delta > 0) · **Burn** = destruída (delta < 0) · **Transfer** = troca/armazém/barraca/poker/inter-server: a soma deve dar ~0; o resíduo aponta vazamento (imposto ou exploit).
 
@@ -34,3 +34,9 @@ Para a auditoria estática por monstro/mapa, use `python tools/era1_drop_audit.p
 Para Meteor, Dragon Ball, gems e equipamentos raros, a telemetria operacional contabiliza o MINT no limite do inventário. Portanto, um item criado no chão e abandonado/desaparecido não entra como oferta econômica efetiva. Quando o item é coletado, o evento carrega o mapa atual e entra nos agregados `resources.byMap`.
 
 A auditoria estática em `tools/era1_drop_audit.py` mede a faucet teórica/configurada por monstro e mapa; a telemetria mede o que de fato chegou à economia dos jogadores. A diferença entre as duas é útil para enxergar perdas no chão, comportamento de farming e efeitos de densidade/velocidade de kill.
+
+
+## Transformações de equipamento
+Além da remoção física de materiais, a Economy V2 registra mutações do próprio equipamento. Se um alvo passa de Refined para Unique ou de +N para +(N+1), o estado anterior é registrado como BURN e o novo como MINT. A abertura de socket registra `Equipment.Socket1`/`Equipment.Socket2`.
+
+Isso evita o falso cenário em que Dragon Balls, Meteors ou +Stones aparecem como consumidos, mas a saída econômica produzida pela forja fica invisível no resumo.
