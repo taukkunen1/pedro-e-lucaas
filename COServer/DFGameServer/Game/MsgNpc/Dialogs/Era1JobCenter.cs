@@ -54,7 +54,56 @@ namespace GameServer.Game.MsgNpc.Dialogs
             client.Inventory.Add(stream, itemId, 1, 0, 0, 0, socketOne);
         }
 
+        internal readonly struct PromotionReward
+        {
+            public readonly uint ItemId;
+            public readonly Role.Flags.Gem SocketOne;
+            public PromotionReward(uint itemId, Role.Flags.Gem socketOne = Role.Flags.Gem.NoSocket)
+            {
+                ItemId = itemId;
+                SocketOne = socketOne;
+            }
+        }
+
+        internal static PromotionReward[] GetClassicPhysicalRewards(string profession, int level)
+        {
+            var rewards = new System.Collections.Generic.List<PromotionReward>();
+
+            if (profession == "Trojan")
+            {
+                if (level == 40) rewards.Add(new PromotionReward(410073));
+                else if (level == 70) rewards.Add(new PromotionReward(130063));
+            }
+            else if (profession == "Warrior")
+            {
+                if (level == 40) rewards.Add(new PromotionReward(900003));
+                else if (level == 70) rewards.Add(new PromotionReward(131063));
+            }
+            else if (profession == "Archer")
+            {
+                if (level == 15) rewards.Add(new PromotionReward(133003));
+                else if (level == 40) rewards.Add(new PromotionReward(500073, Role.Flags.Gem.EmptySocket));
+            }
+            else if (profession == "Taoist")
+            {
+                if (level == 15) rewards.Add(new PromotionReward(134003));
+                else if (level == 40) rewards.Add(new PromotionReward(421073));
+                else if (level == 70) rewards.Add(new PromotionReward(134063));
+            }
+
+            if (level == 100) rewards.Add(new PromotionReward(700031));
+            if (level == 110) rewards.Add(new PromotionReward(Database.ItemType.DragonBall));
+            return rewards.ToArray();
+        }
+
         private static void AwardClassicPhysicalReward(Client.GameClient client, ServerSockets.Packet stream, string profession, int level)
+        {
+            foreach (var reward in GetClassicPhysicalRewards(profession, level))
+                AddReward(client, stream, reward.ItemId, reward.SocketOne);
+        }
+
+        /* Legacy inline reward map retained below only as source history. */
+        private static void AwardClassicPhysicalReward_LegacyUnused(Client.GameClient client, ServerSockets.Packet stream, string profession, int level)
         {
             // IDs verified against Database5700/itemtype.txt.
             if (profession == "Trojan")
