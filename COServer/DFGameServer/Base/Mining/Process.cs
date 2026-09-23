@@ -122,20 +122,10 @@ namespace GameServer.Base.Mining
                         client.MiningAttempts--;
                         return;
                     }
-                    else if (MyMath.Success(4.0))
-                    {
-                        client.Inventory.Add(stream, 730001, 1, 1, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
-                    }
-                    else if (MyMath.Success(6.0))
-                    {
-                        client.Inventory.Add(stream, 730002, 1, 2, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
-                    }
                     else
                     {
+                        // Era 1: mining MINTs ores/gems/Meteor/DragonBall. +Stones are a later economy
+                        // shortcut and are intentionally excluded; Euxenite remains a classic mining output.
                         client.Inventory.Add(stream, 1072031, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
                         client.MiningAttempts--;
                         return;
