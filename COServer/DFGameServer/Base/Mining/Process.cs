@@ -75,19 +75,13 @@ namespace GameServer.Base.Mining
                 client.StopMining();
                 return;
             }
-            if (client.MiningAttempts == 0)
-            {
-                client.SendSysMesage("Sorry, you need to get some rest come back tomorrow.");
-                client.StopMining();
-                return;
-            }
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
                 ActionQuery daction = new ActionQuery()
                 {
                    ObjId = client.Player.UID,
-                    dwParam = client.MiningAttempts,
+                    dwParam = 0,
                     Type = ActionType.Mining,
                     wParam1 = 24,
                     wParam2 = 68,
@@ -125,7 +119,6 @@ namespace GameServer.Base.Mining
                             Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false,
                             Role.Flags.ItemEffect.None, true, "~from~mining!");
 
-                    client.MiningAttempts--;
                     return;
                 }
             }
