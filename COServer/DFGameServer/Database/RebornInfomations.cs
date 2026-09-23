@@ -107,11 +107,46 @@ namespace GameServer.Database
                 }
             }
         }
+        private static bool IsEra1Class(byte cls)
+        {
+            return cls == 11 || cls == 21 || cls == 41 || cls == 132 || cls == 142;
+        }
+
+        public static bool CanEra1Rebirth(Role.Player player, byte rebornClass, out string reason)
+        {
+            if (player.Reborn >= 2)
+            {
+                reason = "Era 1 supports a maximum of two rebirths.";
+                return false;
+            }
+            if (!IsEra1Class(rebornClass))
+            {
+                reason = "That profession is not available in Era 1.";
+                return false;
+            }
+
+            bool water = AtributesStatus.IsWater(player.Class);
+            int required = water && player.Reborn == 0 ? 110 : 120;
+            if (player.Level < required)
+            {
+                reason = "You need to reach level " + required + " before rebirth.";
+                return false;
+            }
+
+            reason = null;
+            return true;
+        }
+
         public unsafe void Reborn(Role.Player player, byte RebornClass, ServerSockets.Packet stream)
         {
 
             if (RebornClass != 0)
             {
+                if (!CanEra1Rebirth(player, RebornClass, out var era1Reason))
+                {
+                    player.Owner.CreateBoxDialog(era1Reason);
+                    return;
+                }
                 if (player.UseAura != MsgUpdate.Flags.Normal)
                     player.AddAura(player.UseAura, null, Role.StatusFlagsBigVector32.PermanentFlag);
                 if (RebornClass % 10 == 1 || RebornClass == 132 || RebornClass == 142)
@@ -207,154 +242,8 @@ namespace GameServer.Database
                             }
                         case 2:
                             {
-                                player.Owner.MySpells.ClearSpells(StaticSpells, stream);
-
-                                byte RClass = 0;
-                                if (player.SecondClass == 135)
-                                    RClass = 132;
-                                else if (player.SecondClass == 145)
-                                    RClass = 142;
-                                else
-                                    RClass = (byte)(player.SecondClass - 4);
-
-                                byte Twoclass = 0;
-                                if (player.Class == 135)
-                                    Twoclass = 132;
-                                else if (player.Class == 145)
-                                    Twoclass = 142;
-                                else
-                                    Twoclass = (byte)(player.Class - 4);
-
-                                foreach (var info in this)
-                                {
-                                    if (info.Item1 == 0 && info.Item2 == 0 && info.Item3 == RClass)
-                                    {
-                                        switch (info.Item4)
-                                        {
-                                            case Action.AllClassSpells:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        if (!StaticSpells.Contains(spellid) && !PureSpells.Contains(spellid))
-                                                            player.Owner.MySpells.Add(stream, spellid);
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                    }
-                                }
-                                foreach (var info in this)
-                                {
-                                    if (info.Item1 == 0 && info.Item2 == RebornClass && info.Item3 == Twoclass)
-                                    {
-                                        switch (info.Item4)
-                                        {
-                                            case Action.PureSpell:
-                                                {
-                                                    if (RClass == Twoclass && Twoclass == RebornClass)
-                                                    {
-                                                        foreach (var spellid in info.Item5)
-                                                        {
-                                                            if (!StaticSpells.Contains(spellid))
-                                                                player.Owner.MySpells.Add(stream, spellid);
-                                                        }
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                    }
-                                }
-                                foreach (var info in this)
-                                {
-                                    if (info.Item1 == 1 && info.Item2 == player.SecondClass && info.Item3 == Twoclass)
-                                    {
-                                        switch (info.Item4)
-                                        {
-                                            case Action.AddRebornSpells:
-                                            case Action.Add:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                        player.Owner.MySpells.Add(stream, spellid);
-                                                    break;
-                                                }
-                                            case Action.Delete:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        player.Owner.MySpells.Remove(spellid, stream);
-                                                    }
-                                                    break;
-                                                }
-                                            case Action.Downgrade:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        player.Owner.MySpells.RebornSpell(stream, spellid);
-                                                    }
-                                                    break;
-                                                }
-
-                                        }
-                                    }
-                                }
-                                foreach (var info in this)
-                                {
-                                    if (info.Item1 == 0 && info.Item2 == 0 && info.Item3 == Twoclass)
-                                    {
-                                        switch (info.Item4)
-                                        {
-                                            case Action.AllClassSpells:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        if (!StaticSpells.Contains(spellid) && !PureSpells.Contains(spellid))
-                                                            player.Owner.MySpells.Add(stream, spellid);
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                    }
-                                }
-                                foreach (var info in this)
-                                {
-                                    if (info.Item1 == 2 && info.Item2 == player.Class && info.Item3 == RebornClass)
-                                    {
-                                        switch (info.Item4)
-                                        {
-                                            case Action.AddRebornSpells:
-                                            case Action.Add:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                        player.Owner.MySpells.Add(stream, spellid);
-                                                    break;
-                                                }
-                                            case Action.Delete:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        player.Owner.MySpells.Remove(spellid, stream);
-                                                    }
-                                                    break;
-                                                }
-                                            case Action.Downgrade:
-                                                {
-                                                    foreach (var spellid in info.Item5)
-                                                    {
-                                                        player.Owner.MySpells.RebornSpell(stream, spellid);
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                    }
-                                }
-                                player.FirstRebornLevel = player.SecoundeRebornLevel;
-                                player.SecoundeRebornLevel = (byte)player.Level;
-                                player.FirstClass = player.SecondClass;
-                                player.SecondClass = player.Class;
-                                player.Class = RebornClass;
-                                Program.SendGlobalPackets.Enqueue(new Game.MsgServer.MsgMessage("Congratulations! " + player.Name + " has got reincanation.", Game.MsgServer.MsgMessage.MsgColor.white, Game.MsgServer.MsgMessage.ChatMode.System).GetArray(stream));
-                                player.Reincarnation = true;
-                                break;
+                                player.Owner.CreateBoxDialog("Reincarnation is not available in Era 1.");
+                                return;
                             }
                     }
 
@@ -460,33 +349,8 @@ namespace GameServer.Database
                     {
                         client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.XpFly);
                     }
-                    else if (Database.AtributesStatus.IsNinja(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FatalStrike))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FatalStrike);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ToxicFog))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ToxicFog);
-                    }
-                    else if (Database.AtributesStatus.IsMonk(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.WhirlwindKick))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.WhirlwindKick);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.TripleAttack))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.TripleAttack);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Oblivion))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Oblivion);
-                    }
-                    else if (Database.AtributesStatus.IsPirate(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.CannonBarrage))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.CannonBarrage);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.BladeTempest))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.BladeTempest);
-                    }
                     else if (Database.AtributesStatus.IsTaoist(client.Player.Class))
                     {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ChainBolt))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ChainBolt);
                         if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Lightning))
                             client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Lightning);
 
