@@ -494,16 +494,16 @@
     },
     {
       "id": "core.itemextra",
-      "name": "Refinery / purification / item lock",
-      "origin": "Posterior",
-      "confidence": "high",
-      "decision": "remove",
+      "name": "Item extra / item lock",
+      "origin": "Verify",
+      "confidence": "medium",
+      "decision": "review",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgItemExtra*",
         "DFGameServer/Game/MsgServer/MsgItemLock*"
       ],
       "dbFiles": [],
-      "note": "Revisao Economy V2: refinery/purification ficam bloqueados em runtime na Era 1; item lock deve ser tratado separadamente se necessario.",
+      "note": "Economy V2 bloqueia Refinery/Purification/Stabilization diretamente em MsgItemExtra. ItemLock permanece separado para revisao historica antes de qualquer gate amplo.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgItemExtra",
