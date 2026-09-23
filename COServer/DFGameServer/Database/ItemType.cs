@@ -292,6 +292,10 @@ namespace GameServer.Database
             DragonBall = 1088000,
             MeteorScroll = 720027,
             Meteor = 1088001,
+            // Era 1 promotion materials. These IDs are the classic Conquer item IDs
+            // used by the 5017-compatible data set.
+            EuxeniteOre = 1072031,
+            Emerald = 1080001,
             MoonBox = 721020,
             MoonBoxLast = 721025,
             ExperiencePotion = 723017,
