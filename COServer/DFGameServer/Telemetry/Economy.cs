@@ -15,7 +15,7 @@ namespace GameServer.Telemetry
     public enum Currency : byte { Gold = 0, CP = 1, BoundCP = 2 }
 
     /// <summary>De onde vem a moeda: escopos abertos nos pontos de entrada (NPC, uso de item, pacote de item).</summary>
-    public enum SourceKind : byte { None = 0, Npc = 1, ItemUsage = 2, ItemUse = 3 }
+    public enum SourceKind : byte { None = 0, Npc = 1, ItemUsage = 2, ItemUse = 3, Compose = 4, EmbedSocket = 5 }
 
     /// <summary>
     /// Telemetria de economia (mint/burn) de Gold, CPs e Bound CPs.
@@ -67,6 +67,8 @@ namespace GameServer.Telemetry
             R("^ItemUsage:(BuyVendingItem|AddVendingItem\\w*|RemoveVendingItem|ShowVendingList)$", "Booth", "transfer"),
             R("^ItemUsage:(BuyItem|BuyItemFromForging|GarmentShop|SellItem)$", "NpcShop"),
             R("^ItemUsage:Repair", "Repair"),
+            R("^Compose:", "Forging"),
+            R("^EmbedSocket:", "Forging"),
             R("^ItemUsage:(Upgrade|GemCompose|Socket|CreateSocket|AddBless|UpdatePurity|ToristSuper|Alternante|UnAlternante|Merge|Embed)", "Forging"),
             R("^ItemUsage:", "ItemUsage.Other"),
             R("^ItemUse:", "ItemUse"),
@@ -155,6 +157,10 @@ namespace GameServer.Telemetry
                         try { if (Pool.ItemsBase.TryGetValue(id, out var it)) name = " " + it.Name; } catch { }
                         return $"ItemUse:{id}{name}";
                     }
+                case SourceKind.Compose:
+                    return "Compose:" + (Enum.GetName(typeof(Game.MsgServer.MsgUpdateItem.ActionType), (byte)id) ?? id.ToString());
+                case SourceKind.EmbedSocket:
+                    return "EmbedSocket:" + (Enum.GetName(typeof(Game.MsgServer.AttackHandler.MsgEmbedSocket.ActionMode), (ushort)id) ?? id.ToString()) + "#" + sub;
             }
             return "Unknown";
         }
