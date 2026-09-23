@@ -93,19 +93,39 @@ namespace GameServer.Game.Era1
             return itemId >= 730001 && itemId <= 730008;
         }
 
+        static int CompositionFamily(uint itemId)
+        {
+            if (Database.ItemType.IsBow(itemId)) return 1;
+            if (Database.ItemType.IsBacksword(itemId)) return 2;
+
+            uint type = itemId / 1000;
+            if (type >= 500 && type <= 580) return 3; // classic 2-handed weapons
+            if (type >= 410 && type <= 490) return 4; // classic 1-handed weapons
+            return 1000 + (int)type;                  // equipment category/type
+        }
+
+        public static bool CanComposeTarget(uint itemId)
+        {
+            if (!IsClassicEquipment(itemId) || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
+                return false;
+            if (!Pool.ItemsBase.TryGetValue(itemId, out var dbItem) || dbItem.Level < 15)
+                return false;
+            return Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)Database.ItemType.ItemPosition(itemId));
+        }
+
         public static bool IsAllowedCompositionMaterial(uint mainItemId, uint materialItemId)
         {
-            if (!IsClassicEquipment(mainItemId) || Game.Era1.Era1Items.IsBlockedEquipment(mainItemId))
+            if (!CanComposeTarget(mainItemId))
                 return false;
             if (IsPlusStone(materialItemId))
                 return true;
             if (!IsClassicEquipment(materialItemId) || Game.Era1.Era1Items.IsBlockedEquipment(materialItemId))
                 return false;
+            if (CompositionFamily(mainItemId) != CompositionFamily(materialItemId))
+                return false;
 
-            ushort mainPosition = Database.ItemType.ItemPosition(mainItemId);
-            ushort materialPosition = Database.ItemType.ItemPosition(materialItemId);
-            return mainPosition == materialPosition
-                && Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)mainPosition);
+            // Minor quality may not exceed main quality.
+            return (materialItemId % 10) <= (mainItemId % 10);
         }
 
         // Classic special spawn exception. This is intentionally outside the normal
