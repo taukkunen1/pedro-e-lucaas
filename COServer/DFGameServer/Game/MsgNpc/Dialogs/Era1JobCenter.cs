@@ -40,6 +40,53 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 .FinalizeDialog();
         }
 
+        private static void AddReward(Client.GameClient client, ServerSockets.Packet stream, uint itemId,
+            Role.Flags.Gem socketOne = Role.Flags.Gem.NoSocket)
+        {
+            if (!client.Inventory.HaveSpace(1))
+            {
+                client.SendSysMesage("Please free one inventory slot to receive your promotion reward.");
+                return;
+            }
+
+            client.Inventory.Add(stream, itemId, 1, 0, 0, 0, socketOne);
+        }
+
+        private static void AwardClassicPhysicalReward(Client.GameClient client, ServerSockets.Packet stream, string profession, int level)
+        {
+            // IDs verified against Database5700/itemtype.txt.
+            if (profession == "Trojan")
+            {
+                if (level == 40) AddReward(client, stream, 410073);      // Normal lvl 40 Cutlass
+                else if (level == 70) AddReward(client, stream, 130063); // Normal lvl 70 Rage Armor
+            }
+            else if (profession == "Warrior")
+            {
+                if (level == 40) AddReward(client, stream, 900003);      // Normal lvl 40 Soft Shield
+                else if (level == 70) AddReward(client, stream, 131063); // Normal lvl 70 Light Armor
+            }
+            else if (profession == "Archer")
+            {
+                if (level == 15) AddReward(client, stream, 133003); // Normal lvl 15 Deerskin Coat
+                else if (level == 40)
+                    AddReward(client, stream, 500073, Role.Flags.Gem.EmptySocket); // Normal lvl 40 Horn Bow, 1 socket
+            }
+            else if (profession == "Taoist")
+            {
+                if (level == 15) AddReward(client, stream, 134003);      // Normal lvl 15 Tao Robe
+                else if (level == 40) AddReward(client, stream, 421073); // Normal lvl 40 End Backsword
+                else if (level == 70) AddReward(client, stream, 134063); // Normal lvl 70 Crane Vestment
+            }
+
+            // Classic level-100 reward for all four profession lines.
+            if (level == 100)
+                AddReward(client, stream, 700031); // Normal Rainbow Gem
+
+            // Classic level-110 reward is one Dragon Ball after consuming the Moon Box.
+            if (level == 110)
+                AddReward(client, stream, Database.ItemType.DragonBall);
+        }
+
         private static bool ConsumePromotionMaterial(Client.GameClient client, ServerSockets.Packet stream, int level, bool archer)
         {
             uint itemId = 0;
@@ -125,6 +172,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
             if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = (byte)(cls + 1);
+            AwardClassicPhysicalReward(client, stream, "Trojan", required);
             if (required == 15)
             {
                 AddSpell(client, stream, Role.Flags.SpellID.Cyclone);
@@ -165,6 +213,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
             if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = (byte)(cls + 1);
+            AwardClassicPhysicalReward(client, stream, "Warrior", required);
             if (required == 15)
             {
                 AddSpell(client, stream, Role.Flags.SpellID.Superman);
@@ -205,6 +254,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
             if (!ConsumePromotionMaterial(client, stream, required, true)) return;
 
             client.Player.Class = (byte)(cls + 1);
+            AwardClassicPhysicalReward(client, stream, "Archer", required);
             if (required == 15)
                 AddSpell(client, stream, Role.Flags.SpellID.XpFly);
             else if (required == 70)
@@ -237,6 +287,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 if (option == 1)
                 {
                     client.Player.Class = 101;
+                    AwardClassicPhysicalReward(client, stream, "Taoist", 15);
                     AddSpell(client, stream, Role.Flags.SpellID.Thunder);
                     AddSpell(client, stream, Role.Flags.SpellID.Cure);
                     Done(client, stream, "Taoist");
@@ -258,6 +309,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 if (option == 2)
                 {
                     client.Player.Class = 132;
+                    AwardClassicPhysicalReward(client, stream, "Taoist", 40);
                     AddSpell(client, stream, Role.Flags.SpellID.Revive);
                     AddSpell(client, stream, Role.Flags.SpellID.HealingRain);
                     Done(client, stream, "Water Taoist");
@@ -265,6 +317,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
                 else if (option == 3)
                 {
                     client.Player.Class = 142;
+                    AwardClassicPhysicalReward(client, stream, "Taoist", 40);
                     AddSpell(client, stream, Role.Flags.SpellID.Vulcano);
                     Done(client, stream, "Fire Taoist");
                 }
@@ -305,6 +358,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
             if (!ConsumePromotionMaterial(client, stream, required, false)) return;
 
             client.Player.Class = nextClass;
+            AwardClassicPhysicalReward(client, stream, "Taoist", required);
             if (water && required == 70)
                 AddSpell(client, stream, Role.Flags.SpellID.Pray);
 
