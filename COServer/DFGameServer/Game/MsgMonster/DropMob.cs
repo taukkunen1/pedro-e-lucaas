@@ -326,59 +326,10 @@ namespace GameServer
 #endif
                         case ConfigurableDropSystem.DropType.DragonBall:
                             {
-                                uint ID = 1088000;
-                                if (killer.Player.VipLevel >= 3)
-                                {
-                                    if (killer.AutoHunting.Enable)
-                                    {
-                                        if (killer.AutoHunting.DBalls)
-                                        {
-                                            if (killer.Inventory.HaveSpace(1))
-                                            {
-                                                if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                                {
-                                                    killer.Player.SendString(stream, MsgStringPacket.StringID.Effect, false, "dispel7");
-                                                    if (killer.Inventory.Contain(1088000, 10) && killer.Player.VipLevel == 6)
-                                                    {
-                                                        killer.Inventory.Remove(1088000, 10, stream);
-                                                        killer.Inventory.Add(stream, 720028, 1);
-                                                        killer.SendSysMesage("[VIP-6] DBScroll got autopacked.", MsgMessage.ChatMode.TopLeft);
-                                                        returnBoolean = true;
-                                                    }
-                                                    killer.SendSysMesage("[VIP-6] You got a DragonBall in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                                    returnBoolean = true;
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Mob.DropItemID(killer, ID, stream, 3, true);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (killer.Inventory.HaveSpace(1))
-                                        {
-                                            if (killer.Inventory.AddItemWitchStack(ID, 0, 1, stream))
-                                            {
-                                                killer.Player.SendString(stream, MsgStringPacket.StringID.Effect, false, "dispel7");
-                                                if (killer.Inventory.Contain(1088000, 10) && killer.Player.VipLevel == 6)
-                                                {
-                                                    killer.Inventory.Remove(1088000, 10, stream);
-                                                    killer.Inventory.Add(stream, 720028, 1);
-                                                    killer.SendSysMesage("[VIP-6] DBScroll got autopacked.", MsgMessage.ChatMode.TopLeft);
-                                                    returnBoolean = true;
-                                                }
-                                                killer.SendSysMesage("[VIP-6] You got a DragonBall in your inventory.", MsgMessage.ChatMode.TopLeft);
-                                                returnBoolean = true;
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    Mob.DropItemID(killer, ID, stream, 3, true);
-                                }
+                                // Era 1: Dragon Balls are physical world drops. VIP/autohunt
+                                // auto-loot and automatic DB-scroll packing are later conveniences
+                                // and bypass the intended hunting/market loop.
+                                Mob.DropItemID(killer, Database.ItemType.DragonBall, stream, 3, true);
                                 returnBoolean = true;
                                 break;
                             }
