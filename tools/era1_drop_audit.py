@@ -225,7 +225,9 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
         "rest_secs_min", "rest_secs_max", "drop_money", "special_drop_count", "special_drops", "equipment_slots",
         "drop_armet", "drop_necklace", "drop_armor", "drop_ring", "drop_weapon",
         "drop_shield", "drop_shoes", "gold_event_pct", "equipment_attempt_pct",
-        "equipment_family_success_pct", "equipment_effective_pct", "meteor_event_pct", "dragonball_event_pct", "refined_1_in", "unique_1_in",
+        "equipment_family_success_pct", "equipment_effective_pct", "meteor_event_pct",
+        "dragonball_global_pct", "dragonball_direct_units_per_kill", "dragonball_expected_units_per_kill",
+        "refined_1_in", "unique_1_in",
         "elite_1_in", "super_1_in", "plus1_1_in_normal_quality",
     ]
     with open(out_path, "w", newline="", encoding="utf-8-sig") as fh:
@@ -262,7 +264,11 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
                 "equipment_family_success_pct": pct(family_success * 100.0),
                 "equipment_effective_pct": pct(c["MonsterEquipmentPercent"] * family_success),
                 "meteor_event_pct": pct(c["MonsterMeteorPercent"]),
-                "dragonball_event_pct": pct(c["MonsterDragonBallPercent"]),
+                "dragonball_global_pct": pct(c["MonsterDragonBallPercent"]),
+                "dragonball_direct_units_per_kill": 1 if mob_id == 8419 else 0,
+                "dragonball_expected_units_per_kill": pct(
+                    (1 if mob_id == 8419 else 0) + c["MonsterDragonBallPercent"] / 100.0
+                ),
                 "refined_1_in": int(c["RefinedDropEvery"]),
                 "unique_1_in": int(c["UniqueDropEvery"]),
                 "elite_1_in": int(c["EliteDropEvery"]),
@@ -291,6 +297,13 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
                     "map_id": map_id,
                     "monster_id": mob_id,
                     "detail": f"{m['monster_name']} has [SpecialDrop]: {m['special_drops']}",
+                })
+            if mob_id == 8419:
+                anomalies.append({
+                    "kind": "classic_direct_dragonball_exception",
+                    "map_id": map_id,
+                    "monster_id": mob_id,
+                    "detail": f"{m['monster_name']} MINTs one direct DragonBall per kill in addition to the global DB roll",
                 })
     return anomalies
 
