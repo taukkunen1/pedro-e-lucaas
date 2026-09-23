@@ -1064,15 +1064,22 @@ namespace GameServer.Game.MsgServer
                         }
                         else if (dwParam2 == Game.Era1.Era1Economy.WeaponSecondSocketDragonBalls)
                         {
-                            if (!weaponSocketTarget) break;
+                            if (!weaponSocketTarget
+                                || socketTarget.SocketOne == Role.Flags.Gem.NoSocket
+                                || socketTarget.SocketTwo != Role.Flags.Gem.NoSocket)
+                                break;
                         }
                         else if (dwParam2 == Game.Era1.Era1Economy.EquipmentSecondSocketStarDrills)
                         {
-                            if (!equipmentSocketTarget) break;
+                            if (!equipmentSocketTarget
+                                || socketTarget.SocketOne == Role.Flags.Gem.NoSocket
+                                || socketTarget.SocketTwo != Role.Flags.Gem.NoSocket)
+                                break;
                         }
                         else if (dwParam2 == Game.Era1.Era1Economy.EquipmentFirstSocketDragonBalls)
                         {
-                            if (!equipmentSocketTarget) break;
+                            if (!equipmentSocketTarget || socketTarget.SocketOne != Role.Flags.Gem.NoSocket)
+                                break;
                         }
                         else
                             break;
