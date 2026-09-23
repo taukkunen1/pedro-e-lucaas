@@ -1057,7 +1057,7 @@ namespace GameServer.Role.Instance
                 var era1Resource = Game.Era1.Era1Economy.TrackedResource(ItemDat.ITEM_ID, ItemDat.Plus);
                 if (era1Resource != null && (mode == AddMode.ADD || mode == AddMode.REMOVE))
                 {
-                    long units = ItemDat.StackSize > 1 ? ItemDat.StackSize : 1;
+                    long units = mode == AddMode.REMOVE && !Removefull ? 1 : (ItemDat.StackSize > 1 ? ItemDat.StackSize : 1);
                     Telemetry.Economy.RecordResource(Owner.Player.UID, Owner.Player.Name, Owner.Player.Map,
                         era1Resource, mode == AddMode.ADD ? units : -units);
                 }
