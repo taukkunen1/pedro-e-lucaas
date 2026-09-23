@@ -54,3 +54,17 @@ As ações legadas `UpgradeMeteor` e `UpgradeDragonball` do pacote de uso de ite
 A telemetria de recursos é contabilizada somente quando o inventário realmente muda: remoções repetidas sobre um UID já consumido não geram novo BURN, e tentativas de ADD com UID já existente não geram MINT duplicado. Os helpers de Meteor/Dragon Ball preservam a equivalência de scrolls em 10 unidades e o troco volta como MINT físico, de forma que o líquido corresponda ao custo efetivamente gasto.
 
 Gems inseridas em equipamento deixam o estoque físico `Gem.*` e passam para `EmbeddedGem.*`; a retirada/destruição da gem que estava no socket queima esse estado embutido. A abertura do slot em si continua separada como `Equipment.Socket1` ou `Equipment.Socket2`.
+
+
+## Economy V4: Market, warehouse e serviços NPC
+
+A V4 separa os fluxos que ficam fora de `Shop.dat`:
+
+- `BuyVendingItem` continua classificado como `Booth / transfer`: Gold e CP só mudam de dono.
+- `DepositWarehouse` / `WarehouseWithdraw` continuam `Warehouse / transfer` e agora exigem presença física em um Warehouse NPC clássico.
+- Conductresses 10050/10051/10052/10053/10056 entram como `Teleport` e seu débito de Silver é BURN.
+- Barber (10002) entra como `Appearance`.
+- Guild Creator (10003 opção 3) entra como `GuildCreation`.
+- Static booths de `Booths.txt` ficam desligados na Era 1, eliminando supply infinito custom que distorcia a leitura de MINT/BURN.
+
+O auditor `python tools/era1_economy_v4_audit.py --check` também procura conversões diretas CP<->Gold e valida os gates de Market/warehouse antes do build.
