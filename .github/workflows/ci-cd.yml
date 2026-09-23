@@ -85,6 +85,12 @@ jobs:
           }
           Get-ChildItem $out -Directory -Filter 'obj-*' | Remove-Item -Recurse -Force
 
+      - name: Era 1 promotion self-test
+        shell: pwsh
+        run: |
+          dotnet run --project "COServer/DFGameServer/GameServer.csproj" -c ${{ needs.setup.outputs.configuration }} --no-restore -- era1-selftest
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - name: Compactar
         shell: pwsh
         run: |
