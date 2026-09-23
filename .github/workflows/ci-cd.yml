@@ -1,112 +1,136 @@
 name: CI/CD
 
-# develop  -> ambiente de DESENVOLVIMENTO (build Debug, artefato "dev")
-# main/tag -> ambiente de PRODUCAO       (build Release, artefato "prod" + GitHub Release nas tags v*)
-# Sem VPS por enquanto: producao = uso local (pasta Placebo) + release no GitHub
 on:
   push:
-    branches: [develop, main]
-    tags: ['v*']
+    branches:
+      - main
+      - develop
+    tags:
+      - "v*"
   pull_request:
-    branches: [develop, main]
+    branches:
+      - main
+      - develop
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Ambiente'
-        type: choice
-        options: [development, production]
-        default: development
 
 permissions:
   contents: write
 
 env:
-  DOTNET_NOLOGO: true
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.env.outputs.environment }}
-      configuration: ${{ steps.env.outputs.configuration }}
-    steps:
-      - id: env
-        shell: bash
-        run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            ENVIRONMENT="${{ inputs.environment }}"
-          elif [[ "${{ github.ref }}" == "refs/heads/main" || "${{ github.ref }}" == refs/tags/v* ]]; then
-            ENVIRONMENT="production"
-          else
-            ENVIRONMENT="development"
-          fi
-          if [[ "$ENVIRONMENT" == "production" ]]; then CONFIG="Release"; else CONFIG="Debug"; fi
-          echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
-          echo "configuration=$CONFIG" >> "$GITHUB_OUTPUT"
-          echo "Ambiente: $ENVIRONMENT ($CONFIG)"
-
   build:
-    needs: setup
+    name: Build, self-test and package
     runs-on: windows-latest
-    env:
-      ASPNETCORE_ENVIRONMENT: ${{ needs.setup.outputs.environment == 'production' && 'Production' || 'Development' }}
-      # Directory.Build.props usa PLACEBO_DIR; no CI a saida vai para uma pasta temporaria
-      PLACEBO_DIR: ${{ runner.temp }}\Placebo
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 30
 
-      - uses: actions/setup-dotnet@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: "10.0.x"
+
+      - name: Select build configuration
+        shell: pwsh
+        run: |
+          $configuration = "Debug"
+          $environmentName = "development"
+
+          if ("${{ github.ref }}" -eq "refs/heads/main" -or "${{ github.ref }}".StartsWith("refs/tags/v")) {
+            $configuration = "Release"
+            $environmentName = "production"
+          }
+
+          "BUILD_CONFIGURATION=$configuration" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "BUILD_ENVIRONMENT=$environmentName" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "PLACEBO_DIR=$env:RUNNER_TEMP\Placebo" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+          Write-Host "Environment: $environmentName"
+          Write-Host "Configuration: $configuration"
 
       - name: Restore
         shell: pwsh
         run: |
-          foreach ($p in 'DFAccountServer/AccountServer.csproj','DFGameServer/GameServer.csproj','DFAPI/API.csproj') {
-            dotnet restore "COServer/$p"
+          $projects = @(
+            "COServer/DFAccountServer/AccountServer.csproj",
+            "COServer/DFGameServer/GameServer.csproj",
+            "COServer/DFAPI/API.csproj"
+          )
+
+          foreach ($project in $projects) {
+            dotnet restore $project
+            if ($LASTEXITCODE -ne 0) {
+              exit $LASTEXITCODE
+            }
           }
 
-      - name: Build + Publish (${{ needs.setup.outputs.configuration }})
+      - name: Build and publish
         shell: pwsh
         run: |
-          $cfg = "${{ needs.setup.outputs.configuration }}"
-          $out = Join-Path $env:RUNNER_TEMP 'publish'
-          foreach ($p in @(
-            @('DFAccountServer/AccountServer.csproj','AccountServer'),
-            @('DFGameServer/GameServer.csproj','GameServer'),
-            @('DFAPI/API.csproj','API'))) {
-            dotnet publish "COServer/$($p[0])" -c $cfg --no-restore -o "$out\$($p[1])" -p:OutDir="$out\obj-$($p[1])\"
-            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $publishRoot = Join-Path $env:RUNNER_TEMP "publish"
+
+          if (Test-Path $publishRoot) {
+            Remove-Item $publishRoot -Recurse -Force
           }
-          # Producao NAO leva a Database (dados de jogadores ficam so no servidor)
-          if ("${{ needs.setup.outputs.environment }}" -eq "development") {
-            Copy-Item "COServer/Database5700" "$out\Database5700" -Recurse
+
+          New-Item -ItemType Directory -Path $publishRoot | Out-Null
+
+          $projects = @(
+            @("COServer/DFAccountServer/AccountServer.csproj", "AccountServer"),
+            @("COServer/DFGameServer/GameServer.csproj", "GameServer"),
+            @("COServer/DFAPI/API.csproj", "API")
+          )
+
+          foreach ($project in $projects) {
+            $destination = Join-Path $publishRoot $project[1]
+
+            dotnet publish $project[0] -c $env:BUILD_CONFIGURATION --no-restore -o $destination
+            if ($LASTEXITCODE -ne 0) {
+              exit $LASTEXITCODE
+            }
           }
-          Get-ChildItem $out -Directory -Filter 'obj-*' | Remove-Item -Recurse -Force
+
+          if ($env:BUILD_ENVIRONMENT -eq "development") {
+            Copy-Item "COServer/Database5700" (Join-Path $publishRoot "Database5700") -Recurse
+          }
 
       - name: Era 1 promotion self-test
         shell: pwsh
         run: |
-          dotnet run --project "COServer/DFGameServer/GameServer.csproj" -c ${{ needs.setup.outputs.configuration }} --no-restore -- era1-selftest
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project "COServer/DFGameServer/GameServer.csproj" -c $env:BUILD_CONFIGURATION --no-restore -- era1-selftest
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
 
-      - name: Compactar
+      - name: Package artifact
         shell: pwsh
         run: |
-          $name = "TrinityConquer-${{ needs.setup.outputs.environment }}-${{ github.sha }}.zip"
-          Compress-Archive -Path "$env:RUNNER_TEMP\publish\*" -DestinationPath $name
-          "ZIP_NAME=$name" | Out-File -FilePath $env:GITHUB_ENV -Append
+          $publishRoot = Join-Path $env:RUNNER_TEMP "publish"
+          $zipPath = Join-Path $env:RUNNER_TEMP "TrinityConquer-$env:BUILD_ENVIRONMENT-${{ github.sha }}.zip"
 
-      - uses: actions/upload-artifact@v4
+          if (Test-Path $zipPath) {
+            Remove-Item $zipPath -Force
+          }
+
+          Compress-Archive -Path "$publishRoot\*" -DestinationPath $zipPath
+          "ARTIFACT_ZIP=$zipPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ needs.setup.outputs.environment == 'production' && 'prod' || 'dev' }}
-          path: ${{ env.ZIP_NAME }}
-          retention-days: ${{ needs.setup.outputs.environment == 'production' && 90 || 7 }}
+          name: TrinityConquer-${{ github.sha }}
+          path: ${{ env.ARTIFACT_ZIP }}
+          if-no-files-found: error
+          retention-days: 14
 
-      - name: GitHub Release (somente tags v*)
+      - name: Create GitHub Release for version tags
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP_NAME }}
+          files: ${{ env.ARTIFACT_ZIP }}
           generate_release_notes: true
