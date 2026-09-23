@@ -43,9 +43,11 @@ namespace GameServer.Game.MsgNpc.Dialogs
         private static void AddReward(Client.GameClient client, ServerSockets.Packet stream, uint itemId,
             Role.Flags.Gem socketOne = Role.Flags.Gem.NoSocket)
         {
+            // Promotion must never lose its reward because the inventory is full.
+            // AddReturnedItem stores it in the returned-item warehouse and notifies the client.
             if (!client.Inventory.HaveSpace(1))
             {
-                client.SendSysMesage("Please free one inventory slot to receive your promotion reward.");
+                client.Inventory.AddReturnedItem(stream, itemId, 1, 0, 0, 0, socketOne);
                 return;
             }
 
