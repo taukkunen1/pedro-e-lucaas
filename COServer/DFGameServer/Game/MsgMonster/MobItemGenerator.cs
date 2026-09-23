@@ -73,25 +73,28 @@ namespace GameServer.Game.MsgMonster
         public MobItemGenerator(MonsterFamily family)
         {
             Family = family;
-            Refined = new MobRateWatcher(10);//500 / Family.Level);//1000 / Family.Level);
-            Unique = new MobRateWatcher(20);//2000 / Family.Level);//4000 / Family.Level);
-            Elite = new MobRateWatcher(25);//4000 / Family.Level);//8000 / Family.Level);
-            Super = new MobRateWatcher(30);//5000 / Family.Level);//10000 / Family.Level);
-            PlusOne = new MobRateWatcher(20);//2000 / Family.Level);//3000 / Family.Level);
-            PlusTwo = new MobRateWatcher(30);//4000 / Family.Level);//6000 / Family.Level);
+            // Era 1 hunting: rare quality/+ drops must remain scarce.
+            // These deterministic watchers are intentionally conservative and replace
+            // the 5695 test-like rates (1/10..1/30) that flooded the economy.
+            Refined = new MobRateWatcher(650);
+            Unique = new MobRateWatcher(1500);
+            Elite = new MobRateWatcher(7500);
+            Super = new MobRateWatcher(30000);
+            PlusOne = new MobRateWatcher(7500);
+            PlusTwo = new MobRateWatcher(60000);
 
             DropHp = new MobRateWatcher(50);
             DropMp = new MobRateWatcher(50);
-            DropSpecialPotions = new MobRateWatcher(50);
+            DropSpecialPotions = new MobRateWatcher(int.MaxValue);
             LuckyAmulet = new MobRateWatcher(300);
 
-            Chi100 = new MobRateWatcher(100);
-            Chi300 = new MobRateWatcher(200);
-            MoonBox = new MobRateWatcher(700);
-            Study20 = new MobRateWatcher(70);
-            Bomb = new MobRateWatcher(300);
-            CuteCPPack = new MobRateWatcher(140);
-            DragonBalls = new MobRateWatcher(100);//5000 / Family.Level);
+            Chi100 = new MobRateWatcher(int.MaxValue);
+            Chi300 = new MobRateWatcher(int.MaxValue);
+            MoonBox = new MobRateWatcher(int.MaxValue);
+            Study20 = new MobRateWatcher(int.MaxValue);
+            Bomb = new MobRateWatcher(int.MaxValue);
+            CuteCPPack = new MobRateWatcher(int.MaxValue);
+            DragonBalls = new MobRateWatcher(50000);
         }
 
         public uint GeneratePotionExtra(bool Special = false)
@@ -254,36 +257,25 @@ namespace GameServer.Game.MsgMonster
         }
         public byte GenerateBless()
         {
-            if (Pool.GetRandom.Next(0, 1000) < 250) // 25%
-            {
-                int selector = Pool.GetRandom.Next(0, 100);
-                if (selector < 1)
-                    return 5;
-                else if (selector < 6)
-                    return 3;
-            }
+            // Blessed equipment is not part of normal Era 1 monster generation.
             return 0;
         }
         public byte GenerateSocketCount(uint ItemID)
         {
-            if (ItemID >= 410000 && ItemID <= 601999)
-            {
-                int nRate = Pool.GetRandom.Next(0, 1000) % 100;
-                if (nRate < 5) // 5%
-                    return 2;
-                else if (nRate < 20) // 15%
-                    return 1;
-            }
+            // Random 1/2-socket equipment drops at the 5695 rates are an economy faucet.
+            // Era 1 sockets are obtained through the classic upgrade/socket mechanics.
             return 0;
         }
         public byte GenerateQuality()
         {
+            if (Super)
+                return 9;
+            if (Elite)
+                return 8;
+            if (Unique)
+                return 7;
             if (Refined)
                 return 6;
-            else if (Unique)
-                return 7;
-            else if (Elite)
-                return 8;
             return 3;
         }
         public uint AlterItemLevel(uint dwItemLev, uint dwItemSort)
