@@ -37,7 +37,10 @@ namespace GameServer.Game.MsgServer
         [PacketAttribute(GamePackets.MsgOsShop)]
         private unsafe static void Process(Client.GameClient user, ServerSockets.Packet stream)
         {
-           
+            // 5695-era Bound CP/OS shop. Keep the packet implementation for
+            // compatibility, but it must not mint items in Era 1.
+            if (!Game.Era1.Era1Shops.EnablePost5017BoundConquerPointMall)
+                return;
 
             byte type;
             ushort DwParam1;  

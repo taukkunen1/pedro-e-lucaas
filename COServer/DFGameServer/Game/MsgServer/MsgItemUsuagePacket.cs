@@ -947,9 +947,13 @@ namespace GameServer.Game.MsgServer
                     {
                         if (client.IsConnectedInterServer())
                             break;
+
                         uint ItemID = (uint)dwParam;
                         uint ItemsCount = dwParam2;
-                        if (Game.Era1.Era1Economy.IsAllowedForgingShopItem(ItemID))
+                        uint mallPrice;
+
+                        if (Game.Era1.Era1Economy.IsAllowedForgingShopItem(ItemID)
+                            && Game.Era1.Era1Shops.TryGetClassicMallPrice(ItemID, out mallPrice))
                         {
                             if (client.Inventory.HaveSpace((byte)ItemsCount))
                             {
@@ -958,19 +962,19 @@ namespace GameServer.Game.MsgServer
                                 {
                                     for (int x = 0; x < ItemsCount; x++)
                                     {
-                                        if (client.Player.ConquerPoints >= DBItem.ConquerPointsWorth)
+                                        if (client.Player.ConquerPoints >= mallPrice)
                                         {
-                                            client.Player.ConquerPoints -= DBItem.ConquerPointsWorth;
+                                            client.Player.ConquerPoints -= mallPrice;
 
-                                            if ((ItemID % 730000) <= 9)
-                                                client.Inventory.Add(DBItem.ID, (byte)(ItemID % 730000), DBItem, stream);
+                                            if (ItemID >= 730001 && ItemID <= 730008)
+                                                client.Inventory.Add(DBItem.ID, (byte)(ItemID - 730000), DBItem, stream);
                                             else
                                                 client.Inventory.Add(DBItem.ID, 0, DBItem, stream);
                                         }
-                                        else break;
+                                        else
+                                            break;
                                     }
                                 }
-
                             }
                         }
                         break;
@@ -1810,6 +1814,11 @@ namespace GameServer.Game.MsgServer
                         uint ItemUID = (uint)dwParam;
                         if (client.Map.SearchNpcInScreen(ShopUID, client.Player.X, client.Player.Y, out Npc obj))
                         {
+                            Database.Shops.ShopFile.Shop saleShop;
+                            if (!Database.Shops.ShopFile.Shops.TryGetValue(ShopUID, out saleShop)
+                                || saleShop.MoneyType != Database.Shops.ShopFile.MoneyType.Gold)
+                                break;
+
                             MsgGameItem Item;
                             if (client.Inventory.TryGetItem(ItemUID, out Item))
                             {
@@ -1826,6 +1835,9 @@ namespace GameServer.Game.MsgServer
                                 Database.ItemType.DBItem DBItem = null;
                                 if (Pool.ItemsBase.TryGetValue(Item.ITEM_ID, out DBItem))
                                 {
+                                    if (!Game.Era1.Era1Shops.IsAllowedNpcGoldShopItem(Item.ITEM_ID))
+                                        break;
+
                                     int prince = (int)(DBItem.GoldWorth);
                                     if (Item.Durability > 0 && Item.Durability < Item.MaximDurability)
                                         prince = (prince * Item.Durability) / Item.MaximDurability;
@@ -1859,7 +1871,7 @@ namespace GameServer.Game.MsgServer
                         if (ShopUID == 0)
                             return;
 
-                        if (ShopUID == Database.Shops.ChampionShop.UID)
+                        if (Game.Era1.Era1Shops.EnablePost5017SpecialPointShops && ShopUID == Database.Shops.ChampionShop.UID)
                         {
                             var shop = Database.Shops.ChampionShop.Shop;
 
@@ -1895,7 +1907,7 @@ namespace GameServer.Game.MsgServer
                                 }
                             }
                         }
-                        else if (ShopUID == Database.Shops.HonorShop.UID)
+                        else if (Game.Era1.Era1Shops.EnablePost5017SpecialPointShops && ShopUID == Database.Shops.HonorShop.UID)
                         {
                             var shop = Database.Shops.HonorShop.Shop;
                             uint cost;
@@ -1921,7 +1933,7 @@ namespace GameServer.Game.MsgServer
                                 }
                             }
                         }
-                        else if (ShopUID == Database.Shops.RacePointShop.UID)
+                        else if (Game.Era1.Era1Shops.EnablePost5017SpecialPointShops && ShopUID == Database.Shops.RacePointShop.UID)
                         {
                             var shop = Database.Shops.RacePointShop.Shop;
                             Database.Shops.RacePointShop.RacePointItem item;
@@ -2043,14 +2055,28 @@ namespace GameServer.Game.MsgServer
 
                         //                            }
                         //                        }
-                        else if (client.Map.SearchNpcInScreen(ShopUID, client.Player.X, client.Player.Y, out Npc obj) || ShopUID == 2888)
+                        else if (client.Map.SearchNpcInScreen(ShopUID, client.Player.X, client.Player.Y, out Npc obj) || ShopUID == Game.Era1.Era1Shops.RemoteShoppingMallShopId)
                         {
+                            if (dwparam4 == 2 && !Game.Era1.Era1Shops.EnablePost5017BoundConquerPointMall)
+                            {
+                                client.SendSysMesage("Bound CP mall purchases are not available in Era 1.");
+                                break;
+                            }
+
                             Database.Shops.ShopFile.Shop shop = new Database.Shops.ShopFile.Shop();
                             if (!Database.Shops.ShopFile.Shops.TryGetValue(ShopUID, out shop))
                                 if (!Database.Shops.EShopFile.Shops.TryGetValue(ShopUID, out shop))
                                     shop = null;
                             if (shop != null && shop.UID != 0)
                             {
+                                if (!Game.Era1.Era1Shops.CanBuyFromShop(shop, ItemID))
+                                    return;
+
+                                uint era1MallPrice = 0;
+                                if (shop.MoneyType == Database.Shops.ShopFile.MoneyType.ConquerPoints
+                                    && !Game.Era1.Era1Shops.TryGetClassicMallPrice(ItemID, out era1MallPrice))
+                                    return;
+
                                 if (dwparam4 == 2)
                                 {
                                     //if (!shop.BoundItems.Contains(ItemID))
@@ -2066,14 +2092,14 @@ namespace GameServer.Game.MsgServer
                                             {
                                                 case Database.Shops.ShopFile.MoneyType.ConquerPoints:
                                                     {
-                                                        if (DBItem.ConquerPointsWorth >= 1)
+                                                        if (era1MallPrice >= 1)
                                                         {
-                                                            if (client.Player.BoundConquerPoints >= DBItem.ConquerPointsWorth)
+                                                            if (client.Player.BoundConquerPoints >= era1MallPrice)
                                                             {
                                                                 byte plus = 0;
                                                                 if (DBItem.ID >= 730001 && DBItem.ID <= 730008)
                                                                     plus = (byte)(DBItem.ID % 10);
-                                                                client.Player.BoundConquerPoints -= (int)DBItem.ConquerPointsWorth;
+                                                                client.Player.BoundConquerPoints -= (int)era1MallPrice;
                                                                 client.Inventory.Add(DBItem.ID, plus, DBItem, stream, true);
 
                                                             }
@@ -2100,14 +2126,14 @@ namespace GameServer.Game.MsgServer
                                             {
                                                 case Database.Shops.ShopFile.MoneyType.ConquerPoints:
                                                     {
-                                                        if (DBItem.ConquerPointsWorth >= 1)
+                                                        if (era1MallPrice >= 1)
                                                         {
-                                                            if (client.Player.ConquerPoints >= DBItem.ConquerPointsWorth)
+                                                            if (client.Player.ConquerPoints >= era1MallPrice)
                                                             {
                                                                 byte plus = 0;
                                                                 if (DBItem.ID >= 730001 && DBItem.ID <= 730008)
                                                                     plus = (byte)(DBItem.ID % 10);
-                                                                client.Player.ConquerPoints -= DBItem.ConquerPointsWorth;
+                                                                client.Player.ConquerPoints -= era1MallPrice;
                                                                 client.Inventory.Add(DBItem.ID, plus, DBItem, stream);
 
                                                             }

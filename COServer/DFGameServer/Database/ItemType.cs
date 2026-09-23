@@ -1352,6 +1352,13 @@ namespace GameServer.Database
                         MagicDefence = Convert.ToUInt16(data[31]);
                         AttackRange = Convert.ToUInt16(data[32]);
                         ConquerPointsWorth = Convert.ToUInt32(data[37]);
+
+                        // Economy V3: normalize historically verified 5017-era mall prices.
+                        // This also fixes legacy 5695 data drift such as Tough Drill 1990 -> 1890
+                        // and the classic 980-CP garments stored with a zero CP price.
+                        if (Game.Era1.Era1Shops.TryGetClassicMallPrice(ID, out uint era1MallPrice))
+                            ConquerPointsWorth = era1MallPrice;
+
                         TimeItems = Convert.ToUInt32(data[39]);
                         Crytical = Convert.ToUInt32(data[40]);
                         SCrytical = Convert.ToUInt32(data[41]);

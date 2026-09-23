@@ -213,9 +213,13 @@ namespace GameServer.Database
             Shops.HonorShop.Load();
             Shops.RacePointShop.Load();
             Shops.ShopFile.Load();
-            // [feature-gate items] tira das lojas os itens de features removidas
+            // [feature-gate items] tira das lojas os itens de features removidas.
+            // Economy V3 também aplica a boundary Era 1 aos NPC shops de Gold.
             {
-                Func<uint, bool> blk = Core.Features.FeatureRegistry.IsBlockedItem;
+                Func<uint, bool> blk = itemId =>
+                    Core.Features.FeatureRegistry.IsBlockedItem(itemId)
+                    || Game.Era1.Era1Items.IsBlockedEquipment(itemId);
+
                 foreach (var sh in Shops.EShopFile.Shops.Values) { sh.Items.RemoveAll(i => blk(i)); sh.BoundItems.RemoveAll(i => blk(i)); }
                 foreach (var sh in Shops.ShopFile.Shops.Values) { sh.Items.RemoveAll(i => blk(i)); sh.BoundItems.RemoveAll(i => blk(i)); }
                 foreach (var k in Shops.HonorShop.Shop.Items.Keys.Where(k => blk(k)).ToList()) Shops.HonorShop.Shop.Items.Remove(k);
