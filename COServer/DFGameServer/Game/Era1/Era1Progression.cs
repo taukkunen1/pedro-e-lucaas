@@ -13,6 +13,27 @@ namespace GameServer.Game.Era1
             return level > MaxLevel ? MaxLevel : level;
         }
 
+        public static void RunSelfTest()
+        {
+            if (ClampLevel(129) != 129 || ClampLevel(130) != 130 || ClampLevel(131) != 130 || ClampLevel(140) != 130)
+                throw new System.InvalidOperationException("Era 1 level cap self-test failed.");
+
+            if (ExtraRebirthAttributePoints(120, false) != 0
+                || ExtraRebirthAttributePoints(121, false) != 1
+                || ExtraRebirthAttributePoints(129, false) != 45
+                || ExtraRebirthAttributePoints(130, false) != 55)
+                throw new System.InvalidOperationException("Era 1 standard rebirth attribute table self-test failed.");
+
+            if (ExtraRebirthAttributePoints(110, true) != 0
+                || ExtraRebirthAttributePoints(112, true) != 1
+                || ExtraRebirthAttributePoints(120, true) != 15
+                || ExtraRebirthAttributePoints(129, true) != 45
+                || ExtraRebirthAttributePoints(130, true) != 55)
+                throw new System.InvalidOperationException("Era 1 Water Taoist attribute table self-test failed.");
+
+            System.Console.WriteLine("ERA1 PROGRESSION SELFTEST PASS");
+        }
+
         public static byte ExtraRebirthAttributePoints(byte level, bool waterTaoist)
         {
             if (waterTaoist)
