@@ -81,15 +81,31 @@ def parse_constants() -> dict[str, float]:
 def parse_monsters() -> dict[int, dict]:
     monsters: dict[int, dict] = {}
     for path in glob.glob(os.path.join(DB, "Monsters", "*.ini")):
-        kv = parse_kv(read_text(path))
+        text = read_text(path)
+        kv = parse_kv(text)
         mid = as_int(kv.get("id"), -1)
         if mid < 0:
             continue
+        special_rows = []
+        sm = re.search(r"\[SpecialDrop\](.*?)(?=\n\s*\[|\Z)", text, re.I | re.S)
+        if sm:
+            for raw in sm.group(1).splitlines():
+                raw = raw.strip()
+                if not raw or raw.lower().startswith("count") or "=" not in raw:
+                    continue
+                _, value = raw.split("=", 1)
+                parts = [x.strip() for x in value.split(",")]
+                if len(parts) >= 2:
+                    special_rows.append(parts[0] + "@" + parts[1])
+
         monster = {
             "monster_id": mid,
             "monster_name": kv.get("name", os.path.splitext(os.path.basename(path))[0]),
             "level": as_int(kv.get("level")),
+            "boss": as_int(kv.get("boss")),
             "drop_money": as_int(kv.get("drop_money")),
+            "special_drop_count": len(special_rows),
+            "special_drops": "|".join(special_rows),
             "drop_armet": as_int(kv.get("drop_armet"), 99),
             "drop_necklace": as_int(kv.get("drop_necklace"), 99),
             "drop_armor": as_int(kv.get("drop_armor"), 99),
@@ -115,7 +131,9 @@ def parse_spawns() -> dict[tuple[int, int], dict]:
                 "map_id": map_id,
                 "monster_id": mob_id,
                 "spawn_entries": 0,
-                "max_npc": 0,
+                "root_spawn_points": 0,
+                "nested_generators": 0,
+                "nested_spawn_count_sum": 0,
                 "rest_secs_min": None,
                 "rest_secs_max": None,
             }
@@ -134,7 +152,7 @@ def parse_spawns() -> dict[tuple[int, int], dict]:
                 continue
             row = get(map_id, mob_id)
             row["spawn_entries"] += 1
-            row["max_npc"] += 1
+            row["root_spawn_points"] += 1
 
     for path in glob.glob(os.path.join(root, "**", "*.ini"), recursive=True):
         kv = parse_kv(read_text(path))
@@ -144,7 +162,11 @@ def parse_spawns() -> dict[tuple[int, int], dict]:
             continue
         row = get(map_id, mob_id)
         row["spawn_entries"] += 1
-        row["max_npc"] += max(0, as_int(kv.get("maxnpc")))
+        row["nested_generators"] += 1
+        # LoadMobSpawns uses max_per_gen for these nested generator files; MobCollection.Add
+        # multiplies normal monsters by 3, while bosses are forced to one instance.
+        configured = max(0, as_int(kv.get("max_per_gen"), as_int(kv.get("maxnpc"))))
+        row["nested_spawn_count_sum"] += configured
         rest = as_int(kv.get("rest_secs"), -1)
         if rest >= 0:
             row["rest_secs_min"] = rest if row["rest_secs_min"] is None else min(row["rest_secs_min"], rest)
@@ -165,6 +187,31 @@ def enabled_slots(m: dict) -> str:
     return "|".join(slots)
 
 
+def equipment_family_success_ratio(m: dict) -> float:
+    """Chance that GenerateItemId selects a family whose configured level is not 99."""
+    ratio = 0.0
+    if m["drop_shoes"] != 99:
+        ratio += 20 / 1200
+    if m["drop_necklace"] != 99:
+        ratio += 30 / 1200
+    if m["drop_ring"] != 99:
+        ratio += 50 / 1200
+    if m["drop_armet"] != 99:
+        ratio += 300 / 1200
+    if m["drop_armor"] != 99:
+        ratio += 300 / 1200
+
+    # Remaining 500/1200 rolls are weapons. Inside that block:
+    # 20% backsword + 60% one-hander use drop_weapon.
+    # Final 20% selects 5 two-handers using drop_weapon and 1 shield using drop_shield.
+    weapon_block = 500 / 1200
+    if m["drop_weapon"] != 99:
+        ratio += weapon_block * (0.20 + 0.60 + 0.20 * (5 / 6))
+    if m["drop_shield"] != 99:
+        ratio += weapon_block * (0.20 * (1 / 6))
+    return min(1.0, ratio)
+
+
 def pct(x: float) -> str:
     return f"{x:.8f}".rstrip("0").rstrip(".")
 
@@ -173,11 +220,12 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
     out_path = os.path.join(OUT, "era1_drops_por_mapa_monstro.csv")
     anomalies: list[dict] = []
     fields = [
-        "map_id", "monster_id", "monster_name", "level", "spawn_entries", "max_npc",
-        "rest_secs_min", "rest_secs_max", "drop_money", "equipment_slots",
+        "map_id", "monster_id", "monster_name", "level", "boss", "spawn_entries",
+        "root_spawn_points", "nested_generators", "runtime_spawn_capacity_est",
+        "rest_secs_min", "rest_secs_max", "drop_money", "special_drop_count", "special_drops", "equipment_slots",
         "drop_armet", "drop_necklace", "drop_armor", "drop_ring", "drop_weapon",
-        "drop_shield", "drop_shoes", "gold_event_pct", "equipment_event_pct",
-        "meteor_event_pct", "dragonball_event_pct", "refined_1_in", "unique_1_in",
+        "drop_shield", "drop_shoes", "gold_event_pct", "equipment_attempt_pct",
+        "equipment_family_success_pct", "equipment_effective_pct", "meteor_event_pct", "dragonball_event_pct", "refined_1_in", "unique_1_in",
         "elite_1_in", "super_1_in", "plus1_1_in_normal_quality",
     ]
     with open(out_path, "w", newline="", encoding="utf-8-sig") as fh:
@@ -194,15 +242,25 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
                 })
                 continue
             slots = enabled_slots(m)
+            family_success = equipment_family_success_ratio(m)
+            runtime_capacity = s["root_spawn_points"] + (
+                s["nested_generators"] if m["boss"] else 3 * s["nested_spawn_count_sum"]
+            )
             row = {
-                **{k: s[k] for k in ("map_id", "monster_id", "spawn_entries", "max_npc", "rest_secs_min", "rest_secs_max")},
+                **{k: s[k] for k in ("map_id", "monster_id", "spawn_entries", "root_spawn_points", "nested_generators", "rest_secs_min", "rest_secs_max")},
                 "monster_name": m["monster_name"],
                 "level": m["level"],
+                "boss": m["boss"],
+                "runtime_spawn_capacity_est": runtime_capacity,
                 "drop_money": m["drop_money"],
+                "special_drop_count": m["special_drop_count"],
+                "special_drops": m["special_drops"],
                 "equipment_slots": slots,
                 **{k: m[k] for k in ("drop_armet", "drop_necklace", "drop_armor", "drop_ring", "drop_weapon", "drop_shield", "drop_shoes")},
                 "gold_event_pct": pct(c["MonsterMoneyPercent"] if m["drop_money"] > 0 else 0.0),
-                "equipment_event_pct": pct(c["MonsterEquipmentPercent"] if slots else 0.0),
+                "equipment_attempt_pct": pct(c["MonsterEquipmentPercent"]),
+                "equipment_family_success_pct": pct(family_success * 100.0),
+                "equipment_effective_pct": pct(c["MonsterEquipmentPercent"] * family_success),
                 "meteor_event_pct": pct(c["MonsterMeteorPercent"]),
                 "dragonball_event_pct": pct(c["MonsterDragonBallPercent"]),
                 "refined_1_in": int(c["RefinedDropEvery"]),
@@ -226,6 +284,13 @@ def write_drop_audit(c: dict[str, float], monsters: dict[int, dict], spawns: dic
                     "map_id": map_id,
                     "monster_id": mob_id,
                     "detail": f"{m['monster_name']} has all equipment drop levels disabled (99)",
+                })
+            if m["special_drop_count"] > 0:
+                anomalies.append({
+                    "kind": "configured_special_drop",
+                    "map_id": map_id,
+                    "monster_id": mob_id,
+                    "detail": f"{m['monster_name']} has [SpecialDrop]: {m['special_drops']}",
                 })
     return anomalies
 
