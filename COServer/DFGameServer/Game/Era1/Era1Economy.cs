@@ -35,6 +35,13 @@ namespace GameServer.Game.Era1
         // but those reward scripts must not participate in the 5017 economy.
         public static bool EnablePost5017MonsterRewards => false;
 
+        // Classic special spawn exception. This is intentionally outside the normal
+        // MonsterDragonBallPercent faucet and must stay visible in static/runtime audits.
+        public static bool IsClassicDirectDragonBallMonster(uint monsterId)
+        {
+            return monsterId == 8419; // WaterDevil / DB Devil
+        }
+
         public static byte RollEquipmentQuality()
         {
             // One shared denominator keeps the declared 1/N rates exact and mutually exclusive:
@@ -117,6 +124,10 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 item boundary/economy integration failed.");
             if (EnablePost5017MonsterRewards)
                 throw new System.InvalidOperationException("Post-5017 monster reward scripts must stay disabled in Era 1.");
+            if (!IsClassicDirectDragonBallMonster(8419)
+                || IsClassicDirectDragonBallMonster(20300)
+                || IsClassicDirectDragonBallMonster(213883))
+                throw new System.InvalidOperationException("Era 1 direct Dragon Ball exception policy failed.");
 
             System.Console.WriteLine("ERA1 ECONOMY SELFTEST PASS");
         }
