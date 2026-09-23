@@ -32,13 +32,18 @@ namespace GameServer.Game.Era1
 
         public static byte RollEquipmentQuality()
         {
-            // Contemporary 2008 hunting reports show the expected ordering:
-            // Refined commonest, then Unique, Elite, with Super exceptional.
-            int roll = Pool.GetRandom.Next(1, SuperDropEvery + 1);
-            if (roll == 1) return 9;
-            if (roll <= SuperDropEvery / EliteDropEvery) return 8;
-            if (roll <= SuperDropEvery / UniqueDropEvery) return 7;
-            if (roll <= SuperDropEvery / RefinedDropEvery) return 6;
+            // One shared denominator keeps the declared 1/N rates exact and mutually exclusive:
+            // Refined 1/650, Unique 1/1500, Elite 1/7500, Super 1/30000.
+            const int scale = 390000; // LCM(650, 1500, 7500, 30000)
+            int roll = Pool.GetRandom.Next(1, scale + 1);
+            int cursor = scale / SuperDropEvery;
+            if (roll <= cursor) return 9;
+            cursor += scale / EliteDropEvery;
+            if (roll <= cursor) return 8;
+            cursor += scale / UniqueDropEvery;
+            if (roll <= cursor) return 7;
+            cursor += scale / RefinedDropEvery;
+            if (roll <= cursor) return 6;
             return 3;
         }
 
