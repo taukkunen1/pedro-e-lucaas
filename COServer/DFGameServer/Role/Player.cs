@@ -1599,12 +1599,9 @@ namespace GameServer.Role
                 // Era 1: leveling alone never grants profession skills.
                 // Skills and profession ranks are awarded by the classic Job Center/Birth Village flow.
 
-                _level = value;
-                if (_level >= 140)
-                {
-                    _level = 140;
+                _level = Game.Era1.Era1Progression.ClampLevel(value);
+                if (_level >= Game.Era1.Era1Progression.MaxLevel)
                     Experience = 0;
-                }
             }
         }
         public unsafe byte Reborn;
