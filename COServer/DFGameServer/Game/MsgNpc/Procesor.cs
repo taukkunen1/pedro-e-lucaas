@@ -409,6 +409,18 @@ namespace GameServer.Game.MsgNpc
                             return;
                         }
 
+                        // Later-patch convenience route: the Equipment Blacksmith offers
+                        // instant level-to-140 upgrades for CPs in options 61-68.
+                        // Keep the classic Meteor/DragonBall paths, but reject this shortcut
+                        // even if an old or modified client invokes the option directly.
+                        if (action.npcid == (uint)NpcID.EquipmentBlacksmith
+                            && action.option >= 61 && action.option <= 68
+                            && !Game.Era1.Era1Economy.EnableDirectLevelUpgradeWithCps)
+                        {
+                            action.client.SendSysMesage("Direct equipment level upgrade with CPs is not available in Era 1.");
+                            return;
+                        }
+
                         if (action.InteractType == (byte)NpcReply.InteractTypes.MessageBox)
                         {
                             if (action.client.Player.StartMessageBox > DateTime.Now)
