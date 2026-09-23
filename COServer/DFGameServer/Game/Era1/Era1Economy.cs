@@ -12,7 +12,7 @@ namespace GameServer.Game.Era1
         // 4% unique, 0.9% elite, 0.1% super.
         public static byte RollEquipmentQuality()
         {
-            int roll = Pool.GetRandom.Next(0, 10000);
+            int roll = global::GameServer.Pool.GetRandom.Next(0, 10000);
             if (roll < 10) return 9;
             if (roll < 100) return 8;
             if (roll < 500) return 7;
@@ -23,7 +23,7 @@ namespace GameServer.Game.Era1
         // +1 remains a scarce item MINT. Higher plus values must be produced by composition (BURN).
         public static byte RollHuntingPlus()
         {
-            return Pool.GetRandom.Next(0, 10000) < 200 ? (byte)1 : (byte)0; // 2% of equipment drops
+            return global::GameServer.Pool.GetRandom.Next(0, 10000) < 200 ? (byte)1 : (byte)0; // 2% of equipment drops
         }
 
         public static bool IsClassicMiningGem(uint id)
