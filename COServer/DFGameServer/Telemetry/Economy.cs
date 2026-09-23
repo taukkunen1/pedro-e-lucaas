@@ -114,6 +114,7 @@ namespace GameServer.Telemetry
 
         static ConcurrentDictionary<(Currency cur, string system, string reason, bool transfer), Agg> _agg = new();
         static ConcurrentDictionary<uint, PlayerAgg> _players = new();
+        static ConcurrentDictionary<(string resource, string system, string reason, bool transfer), Agg> _resources = new();
         static DateTime _day = DateTime.Now.Date;
         static readonly object _swap = new();
         #endregion
@@ -192,6 +193,30 @@ namespace GameServer.Telemetry
         {
             if (!_started || before == after) return;
             Push(uid, name, map, cur, before, after, null);
+        }
+
+        /// <summary>Tracks scarce Era 1 item resources using the same MINT/BURN/TRANSFER classifier as currency.</summary>
+        public static void RecordResource(uint uid, string name, uint map, string resource, long delta)
+        {
+            if (!_started || string.IsNullOrEmpty(resource) || delta == 0) return;
+            try
+            {
+                string reason = ReasonNow();
+                var (system, flowMode) = Classify(reason);
+                if (flowMode == "ignore") return;
+                bool transfer = flowMode == "transfer";
+                long abs = System.Math.Abs(delta);
+                var a = _resources.GetOrAdd((resource, system, reason, transfer), _ => new Agg());
+                Interlocked.Increment(ref a.Count);
+                if (delta > 0) Interlocked.Add(ref a.In, abs); else Interlocked.Add(ref a.Out, abs);
+
+                string flow = transfer ? "Transfer" : (delta > 0 ? "Mint" : "Burn");
+                if (!_queue.TryAdd(new Ev { T = DateTime.Now, Uid = uid, Name = name, Map = map,
+                    Cur = Currency.Gold, Before = 0, After = delta, Flow = flow,
+                    System = "Resource:" + resource + "/" + system, Reason = reason }))
+                    Interlocked.Increment(ref _dropped);
+            }
+            catch { }
         }
 
         /// <summary>Para ganhos/gastos que nao passam pelos setters (ex.: personagem novo antes do login completo).</summary>
@@ -327,7 +352,7 @@ namespace GameServer.Telemetry
         static void RollDay()
         {
             WriteSummary(true);
-            lock (_swap) { _agg = new(); _players = new(); _day = DateTime.Now.Date; }
+            lock (_swap) { _agg = new(); _players = new(); _resources = new(); _day = DateTime.Now.Date; }
         }
 
         public static string SnapshotJson()
@@ -365,7 +390,32 @@ namespace GameServer.Telemetry
                     topBurners = pl.Where(p => p.Value.Burn[i] > 0).OrderByDescending(p => p.Value.Burn[i]).Take(20).Select(p => new { uid = p.Key, name = p.Value.Name, amount = p.Value.Burn[i] })
                 };
             }
-            return JsonConvert.SerializeObject(new { day = _day.ToString("yyyy-MM-dd"), generatedAt = DateTime.Now.ToString("s"), droppedEvents = Interlocked.Read(ref _dropped), currencies = cur }, Formatting.Indented);
+            var resources = _resources.GroupBy(r => r.Key.resource).ToDictionary(
+                g => g.Key,
+                g =>
+                {
+                    long minted = g.Where(r => !r.Key.transfer).Sum(r => r.Value.In);
+                    long burned = g.Where(r => !r.Key.transfer).Sum(r => r.Value.Out);
+                    return (object)new
+                    {
+                        minted,
+                        burned,
+                        net = minted - burned,
+                        mintBurnRatio = burned == 0 ? (double?)null : System.Math.Round((double)minted / burned, 4),
+                        burnCoveragePct = minted == 0 ? (double?)null : System.Math.Round((double)burned * 100.0 / minted, 2),
+                        transferIn = g.Where(r => r.Key.transfer).Sum(r => r.Value.In),
+                        transferOut = g.Where(r => r.Key.transfer).Sum(r => r.Value.Out),
+                        bySystem = g.GroupBy(r => r.Key.system).Select(s => new
+                        {
+                            system = s.Key,
+                            minted = s.Where(r => !r.Key.transfer).Sum(r => r.Value.In),
+                            burned = s.Where(r => !r.Key.transfer).Sum(r => r.Value.Out),
+                            events = s.Sum(r => r.Value.Count)
+                        }).OrderByDescending(x => x.minted + x.burned).ToList()
+                    };
+                });
+
+            return JsonConvert.SerializeObject(new { day = _day.ToString("yyyy-MM-dd"), generatedAt = DateTime.Now.ToString("s"), droppedEvents = Interlocked.Read(ref _dropped), currencies = cur, resources }, Formatting.Indented);
         }
 
         static void WriteSummary(bool final)
