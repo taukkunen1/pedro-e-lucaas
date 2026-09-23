@@ -1009,13 +1009,16 @@ namespace GameServer.Role.Instance
             if (HaveSpace(1) || mode == AddMode.REMOVE)
             {
                 long actualRemovedUnits = 0;
+                bool actualAdded = false;
                 string logs = "[Item]" + Owner.Player.Name + " [" + mode + "] [" + ItemDat.UID + "]" + ItemDat.ITEM_ID + " plus [" + ItemDat.Plus + "] at : " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
                 Database.ServerDatabase.LoginQueue.Enqueue(logs);
                 switch (mode)
                 {
                     case AddMode.ADD:
                         {
+                            bool existedBeforeAdd = ClientItems.ContainsKey(ItemDat.UID);
                             CheakUp(ItemDat);
+                            actualAdded = !existedBeforeAdd && ClientItems.ContainsKey(ItemDat.UID);
                             if (ItemDat.StackSize == 0)
                                 ItemDat.StackSize = 1;
                             ItemDat.Position = 0;
@@ -1057,7 +1060,7 @@ namespace GameServer.Role.Instance
                             break;
                         }
                 }
-                if (mode == AddMode.ADD || (mode == AddMode.REMOVE && actualRemovedUnits > 0))
+                if ((mode == AddMode.ADD && actualAdded) || (mode == AddMode.REMOVE && actualRemovedUnits > 0))
                 {
                     var era1Resources = Game.Era1.Era1Economy.TrackedResources(ItemDat.ITEM_ID, ItemDat.Plus);
                     if (era1Resources.Length != 0)
