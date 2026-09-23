@@ -93,43 +93,40 @@ namespace GameServer.Base.Mining
                     wParam2 = 68,
                 };
                 client.Player.View.SendView(stream.ActionCreate(&daction), true);
-                if (MyMath.Success(50.0)) // 50% any reward
+                // Era 1 mining is an ore/gem/meteor/DB faucet only. 5695 +Stone
+                // rewards are deliberately excluded; every successful find consumes one attempt.
+                if (MyMath.Success(50.0))
                 {
-                    if (MyMath.Success(40.0))
+                    uint itemid;
+                    if (PercentSuccess(0.05))
                     {
-                        client.Inventory.Add(stream, Ores[Role.Core.Random.Next(0, Ores.Length)], 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
+                        itemid = Database.ItemType.DragonBall;
                     }
-                    else if (MyMath.Success(10.0))
+                    else if (PercentSuccess(0.75))
                     {
-                        uint itemid = Gems[Role.Core.Random.Next(0, Gems.Length)];
-                        if (PercentSuccess(0.01))
-                            itemid += 2; // For Super Gem
-                        client.Inventory.Add(stream, itemid, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
+                        itemid = Database.ItemType.Meteor;
                     }
-                    else if (MyMath.Success(0.1))
+                    else if (PercentSuccess(4.0))
                     {
-                        client.Inventory.Add(stream, 1088000, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
-                    }
-                    else if (MyMath.Success(1.0))
-                    {
-                        client.Inventory.Add(stream, 1088001, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
+                        itemid = Gems[Role.Core.Random.Next(0, Gems.Length)];
+                        // Refined gems are rare; super gems remain exceptional.
+                        if (PercentSuccess(0.05))
+                            itemid += 2;
+                        else if (PercentSuccess(2.0))
+                            itemid += 1;
                     }
                     else
                     {
-                        // Era 1: mining MINTs ores/gems/Meteor/DragonBall. +Stones are a later economy
-                        // shortcut and are intentionally excluded; Euxenite remains a classic mining output.
-                        client.Inventory.Add(stream, 1072031, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false, Role.Flags.ItemEffect.None, true, "~from~mining!");
-                        client.MiningAttempts--;
-                        return;
+                        itemid = Ores[Role.Core.Random.Next(0, Ores.Length)];
                     }
+
+                    if (Game.Era1.Era1Items.IsAllowedGeneratedDrop(itemid))
+                        client.Inventory.Add(stream, itemid, 1, 0, 0, 0,
+                            Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, false,
+                            Role.Flags.ItemEffect.None, true, "~from~mining!");
+
+                    client.MiningAttempts--;
+                    return;
                 }
             }
         }
