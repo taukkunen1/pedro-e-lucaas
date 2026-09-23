@@ -62,18 +62,7 @@ namespace GameServer
                                         }
                                     }
                                 }
-                                if (Drop.MoneyDrop.Type == ConfigurableDropSystem.MoneyType.ConquerPoints)
-                                {
-                                    uint awardCPs = (uint)Pool.GetRandom.Next((int)Drop.MoneyDrop.Min, (int)Drop.MoneyDrop.Max);
-                                    killer.Player.ConquerPoints += awardCPs;
-                                    killer.SendSysMesage($"You get {awardCPs} ConquerPoints for killing the monster.", MsgMessage.ChatMode.TopLeft);
-                                }
-                                if (Drop.MoneyDrop.Type == ConfigurableDropSystem.MoneyType.BoundConquerPoints)
-                                {
-                                    int awardCPs = (int)Pool.GetRandom.Next((int)Drop.MoneyDrop.Min, (int)Drop.MoneyDrop.Max);
-                                    killer.Player.BoundConquerPoints += awardCPs;
-                                    killer.SendSysMesage($"You get {awardCPs} ConquerPoints for killing the monster.", MsgMessage.ChatMode.TopLeft);
-                                }
+                                // Era 1 hunting economy uses silver drops, not direct CP/Bound-CP monster rewards.
                                 returnBoolean = true;
                                 break;
                             }
@@ -154,6 +143,15 @@ namespace GameServer
                                 break;
                             }
                         case ConfigurableDropSystem.DropType.Stone:
+                        case ConfigurableDropSystem.DropType.ExpBall:
+                        case ConfigurableDropSystem.DropType.Letter:
+                        case ConfigurableDropSystem.DropType.PowerEXPBall:
+                            {
+                                // Later/custom economy drops are not part of the 5017 Era 1 hunting loop.
+                                break;
+                            }
+#if false
+                        case ConfigurableDropSystem.DropType.Stone_Legacy:
                             {
                                 ushort randomStonePlus = (ushort)Role.Core.Random.Next(1, 3);
                                 uint ID = StoneId(randomStonePlus);
@@ -325,6 +323,7 @@ namespace GameServer
                                 returnBoolean = true;
                                 break;
                             }
+#endif
                         case ConfigurableDropSystem.DropType.DragonBall:
                             {
                                 uint ID = 1088000;
@@ -420,7 +419,7 @@ namespace GameServer
             , uint amount, bool special, byte ID_Quality, Client.GameClient user = null, Database.ItemType.DBItem DBItem = null)
         {
             Game.MsgServer.MsgGameItem DataItem = new Game.MsgServer.MsgGameItem();
-            if (ItemID == 0) return;
+            if (!Game.Era1.Era1Items.IsAllowedGeneratedDrop(ItemID)) return;
             DataItem.ITEM_ID = ItemID;
             if (DataItem.Durability > 100)
             {
