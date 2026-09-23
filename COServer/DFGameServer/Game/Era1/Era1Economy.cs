@@ -100,6 +100,39 @@ namespace GameServer.Game.Era1
             return itemId >= 730001 && itemId <= 730008;
         }
 
+        public const byte ClassicComposeMinorCount = 2;
+        public const byte ClassicHighPlusPlayerLevel = 130;
+
+        public static bool IsClassicGem(uint itemId)
+        {
+            byte quality = (byte)(itemId % 10);
+            return IsClassicMiningGem(itemId) && (quality == 1 || quality == 2 || quality == 3);
+        }
+
+        public static byte CompositionMaterialPlus(uint itemId, byte storedPlus)
+        {
+            if (IsPlusStone(itemId))
+                return (byte)(itemId - 730000);
+            return storedPlus;
+        }
+
+        public static byte ClassicHighPlusDragonBallCost(byte currentPlus)
+        {
+            if (currentPlus == 9) return 12;
+            if (currentPlus == 10) return 25;
+            if (currentPlus == 11) return 40;
+            return 0;
+        }
+
+        public static byte ClassicComposeGemCost(uint targetItemId, byte currentPlus)
+        {
+            // The old composition rule requires gems when the result becomes +6 or higher:
+            // two for weapons and one for other equipment.
+            if (currentPlus < 5 || currentPlus >= 9)
+                return 0;
+            return IsClassicWeaponSocketTarget(targetItemId) ? (byte)2 : (byte)1;
+        }
+
         static int CompositionFamily(uint itemId)
         {
             if (Database.ItemType.IsBow(itemId)) return 1;
@@ -282,9 +315,13 @@ namespace GameServer.Game.Era1
                 || TrackedResource(730001) != "PlusStone.Plus1"
                 || TrackedResource(Database.ItemType.ToughDrill) != "Drill.Tough")
                 throw new System.InvalidOperationException("Era 1 resource MINT/BURN classification failed.");
-            if (Database.ItemType.StonePlusPoints(0) != 0 || Database.ItemType.StonePlusPoints(1) != 10
-                || Database.ItemType.ComposePlusPoints(8) != 58320 || Database.ItemType.ComposePlusPoints(9) != 2700)
-                throw new System.InvalidOperationException("Era 1 composition point table failed.");
+            if (ClassicComposeMinorCount != 2 || ClassicHighPlusPlayerLevel != 130
+                || ClassicHighPlusDragonBallCost(9) != 12
+                || ClassicHighPlusDragonBallCost(10) != 25
+                || ClassicHighPlusDragonBallCost(11) != 40
+                || ClassicComposeGemCost(410073, 5) != 2
+                || ClassicComposeGemCost(130033, 5) != 1)
+                throw new System.InvalidOperationException("Era 1 classic composition/refining policy failed.");
             if (!IsClassicWeaponSocketTarget(410073) || IsClassicWeaponSocketTarget(900003)
                 || !IsClassicEquipmentSocketTarget(900003)
                 || WeaponFirstSocketDragonBalls != 1 || WeaponSecondSocketDragonBalls != 5
