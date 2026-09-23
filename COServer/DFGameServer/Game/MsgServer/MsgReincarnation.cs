@@ -24,9 +24,15 @@ namespace GameServer.Game.MsgServer
 
             stream.GetReincarnation(out ToClass, out ToBody);
 
+            // Era 1 has no reincarnation/third-life system. The 5017 target keeps
+            // only first and second rebirth, so packets for the later system are rejected.
+            user.CreateBoxDialog("Reincarnation is not available in Era 1.");
+            return;
+
+#pragma warning disable CS0162
             if (user.Inventory.HaveSpace(2))
             {
-                if (ToClass == 11 || ToClass == 21 || ToClass == 41 || ToClass == 51 || ToClass == 61 || ToClass == 71 || ToClass == 81 || ToClass == 132 || ToClass == 142 || ToClass == 161)
+                if (ToClass == 11 || ToClass == 21 || ToClass == 41 || ToClass == 132 || ToClass == 142)
                 {
                     if (user.Inventory.Contain(711083, 1) || user.Inventory.Contain(711083, 1, 1))
                     {
@@ -65,7 +71,7 @@ namespace GameServer.Game.MsgServer
                 }
             }
             else user.CreateBoxDialog("You need 2 free spaces in your inventory.");
-
+#pragma warning restore CS0162
         }
     }
 }
