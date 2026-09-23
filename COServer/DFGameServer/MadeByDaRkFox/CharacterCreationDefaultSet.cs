@@ -1,52 +1,41 @@
-﻿using GameServer.Client;
+using GameServer.Client;
 using GameServer.Game.MsgServer;
 
 namespace GameServer.MadeByDaRkFox
 {
+    /// <summary>
+    /// Era 1 starter equipment.
+    ///
+    /// Character creation is intentionally conservative: no welcome pack,
+    /// no injected Gold and no post-classic equipment. Skills are learned
+    /// through normal game progression/Birth Village instead of being granted
+    /// here.
+    /// </summary>
     public static class CharacterCreationDefaultSet
     {
         public static void Init(GameClient client, ServerSockets.Packet stream)
         {
+            // Basic level-1 clothing shared by the classic professions.
             client.Equipment.Add(stream, 132006, Role.Flags.ConquerItem.Armor);
+
+            // Only the four Era 1 professions are valid at character creation.
+            // Do not add rings or later-class starter gear here.
             if (Database.AtributesStatus.IsTaoist(client.Player.Class))
             {
-                client.Equipment.Add(stream, 152005, Role.Flags.ConquerItem.Ring);
                 client.Equipment.Add(stream, 421301, Role.Flags.ConquerItem.RightWeapon);
-            } else if (Database.AtributesStatus.IsArcher(client.Player.Class))
+            }
+            else if (Database.AtributesStatus.IsArcher(client.Player.Class))
             {
-                client.Equipment.Add(stream, 150003, Role.Flags.ConquerItem.Ring);
                 client.Equipment.Add(stream, 500006, Role.Flags.ConquerItem.RightWeapon);
             }
-            else
+            else if (Database.AtributesStatus.IsTrojan(client.Player.Class))
             {
-                client.Equipment.Add(stream, 150003, Role.Flags.ConquerItem.Ring);
-                if (Database.AtributesStatus.IsPirate(client.Player.Class))
-                {
-                    client.Equipment.Add(stream, 611301, Role.Flags.ConquerItem.RightWeapon);
-                }
-                else if (Database.AtributesStatus.IsTrojan(client.Player.Class))
-                {
-                    client.Equipment.Add(stream, 420301, Role.Flags.ConquerItem.RightWeapon);
-                }
-                else if (Database.AtributesStatus.IsMonk(client.Player.Class))
-                {
-                    client.Equipment.Add(stream, 610301, Role.Flags.ConquerItem.RightWeapon);
-                }
-                else if (Database.AtributesStatus.IsNinja(client.Player.Class))
-                {
-                    client.Equipment.Add(stream, 601301, Role.Flags.ConquerItem.RightWeapon);
-                }
-                else if (Database.AtributesStatus.IsWarrior(client.Player.Class))
-                {
-                    client.Equipment.Add(stream, 561301, Role.Flags.ConquerItem.RightWeapon);
-                }
-                else
-                    client.Equipment.Add(stream, 410301, Role.Flags.ConquerItem.RightWeapon);
+                client.Equipment.Add(stream, 420301, Role.Flags.ConquerItem.RightWeapon);
             }
-            client.Inventory.Add(stream, 723753, 1, 0, 0, 0, Role.Flags.Gem.NoSocket, Role.Flags.Gem.NoSocket, true); // Welcome pack
-            client.Player.Money += 50000;
-            if (!client.FullLoading) GameServer.Telemetry.Economy.RecordManual(client.Player.UID, client.Player.Name, client.Player.Map, GameServer.Telemetry.Currency.Gold, 50000, "Code:NewCharacter");
-            client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
+            else if (Database.AtributesStatus.IsWarrior(client.Player.Class))
+            {
+                client.Equipment.Add(stream, 561301, Role.Flags.ConquerItem.RightWeapon);
+            }
         }
     }
 }
