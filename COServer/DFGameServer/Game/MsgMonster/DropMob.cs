@@ -457,12 +457,12 @@ namespace GameServer
             uint dwItemSort = 0;
             uint dwItemLev = 0;
             int nRand = BaseFunc.RandGet(1200, false);
-            if (nRand >= 0 && nRand < 20) // 0.17%
+            if (nRand >= 0 && nRand < 20) // 1.67%
             {
                 dwItemSort = 160;
                 dwItemLev = Mob.Family.DropBoots;
             }
-            else if (nRand >= 20 && nRand < 50) // 0.25%
+            else if (nRand >= 20 && nRand < 50) // 2.50%
             {
                 dwItemSort = MobItemGenerator.NecklaceType[BaseFunc.RandGet(MobItemGenerator.NecklaceType.Length, false)];
                 dwItemLev = Mob.Family.DropNecklace;
@@ -482,19 +482,20 @@ namespace GameServer
                 dwItemSort = MobItemGenerator.ArmorType[BaseFunc.RandGet(MobItemGenerator.ArmorType.Length, false)];
                 dwItemLev = Mob.Family.DropArmor;
             }
-            else // 45%
+            else // 41.67%
             {
                 int nRate = BaseFunc.RandGet(100, false);
-                if (nRate >= 0 && nRate < 20) // 20% of 45% (= 9%) - Backswords
+                if (nRate >= 0 && nRate < 20) // 20% of weapon drops (= 8.33% overall) - Backswords
                 {
                     dwItemSort = 421;
+                    dwItemLev = Mob.Family.DropWeapon;
                 }
-                else if (nRate >= 40 && nRate < 80)	// 40% of 45% (= 18%) - One handers
+                else if (nRate >= 20 && nRate < 80) // 60% of weapon drops (= 25.00% overall) - One handers
                 {
                     dwItemSort = MobItemGenerator.OneHanderType[BaseFunc.RandGet(MobItemGenerator.OneHanderType.Length, false)];
                     dwItemLev = Mob.Family.DropWeapon;
                 }
-                else if (nRate >= 80 && nRate < 100)// 20% of 45% (= 9%) - Two handers (and shield)
+                else // 20% of weapon drops (= 8.33% overall) - Two handers (and shield)
                 {
                     dwItemSort = MobItemGenerator.TwoHanderType[BaseFunc.RandGet(MobItemGenerator.TwoHanderType.Length, false)];
                     dwItemLev = ((dwItemSort == 900) ? Mob.Family.DropShield : Mob.Family.DropWeapon);
