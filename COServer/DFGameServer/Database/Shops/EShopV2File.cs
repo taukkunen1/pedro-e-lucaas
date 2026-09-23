@@ -116,6 +116,10 @@ namespace GameServer.Database.Shops
                 }
                 
             }
+
+            // Economy V3: keep the legacy 5695 catalogue on disk, but expose only
+            // the 5017-era Shopping Mall subset at runtime.
+            Game.Era1.Era1Shops.SanitizeEShops(EShopFile.Shops);
         }
     }
 }
