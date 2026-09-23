@@ -357,7 +357,7 @@ namespace GameServer.Client
             if (Fake)
                 return;
 
-            if (Player.Level >= 140)
+            if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
                 return;
 
             if (Player.ExpProtection > 0)
@@ -366,7 +366,7 @@ namespace GameServer.Client
             var nextlevel = Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)(Player.Level)];
             if (nextlevel.Experience == 0)
             {
-                return;//player level 140. Error divide by 0;
+                return;//Era 1 max level. Error divide by 0;
             }
             ulong loseexp = (ulong)((Player.Experience * (uint)(nextlevel.UpLevTime * nextlevel.MentorUpLevTime)) / nextlevel.Experience);
             double LoseExpPercent = (double)((double)loseexp / (double)nextlevel.Experience);
@@ -387,7 +387,7 @@ namespace GameServer.Client
                 var killernextlevel = Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)(killer.Player.Level)];
                 if (killernextlevel.Experience == 0)
                 {
-                    return;//player level 140. Error divide by 0;
+                    return;//Era 1 max level. Error divide by 0;
                 }
                 double GetExp = (double)((double)100 / (double)killernextlevel.Experience) * (double)(loseexp * 100);
                 killer.Player.Experience += (uint)GetExp;
@@ -528,7 +528,7 @@ namespace GameServer.Client
             {
                 return;
             }
-            if (Player.Level < 140)
+            if (Player.Level < Game.Era1.Era1Progression.MaxLevel)
             {
                 if (effect != Role.Flags.ExperienceEffect.None)
                 {
@@ -545,7 +545,7 @@ namespace GameServer.Client
                     Player.Experience -= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience;
                     ushort newlev = (ushort)(Player.Level + 1);
                     UpdateLevel(stream, newlev);
-                    if (Player.Level >= 140)
+                    if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
                     {
                         Player.Experience = 0;
                         break;
@@ -632,22 +632,28 @@ namespace GameServer.Client
         }
         public string InfoLevelUpdate(double amount = 600)
         {
+            if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                return Game.Era1.Era1Progression.MaxLevel + " (MAX)";
+
             ulong ReceiveExperience = GainExpBall(amount, false, Role.Flags.ExperienceEffect.None, true);
             ulong MyExperince = Player.Experience;
             byte MyLevel = (byte)Player.Level;
             MyExperince += ReceiveExperience;
-            while (MyExperince >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)MyLevel].Experience)
+            while (MyLevel < Game.Era1.Era1Progression.MaxLevel
+                && MyExperince >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)MyLevel].Experience)
             {
                 MyExperince -= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)MyLevel].Experience;
                 MyLevel++;
             }
+            if (MyLevel >= Game.Era1.Era1Progression.MaxLevel)
+                return Game.Era1.Era1Progression.MaxLevel + " (MAX)";
             float Percentaj = (float)(Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)MyLevel].Experience / MyExperince);
             return "" + MyLevel + " (" + Percentaj + "%)";
         }
         public ulong GainExpBall(double amount = 600, bool sendMsg = false, Role.Flags.ExperienceEffect effect = Role.Flags.ExperienceEffect.None
             , bool JustCalculate = false, bool mentorexp = true)
         {
-            if (Player.Level >= 140)
+            if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
                 return 0;
             if (sendMsg)
             {
@@ -667,24 +673,13 @@ namespace GameServer.Client
                 return 0;
 
             var ReceiveExp = (long)Player.Experience * LevelDBExp.UpLevTime / (double)LevelDBExp.Experience;
-            if (ReceiveExp < 0 && Player.Level == 139)
-            {
-                ReceiveExp = 0;
-                using (var rec = new ServerSockets.RecycledPacket())
-                {
-                    var stream = rec.GetStream();
-                    UpdateLevel(stream, 140, true);
-                }
-                return 0;
-            }
-            else
-                ReceiveExp += amount;
+            ReceiveExp += amount;
 
             byte IncreaseLevel = (byte)Player.Level;
             //LevelDBExp = LevelInfo[Database.DBLevExp.Sort.User][IncreaseLevel];
             var times = LevelDBExp.UpLevTime;
 
-            while (IncreaseLevel < 140)
+            while (IncreaseLevel < Game.Era1.Era1Progression.MaxLevel)
             {
                 if (ReceiveExp < times)
                     break;
@@ -731,7 +726,7 @@ namespace GameServer.Client
         }
         public ulong CalcExpBall(double amount, out ushort nextlevel)
         {
-            if (Player.Level >= 140)
+            if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
             { nextlevel = 0; return 0; }
 
             var LevelDBExp = Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level];
@@ -745,7 +740,7 @@ namespace GameServer.Client
             //LevelDBExp = LevelInfo[Database.DBLevExp.Sort.User][IncreaseLevel];
             var times = LevelDBExp.UpLevTime;
 
-            while (IncreaseLevel < 140)
+            while (IncreaseLevel < Game.Era1.Era1Progression.MaxLevel)
             {
                 if (ReceiveExp < times)
                     break;
@@ -1651,6 +1646,7 @@ namespace GameServer.Client
         }
         public void UpdateLevel(ServerSockets.Packet stream, ushort Level, bool REsetExp = false, bool mentorexp = true)
         {
+            Level = Game.Era1.Era1Progression.ClampLevel(Level);
 
             if (Level == Player.Level)
                 return;
