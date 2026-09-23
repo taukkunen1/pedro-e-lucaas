@@ -12,7 +12,8 @@ namespace GameServer.Game.Era1
         public const int EliteDropEvery = 7500;
         public const int SuperDropEvery = 30000;
         public const int PlusOneDropEvery = 7500;
-        public const int PlusTwoDropEvery = 60000;
+        // Direct +2 equipment is not part of the normal 5017 hunting faucet.
+        public const int PlusTwoDropEvery = int.MaxValue;
         public const int DragonBallDropEvery = 50000;
 
         public const double MiningSuccessPercent = 50.0;
@@ -21,6 +22,18 @@ namespace GameServer.Game.Era1
         public const double MiningGemPercent = 4.0;
         public const double MiningRefinedGemPercent = 2.0;
         public const double MiningSuperGemPercent = 0.05;
+
+        public static byte RollEquipmentQuality()
+        {
+            // Contemporary 2008 hunting reports show the expected ordering:
+            // Refined commonest, then Unique, Elite, with Super exceptional.
+            int roll = Pool.GetRandom.Next(1, SuperDropEvery + 1);
+            if (roll == 1) return 9;
+            if (roll <= SuperDropEvery / EliteDropEvery) return 8;
+            if (roll <= SuperDropEvery / UniqueDropEvery) return 7;
+            if (roll <= SuperDropEvery / RefinedDropEvery) return 6;
+            return 3;
+        }
 
         public static bool IsLaterEconomyDrop(MadeByDaRkFox.ConfigurableDropSystem.DropType type)
         {
