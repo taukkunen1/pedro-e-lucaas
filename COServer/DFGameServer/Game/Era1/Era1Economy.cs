@@ -66,8 +66,15 @@ namespace GameServer.Game.Era1
         public static bool IsClassicEquipment(uint itemId)
         {
             uint type = itemId / 1000;
-            return (type >= 110 && type <= 160)
-                || (type >= 410 && type <= 590)
+            return (type >= 111 && type <= 118)
+                || type == 123
+                || (type >= 120 && type <= 121)
+                || (type >= 130 && type <= 139)
+                || (type >= 141 && type <= 148)
+                || (type >= 150 && type <= 152)
+                || type == 160
+                || (type >= 410 && type <= 490)
+                || (type >= 500 && type <= 580)
                 || type == 900;
         }
 
@@ -76,7 +83,7 @@ namespace GameServer.Game.Era1
             if (!IsClassicEquipment(itemId) || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
                 return false;
             uint type = itemId / 1000;
-            return type >= 410 && type <= 590;
+            return (type >= 410 && type <= 490) || (type >= 500 && type <= 580);
         }
 
         public static bool IsClassicEquipmentSocketTarget(uint itemId)
@@ -85,7 +92,7 @@ namespace GameServer.Game.Era1
                 || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
                 return false;
             ushort position = Database.ItemType.ItemPosition(itemId);
-            return Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)position);
+            return position != 0 && Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)position);
         }
 
         public static bool IsPlusStone(uint itemId)
@@ -110,7 +117,8 @@ namespace GameServer.Game.Era1
                 return false;
             if (!Pool.ItemsBase.TryGetValue(itemId, out var dbItem) || dbItem.Level < 15)
                 return false;
-            return Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)Database.ItemType.ItemPosition(itemId));
+            ushort position = Database.ItemType.ItemPosition(itemId);
+            return position != 0 && Database.ItemType.AllowToUpdate((Role.Flags.ConquerItem)position);
         }
 
         public static bool IsAllowedCompositionMaterial(uint mainItemId, uint materialItemId)
