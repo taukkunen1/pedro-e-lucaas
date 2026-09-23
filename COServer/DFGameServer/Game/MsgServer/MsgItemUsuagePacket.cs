@@ -1648,9 +1648,13 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             return;
-                        //-1
-                        dwParam = (ulong)client.Player.WHMoney;
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
+                        {
+                            client.SendSysMesage("You must be at a warehouse to access stored silver.");
+                            break;
+                        }
 
+                        dwParam = (ulong)client.Player.WHMoney;
                         client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                         break;
                     }
@@ -1660,12 +1664,21 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             break;
-                        if (client.Player.Money > (long)dwParam)
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
                         {
+                            client.SendSysMesage("You must be at a warehouse to deposit silver.");
+                            break;
+                        }
+                        if (dwParam == 0 || dwParam > uint.MaxValue)
+                            break;
 
-                            client.Player.WHMoney += (long)dwParam;
-                            client.Player.Money -= (uint)dwParam;
+                        uint amount = (uint)dwParam;
+                        if (client.Player.Money >= amount)
+                        {
+                            client.Player.WHMoney += amount;
+                            client.Player.Money -= amount;
                             client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
+                            client.Player.SendUpdate(stream, client.Player.WHMoney, MsgUpdate.DataType.WHMoney);
                             client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                         }
                         break;
@@ -1676,10 +1689,20 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             break;
-                        if (client.Player.WHMoney >= (long)dwParam)
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
                         {
-                            client.Player.Money += (uint)dwParam;
-                            client.Player.WHMoney -= (long)dwParam;
+                            client.SendSysMesage("You must be at a warehouse to withdraw silver.");
+                            break;
+                        }
+                        if (dwParam == 0 || dwParam > uint.MaxValue)
+                            break;
+
+                        uint amount = (uint)dwParam;
+                        if (client.Player.WHMoney >= amount
+                            && amount <= uint.MaxValue - client.Player.Money)
+                        {
+                            client.Player.Money += amount;
+                            client.Player.WHMoney -= amount;
                             client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
                             client.Player.SendUpdate(stream, client.Player.WHMoney, MsgUpdate.DataType.WHMoney);
                             client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
