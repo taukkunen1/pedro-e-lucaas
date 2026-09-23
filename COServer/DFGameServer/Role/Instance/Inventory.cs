@@ -1114,6 +1114,78 @@ namespace GameServer.Role.Instance
             }
         }
 
+        public bool CheckDragonBalls(byte count, bool Removethat, ServerSockets.Packet stream)
+        {
+            if (Contain(Database.ItemType.DragonBall, count))
+            {
+                if (Removethat)
+                    Remove(Database.ItemType.DragonBall, count, stream);
+                return true;
+            }
+
+            byte Counter = 0;
+            var RemoveThis = new Dictionary<uint, Game.MsgServer.MsgGameItem>();
+            var Scrolls = new Dictionary<uint, Game.MsgServer.MsgGameItem>();
+            var Balls = new Dictionary<uint, Game.MsgServer.MsgGameItem>();
+
+            foreach (var item in ClientItems.Values)
+            {
+                if (item.ITEM_ID == Database.ItemType.DragonBallScroll)
+                    Scrolls[item.UID] = item;
+                else if (item.ITEM_ID == Database.ItemType.DragonBall)
+                    Balls[item.UID] = item;
+            }
+
+            foreach (var item in Scrolls.Values)
+            {
+                Counter += 10;
+                RemoveThis[item.UID] = item;
+                if (Counter >= count)
+                    break;
+            }
+
+            if (Counter >= count)
+            {
+                byte change = (byte)(Counter - count);
+                if (HaveSpace(change))
+                {
+                    if (Removethat)
+                    {
+                        if (change > 0)
+                            Add(stream, Database.ItemType.DragonBall, change);
+                        foreach (var item in RemoveThis.Values)
+                            Update(item, AddMode.REMOVE, stream);
+                    }
+                    return true;
+                }
+
+                if (RemoveThis.Count > 0)
+                {
+                    var first = RemoveThis.Values.First();
+                    RemoveThis.Remove(first.UID);
+                    Counter -= 10;
+                }
+            }
+
+            foreach (var item in Balls.Values)
+            {
+                if (RemoveThis.ContainsKey(item.UID))
+                    continue;
+                Counter++;
+                RemoveThis[item.UID] = item;
+                if (Counter >= count)
+                    break;
+            }
+
+            if (Counter < count)
+                return false;
+
+            if (Removethat)
+                foreach (var item in RemoveThis.Values)
+                    Update(item, AddMode.REMOVE, stream);
+            return true;
+        }
+
         public bool CheckMeteors(byte count, bool Removethat, ServerSockets.Packet stream)
         {
 
