@@ -249,8 +249,7 @@ namespace GameServer.Game.MsgServer
                         MsgGameItem DataItem;
                         if (client.TryGetItem(ItemUID, out DataItem))
                         {
-                            if (!Game.Era1.Era1Economy.IsClassicEquipment(DataItem.ITEM_ID)
-                                || Game.Era1.Era1Items.IsBlockedEquipment(DataItem.ITEM_ID))
+                            if (!Game.Era1.Era1Economy.CanComposeTarget(DataItem.ITEM_ID))
                                 return;
                             ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                             //anti proxy --------------------
@@ -300,7 +299,9 @@ namespace GameServer.Game.MsgServer
                                 if (client.Inventory.ClientItems.TryGetValue(ItemsUIDS[x], out itemuse)
                                     && itemuse.UID != DataItem.UID
                                     && Game.Era1.Era1Economy.IsAllowedCompositionMaterial(DataItem.ITEM_ID, itemuse.ITEM_ID)
-                                    && (Game.Era1.Era1Economy.IsPlusStone(itemuse.ITEM_ID) || itemuse.Plus > 0 || itemuse.PlusProgress > 0))
+                                    && itemuse.Plus <= 8
+                                    && itemuse.Locked == 0
+                                    && (Game.Era1.Era1Economy.IsPlusStone(itemuse.ITEM_ID) || itemuse.Plus > 0))
                                 {
                                     UseItems.Enqueue(itemuse);
                                     EmbedUpdate = true;
@@ -332,7 +333,6 @@ namespace GameServer.Game.MsgServer
                                                     var Stone = UseItems.Dequeue();
 
                                                     DataItem.PlusProgress += Database.ItemType.StonePlusPoints(Stone.Plus);
-                                                    DataItem.PlusProgress += Stone.PlusProgress;
                                                     while (DataItem.PlusProgress >= Database.ItemType.ComposePlusPoints(DataItem.Plus) && DataItem.Plus != 12)
                                                     {
                                                         DataItem.PlusProgress -= Database.ItemType.ComposePlusPoints(DataItem.Plus);
