@@ -355,7 +355,12 @@ namespace GameServer.Telemetry
                 int i = (int)c;
                 cur[c.ToString()] = new
                 {
-                    minted, burned, net = minted - burned, bySystem, topReasons,
+                    minted,
+                    burned,
+                    net = minted - burned,
+                    mintBurnRatio = burned == 0 ? (double?)null : System.Math.Round((double)minted / burned, 4),
+                    burnCoveragePct = minted == 0 ? (double?)null : System.Math.Round((double)burned * 100.0 / minted, 2),
+                    bySystem, topReasons,
                     topMinters = pl.Where(p => p.Value.Mint[i] > 0).OrderByDescending(p => p.Value.Mint[i]).Take(20).Select(p => new { uid = p.Key, name = p.Value.Name, amount = p.Value.Mint[i] }),
                     topBurners = pl.Where(p => p.Value.Burn[i] > 0).OrderByDescending(p => p.Value.Burn[i]).Take(20).Select(p => new { uid = p.Key, name = p.Value.Name, amount = p.Value.Burn[i] })
                 };
