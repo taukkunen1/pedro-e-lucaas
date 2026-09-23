@@ -55,6 +55,31 @@ namespace GameServer.Game.Era1
                 || type == MadeByDaRkFox.ConfigurableDropSystem.DropType.PowerEXPBall;
         }
 
+        public static string TrackedResource(uint itemId, byte plus = 0)
+        {
+            if (itemId == Database.ItemType.Meteor || itemId == Database.ItemType.MeteorTear) return "Meteor";
+            if (itemId == Database.ItemType.DragonBall) return "DragonBall";
+            if (IsClassicMiningGem(itemId))
+            {
+                byte quality = (byte)(itemId % 10);
+                return quality == 3 ? "Gem.Super" : quality == 2 ? "Gem.Refined" : "Gem.Normal";
+            }
+
+            uint type = itemId / 1000;
+            bool equipment = (type >= 110 && type <= 160)
+                || (type >= 410 && type <= 590) || type == 900;
+            if (equipment)
+            {
+                if (plus > 0) return "Equipment.Plus" + plus;
+                byte quality = (byte)(itemId % 10);
+                if (quality == 9) return "Equipment.Super";
+                if (quality == 8) return "Equipment.Elite";
+                if (quality == 7) return "Equipment.Unique";
+                if (quality == 6) return "Equipment.Refined";
+            }
+            return null;
+        }
+
         public static bool IsClassicMiningGem(uint id)
         {
             uint family = id / 10;
@@ -71,6 +96,12 @@ namespace GameServer.Game.Era1
             if (MonsterDragonBallPercent >= MonsterMeteorPercent
                 || MiningDragonBallPercent >= MiningMeteorPercent || MiningMeteorPercent >= MiningGemPercent)
                 throw new System.InvalidOperationException("Era 1 mining faucet ordering failed.");
+            if (TrackedResource(Database.ItemType.Meteor) != "Meteor"
+                || TrackedResource(Database.ItemType.DragonBall) != "DragonBall"
+                || TrackedResource(700031) != "Gem.Normal"
+                || TrackedResource(410079) != "Equipment.Super"
+                || TrackedResource(410073, 1) != "Equipment.Plus1")
+                throw new System.InvalidOperationException("Era 1 resource MINT/BURN classification failed.");
             if (Game.Era1.Era1Items.IsBlockedEquipment(410073)
                 || !Game.Era1.Era1Items.IsBlockedEquipment(201003))
                 throw new System.InvalidOperationException("Era 1 item boundary/economy integration failed.");
