@@ -38,10 +38,13 @@ namespace GameServer.Game.MsgServer.AttackHandler
          ActionMode Mode;
 
          stream.GetEmbedSocket(out ItemUID, out GemUID, out Slot, out Mode);
+         using var _econScope = GameServer.Telemetry.Economy.Scope(GameServer.Telemetry.SourceKind.EmbedSocket, (uint)Mode, (uint)Slot);
 
             MsgGameItem DataItem;
             if (user.TryGetItem(ItemUID, out DataItem))
             {
+                if (Game.Era1.Era1Items.IsBlockedEquipment(DataItem.ITEM_ID))
+                    return;
                 ushort Position = Database.ItemType.ItemPosition(DataItem.ITEM_ID);
                 //anti-proxy-----------------------
                 if (Position != (ushort)Role.Flags.ConquerItem.Fan && Position != (ushort)Role.Flags.ConquerItem.Tower)
