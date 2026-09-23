@@ -799,7 +799,7 @@ namespace GameServer.Game.MsgMonster
                         }
                     }*/
                     #region FruitsMobs and 
-                    if (killer.FruitsMobs > killer.MaxFruits)
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && killer.FruitsMobs > killer.MaxFruits)
                     {
                         killer.FruitsMobs = 0;
                         byte rand2 = (byte)Pool.GetRandom.Next(0, 5);
@@ -850,7 +850,7 @@ namespace GameServer.Game.MsgMonster
                     #endregion
 
 
-                    if (killer.CityMobs > killer.MaxCity)
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && killer.CityMobs > killer.MaxCity)
                     {
                         killer.CityMobs = 0;
 
@@ -5052,7 +5052,7 @@ namespace GameServer.Game.MsgMonster
                 {
                     if (Map == 2060)
                     {
-                        if (Family.ID == 20300)//nemesys
+                        if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Family.ID == 20300)//nemesys
                         {
                             {
                                 MsgServer.MsgGameItem DataItem = new MsgServer.MsgGameItem();
@@ -5294,7 +5294,7 @@ namespace GameServer.Game.MsgMonster
 
                     ///////////// Base Monster /////////////
 
-                    if (Boss > 0)
+                    if (Boss > 0 && Game.Era1.Era1Economy.EnablePost5017MonsterRewards)
                     {
                         var boss = MobsHandler.CallUp(Family, (IDMonster)Family.ID);
                         if (boss != null)
@@ -5302,7 +5302,7 @@ namespace GameServer.Game.MsgMonster
                     }
 
                     ///////////// Base Monster /////////////
-                    if (Boss > 0 && Family.ID == 213883)//chaos Guard
+                    if (Game.Era1.Era1Economy.EnablePost5017MonsterRewards && Boss > 0 && Family.ID == 213883)//chaos Guard
                     {
                         const ushort GetStudyPoints = 50;
                         uint[] ItemsIDS = new uint[] { Database.ItemType.DragonBallScroll, Database.ItemType.PowerExpBall, 3005126 /*chi 500*/, 150059
@@ -5689,6 +5689,8 @@ namespace GameServer.Game.MsgMonster
         public void DropItem(ServerSockets.Packet stream, uint OwnerItem, Role.GameMap map, uint ItemID, ushort XX, ushort YY, MsgFloorItem.MsgItem.ItemType typ
             , uint amount, bool special, byte ID_Quality, Client.GameClient user = null, Database.ItemType.DBItem DBItem = null, bool CHECKITEM = false)
         {
+            if (!Game.Era1.Era1Items.IsAllowedGeneratedDrop(ItemID))
+                return;
             MsgServer.MsgGameItem DataItem = new MsgServer.MsgGameItem();
             if (ItemID == 1088000 || ItemID == 1088001)
             {
@@ -5839,6 +5841,8 @@ namespace GameServer.Game.MsgMonster
 
         public void DropItemID(Client.GameClient killer, uint itemid, ServerSockets.Packet stream, byte range = 3, bool CHECKITEM = false, int mins = 0)
         {
+            if (!Game.Era1.Era1Items.IsAllowedGeneratedDrop(itemid))
+                return;
             if (itemid == 1088000 || itemid == 1088001)
             {
                 if (!CHECKITEM)
