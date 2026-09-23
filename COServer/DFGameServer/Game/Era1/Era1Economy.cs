@@ -54,16 +54,14 @@ namespace GameServer.Game.Era1
             return action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithCPs
                 || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithItem
                 || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.UpdatePurity
-                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.DegradeEquipment;
+                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.DegradeEquipment
+                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.RepairItemVIP
+                || action == Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.GarmentShop;
         }
 
         public static bool IsAllowedForgingShopItem(uint itemId)
         {
-            return itemId == Database.ItemType.Meteor
-                || itemId == Database.ItemType.DragonBall
-                || itemId == 730001 || itemId == 730003 || itemId == 730006
-                || itemId == Database.ItemType.SuperToroiseGem
-                || itemId == Database.ItemType.ToughDrill;
+            return Era1Shops.IsAllowedForgingPurchase(itemId);
         }
 
         public static bool IsClassicEquipment(uint itemId)
@@ -347,6 +345,8 @@ namespace GameServer.Game.Era1
             if (!IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithCPs)
                 || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.SocketTalismanWithItem)
                 || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.DegradeEquipment)
+                || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.RepairItemVIP)
+                || !IsBlockedItemUsage(Game.MsgServer.MsgItemUsuagePacket.ItemUsageID.GarmentShop)
                 || EnablePost5017ItemExtra || EnablePost5017CompositionMentorRewards
                 || EnableDirectLevelUpgradeWithCps)
                 throw new System.InvalidOperationException("Post-5017 item systems must stay disabled in Era 1.");
