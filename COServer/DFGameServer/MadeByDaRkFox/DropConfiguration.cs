@@ -29,14 +29,14 @@ namespace GameServer.MadeByDaRkFox
             {
                 Console.WriteLine($"Cannot read the {ConfigPath} Config File. Creating one config default file...");
                 Drops.Clear();
-                Drops.Add(new DropConfiguration() { Percent = 1.5, Type = DropType.MeteorScroll, Enabled = true });
-                Drops.Add(new DropConfiguration() { Percent = 1.2, Type = DropType.Item, Enabled = true });
+                Drops.Add(new DropConfiguration() { Percent = Game.Era1.Era1Economy.MonsterMeteorPercent, Type = DropType.MeteorScroll, Enabled = true });
+                Drops.Add(new DropConfiguration() { Percent = Game.Era1.Era1Economy.MonsterEquipmentPercent, Type = DropType.Item, Enabled = true });
                 Drops.Add(new DropConfiguration() { Percent = 1.3, Type = DropType.Stone, Enabled = false });
                 Drops.Add(new DropConfiguration() { Percent = 2, Type = DropType.ExpBall, Enabled = false });
                 Drops.Add(new DropConfiguration() { Percent = 2, Type = DropType.Letter, Enabled = false });
                 Drops.Add(new DropConfiguration() { Percent = 1.1, Type = DropType.PowerEXPBall, Enabled = false });
-                Drops.Add(new DropConfiguration() { Percent = 1.4, Type = DropType.DragonBall, Enabled = true });
-                Drops.Add(new DropConfiguration() { Percent = 15, Type = DropType.Money, Enabled = true, MoneyDrop = new MoneyDrop() { Min = 1000, Max = 2000, Type = MoneyType.Money} });
+                Drops.Add(new DropConfiguration() { Percent = Game.Era1.Era1Economy.MonsterDragonBallPercent, Type = DropType.DragonBall, Enabled = true });
+                Drops.Add(new DropConfiguration() { Percent = Game.Era1.Era1Economy.MonsterMoneyPercent, Type = DropType.Money, Enabled = true, MoneyDrop = new MoneyDrop() { Min = 0, Max = 0, Type = MoneyType.Money} });
                 File.WriteAllText(ConfigPath, Newtonsoft.Json.JsonConvert.SerializeObject(Drops));
                 ApplyEra1Policy();
             }
