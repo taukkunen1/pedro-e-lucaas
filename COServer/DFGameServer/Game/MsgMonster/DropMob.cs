@@ -441,20 +441,9 @@ namespace GameServer
                     {
                         if (ID_Quality == 3)
                         {
-                            if (Role.Core.Rate(50))
-                            {
-                                DataItem.Plus = 2;
-                            }
-                            else if (Role.Core.Rate(60))
-                            {
-                                DataItem.Bless = (byte)Pool.GetRandom.Next(1, 3);
-                            }
-                            else if (Role.Core.Rate(70))
-                            {
-                                DataItem.SocketOne = Role.Flags.Gem.EmptySocket;
-                                DataItem.SocketTwo = Role.Flags.Gem.EmptySocket;
-                            }
-                            else DataItem.Plus = 1;
+                            // Hunting may MINT a scarce +1. +2 and above are composition-only BURN progression.
+                            // Blessing and free double-socket rolls from the 5695/custom drop path are disabled.
+                            DataItem.Plus = Game.Era1.Era1Economy.RollHuntingPlus();
                         }
                         if (DBItem != null)
                         {
@@ -598,11 +587,7 @@ namespace GameServer
         public static uint GenerateItemId(MonsterRole Mob, uint map, out byte dwItemQuality, out bool Special, out Database.ItemType.DBItem DbItem)
         {
             Special = false;
-            if (Role.Core.Rate(75))
-            {
-                dwItemQuality = Mob.Family.ItemGenerator.GenerateQuality();
-            }
-            else dwItemQuality = 9;//super
+            dwItemQuality = Game.Era1.Era1Economy.RollEquipmentQuality();
 
             uint dwItemSort = 0;
             uint dwItemLev = 0;
