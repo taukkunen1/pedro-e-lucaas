@@ -47,9 +47,11 @@ namespace GameServer.Game.MsgServer
                         client.Player.Body = Body;
 
                         client.Player.Level = 1;
-                        client.Player.Map = 1002;
-                        client.Player.X = 428;
-                        client.Player.Y = 378;
+                        // Era 1 characters begin in Birth Village and leave for Twin City
+                        // through the classic tutorial flow.
+                        client.Player.Map = 1010;
+                        client.Player.X = 61;
+                        client.Player.Y = 109;
 
                         Database.DataCore.LoadClient(client.Player);
 
@@ -69,72 +71,10 @@ namespace GameServer.Game.MsgServer
 
                         CharacterCreationDefaultSet.Init(client, stream);
 
-                        if (Database.AtributesStatus.IsTrojan(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FastBlader))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FastBlader);
+                        // Era 1: do not grant class/XP skills during character creation.
+                        // New characters learn their abilities through the classic Birth Village,
+                        // promotion and skill-training progression.
 
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ScrenSword))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ScrenSword);
-
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Cyclone))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Cyclone);
-                        }
-                        else if (Database.AtributesStatus.IsWarrior(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Superman))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Superman);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FastBlader))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FastBlader);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ScrenSword))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ScrenSword);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Shield))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Shield);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Accuracy))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Accuracy);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Roar))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Roar);
-                        }
-                        else if (Database.AtributesStatus.IsArcher(client.Player.Class))
-                        {
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.XpFly);
-                        }
-                        else if (Database.AtributesStatus.IsNinja(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FatalStrike))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FatalStrike);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ToxicFog))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ToxicFog);
-                        }
-                        else if (Database.AtributesStatus.IsMonk(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.WhirlwindKick))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.WhirlwindKick);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.TripleAttack))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.TripleAttack);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Oblivion))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Oblivion);
-                        }
-                        else if (Database.AtributesStatus.IsPirate(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.CannonBarrage))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.CannonBarrage);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.BladeTempest))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.BladeTempest);
-                        }
-                        else if (Database.AtributesStatus.IsTaoist(client.Player.Class))
-                        {
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ChainBolt))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ChainBolt);
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Lightning))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Lightning);
-
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Thunder))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Thunder);
-
-                            if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Cure))
-                                client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Cure);
-                        }
                         client.Send(new MsgMessage("ANSWER_OK", MsgMessage.MsgColor.red, MsgMessage.ChatMode.PopUP).GetArray(stream));
                         Database.Server.LastChar = client.Player.Name;
                         client.Status.MaxHitpoints = client.CalculateHitPoint();
