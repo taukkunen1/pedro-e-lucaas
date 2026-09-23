@@ -53,6 +53,12 @@ namespace GameServer.Role.Instance
         public unsafe void Add(ServerSockets.Packet stream, ushort ID, ushort level = 0,byte levelsoul = 0
             , byte previouslevel = 0, int Experience = 0, bool ClearExp =false)
         {
+            // Era 1 server-side gate: later-version skills cannot be learned even if
+            // a stale NPC, quest or client packet attempts to grant them.
+            if (System.Enum.IsDefined(typeof(Role.Flags.SpellID), ID)
+                && Game.Era1.Era1Skills.IsPostClassic((Role.Flags.SpellID)ID))
+                return;
+
             if (ID == 1105 || ID >= 4000 && ID <= 4070)
                 return;
             if (Pool.Magic.ContainsKey(ID))
