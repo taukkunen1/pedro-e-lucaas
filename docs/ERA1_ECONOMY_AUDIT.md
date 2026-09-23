@@ -171,3 +171,13 @@ A leitura operacional passa a ser **faucet -> inventário -> transformação/sin
 
 ### Estado de gems socketadas
 A inserção consome a gem física (`Gem.*`) e cria o estado `EmbeddedGem.*`. Remover uma gem destrói esse estado e não recria a gem física. Assim a telemetria distingue estoque negociável de valor já incorporado a equipamento.
+
+
+### Integridade do BURN e atalhos de forja
+
+- O downgrade de equipamento por 54 CP é rejeitado na fronteira de `ItemUsage`, evitando um atalho fora da economia clássica de materiais.
+- O `EquipmentBlacksmith` não pode executar as opções 61-68 de upgrade direto ao nível máximo por 10.000 CP, inclusive quando chamadas por cliente modificado.
+- O caminho legado `ItemUsage:UpgradeMeteor/UpgradeDragonball` foi alinhado à política Era 1: exige alvo clássico, registra transformação do equipamento e não cria sockets aleatórios durante upgrade.
+- A fronteira de inventário só registra BURN quando a remoção realmente retirou unidades. Uma segunda tentativa sobre o mesmo UID não produz BURN fantasma.
+- Foi removida a dupla remoção existente em um ramo de `CheckMeteors()` ao combinar Meteor Scroll e Meteors físicos.
+- Ao embutir uma gem, a unidade física `Gem.*` é consumida e o estado passa a `EmbeddedGem.*`. Remover/destruir a gem registra BURN do estado embutido. O handler aceita apenas famílias de gems clássicas.
