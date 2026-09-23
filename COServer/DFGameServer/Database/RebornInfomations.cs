@@ -318,48 +318,10 @@ namespace GameServer.Database
                     player.SendUpdate(stream, player.FirstClass, Game.MsgServer.MsgUpdate.DataType.FirsRebornClass);
                     player.SendUpdate(stream, player.SecondClass, Game.MsgServer.MsgUpdate.DataType.SecondRebornClass);
                     player.Owner.Equipment.QueryEquipment(player.Owner.Equipment.Alternante, true);
-                    var client = player.Owner;
-                    if (Database.AtributesStatus.IsTrojan(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FastBlader))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FastBlader);
+                    // Era 1: rebirth does not re-grant the normal profession starter kit.
+                    // Reborn-only spells come from magictypeop rules; normal class skills
+                    // remain tied to their classic trainers/Job Center acquisition.
 
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ScrenSword))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ScrenSword);
-
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Cyclone))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Cyclone);
-                    }
-                    else if (Database.AtributesStatus.IsWarrior(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Superman))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Superman);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.FastBlader))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.FastBlader);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.ScrenSword))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.ScrenSword);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Shield))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Shield);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Accuracy))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Accuracy);
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Roar))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Roar);
-                    }
-                    else if (Database.AtributesStatus.IsArcher(client.Player.Class))
-                    {
-                        client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.XpFly);
-                    }
-                    else if (Database.AtributesStatus.IsTaoist(client.Player.Class))
-                    {
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Lightning))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Lightning);
-
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Thunder))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Thunder);
-
-                        if (!client.MySpells.ClientSpells.ContainsKey((ushort)Role.Flags.SpellID.Cure))
-                            client.MySpells.Add(stream, (ushort)Role.Flags.SpellID.Cure);
-                    }
 
                 }
             }
