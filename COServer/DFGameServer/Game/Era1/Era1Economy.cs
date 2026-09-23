@@ -30,6 +30,11 @@ namespace GameServer.Game.Era1
         public const double MiningRefinedGemPercent = 2.0;
         public const double MiningSuperGemPercent = 0.05;
 
+        // 5695/custom kill-counter and boss reward scripts inject Souls, Study Points,
+        // high +Stones and multi-DB bundles. The monster engine stays enabled in Era 1,
+        // but those reward scripts must not participate in the 5017 economy.
+        public static bool EnablePost5017MonsterRewards => false;
+
         public static byte RollEquipmentQuality()
         {
             // One shared denominator keeps the declared 1/N rates exact and mutually exclusive:
@@ -110,6 +115,8 @@ namespace GameServer.Game.Era1
             if (Game.Era1.Era1Items.IsBlockedEquipment(410073)
                 || !Game.Era1.Era1Items.IsBlockedEquipment(201003))
                 throw new System.InvalidOperationException("Era 1 item boundary/economy integration failed.");
+            if (EnablePost5017MonsterRewards)
+                throw new System.InvalidOperationException("Post-5017 monster reward scripts must stay disabled in Era 1.");
 
             System.Console.WriteLine("ERA1 ECONOMY SELFTEST PASS");
         }
