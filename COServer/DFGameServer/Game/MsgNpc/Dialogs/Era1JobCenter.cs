@@ -146,7 +146,7 @@ namespace GameServer.Game.MsgNpc.Dialogs
 
             client.Player.Class = (byte)(cls + 1);
             if (required == 15)
-                AddSpell(client, stream, Role.Flags.SpellID.Fly);
+                AddSpell(client, stream, Role.Flags.SpellID.XpFly);
             else if (required == 70)
                 AddSpell(client, stream, Role.Flags.SpellID.Fly);
 
