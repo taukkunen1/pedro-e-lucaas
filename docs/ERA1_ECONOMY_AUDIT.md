@@ -117,32 +117,51 @@ Isso impede usar 1,2% como se fosse a taxa efetiva para qualquer monstro/mapa.
 
 ## Economy V2: BURN, composição e sockets
 
-O fechamento do lado de consumo da economia cobre agora os principais caminhos de forja da Era 1:
+O fechamento do lado de consumo da economia cobre agora os principais caminhos de forja da Era 1.
 
-- `MsgUpdateItem.Compose` abre um escopo próprio de telemetria (`Compose:<acao>`).
-- Upgrade de qualidade só aceita Dragon Balls em **todos** os UIDs enviados. Um DB seguido de itens arbitrários não pode mais inflar a chance de upgrade.
-- Composição +N rejeita o próprio item-alvo, equipamentos pós-5017, categorias incompatíveis e materiais sem pontos de composição.
-- O alvo da composição é tratado como transformação: por exemplo, passar de +1 para +2 registra BURN de `Equipment.Plus1` e MINT de `Equipment.Plus2`, além do BURN dos materiais consumidos.
-- Mudanças Refined -> Unique -> Elite -> Super também registram a qualidade anterior como BURN e a nova qualidade como MINT.
-- `StonePlusPoints(+0)` foi corrigido para zero. A tabela de +1..+8 permanece 10/40/120/360/1080/3240/9720/29160.
-- Meteor Scroll e Dragon Ball Scroll são contabilizados como 10 unidades do recurso-base, evitando subcontagem de BURN/MINT.
-- Tough Drill e Star Drill entram na telemetria como `Drill.Tough` e `Drill.Star`.
-- +Stones entram como `PlusStone.PlusN`.
+### Composição 5017
+
+A auditoria histórica mostrou que `Composition Points` não pertence ao 5017: esse modelo foi introduzido no patch 5066. Portanto, `MsgUpdateItem.Compose` não usa `PlusProgress`/`ComposePlusPoints` na Era 1.
+
+- `Quick Compose`/`ChanceUpgrade` fica bloqueado.
+- +0 até +9 usa a composição antiga: 1 item principal + exatamente 2 materiais compatíveis para subir um nível.
+- O material precisa ser +N válido, não pode repetir UID, não pode ser o próprio alvo, não pode estar locked e não pode ter qualidade superior à do item principal.
+- Armas são separadas em Bow, 1-handed, 2-handed e Backsword; demais equipamentos precisam pertencer à mesma categoria/tipo.
+- Equipamento +0 não pode ser material; +Stones +1..+8 substituem materiais de equipamento.
+- Para produzir +6 ou superior pela composição antiga, são exigidas as gems adicionais da regra clássica: 2 gems para arma e 1 para equipamento não-arma.
+- +9 -> +10 custa 12 Dragon Balls; +10 -> +11 custa 25; +11 -> +12 custa 40, com requisito de personagem level 130+.
+- Dragon Ball Scroll vale 10 DBs; troco de um scroll parcialmente utilizado volta como Dragon Balls físicas, mantendo o BURN líquido correto.
+- O estado do alvo é registrado como transformação: por exemplo, +1 -> +2 gera BURN de `Equipment.Plus1` e MINT de `Equipment.Plus2`, além do BURN dos dois materiais.
+
+### Upgrade de nível e qualidade
+
+- Upgrade de qualidade só aceita Dragon Balls em **todos** os UIDs enviados; UIDs repetidos são rejeitados.
+- O alvo precisa ser equipamento clássico válido e qualidade Super não pode ser incrementada novamente.
+- Refined -> Unique -> Elite -> Super registra BURN do estado anterior e MINT do novo estado.
+- Meteor/Meteor Tear/Meteor Scroll são consolidados em `Meteor`; scroll vale 10 unidades.
+- Reparo de equipamento com durabilidade zero passa pelo mesmo pool de Meteor/Tear/Scroll e consome 5 Meteors líquidos.
+
+### Gems e recursos auxiliares
+
+- Gem Compose mantém 15 Normal + 10.000 Silver -> Refined e 15 Refined + 800.000 Silver -> Super; Refined Tortoise -> Super custa 1.000.000 Silver no handler existente.
+- O ramo que permitia parâmetros especiais de `GemCompose` adicionarem um item sem débito correspondente foi removido.
+- `ToristSuper` não desconta mais 100.000 Silver antes de confirmar que o conjunto completo de gems existe.
+- A recompensa histórica aleatória de 7 Refined Gems -> 2/3 Refined Tortoise ou Super Tortoise ainda precisa de probabilidade histórica confiável antes de substituir o resultado legado do código.
+- Tough Drill e Star Drill entram como `Drill.Tough` e `Drill.Star`; +Stones entram como `PlusStone.PlusN`.
 
 ### Socket policy
 
 - Armas clássicas: 1 Dragon Ball para o primeiro socket e 5 Dragon Balls para o segundo.
-- Equipamentos clássicos não-arma: 12 Dragon Balls para o primeiro socket; segundo socket por Tough Drill (20% no código existente) ou 7 Star Drills.
-- Cada socket efetivamente criado gera `Equipment.Socket1` ou `Equipment.Socket2` na telemetria.
-- Equipamentos bloqueados da Era 1 não podem usar essas rotas.
-- `MsgEmbedSocket` possui escopo próprio (`EmbedSocket:<acao>#<slot>`), portanto o BURN de gems inseridas deixa de cair em `Other`.
+- Equipamentos clássicos não-arma: 12 Dragon Balls para o primeiro socket; segundo socket por Tough Drill (chance do código) ou 7 Star Drills.
+- Segundo socket exige que o primeiro já exista; pacotes não podem abrir diretamente o slot 2.
+- Cada socket criado gera `Equipment.Socket1` ou `Equipment.Socket2` na telemetria.
+- `MsgEmbedSocket` possui escopo próprio (`EmbedSocket:<acao>#<slot>`), então o BURN de gems inseridas é classificado em `Forging`.
 
-### Fechamento de rotas posteriores/exploits
+### Rotas pós-5017 bloqueadas
 
-- Socket de talismã por CP/item é rejeitado na fronteira de `ItemUsage`.
+- Talisman socket por CP/item é rejeitado na fronteira de `ItemUsage`.
 - Refinery/Purification/Stabilization em `MsgItemExtra` ficam atrás de `EnablePost5017ItemExtra = false`.
-- Steed composition fica bloqueada e o reward de mentor ligado à composição fica desativado.
-- Stabilization Stones pós-5017 deixaram de ser compráveis pelo handler `BuyItemFromForging`.
-- Foi removido o ramo de `GemCompose` que aceitava parâmetros especiais e adicionava um item ao inventário sem executar o débito correspondente.
+- Steed composition e reward de mentor ligados à composição permanecem fora da Era 1.
+- Stabilization Stones foram retiradas do handler `BuyItemFromForging`.
 
-A leitura operacional passa a ser **faucet -> inventário -> transformação/sink**. Para cada recurso, compare `minted`, `burned`, `net` e `burnCoveragePct`; para progressão, observe também os pares de transformação de qualidade, +N e sockets.
+A leitura operacional passa a ser **faucet -> inventário -> transformação/sink**. Para cada recurso, compare `minted`, `burned`, `net`, origem por sistema e por mapa. Para progressão, acompanhe também as transições `Equipment.PlusN`, qualidade e sockets.
