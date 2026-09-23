@@ -72,49 +72,9 @@ namespace GameServer.Database
         }
         public byte ExtraAtributePoints(byte level, byte mClass)
         {
-            if (mClass == 135)
-            {
-                if (level <= 110)
-                    return 0;
-                switch (level)
-                {
-                    case 112: return 1;
-                    case 114: return 3;
-                    case 116: return 6;
-                    case 118: return 10;
-                    case 120: return 15;
-                    case 121: return 15;
-                    case 122: return 21;
-                    case 123: return 21;
-                    case 124: return 28;
-                    case 125: return 28;
-                    case 126: return 36;
-                    case 127: return 36;
-                    case 128: return 45;
-                    case 129: return 45;
-                    default:
-                        return 55;
-                }
-            }
-            else
-            {
-                if (level <= 120)
-                    return 0;
-                switch (level)
-                {
-                    case 121: return 1;
-                    case 122: return 3;
-                    case 123: return 6;
-                    case 124: return 10;
-                    case 125: return 15;
-                    case 126: return 21;
-                    case 127: return 28;
-                    case 128: return 36;
-                    case 129: return 45;
-                    default:
-                        return 55;
-                }
-            }
+            return Game.Era1.Era1Progression.ExtraRebirthAttributePoints(
+                level,
+                AtributesStatus.IsWater(mClass));
         }
         private static bool IsEra1DataClass(byte cls)
         {
