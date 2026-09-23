@@ -1008,6 +1008,7 @@ namespace GameServer.Role.Instance
         {
             if (HaveSpace(1) || mode == AddMode.REMOVE)
             {
+                long actualRemovedUnits = 0;
                 string logs = "[Item]" + Owner.Player.Name + " [" + mode + "] [" + ItemDat.UID + "]" + ItemDat.ITEM_ID + " plus [" + ItemDat.Plus + "] at : " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
                 Database.ServerDatabase.LoginQueue.Enqueue(logs);
                 switch (mode)
@@ -1041,6 +1042,7 @@ namespace GameServer.Role.Instance
                             if (ItemDat.StackSize > 1 && ItemDat.Position < 40 && !Removefull)
                             {
                                 ItemDat.StackSize -= 1;
+                                actualRemovedUnits = 1;
                                 ItemDat.Mode = Flags.ItemMode.Update;
                                 ItemDat.Send(Owner, stream);
                                 break;
@@ -1048,18 +1050,21 @@ namespace GameServer.Role.Instance
                             Game.MsgServer.MsgGameItem item;
                             if (ClientItems.TryRemove(ItemDat.UID, out item))
                             {
+                                actualRemovedUnits = Removefull && ItemDat.StackSize > 1 ? ItemDat.StackSize : 1;
                                 Owner.Send(stream.ItemUsageCreate(MsgItemUsuagePacket.ItemUsageID.RemoveInventory, ItemDat.UID, 0, 0, 0, 0, 0));
                             }
                             else Owner.Send(stream.ItemUsageCreate(MsgItemUsuagePacket.ItemUsageID.RemoveInventory, ItemDat.UID, 0, 0, 0, 0, 0));
                             break;
                         }
                 }
-                if (mode == AddMode.ADD || mode == AddMode.REMOVE)
+                if (mode == AddMode.ADD || (mode == AddMode.REMOVE && actualRemovedUnits > 0))
                 {
                     var era1Resources = Game.Era1.Era1Economy.TrackedResources(ItemDat.ITEM_ID, ItemDat.Plus);
                     if (era1Resources.Length != 0)
                     {
-                        long units = mode == AddMode.REMOVE && !Removefull ? 1 : (ItemDat.StackSize > 1 ? ItemDat.StackSize : 1);
+                        long units = mode == AddMode.ADD
+                            ? (ItemDat.StackSize > 1 ? ItemDat.StackSize : 1)
+                            : actualRemovedUnits;
                         units *= Game.Era1.Era1Economy.TrackedResourceUnitMultiplier(ItemDat.ITEM_ID);
                         for (int resourceIndex = 0; resourceIndex < era1Resources.Length; resourceIndex++)
                             Telemetry.Economy.RecordResource(Owner.Player.UID, Owner.Player.Name, Owner.Player.Map,
@@ -1231,11 +1236,6 @@ namespace GameServer.Role.Instance
                                 RemoveThis.Add(GameItem.UID, GameItem);
                                 if (Counter >= count)
                                     break;
-                            }
-                            if (Removethat)
-                            {
-                                foreach (var GameItem in RemoveThis.Values)
-                                    Update(GameItem, AddMode.REMOVE, stream);
                             }
                         }
                         else
