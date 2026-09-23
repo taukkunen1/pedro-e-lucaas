@@ -89,3 +89,27 @@ A telemetria cobre Gold, CP, Bound CP e recursos escassos:
 O resumo diário inclui `minted`, `burned`, `net`, razão MINT/BURN, cobertura de BURN, origem por sistema e agora também agregação por mapa para recursos escassos. O NDJSON inclui o nome do recurso em eventos de resource telemetry.
 
 A regra operacional é simples: a economia só deve ser rebalanceada depois de observar MINT/BURN real em produção. A taxa no código é a faucet teórica; a taxa efetiva depende da população de cada mapa, velocidade de kill, composição dos spawns, perdas no chão e consumo em composição/forja.
+
+
+## Fechamento de faucets paralelas
+
+A auditoria do fluxo real de morte de monstros encontrou recompensas que não passavam pelo `DropMob` normal. Na Era 1 elas ficam explicitamente separadas:
+
+- `EnablePost5017MonsterRewards = false` bloqueia os reward scripts 5695/custom que injetavam Fruits/City rewards, Study Points, Souls, +Stones altos, bundles de Dragon Ball e recompensas de bosses posteriores.
+- Nemesis (incluindo o bundle direto de 7 Dragon Balls), Chaos Guard, NightmareCaptain e os caminhos PurpleBanshee posteriores ficam atrás desse gate.
+- `MonsterRole.DropItem` e `MonsterRole.DropItemID` também aplicam `Era1Items.IsAllowedGeneratedDrop`, evitando que um script legado contorne a fronteira de itens apenas por não utilizar o `DropMob`.
+- O WaterDevil ID 8419 permanece como exceção direta declarada por `IsClassicDirectDragonBallMonster`. O auditor não mistura essa exceção com a taxa global: registra `dragonball_global_pct`, `dragonball_direct_units_per_kill` e `dragonball_expected_units_per_kill`.
+
+A exceção direta precisa ser lida como uma faucet especial do monstro, e não como alteração da taxa global de Dragon Ball.
+
+## Taxa efetiva por monstro
+
+A chance global de tentativa de equipamento é 1,2%, porém a chance de item realmente produzido depende dos slots habilitados no arquivo do monstro. O relatório agora distingue:
+
+- `equipment_attempt_pct`: chance de entrar no evento global de equipamento.
+- `equipment_family_success_pct`: probabilidade de a família sorteada possuir nível de drop válido para aquele monstro.
+- `equipment_effective_pct`: produto das duas probabilidades.
+- `runtime_spawn_capacity_est`: estimativa construída conforme os dois loaders reais de spawn.
+- `special_drops`: entradas de `[SpecialDrop]` que exigem revisão explícita.
+
+Isso impede usar 1,2% como se fosse a taxa efetiva para qualquer monstro/mapa.
