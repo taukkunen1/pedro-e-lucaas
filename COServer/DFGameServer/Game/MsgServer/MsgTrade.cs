@@ -206,25 +206,36 @@ namespace GameServer.Game.MsgServer
                                             break;
                                         }
 
-                                        uint userReceivesCps = targetTrade.ConquerPoints;
-                                        uint userReceivesMoney = targetTrade.Money;
-                                        uint targetReceivesCps = userTrade.ConquerPoints;
-                                        uint targetReceivesMoney = userTrade.Money;
+                                        uint userEscrowCps;
+                                        uint userEscrowMoney;
+                                        uint targetEscrowCps;
+                                        uint targetEscrowMoney;
 
-                                        // Economy V5: consume both escrow ledgers before crediting either
-                                        // side. A disconnect/replayed completion cannot refund already
-                                        // transferred currency a second time.
-                                        targetTrade.ConquerPoints = 0;
-                                        targetTrade.Money = 0;
-                                        userTrade.ConquerPoints = 0;
-                                        userTrade.Money = 0;
+                                        // Economy V5: atomically consume both escrow ledgers before
+                                        // crediting either side. Concurrent close/disconnect/confirm
+                                        // paths cannot settle or refund the same escrow twice.
+                                        if (!Role.Instance.Trade.TryTakePair(
+                                            userTrade,
+                                            targetTrade,
+                                            false,
+                                            out userEscrowCps,
+                                            out userEscrowMoney,
+                                            out targetEscrowCps,
+                                            out targetEscrowMoney))
+                                        {
+                                            userTrade.Confirmed = false;
+                                            targetTrade.Confirmed = false;
+                                            user.SendSysMesage("Trade settlement was cancelled because the escrow was already closed.", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
+                                            target.SendSysMesage("Trade settlement was cancelled because the escrow was already closed.", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
+                                            break;
+                                        }
 
-                                        user.Player.ConquerPoints += userReceivesCps;
-                                        user.Player.Money += userReceivesMoney;
+                                        user.Player.ConquerPoints += targetEscrowCps;
+                                        user.Player.Money += targetEscrowMoney;
                                         user.Player.SendUpdate(stream, user.Player.Money, MsgUpdate.DataType.Money);
 
-                                        target.Player.ConquerPoints += targetReceivesCps;
-                                        target.Player.Money += targetReceivesMoney;
+                                        target.Player.ConquerPoints += userEscrowCps;
+                                        target.Player.Money += userEscrowMoney;
                                         target.Player.SendUpdate(stream, target.Player.Money, MsgUpdate.DataType.Money);
 
                                         foreach (var item in targetTrade.Items.Values)
