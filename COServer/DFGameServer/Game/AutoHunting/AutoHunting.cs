@@ -91,6 +91,29 @@ namespace GameServer
         public static bool CanAutoJump(byte vipLevel) => vipLevel >= AutoJumpVipLevel;
         public static bool CanAutoPickUp(byte vipLevel) => vipLevel >= AutoPickUpVipLevel;
 
+        public string RadiusLabel => HuntRadius == 0 ? "Unlimited" : HuntRadius.ToString();
+        public string ExpDeliveryLabel => ExpDeliveryMode == AutoHuntExpDelivery.Instant ? "Instant" : "On Stop";
+        public string SkillsStatus => UseSkills ? "[Enabled]" : "[Disabled]";
+        public string FastModeStatus => FastMode ? "[Enabled]" : "[Disabled]";
+
+        public void CycleRadius()
+        {
+            switch (HuntRadius)
+            {
+                case 0: HuntRadius = 10; break;
+                case 10: HuntRadius = 20; break;
+                case 20: HuntRadius = 30; break;
+                default: HuntRadius = 0; break;
+            }
+        }
+
+        public void ToggleExpDelivery()
+        {
+            ExpDeliveryMode = ExpDeliveryMode == AutoHuntExpDelivery.OnStop
+                ? AutoHuntExpDelivery.Instant
+                : AutoHuntExpDelivery.OnStop;
+        }
+
         public bool ShouldAutoPickUp(Game.MsgFloorItem.MsgItem floorItem)
         {
             if (floorItem == null)
