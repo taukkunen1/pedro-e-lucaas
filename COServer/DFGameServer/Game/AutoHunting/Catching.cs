@@ -175,10 +175,29 @@ namespace GameServer
                 }
             }
         }
+        public static void FlushPendingExperience(Client.GameClient client)
+        {
+            if (client == null || client.Player == null)
+                return;
+
+            ulong pending = client.AutoHunting.TakePendingExperience();
+            if (pending == 0)
+                return;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                // PendingExperience stores the final kill EXP value. Apply it without
+                // recalculating server/gem/double-EXP multipliers at stop time.
+                client.IncreaseExperienceRaw(stream, pending);
+            }
+        }
+
         public static void End(Client.GameClient client)
         {
             if (!ValidClient(client))
                 return;
+            FlushPendingExperience(client);
             client.AutoHunting.Enable = false;
             client.OnAutoAttack = false;
             client.Player.MyTitle = client.AutoHunting.Mytitle;
@@ -484,7 +503,7 @@ namespace GameServer
                             }
                         }
 
-                        if (!client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
+                        if (!client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike) && client.AutoHunting.UseSkills)
                         {
                             Dictionary<ushort, Database.MagicType.Magic> Spells;
                             if (Pool.Magic.TryGetValue(SpellID, out Spells))
