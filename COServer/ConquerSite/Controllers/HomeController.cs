@@ -52,6 +52,11 @@ namespace ConquerSite.Controllers
             return View(_downloadsSettings);
         }
 
+        public IActionResult ServerInfo()
+        {
+            return View();
+        }
+
         public IActionResult Guides()
         {
             return View();
