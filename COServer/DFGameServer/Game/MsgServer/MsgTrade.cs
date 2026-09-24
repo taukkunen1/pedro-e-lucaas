@@ -180,53 +180,70 @@ namespace GameServer.Game.MsgServer
                                     }
                                     else
                                     {
+                                        var userTrade = user.MyTrade;
+                                        var target = userTrade.Target;
+                                        var targetTrade = target.MyTrade;
+
+                                        bool canReceiveCurrency =
+                                            Game.Era1.Era1Faucets.CanAddCurrency(user.Player.ConquerPoints, targetTrade.ConquerPoints)
+                                            && Game.Era1.Era1Faucets.CanAddCurrency(user.Player.Money, targetTrade.Money)
+                                            && Game.Era1.Era1Faucets.CanAddCurrency(target.Player.ConquerPoints, userTrade.ConquerPoints)
+                                            && Game.Era1.Era1Faucets.CanAddCurrency(target.Player.Money, userTrade.Money);
+
+                                        bool accepted =
+                                            canReceiveCurrency
+                                            && user.Inventory.HaveSpace((byte)targetTrade.Items.Count)
+                                            && targetTrade.ValidItems()
+                                            && target.Inventory.HaveSpace((byte)userTrade.Items.Count)
+                                            && userTrade.ValidItems();
+
+                                        if (!accepted)
+                                        {
+                                            userTrade.Confirmed = false;
+                                            targetTrade.Confirmed = false;
+                                            user.SendSysMesage("There was an error with the trade. Currency and items remain in the trade window.", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
+                                            target.SendSysMesage("There was an error with the trade. Currency and items remain in the trade window.", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
+                                            break;
+                                        }
+
+                                        uint userReceivesCps = targetTrade.ConquerPoints;
+                                        uint userReceivesMoney = targetTrade.Money;
+                                        uint targetReceivesCps = userTrade.ConquerPoints;
+                                        uint targetReceivesMoney = userTrade.Money;
+
+                                        // Economy V5: consume both escrow ledgers before crediting either
+                                        // side. A disconnect/replayed completion cannot refund already
+                                        // transferred currency a second time.
+                                        targetTrade.ConquerPoints = 0;
+                                        targetTrade.Money = 0;
+                                        userTrade.ConquerPoints = 0;
+                                        userTrade.Money = 0;
+
+                                        user.Player.ConquerPoints += userReceivesCps;
+                                        user.Player.Money += userReceivesMoney;
+                                        user.Player.SendUpdate(stream, user.Player.Money, MsgUpdate.DataType.Money);
+
+                                        target.Player.ConquerPoints += targetReceivesCps;
+                                        target.Player.Money += targetReceivesMoney;
+                                        target.Player.SendUpdate(stream, target.Player.Money, MsgUpdate.DataType.Money);
+
+                                        foreach (var item in targetTrade.Items.Values)
+                                        {
+                                            user.Inventory.Update(item, Instance.AddMode.MOVE, stream);
+                                            target.Inventory.Update(item, Instance.AddMode.REMOVE, stream, true);
+                                        }
+                                        foreach (var item in userTrade.Items.Values)
+                                        {
+                                            target.Inventory.Update(item, Instance.AddMode.MOVE, stream);
+                                            user.Inventory.Update(item, Instance.AddMode.REMOVE, stream, true);
+                                        }
+
                                         user.Player.targetTrade = 0;
-                                        user.MyTrade.Target.Player.targetTrade = 0;
-
-
+                                        target.Player.targetTrade = 0;
                                         user.Send(stream.TradeCreate(dwParam, TradeID.CloseTradeWindow));
-                                        user.MyTrade.Target.Send(stream.TradeCreate(dwParam, TradeID.CloseTradeWindow));
+                                        target.Send(stream.TradeCreate(dwParam, TradeID.CloseTradeWindow));
 
-
-                                        bool Acceped = false;
-                                        if (user.Inventory.HaveSpace((byte)user.MyTrade.Target.MyTrade.Items.Count))
-                                        {
-                                            if (user.MyTrade.Target.MyTrade.ValidItems())
-                                            {
-                                                if (user.MyTrade.Target.Inventory.HaveSpace((byte)user.MyTrade.Items.Count))
-                                                {
-                                                    if (user.MyTrade.ValidItems())
-                                                    {
-
-                                                        user.Player.ConquerPoints += user.MyTrade.Target.MyTrade.ConquerPoints;
-                                                        user.Player.Money += user.MyTrade.Target.MyTrade.Money;
-                                                        user.Player.SendUpdate(stream, user.Player.Money, MsgUpdate.DataType.Money);
-
-                                                        user.MyTrade.Target.Player.ConquerPoints += user.MyTrade.ConquerPoints;
-                                                        user.MyTrade.Target.Player.Money += user.MyTrade.Money;
-                                                        user.MyTrade.Target.Player.SendUpdate(stream, user.MyTrade.Target.Player.Money, MsgUpdate.DataType.Money);
-
-                                                        foreach (var item in user.MyTrade.Target.MyTrade.Items.Values)
-                                                        {
-                                                            user.Inventory.Update(item, Instance.AddMode.MOVE, stream);
-                                                            user.MyTrade.Target.Inventory.Update(item, Instance.AddMode.REMOVE, stream, true);
-                                                        }
-                                                        foreach (var item in user.MyTrade.Items.Values)
-                                                        {
-                                                            user.MyTrade.Target.Inventory.Update(item, Instance.AddMode.MOVE, stream);
-                                                            user.Inventory.Update(item, Instance.AddMode.REMOVE, stream, true);
-                                                        }
-                                                    }
-                                                    Acceped = true;
-                                                }
-                                            }
-                                        }
-                                        if (!Acceped)
-                                        {
-                                            user.SendSysMesage("There was an error with the trade", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
-                                            user.MyTrade.Target.SendSysMesage("There was an error with the trade", MsgMessage.ChatMode.System, MsgMessage.MsgColor.red);
-                                        }
-                                        user.MyTrade.Target.MyTrade = null;
+                                        target.MyTrade = null;
                                         user.MyTrade = null;
 
                                     }
