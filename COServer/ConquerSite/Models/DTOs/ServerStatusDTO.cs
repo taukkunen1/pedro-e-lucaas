@@ -1,3 +1,5 @@
+using System;
+
 namespace ConquerSite.Models.DTOs
 {
     public class ServerStatusDTO
