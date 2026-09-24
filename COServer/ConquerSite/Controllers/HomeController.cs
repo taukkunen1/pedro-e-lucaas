@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using System.IO;
 
 namespace ConquerSite.Controllers
 {
@@ -75,6 +77,43 @@ namespace ConquerSite.Controllers
             }
 
             return View(rankings);
+        }
+
+        public IActionResult Updates()
+        {
+            return View(new UpdatesPageDTO { Posts = LoadUpdates() });
+        }
+
+        public IActionResult Update(string id)
+        {
+            UpdatePostDTO post = LoadUpdates()
+                .FirstOrDefault(x => x.Slug.Equals(id ?? "", System.StringComparison.OrdinalIgnoreCase));
+
+            if (post == null)
+                return NotFound();
+
+            return View(post);
+        }
+
+        private List<UpdatePostDTO> LoadUpdates()
+        {
+            try
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "App_Data", "updates.json");
+                if (!System.IO.File.Exists(path))
+                    return new List<UpdatePostDTO>();
+
+                string json = System.IO.File.ReadAllText(path);
+                return JsonSerializer.Deserialize<List<UpdatePostDTO>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                })?.OrderByDescending(x => x.PublishedAt).ToList() ?? new List<UpdatePostDTO>();
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Unable to load Placebo updates.");
+                return new List<UpdatePostDTO>();
+            }
         }
 
         public IActionResult Guides()
