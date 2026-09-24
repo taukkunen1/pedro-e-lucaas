@@ -27,7 +27,12 @@ namespace GameServer
         public byte MpPotionPercent = 30;
         public AutoHuntExpDelivery ExpDeliveryMode = AutoHuntExpDelivery.OnStop;
         private readonly object PendingExperienceSync = new object();
-        public ulong PendingExperience = 0;
+        private ulong PendingExperienceValue = 0;
+
+        public ulong PendingExperience
+        {
+            get { lock (PendingExperienceSync) return PendingExperienceValue; }
+        }
 
         public enum AutoHuntExpDelivery : byte
         {
@@ -46,9 +51,9 @@ namespace GameServer
                 return;
             lock (PendingExperienceSync)
             {
-                PendingExperience = ulong.MaxValue - PendingExperience < experience
+                PendingExperienceValue = ulong.MaxValue - PendingExperienceValue < experience
                     ? ulong.MaxValue
-                    : PendingExperience + experience;
+                    : PendingExperienceValue + experience;
             }
         }
 
@@ -56,8 +61,8 @@ namespace GameServer
         {
             lock (PendingExperienceSync)
             {
-                ulong value = PendingExperience;
-                PendingExperience = 0;
+                ulong value = PendingExperienceValue;
+                PendingExperienceValue = 0;
                 return value;
             }
         }
