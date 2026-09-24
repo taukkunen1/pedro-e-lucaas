@@ -7,7 +7,7 @@ namespace GameServer.Game.Era1
     /// </summary>
     public static class Era1Items
     {
-        private static bool IsBlockedByIdFamily(uint itemId)
+        internal static bool IsBlockedByIdFamily(uint itemId)
         {
             uint type = itemId / 1000;
 
