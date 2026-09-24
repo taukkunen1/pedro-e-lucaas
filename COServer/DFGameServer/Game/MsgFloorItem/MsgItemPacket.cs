@@ -71,6 +71,81 @@ namespace GameServer.Game.MsgFloorItem
             return item;
         }
 
+        public static bool TryAutoPickup(Client.GameClient client, MsgFloorItem.MsgItem mapItem, ServerSockets.Packet packet)
+        {
+            if (client == null || mapItem == null || client.InTrade || !client.Player.OnMyOwnServer)
+                return false;
+            if (!client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.VipLevel))
+                return false;
+            if (!client.AutoHunting.ShouldAutoPickUp(mapItem))
+                return false;
+            if (Role.Core.GetDistance(client.Player.X, client.Player.Y, mapItem.X, mapItem.Y) > 5)
+                return false;
+
+            // Respect the same temporary owner/team protection used by manual pickup.
+            if (mapItem.ToMySelf && !mapItem.ExpireMySelf && mapItem.ItemOwner != client.Player.UID)
+            {
+                if (client.Team == null || !client.Team.IsTeamMember(mapItem.ItemOwner))
+                    return false;
+                if (mapItem.Typ == MsgItem.ItemType.Money && !client.Team.PickupMoney)
+                    return false;
+                if (mapItem.Typ == MsgItem.ItemType.Item && !client.Team.PickupItems)
+                    return false;
+            }
+
+            switch (mapItem.Typ)
+            {
+                case MsgItem.ItemType.Money:
+                    if (!mapItem.TryClaimPickup())
+                        return false;
+                    client.Player.Money += mapItem.Gold;
+                    client.Player.SendUpdate(packet, client.Player.Money, MsgServer.MsgUpdate.DataType.Money);
+                    mapItem.SendAll(packet, MsgDropID.Remove);
+                    client.Map.cells[mapItem.X, mapItem.Y] &= ~Role.MapFlagType.Item;
+                    client.Map.View.LeaveMap<Role.IMapObj>(mapItem);
+                    return true;
+
+                case MsgItem.ItemType.Item:
+                    if (mapItem.ItemBase == null || !client.Inventory.HaveSpace(1))
+                        return false;
+
+                    Database.ItemType.DBItem dbItem;
+                    if (!Pool.ItemsBase.TryGetValue(mapItem.MsgFloor.m_ID, out dbItem))
+                        return false;
+                    if (!mapItem.TryClaimPickup())
+                        return false;
+
+                    try
+                    {
+                        bool added;
+                        if (mapItem.ItemBase.StackSize > 1)
+                            added = client.Inventory.Update(mapItem.ItemBase, Instance.AddMode.ADD, packet);
+                        else
+                            added = client.Inventory.Add(mapItem.ItemBase, dbItem, packet);
+
+                        if (!added)
+                        {
+                            mapItem.ReleasePickupClaim();
+                            return false;
+                        }
+
+                        client.Map.cells[mapItem.X, mapItem.Y] &= ~Role.MapFlagType.Item;
+                        client.Map.View.LeaveMap<Role.IMapObj>(mapItem);
+                        mapItem.SendAll(packet, MsgDropID.Remove);
+                        if (dbItem.ID == 711352)
+                            client.Player.QuestGUI.IncreaseQuestObjectives(packet, 1311, 1);
+                        return true;
+                    }
+                    catch
+                    {
+                        mapItem.ReleasePickupClaim();
+                        throw;
+                    }
+            }
+
+            return false;
+        }
+
         [PacketAttribute(GamePackets.FloorMap)]
         public unsafe static void FloorMap(Client.GameClient client, ServerSockets.Packet packet)
         {
