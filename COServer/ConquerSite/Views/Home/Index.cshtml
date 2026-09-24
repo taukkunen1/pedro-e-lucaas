@@ -1,11 +1,14 @@
+@model ConquerSite.Models.DTOs.ServerStatusDTO
 @{
     ViewData["Title"] = "Era 1";
+    string apiState = Model.ApiOnline ? "Online" : "Unavailable";
+    string gameState = !Model.ApiOnline ? "Unavailable" : (Model.GameServerOnline ? "Online" : "Offline");
 }
 
 <section class="tc-hero">
     <div class="tc-hero-overlay"></div>
     <div class="container tc-hero-content">
-        <div class="tc-kicker">TRINITYCONQUER</div>
+        <div class="tc-kicker">PLACEBO</div>
         <h1>ERA 1</h1>
         <p class="tc-hero-lead">Old-school progression. Classic economy. A Conquer experience inspired by patch 5017.</p>
         <div class="tc-hero-actions">
@@ -18,6 +21,43 @@
             <span>Classic classes</span>
             <span>Physical Market</span>
         </div>
+    </div>
+</section>
+
+<section class="tc-status-strip" aria-label="Placebo server status">
+    <div class="container">
+        <div class="tc-status-grid">
+            <div class="tc-status-item">
+                <span class="tc-status-label">API</span>
+                <strong class="@(Model.ApiOnline ? "tc-status-online" : "tc-status-offline")">
+                    <i class="tc-status-dot"></i>@apiState
+                </strong>
+            </div>
+            <div class="tc-status-item">
+                <span class="tc-status-label">GameServer</span>
+                <strong class="@(Model.GameServerOnline ? "tc-status-online" : "tc-status-offline")">
+                    <i class="tc-status-dot"></i>@gameState
+                </strong>
+            </div>
+            <div class="tc-status-item">
+                <span class="tc-status-label">Players online</span>
+                <strong>@(Model.GameServerOnline ? Model.OnlinePlayers.ToString() : "—")</strong>
+            </div>
+            <div class="tc-status-item">
+                <span class="tc-status-label">Uptime</span>
+                <strong>@Model.UptimeLabel</strong>
+            </div>
+            <div class="tc-status-item">
+                <span class="tc-status-label">Client patch</span>
+                <strong>@Model.ClientPatch</strong>
+            </div>
+        </div>
+        @if (Model.ApiOnline && Model.LastHeartbeatUtc.HasValue)
+        {
+            <div class="tc-status-updated">
+                Last GameServer heartbeat: @Model.LastHeartbeatUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")
+            </div>
+        }
     </div>
 </section>
 
@@ -77,7 +117,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <div class="tc-image-frame">
-                    <img src="~/images/ServerImage1.png" alt="TrinityConquer gameplay" class="img-fluid" loading="lazy" />
+                    <img src="~/images/ServerImage1.png" alt="Placebo gameplay" class="img-fluid" loading="lazy" />
                 </div>
             </div>
             <div class="col-lg-6">
@@ -107,14 +147,14 @@
                 <p class="tc-copy-large">The server keeps its Era 1 identity while adding technical improvements where they do not replace the core game.</p>
                 <div class="row tc-mini-features">
                     <div class="col-sm-6"><strong>Auto Hunt V2</strong><span>VIP-gated automation with controlled pickup and movement.</span></div>
-                    <div class="col-sm-6"><strong>Launcher updates</strong><span>Incremental client updates through the Trinity launcher.</span></div>
+                    <div class="col-sm-6"><strong>Launcher updates</strong><span>Incremental client updates through the Placebo launcher.</span></div>
                     <div class="col-sm-6"><strong>Economy safeguards</strong><span>Server-side controls designed to protect long-term progression.</span></div>
                     <div class="col-sm-6"><strong>Era 1 migration</strong><span>Post-era equipment and systems are actively gated by the server.</span></div>
                 </div>
             </div>
             <div class="col-lg-5 mt-4 mt-lg-0">
                 <div class="tc-image-frame tc-image-frame-small">
-                    <img src="~/images/ServerImage3.png" alt="TrinityConquer world" class="img-fluid" loading="lazy" />
+                    <img src="~/images/ServerImage3.png" alt="Placebo world" class="img-fluid" loading="lazy" />
                 </div>
             </div>
         </div>
@@ -125,7 +165,7 @@
     <div class="container text-center">
         <div class="tc-kicker">READY TO ENTER?</div>
         <h2>Start your Era 1 character.</h2>
-        <p>Download the client, create your account and enter TrinityConquer.</p>
+        <p>Download the client, create your account and enter Placebo.</p>
         <div class="tc-hero-actions justify-content-center">
             <a class="btn tc-btn-primary btn-lg" asp-controller="Home" asp-action="Downloads">Download client</a>
             <a class="btn tc-btn-outline btn-lg" asp-controller="Account" asp-action="Register">Create account</a>
