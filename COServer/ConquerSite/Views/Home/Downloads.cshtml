@@ -1,36 +1,70 @@
-﻿@model ConquerSite.Models.DTOs.DowloadsSettings
-
+@model ConquerSite.Models.DTOs.DowloadsSettings
 @{
-    ViewData["Title"] = "Downloads";
+    ViewData["Title"] = "Download";
 }
 
-<div class="container">
-    <div class="row my-3">
-        <div class="col-12">
-            <h1>@ViewData["Title"]</h1>
-            <hr />
-            <div class="text-center my-3" id="download-client">
-                <div class="container padding-top-2x padding-bottom-5x mb-2">
-                    <h3 class="text-center mb-30">Game Client Download</h3>
-                    <div class="row padding-bottom-1x">
-                        <div class="col-md-6 offset-md-3">
-                            <p>You can download and install Classic Conquer using the following download link. Once downloaded, simply install and run the game from the new desktop shortcut.</p>
-                            <p>Client Patch Number: @Model.GetLastPatch()</p>
-                            <div class="text-center">
-                                @if (Model.GetClientMegaUrl() != null && Model.GetClientMegaUrl().Length > 0)
-                                {
-                                   <a class="market-button windows-button" href="@Model.GetClientMegaUrl()"><span class="mb-subtitle">Download for</span><span class="mb-title">Windows</span><small>(MEGA)</small></a>
-                                }
-                                @if (Model.GetClientMediafireUrl() != null && Model.GetClientMediafireUrl().Length > 0)
-                                {
-                                    <a class="market-button windows-button" href="@Model.GetClientMediafireUrl()"><span class="mb-subtitle">Download for</span><span class="mb-title">Windows</span><small>(Mediafire)</small></a>
-                                }
-                            </div>
-                            <a href="https://mega.nz/file/g4hygToJ#7IBMsVGzIOpra4uL3v-On19ca16f2Jh9wvbFk14nRfM" target="_blank" style="color:darkred;">If have problems with flash install this!</a>
-                        </div>
+<section class="tc-page-hero">
+    <div class="container">
+        <div class="tc-kicker">PLAY TRINITYCONQUER</div>
+        <h1>Download</h1>
+        <p>Install the TrinityConquer client and let the launcher keep your game files up to date.</p>
+    </div>
+</section>
+
+<section class="tc-download-shell">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="tc-download-card">
+                    <div class="tc-download-version">Current client patch: @Model.GetLastPatch()</div>
+                    <h2 class="mt-2">TrinityConquer for Windows</h2>
+                    <p class="tc-muted-copy mt-3">
+                        Download the complete client if this is your first installation. After installation,
+                        start TrinityConquer through the launcher so future patches can be applied automatically.
+                    </p>
+
+                    <div class="tc-download-actions">
+                        @if (!string.IsNullOrWhiteSpace(Model.GetClientMegaUrl()))
+                        {
+                            <a class="btn tc-btn-primary btn-lg" href="@Model.GetClientMegaUrl()" target="_blank" rel="noopener noreferrer">
+                                Download via MEGA
+                            </a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.GetClientMediafireUrl()))
+                        {
+                            <a class="btn tc-btn-outline btn-lg" href="@Model.GetClientMediafireUrl()" target="_blank" rel="noopener noreferrer">
+                                MediaFire mirror
+                            </a>
+                        }
                     </div>
+
+                    <div class="tc-download-note">
+                        The adapted 5695 client is used as the technical base for TrinityConquer Era 1.
+                        Gameplay rules and progression are controlled by the server.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="tc-download-card">
+                    <div class="tc-kicker">INSTALLATION</div>
+                    <h3>Three steps to play</h3>
+                    <ol class="tc-step-list mt-4">
+                        <li>
+                            <strong>Download the full client</strong>
+                            Use one of the mirrors and extract or install it in a folder you can write to.
+                        </li>
+                        <li>
+                            <strong>Run the Trinity launcher</strong>
+                            The launcher checks the patch manifest and downloads missing updates.
+                        </li>
+                        <li>
+                            <strong>Login and play</strong>
+                            Create a game account on the website, then enter your credentials in the client.
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
