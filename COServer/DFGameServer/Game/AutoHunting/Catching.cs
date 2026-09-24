@@ -124,6 +124,8 @@ namespace GameServer
                 dialog.AddOption("Skills: " + client.AutoHunting.SkillsStatus, 241);
                 dialog.AddOption("EXP: " + client.AutoHunting.ExpDeliveryLabel, 242);
                 dialog.AddOption("Fast mode: " + client.AutoHunting.FastModeStatus, 243);
+                dialog.AddOption("HP potion: " + client.AutoHunting.HpPotionPercent + "%", 245);
+                dialog.AddOption("MP potion: " + client.AutoHunting.MpPotionPercent + "%", 246);
                 dialog.AddOption("Pickup settings", 244);
                 dialog.AddOption("Close", 255);
                 dialog.FinalizeDialog();
@@ -158,8 +160,31 @@ namespace GameServer
                 case 244:
                     ShowPickupSettings(client);
                     return true;
+                case 245:
+                    client.AutoHunting.HpPotionPercent = NextPotionThreshold(client.AutoHunting.HpPotionPercent);
+                    ShowSettings(client);
+                    return true;
+                case 246:
+                    client.AutoHunting.MpPotionPercent = NextPotionThreshold(client.AutoHunting.MpPotionPercent);
+                    ShowSettings(client);
+                    return true;
             }
             return false;
+        }
+
+        private static byte NextPotionThreshold(byte current)
+        {
+            switch (current)
+            {
+                case 0: return 20;
+                case 20: return 30;
+                case 30: return 40;
+                case 40: return 50;
+                case 50: return 60;
+                case 60: return 70;
+                case 70: return 80;
+                default: return 0;
+            }
         }
 
         public static void ShowPickupSettings(Client.GameClient client)
