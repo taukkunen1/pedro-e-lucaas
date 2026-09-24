@@ -1,33 +1,67 @@
-﻿@{
+@{
     ViewData["Title"] = "My Character";
     Character c = (Character)ViewBag.Character;
-    int UidLenght = c.UID.ToString().Length;
-    string UidMask = c.UID.ToString();
-    UidMask = "****" + UidMask.Substring(UidMask.Length - 4, 3);
+    string uid = c.UID.ToString();
+    string uidMask = uid.Length > 4 ? "****" + uid.Substring(uid.Length - 4) : "****";
 }
 
-<div class="container">
-    <div class="row my-3">
-        <div class="col-lg-4">
-            <div class="card">
-              <img src="@ViewBag.CharacterAvatar" class="card-img-top" alt="" style="height: 130px;object-fit: contain;">
-              <div class="card-body">
-                <h5 class="card-title">@ViewBag.Character.Name</h5>
-                <hr />
-                <div>UID: @UidMask</div>
-                <div>Level: @ViewBag.Character.Level</div>
-                <div>Class: @ViewBag.CharacterClassName</div>
-                <div>Reborn: @ViewBag.Character.Reborn</div>
-                <div>DonationPoints: @ViewBag.Character.RacePoints</div>
-                <div class="alert alert-info mt-3" role="alert">
-                    UID Partially hidden for security
+<section class="tc-page-hero tc-page-hero-account">
+    <div class="container">
+        <div class="tc-kicker">ACCOUNT DASHBOARD</div>
+        <h1>My Character</h1>
+        <p>Your current TrinityConquer character at a glance.</p>
+    </div>
+</section>
+
+<section class="tc-account-shell">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <article class="tc-character-card">
+                    <div class="tc-character-avatar">
+                        <img src="@ViewBag.CharacterAvatar" alt="@ViewBag.Character.Name" />
+                    </div>
+                    <div class="tc-character-body">
+                        <div class="tc-kicker">ACTIVE CHARACTER</div>
+                        <h2>@ViewBag.Character.Name</h2>
+                        <p>@ViewBag.CharacterClassName · Level @ViewBag.Character.Level</p>
+                        <div class="tc-character-id">UID @uidMask</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row tc-stat-grid">
+                    <div class="col-sm-6 mb-4">
+                        <article class="tc-stat-card">
+                            <span>Level</span>
+                            <strong>@ViewBag.Character.Level</strong>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <article class="tc-stat-card">
+                            <span>Class</span>
+                            <strong>@ViewBag.CharacterClassName</strong>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <article class="tc-stat-card">
+                            <span>Reborn</span>
+                            <strong>@ViewBag.Character.Reborn</strong>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <article class="tc-stat-card">
+                            <span>Donation Points</span>
+                            <strong>@ViewBag.Character.RacePoints</strong>
+                        </article>
+                    </div>
                 </div>
-              </div>
-              <div class="card-body d-none">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
+
+                <div class="tc-account-note">
+                    More character information, rankings and security controls will be added to this dashboard in the next website phases.
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
