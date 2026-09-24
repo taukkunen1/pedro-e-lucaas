@@ -9,6 +9,20 @@ namespace GameServer.Game.Era1
     {
         public static bool IsBlockedEquipment(uint itemId)
         {
+            // ItemPosition depends on the loaded 5695 item database. Keep the
+            // deterministic Era 1 family gates first so promotion self-tests
+            // can run before Database.Server.Initialize/LoadDatabase.
+            uint type = itemId / 1000;
+
+            if (type == 201 || type == 202 || type == 300)
+                return true;
+
+            if (type >= 601 && type <= 619)
+                return true;
+
+            if (type == 141 || type == 142 || type == 143)
+                return true;
+
             ushort position = Database.ItemType.ItemPosition(itemId);
             switch ((Role.Flags.ConquerItem)position)
             {
@@ -22,16 +36,6 @@ namespace GameServer.Game.Era1
                 case Role.Flags.ConquerItem.LeftWeaponAccessory:
                     return true;
             }
-
-            uint type = itemId / 1000;
-            // Later profession weapons embedded in the 5695 item database.
-            if (type >= 601 && type <= 619)
-                return true;
-
-            // Patch 5035 (jul/2008): headbands de guerreiro (141), plumas de arqueiro (142)
-            // e headbands de monge (143).
-            if (type == 141 || type == 142 || type == 143)
-                return true;
 
             // Patch 5035: escudos a partir do nivel 120.
             if (type == 900 && Pool.ItemsBase.TryGetValue(itemId, out var shield) && shield.Level >= 120)
