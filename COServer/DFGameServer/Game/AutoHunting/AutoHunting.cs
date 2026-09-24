@@ -16,6 +16,15 @@ namespace GameServer
         public string LootMoneyStatus => this.LootMoney ? "[Enabled]" : "[Disabled]";
         public string Status => this.Enable ? "[Enabled]" : "[Disabled]";
 
+        // Official Auto Hunt privilege thresholds.
+        // Basic Auto Hunt: everyone; Auto Jump: VIP 3+; Auto Pick Up: VIP 4+.
+        public const byte AutoJumpVipLevel = 3;
+        public const byte AutoPickUpVipLevel = 4;
+
+        public static bool CanAutoHunt(byte vipLevel) => true;
+        public static bool CanAutoJump(byte vipLevel) => vipLevel >= AutoJumpVipLevel;
+        public static bool CanAutoPickUp(byte vipLevel) => vipLevel >= AutoPickUpVipLevel;
+
         public bool FastMode = false;
         public bool Enable = false;
         public bool DBalls = false;
