@@ -117,7 +117,10 @@ namespace GameServer.Game.MsgTournaments
                         Process = ProcesType.Dead;
 
                         var winner = MapPlayers().First();
-                        uint value = EventsRewards.EventReward("CouplesTournament").RewardValue; //* (uint)Pool.GamePoll.Count;
+                        // Economy V5: this reward was previously sourced from an undefined
+            // configurable key and silently fell back to 350 CP. Keep the event's
+            // explicit legacy constant instead of an implicit faucet.
+            uint value = RewardConquerPoints;
                         //if (Pool.GamePoll.Count > 40)
                         //    value = 5000 * 40;
 

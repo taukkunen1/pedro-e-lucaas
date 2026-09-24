@@ -133,6 +133,7 @@ namespace GameServer
                 Game.Era1.Era1Economy.RunSelfTest();
                 Game.Era1.Era1Shops.RunSelfTest();
                 Game.Era1.Era1Services.RunSelfTest();
+                Game.Era1.Era1Faucets.RunSelfTest();
                 return;
             }
 

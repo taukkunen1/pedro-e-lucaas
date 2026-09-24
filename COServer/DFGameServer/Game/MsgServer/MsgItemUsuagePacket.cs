@@ -528,81 +528,69 @@ namespace GameServer.Game.MsgServer
                     {
                         if (client.IsConnectedInterServer())
                             break;
-                        Game.MsgServer.MsgDetainedItem DetainedItem;
-                        if (client.Confiscator.RedeemContainer.TryGetValue((uint)id, out DetainedItem))
+
+                        Game.MsgServer.MsgDetainedItem detainedItem;
+                        if (!client.Confiscator.RedeemContainer.TryGetValue(id, out detainedItem))
+                            break;
+
+                        detainedItem.DaysLeft = (uint)(TimeSpan.FromTicks(DateTime.Now.Ticks).Days
+                            - TimeSpan.FromTicks(Role.Instance.Confiscator.GetTimer(detainedItem.Date).Ticks).Days);
+                        if (detainedItem.DaysLeft > 7)
                         {
-                            DetainedItem.DaysLeft = (uint)(TimeSpan.FromTicks(DateTime.Now.Ticks).Days - TimeSpan.FromTicks(Role.Instance.Confiscator.GetTimer(DetainedItem.Date).Ticks).Days);
-                            if (DetainedItem.DaysLeft > 7)
-                            {
-#if Arabic
-                                  client.SendSysMesage("This item is expired!");
-#else
-                                client.SendSysMesage("This item is expired!");
-#endif
+                            client.SendSysMesage("This item is expired!");
+                            break;
+                        }
 
-                                break;
-                            }
-                            if (!client.Inventory.HaveSpace(1))
-                            {
-#if Arabic
-                                                                client.SendSysMesage("Please make 1 space in your container!");
-#else
-                                client.SendSysMesage("Please make 1 more space in your container!");
-#endif
+                        if (!client.Inventory.HaveSpace(1))
+                        {
+                            client.SendSysMesage("Please make 1 more space in your container!");
+                            break;
+                        }
 
-                                break;
-                            }
-                            if (client.Player.ConquerPoints >= Role.Instance.Confiscator.CalculateCpsCost(DetainedItem))
-                            {
-                                client.Player.ConquerPoints -= (uint)Role.Instance.Confiscator.CalculateCpsCost(DetainedItem);
+                        uint redeemCost = (uint)Role.Instance.Confiscator.CalculateCpsCost(detainedItem);
+                        if (client.Player.ConquerPoints < redeemCost)
+                            break;
 
+                        // Economy V5: acquire the redemption record exactly once before
+                        // mutating currency or returning the item. Packet replay cannot
+                        // redeem the same record twice.
+                        if (!client.Confiscator.RedeemContainer.TryRemove(detainedItem.UID, out detainedItem))
+                            break;
 
-                                dwParam = client.Player.UID;
-                                dwparam4 = (uint)Role.Instance.Confiscator.CalculateCpsCost(DetainedItem);
+                        Role.Instance.Confiscator gainerContainer;
+                        if (!Pool.QueueContainer.PollContainers.TryGetValue(detainedItem.GainerUID, out gainerContainer))
+                        {
+                            gainerContainer = new Role.Instance.Confiscator();
+                            Pool.QueueContainer.QueueObj(detainedItem.GainerUID, gainerContainer);
+                        }
 
-                                client.Send(stream.ItemUsageCreate(ItemUsageID.RedeemGear, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                        detainedItem.Action = MsgDetainedItem.ContainerType.RewardCps;
+                        detainedItem.RewardConquerPoints = (int)redeemCost;
+                        gainerContainer.ClaimContainer[detainedItem.UID] = detainedItem;
 
+                        client.Player.ConquerPoints -= redeemCost;
 
-                                client.Inventory.Update(MsgDetainedItem.CopyTo(DetainedItem), Instance.AddMode.ADD, stream);
+                        dwParam = client.Player.UID;
+                        dwparam4 = redeemCost;
+                        client.Send(stream.ItemUsageCreate(ItemUsageID.RedeemGear, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
 
-#if Arabic
-  string Messajj = "" + client.Player.Name + " redeemed his equipment (" + Constants.ItemsBase.GetItemName(DetainedItem.ItemID) + "), he paying " + Role.Instance.Confiscator.CalculateCpsCost(DetainedItem) + " conquer points for " + DetainedItem.GainerName + ".";
+                        client.Inventory.Update(MsgDetainedItem.CopyTo(detainedItem), Instance.AddMode.ADD, stream);
 
-#else
-                                string Messajj = "" + client.Player.Name + " redeemed his equipment (" + Pool.ItemsBase.GetItemName(DetainedItem.ItemID) + "), he paying " + Role.Instance.Confiscator.CalculateCpsCost(DetainedItem) + " conquer points for " + DetainedItem.GainerName + ".";
+                        string redeemMessage = "" + client.Player.Name + " redeemed his equipment ("
+                            + Pool.ItemsBase.GetItemName(detainedItem.ItemID) + "), paying "
+                            + redeemCost + " conquer points for " + detainedItem.GainerName + ".";
+                        Program.SendGlobalPackets.Enqueue(new MsgMessage(
+                            redeemMessage,
+                            MsgMessage.MsgColor.white,
+                            MsgMessage.ChatMode.System).GetArray(stream));
 
-#endif
-
-                                //string Messaj = "" + client.Player.Name + " redeemed his equipment, hereby obtained a ransom of " + DetainedItem.ConquerPointsCost + " points, all the days Stone Award to seize its equipment to help players " + DetainedItem.GainerName + "";
-                                Program.SendGlobalPackets.Enqueue(new MsgMessage(Messajj, MsgMessage.MsgColor.white, MsgMessage.ChatMode.System).GetArray(stream));
-
-                                if (client.Confiscator.RedeemContainer.TryRemove(DetainedItem.UID, out DetainedItem))
-                                {
-                                    Role.Instance.Confiscator GainerCointainer;
-                                    if (Pool.QueueContainer.PollContainers.TryGetValue(DetainedItem.GainerUID, out GainerCointainer))
-                                    {
-                                        if (GainerCointainer.ClaimContainer.ContainsKey(DetainedItem.UID))
-                                        {
-                                            DetainedItem.Action = MsgDetainedItem.ContainerType.RewardCps;
-                                            DetainedItem.RewardConquerPoints = Role.Instance.Confiscator.CalculateCpsCost(DetainedItem);
-                                            GainerCointainer.ClaimContainer[DetainedItem.UID] = DetainedItem;
-
-                                            Client.GameClient Gainer;
-                                            if (Pool.GamePoll.TryGetValue(DetainedItem.GainerUID, out Gainer))
-                                            {
-                                                dwParam = Gainer.Player.UID;
-                                                action = ItemUsageID.ClaimGear;
-
-                                                Gainer.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
-
-
-
-                                                GainerCointainer.ClaimContainer[DetainedItem.UID].Send(Gainer, stream);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                        Client.GameClient gainer;
+                        if (Pool.GamePoll.TryGetValue(detainedItem.GainerUID, out gainer))
+                        {
+                            dwParam = gainer.Player.UID;
+                            action = ItemUsageID.ClaimGear;
+                            gainer.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                            gainerContainer.ClaimContainer[detainedItem.UID].Send(gainer, stream);
                         }
                         break;
                     }
@@ -610,75 +598,76 @@ namespace GameServer.Game.MsgServer
                     {
                         if (client.IsConnectedInterServer())
                             break;
-                        if (!client.Inventory.HaveSpace(1))
-                        {
-#if Arabic
-                              client.SendSysMesage("Please make 1 space in your container!");
-#else
-                            client.SendSysMesage("Please make 1 more space in your container!");
-#endif
 
+                        Game.MsgServer.MsgDetainedItem claimItem;
+                        if (!client.Confiscator.ClaimContainer.TryGetValue(id, out claimItem))
+                            break;
+
+                        claimItem.DaysLeft = (uint)(TimeSpan.FromTicks(DateTime.Now.Ticks).Days
+                            - TimeSpan.FromTicks(Role.Instance.Confiscator.GetTimer(claimItem.Date).Ticks).Days);
+
+                        if (claimItem.RewardConquerPoints > 0)
+                        {
+                            uint reward = (uint)claimItem.RewardConquerPoints;
+                            if (!Game.Era1.Era1Faucets.CanAddCurrency(client.Player.ConquerPoints, reward))
+                            {
+                                client.SendSysMesage("You cannot claim these ConquerPoints while your balance is at the currency limit.");
+                                break;
+                            }
+
+                            // Economy V5: remove-first makes the reward one-shot.
+                            // A replayed ClaimGear packet cannot mint the same ransom twice.
+                            if (!client.Confiscator.ClaimContainer.TryRemove(claimItem.UID, out claimItem))
+                                break;
+
+                            client.Player.ConquerPoints += reward;
+
+                            string rewardMessage = "Congratulation! " + client.Player.Name + " has received "
+                                + reward + " conquer points for capture the red/black player called "
+                                + claimItem.OwnerName;
+                            Program.SendGlobalPackets.Enqueue(new MsgMessage(
+                                rewardMessage,
+                                MsgMessage.MsgColor.white,
+                                MsgMessage.ChatMode.System).GetArray(stream));
+
+                            dwParam = client.Player.UID;
+                            dwparam4 = reward;
+                            client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                             break;
                         }
 
-                        Game.MsgServer.MsgDetainedItem ClaimItem;
-                        if (client.Confiscator.ClaimContainer.TryGetValue(id, out ClaimItem))
+                        if (claimItem.DaysLeft <= 7)
                         {
-                            if (ClaimItem.Bound && ClaimItem.DaysLeft > 7)
-                            {
-
-                                dwParam = client.Player.UID;
-
-                                dwparam4 = (uint)ClaimItem.RewardConquerPoints;
-
-
-                                client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
-
-                                client.Confiscator.ClaimContainer.TryRemove(ClaimItem.UID, out ClaimItem);
-#if Arabic
-                                 client.SendSysMesage("Unnclaimable Bound item!");
-#else
-                                client.SendSysMesage("Unnclaimable Bound item!");
-#endif
-
-                                break;
-                            }
-                            ClaimItem.DaysLeft = (uint)(TimeSpan.FromTicks(DateTime.Now.Ticks).Days - TimeSpan.FromTicks(Role.Instance.Confiscator.GetTimer(ClaimItem.Date).Ticks).Days);
-                            if (ClaimItem.DaysLeft < 7 && ClaimItem.Action != MsgDetainedItem.ContainerType.RewardCps)
-                            {
-#if Arabic
-                                 client.SendSysMesage("This item is not expired. You cannot claim it yet!");
-#else
-                                client.SendSysMesage("This item is not expired. You cannot claim it yet!");
-#endif
-
-                                break;
-                            }
-                            if (ClaimItem.RewardConquerPoints != 0)
-                            {
-                                client.Player.ConquerPoints += (uint)ClaimItem.RewardConquerPoints;
-
-                                client.Confiscator.ClaimContainer.TryRemove(ClaimItem.UID, out ClaimItem);
-                            }
-                            else if (ClaimItem.DaysLeft > 7)
-                            {
-                                client.Inventory.Update(MsgDetainedItem.CopyTo(ClaimItem), Instance.AddMode.ADD, stream);
-                                client.Confiscator.ClaimContainer.TryRemove(ClaimItem.UID, out ClaimItem);
-                            }
-#if Arabic
-                              string Messaj = "Congratulation! " + client.Player.Name + " has received " + ClaimItem.RewardConquerPoints + " conquer points for capture the red/black player called " + ClaimItem.OwnerName + "";//"Thank you for arresting red/black name players " + client.Entity.Name + " has recived " + item.ConquerPointsCost + " CPS . Congratulations!";
-                           
-#else
-                            string Messaj = "Congratulation! " + client.Player.Name + " has received " + ClaimItem.RewardConquerPoints + " conquer points for capture the red/black player called " + ClaimItem.OwnerName + "";//"Thank you for arresting red/black name players " + client.Entity.Name + " has recived " + item.ConquerPointsCost + " CPS . Congratulations!";
-
-#endif
-                            Program.SendGlobalPackets.Enqueue(new MsgMessage(Messaj, MsgMessage.MsgColor.white, MsgMessage.ChatMode.System).GetArray(stream));
-
-                            dwParam = client.Player.UID;
-                            dwparam4 = (uint)ClaimItem.RewardConquerPoints;
-                            client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
-
+                            client.SendSysMesage("This item is not expired. You cannot claim it yet!");
+                            break;
                         }
+
+                        if (claimItem.Bound)
+                        {
+                            if (client.Confiscator.ClaimContainer.TryRemove(claimItem.UID, out claimItem))
+                            {
+                                dwParam = client.Player.UID;
+                                dwparam4 = 0;
+                                client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                                client.SendSysMesage("Unnclaimable Bound item!");
+                            }
+                            break;
+                        }
+
+                        if (!client.Inventory.HaveSpace(1))
+                        {
+                            client.SendSysMesage("Please make 1 more space in your container!");
+                            break;
+                        }
+
+                        // Expired equipment is also a one-shot claim: remove before add.
+                        if (!client.Confiscator.ClaimContainer.TryRemove(claimItem.UID, out claimItem))
+                            break;
+
+                        client.Inventory.Update(MsgDetainedItem.CopyTo(claimItem), Instance.AddMode.ADD, stream);
+                        dwParam = client.Player.UID;
+                        dwparam4 = 0;
+                        client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                         break;
                     }
                 case ItemUsageID.GarmentShop:

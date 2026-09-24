@@ -28,6 +28,11 @@
       "flow": "transfer"
     },
     {
+      "match": "^ItemUsage:(RedeemGear|ClaimGear)$",
+      "system": "PkRedemption",
+      "flow": "transfer"
+    },
+    {
       "match": "^ItemUsage:(BuyItem|BuyItemFromForging|GarmentShop|SellItem)$",
       "system": "NpcShop",
       "flow": "auto"
@@ -108,7 +113,12 @@
       "flow": "auto"
     },
     {
-      "match": "^Code:(MsgGuildProces|Guild\\w*)\\b",
+      "match": "^Code:MsgGuildProces\\\\b",
+      "system": "GuildTreasury",
+      "flow": "transfer"
+    },
+    {
+      "match": "^Code:Guild\\\\w*\\\\b",
       "system": "Guild",
       "flow": "auto"
     },

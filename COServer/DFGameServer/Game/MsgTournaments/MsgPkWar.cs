@@ -8,7 +8,7 @@ namespace GameServer.Game.MsgTournaments
 {
     public class MsgPkWar
     {
-        public const int RewardConquerPoints = 2500, FinishMinutes = 20 , EndSignTime = 19;
+        public const int RewardConquerPoints = (int)Game.Era1.Era1Faucets.WeeklyPkWarRewardConquerPoints, FinishMinutes = 20 , EndSignTime = 19;
 
         private ProcesType Mode;
         public static DateTime EndSignTimer = new DateTime();
@@ -61,9 +61,9 @@ namespace GameServer.Game.MsgTournaments
         public void GiveReward(Client.GameClient client, ServerSockets.Packet stream)
         {
             WinnerUID = client.Player.UID;
-            var value = EventsRewards.EventReward("WeeklyPKWar").RewardValue * (uint)Pool.GamePoll.Count;
-            if (Pool.GamePoll.Count > 40)
-                value = EventsRewards.EventReward("WeeklyPKWar").RewardValue * 40;
+            // Economy V5: fixed reward. Population-scaled fallback rewards were an
+            // unbounded CP faucet and disagreed with the event's own advertised prize.
+            uint value = Game.Era1.Era1Faucets.WeeklyPkWarRewardConquerPoints;
             client.SendSysMesage("You received " + value.ToString() + " ConquerPoints and 4 PowerExpBalls. ", MsgServer.MsgMessage.ChatMode.System, MsgServer.MsgMessage.MsgColor.red);
             MsgSchedules.SendSysMesage("" + client.Player.Name + " Won  WeeklyPK War , he received " + RewardConquerPoints.ToString() + " ConquerPoints and 4-PowerExpBalls!", MsgServer.MsgMessage.ChatMode.TopLeftSystem, MsgServer.MsgMessage.MsgColor.white);
             string reward = "[EVENT]" + client.Player.Name + " has received " + value + " from WeeklyPK.";

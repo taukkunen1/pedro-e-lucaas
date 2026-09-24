@@ -254,9 +254,9 @@ namespace GameServer.Game.MsgTournaments
                             {
                                 if (user.Player.MyClanMember.Rank == Role.Instance.Clan.Ranks.Leader)
                                 {
-                                    var value = 3500000 * (uint)Pool.GamePoll.Count;
-                                    if (Pool.GamePoll.Count > 40)
-                                        value = 3500000 * 40;
+                                    // Economy V5: fixed Silver faucet. Do not multiply
+                                    // event rewards by the number of online characters.
+                                    const uint value = 3500000;
                                     user.Player.Money += value;
                                     user.CreateBoxDialog("You received " + value + " Silver.");
                                     using (var rec = new ServerSockets.RecycledPacket())
@@ -267,9 +267,9 @@ namespace GameServer.Game.MsgTournaments
                                 }
                                 else
                                 {
-                                    var value = 3500000 * (uint)Pool.GamePoll.Count;
-                                    if (Pool.GamePoll.Count > 40)
-                                        value = 3500000 * 40;
+                                    // Economy V5: member reward is half of the fixed
+                                    // clan-war Silver reward, independent of population.
+                                    const uint value = 3500000;
                                     user.Player.Money += value / 2;
                                     user.CreateBoxDialog("You received " + value / 2 + " Money.");
                                 }

@@ -182,6 +182,13 @@ namespace GameServer.Game.MsgServer
                                 user.Player.SendUpdate(stream, user.Player.Money, MsgUpdate.DataType.Money);
                                 user.Player.MyGuildMember.MoneyDonate += UID;
                                 user.Player.MyGuild.Info.SilverFund += UID;
+                                GameServer.Telemetry.Economy.RecordManual(
+                                    0,
+                                    "GuildTreasury:" + user.Player.MyGuild.GuildName,
+                                    user.Player.Map,
+                                    GameServer.Telemetry.Currency.Gold,
+                                    (long)UID,
+                                    "Code:MsgGuildProces.GuildTreasury");
                                 user.Player.MyGuild.SendThat(user.Player);
                             }
                         }
@@ -201,6 +208,13 @@ namespace GameServer.Game.MsgServer
 
                                 user.Player.MyGuildMember.CpsDonate += UID;
                                 user.Player.MyGuild.Info.ConquerPointFund += UID;
+                                GameServer.Telemetry.Economy.RecordManual(
+                                    0,
+                                    "GuildTreasury:" + user.Player.MyGuild.GuildName,
+                                    user.Player.Map,
+                                    GameServer.Telemetry.Currency.CP,
+                                    (long)UID,
+                                    "Code:MsgGuildProces.GuildTreasury");
                                 user.Player.MyGuild.SendThat(user.Player);
                             }
                         }
