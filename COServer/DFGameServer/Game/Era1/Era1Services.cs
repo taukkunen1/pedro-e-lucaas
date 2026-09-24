@@ -37,6 +37,13 @@ namespace GameServer.Game.Era1
                 && npcId != (uint)Game.MsgNpc.NpcID.WHPoker;
         }
 
+        public static bool IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID action)
+        {
+            return action == Game.MsgServer.MsgWarehouse.DepositActionID.Show
+                || action == Game.MsgServer.MsgWarehouse.DepositActionID.DepositItem
+                || action == Game.MsgServer.MsgWarehouse.DepositActionID.WithdrawItem;
+        }
+
         public static bool CanUseClassicWarehouse(Client.GameClient client, uint npcId)
         {
             if (client == null || client.IsConnectedInterServer())
@@ -106,6 +113,14 @@ namespace GameServer.Game.Era1
                 || IsClassicWarehouseNpc((uint)Game.MsgNpc.NpcID.WHPoker)
                 || IsClassicWarehouseNpc(ushort.MaxValue))
                 throw new System.InvalidOperationException("Era 1 warehouse NPC boundary failed.");
+
+            if (!IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.Show)
+                || !IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.DepositItem)
+                || !IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.WithdrawItem)
+                || IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.Show_WH_House)
+                || IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.ShashShow)
+                || IsClassicWarehouseAction(Game.MsgServer.MsgWarehouse.DepositActionID.ShowInventorySash))
+                throw new System.InvalidOperationException("Era 1 warehouse action boundary failed.");
 
             if (!IsValidVendingPrice(1) || IsValidVendingPrice(0))
                 throw new System.InvalidOperationException("Era 1 vending price boundary failed.");
