@@ -69,6 +69,7 @@ namespace ConquerSite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult RegisterPost(Account account)
         {
             List<Message> Messages = new();
@@ -108,35 +109,37 @@ namespace ConquerSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginPost(Account account)
+        [ValidateAntiForgeryToken]
+        public IActionResult LoginPost(LoginAccountDTO account)
         {
             List<Message> Messages = new();
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("Username", account.Username);
-            Account acc = RestApiHelper.GetRequest<Account>("Account", param);
-            if (acc != null)
+
+            if (!ModelState.IsValid)
             {
-                // a senha vai no corpo do POST (nunca na URL) e a API confere o hash
-                acc = RestApiHelper.PostRequestAs<Account>("AccountLogin", new { Username = account.Username, Password = account.Password });
-                if (acc != null && acc.EntityID != 0)
-                {
-                    Utils.LoginAccount(HttpContext.Session, acc);
-                    Messages.Add(new Message() { Text = $"Logged with your account {account.Username} successfully.", Type = TypeMessage.Success });
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    Messages.Add(new Message() { Text = $"Password for the account {account.Username} invalid.", Type = TypeMessage.Danger });
-                }
+                Messages.Add(new Message() { Text = "Invalid username or password.", Type = TypeMessage.Danger });
+                ViewBag.Message = Messages;
+                return View("Login", account);
             }
-            else
+
+            // Use one generic authentication error so the login page does not reveal
+            // whether a username exists.
+            Account acc = RestApiHelper.PostRequestAs<Account>(
+                "AccountLogin",
+                new { Username = account.Username, Password = account.Password });
+
+            if (acc != null && acc.EntityID != 0)
             {
-                Messages.Add(new Message() { Text = $"Username {account.Username} not exists.", Type = TypeMessage.Danger });
+                Utils.LoginAccount(HttpContext.Session, acc);
+                return RedirectToAction("Index", "Home");
             }
+
+            Messages.Add(new Message() { Text = "Invalid username or password.", Type = TypeMessage.Danger });
             ViewBag.Message = Messages;
-            return View("Login");
+            return View("Login", account);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Logout()
         {
             Utils.LogoutAccount(HttpContext.Session);
