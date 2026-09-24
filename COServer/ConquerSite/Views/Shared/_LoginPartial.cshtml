@@ -1,22 +1,25 @@
-﻿<ul class="navbar-nav">
+<ul class="navbar-nav tc-account-nav">
     @if (Utils.CurrentLoggedAccount(Context.Session) != null)
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" title="Manage" asp-action="MyCharacter" asp-controller="Account">Hello @Utils.CurrentLoggedAccount(Context.Session).Username !</a>
+            <a class="nav-link" title="My character" asp-action="MyCharacter" asp-controller="Account">
+                @Utils.CurrentLoggedAccount(Context.Session).Username
+            </a>
         </li>
         <li class="nav-item">
-            <form class="form-inline">
-                <button type="submit" class="nav-link btn btn-link text-dark" asp-action="Logout" asp-controller="Account">Logout</button>
+            <form asp-action="Logout" asp-controller="Account" method="post" class="form-inline">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="Register" asp-controller="Account">Register</a>
+            <a class="nav-link" asp-action="Login" asp-controller="Account">Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="Login" asp-controller="Account">Login</a>
+            <a class="nav-link tc-account-cta" asp-action="Register" asp-controller="Account">Create account</a>
         </li>
     }
 </ul>
