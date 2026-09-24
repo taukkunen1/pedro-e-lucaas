@@ -147,43 +147,9 @@ namespace ConquerSite.Controllers
         {
             return View();
         }
-        public IActionResult Shop()
+public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [HttpGet("xtremetop100.vote")]
-        public IActionResult VotePostBack(string Custom, string VotingIP)
-        {
-            List<Message> Messages = new();
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("UID", Custom);
-            Account acc = RestApiHelper.GetRequest<Account>("AccountByUID", param);
-            if (acc != null)
-            {
-                Vote v = RestApiHelper.GetRequest<Vote>("Votes/Get", param);
-                if (v != null)
-                {
-                    v.LastVoteDate = System.DateTime.Now;
-                    v.Votes++;
-                }
-                RestApiHelper.PostRequestSuccessful("Votes/Add", new Core.Models.AddVote() { UID = uint.Parse(Custom) });
-                Messages.Add(new Message() { Text = $"Has voted and obtained 1 VotePoints with your account with EntityID:{Custom} [IP: {VotingIP}].", Type = TypeMessage.Success });
-            }
-            else
-            {
-                Messages.Add(new Message() { Text = $"Cannot find the EntityID:{Custom} [IP: {VotingIP}] for apply the reward for vote.", Type = TypeMessage.Danger });
-            }
-            foreach (Message v in Messages)
-            {
-                System.IO.File.AppendAllText("Vote.log", $"[{System.DateTime.Now.ToShortDateString()}] {Messages.First().Text}{System.Environment.NewLine}");
-            }
-            return View("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
