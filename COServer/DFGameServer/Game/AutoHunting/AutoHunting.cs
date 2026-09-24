@@ -20,6 +20,36 @@ namespace GameServer
         public ushort OriginX;
         public ushort OriginY;
         public ushort HuntRadius = 0;
+        public bool UseSkills = true;
+        public byte HpPotionPercent = 40;
+        public byte MpPotionPercent = 30;
+        public AutoHuntExpDelivery ExpDeliveryMode = AutoHuntExpDelivery.OnStop;
+        public ulong PendingExperience = 0;
+
+        public enum AutoHuntExpDelivery : byte
+        {
+            OnStop = 0,
+            Instant = 1
+        }
+
+        public static ushort NormalizeRadius(ushort radius)
+        {
+            return radius == 10 || radius == 20 || radius == 30 ? radius : (ushort)0;
+        }
+
+        public void AddPendingExperience(ulong experience)
+        {
+            if (experience == 0)
+                return;
+            checked { PendingExperience += experience; }
+        }
+
+        public ulong TakePendingExperience()
+        {
+            ulong value = PendingExperience;
+            PendingExperience = 0;
+            return value;
+        }
 
         public bool IsInsideHuntRadius(ushort x, ushort y)
         {
@@ -133,6 +163,11 @@ namespace GameServer
             OriginX = 0;
             OriginY = 0;
             HuntRadius = 0;
+            UseSkills = true;
+            HpPotionPercent = 40;
+            MpPotionPercent = 30;
+            ExpDeliveryMode = AutoHuntExpDelivery.OnStop;
+            PendingExperience = 0;
             X = 0;
             Y = 0;
             AttackStamp = DateTime.Now;
