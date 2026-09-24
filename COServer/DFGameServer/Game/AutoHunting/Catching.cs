@@ -309,10 +309,12 @@ namespace GameServer
 
         public static void End(Client.GameClient client)
         {
+            if (client == null || client.Player == null || client.AutoHunting == null)
+                return;
+            client.AutoHunting.Enable = false;
+            FlushPendingExperience(client);
             if (!ValidClient(client))
                 return;
-            FlushPendingExperience(client);
-            client.AutoHunting.Enable = false;
             client.OnAutoAttack = false;
             client.Player.MyTitle = client.AutoHunting.Mytitle;
             using (var rec = new ServerSockets.RecycledPacket())
