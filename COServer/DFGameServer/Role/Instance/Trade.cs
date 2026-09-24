@@ -33,7 +33,9 @@ namespace GameServer.Role.Instance
        {
            if (Target.InTrade)
            {
-               if (Owner.Player.ConquerPoints >= dwParam)
+               if (dwParam > 0
+                   && Owner.Player.ConquerPoints >= dwParam
+                   && Game.Era1.Era1Faucets.CanAddCurrency(ConquerPoints, dwParam))
                {
                    Owner.Player.ConquerPoints -= dwParam;
                    ConquerPoints += dwParam;
@@ -46,7 +48,9 @@ namespace GameServer.Role.Instance
        {
            if (Target.InTrade)
            {
-               if (Owner.Player.Money >= dwParam)
+               if (dwParam > 0
+                   && Owner.Player.Money >= dwParam
+                   && Game.Era1.Era1Faucets.CanAddCurrency(Money, dwParam))
                {
                    Owner.Player.Money -= dwParam;
                    Money += dwParam;
@@ -120,6 +124,13 @@ namespace GameServer.Role.Instance
                    Owner.Send(msg.TradeCreate(Owner.Player.UID, MsgTrade.TradeID.CloseTradeWindow));
                    Target.Send(msg.TradeCreate(Owner.Player.UID, MsgTrade.TradeID.CloseTradeWindow));
 
+                   if (!Target.MyTrade.CanRefundCurrency() || !Owner.MyTrade.CanRefundCurrency())
+                   {
+                       Owner.SendSysMesage("Trade cannot be closed while a currency refund would exceed the balance limit.");
+                       Target.SendSysMesage("Trade cannot be closed while a currency refund would exceed the balance limit.");
+                       return;
+                   }
+
                    Owner.Player.targetTrade = 0;
                    Target.Player.targetTrade = 0;
 
@@ -132,10 +143,27 @@ namespace GameServer.Role.Instance
            }
        }
 
+       public bool CanRefundCurrency()
+       {
+           return Game.Era1.Era1Faucets.CanAddCurrency(Owner.Player.ConquerPoints, ConquerPoints)
+               && Game.Era1.Era1Faucets.CanAddCurrency(Owner.Player.Money, Money);
+       }
+
        public void DestroyItems(ServerSockets.Packet stream)
        {
-           Owner.Player.ConquerPoints += ConquerPoints;
-           Owner.Player.Money += Money;
+           if (!CanRefundCurrency())
+           {
+               Owner.SendSysMesage("Trade refund blocked because the currency balance limit would be exceeded.");
+               return;
+           }
+
+           uint cps = ConquerPoints;
+           uint money = Money;
+           ConquerPoints = 0;
+           Money = 0;
+
+           Owner.Player.ConquerPoints += cps;
+           Owner.Player.Money += money;
           
            Owner.Player.SendUpdate(stream,Owner.Player.Money, Game.MsgServer.MsgUpdate.DataType.Money);
 
