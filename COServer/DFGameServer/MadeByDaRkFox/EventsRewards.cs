@@ -60,15 +60,21 @@ namespace GameServer.MadeByDaRkFox
 
         public static EventRewardConfig EventReward(string name, MoneyType TypeReward = MoneyType.ConquerPoints)
         {
-            EventRewardConfig eRewConfig = EventRewards.Where(x => x.EventName == name && x.TypeReward == TypeReward).FirstOrDefault();
+            EventRewardConfig eRewConfig = EventRewards?
+                .FirstOrDefault(x => x.EventName == name && x.TypeReward == TypeReward);
             if (eRewConfig != null)
+                return eRewConfig;
+
+            // Economy V5: an unknown key is configuration debt, not a currency faucet.
+            // Returning zero preserves availability while making the missing reward
+            // visible in logs and preventing implicit 350-CP minting.
+            Console.WriteLine($"Event reward {name} ({TypeReward}) not defined. Reward disabled [0].");
+            return new EventRewardConfig()
             {
-                return EventRewards.Where(x => x.EventName == name).FirstOrDefault();
-            } else
-            {
-                Console.WriteLine($"Event reward {name} not defined. Using the Default Reward [350 CPs]");
-            }
-            return new EventRewardConfig() { EventName = name, RewardValue = 350, TypeReward = MoneyType.ConquerPoints}; // By default 350 CPs for event rewards
+                EventName = name,
+                RewardValue = Game.Era1.Era1Faucets.UnknownEventRewardValue,
+                TypeReward = TypeReward
+            };
         }
     }
 
