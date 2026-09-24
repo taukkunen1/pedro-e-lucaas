@@ -1,6 +1,7 @@
 ﻿using Core;
 using GameServer.Role;
 using System;
+using System.Threading;
 
 namespace GameServer.Game.MsgFloorItem
 {
@@ -25,6 +26,18 @@ namespace GameServer.Game.MsgFloorItem
         public bool Alive { get { return Expire.AddSeconds(SpecialSeconds != 0 ? SpecialSeconds : 40) > DateTime.Now; } }
         public DateTime AttackStamp = DateTime.Now;
 
+        // Pickup ownership is claimed atomically before an award is granted.
+        // This prevents a manual pickup and Auto Pick Up (or two clients) from
+        // awarding the same floor object concurrently.
+        private int PickupClaimed = 0;
+        public bool TryClaimPickup()
+        {
+            return Interlocked.CompareExchange(ref PickupClaimed, 1, 0) == 0;
+        }
+        public void ReleasePickupClaim()
+        {
+            Interlocked.Exchange(ref PickupClaimed, 0);
+        }
 
         public MsgServer.MsgGameItem ItemBase;
         public MsgFloorItem.MsgItemPacket MsgFloor;
