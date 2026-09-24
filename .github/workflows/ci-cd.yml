@@ -77,6 +77,14 @@ jobs:
             exit $LASTEXITCODE
           }
 
+      - name: Economy V5 global faucet audit
+        shell: pwsh
+        run: |
+          python tools/era1_economy_v5_audit.py --check
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
       - name: Build and publish
         shell: pwsh
         run: |
