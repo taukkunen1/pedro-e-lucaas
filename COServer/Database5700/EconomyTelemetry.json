@@ -53,6 +53,26 @@
       "flow": "auto"
     },
     {
+      "match": "^Npc:(10050|10051|10052|10053|10056)#",
+      "system": "Teleport",
+      "flow": "auto"
+    },
+    {
+      "match": "^Npc:10002#",
+      "system": "Appearance",
+      "flow": "auto"
+    },
+    {
+      "match": "^Npc:4432#",
+      "system": "ArenaFee",
+      "flow": "auto"
+    },
+    {
+      "match": "^Npc:10003#3$",
+      "system": "GuildCreation",
+      "flow": "auto"
+    },
+    {
       "match": "^Npc:",
       "system": "Npc",
       "flow": "auto"

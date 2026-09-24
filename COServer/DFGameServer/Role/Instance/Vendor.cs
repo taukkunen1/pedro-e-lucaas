@@ -63,6 +63,11 @@ namespace GameServer.Role.Instance
         public unsafe void CreateVendor(ServerSockets.Packet stream)
         {
             if (InVending) return;
+            if (!Game.Era1.Era1Services.CanCreatePlayerBooth(Owner))
+            {
+                Owner?.SendSysMesage("Vending is only available in the classic Market.");
+                return;
+            }
 
             VendorUID = VendorCounter.Next;
 
@@ -107,7 +112,10 @@ namespace GameServer.Role.Instance
         }
         public bool AddItem(Game.MsgServer.MsgGameItem DataItem, Game.MsgServer.MsgItemView.ActionMode CostType, uint Amout)
         {
-            if (DataItem.Bound == 1 || DataItem.Inscribed == 1 || DataItem.Locked != 0 || DataItem.ITEM_ID == 750000)
+            if (DataItem == null
+                || !Game.Era1.Era1Services.IsAllowedPlayerVendingItem(DataItem.ITEM_ID)
+                || !Game.Era1.Era1Services.IsValidVendingPrice(Amout)
+                || DataItem.Bound == 1 || DataItem.Inscribed == 1 || DataItem.Locked != 0)
                 return false;
 
             if (Items.Count == MaxItems)

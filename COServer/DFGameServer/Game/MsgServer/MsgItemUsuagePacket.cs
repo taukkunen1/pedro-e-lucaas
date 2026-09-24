@@ -1354,48 +1354,49 @@ namespace GameServer.Game.MsgServer
                                                 bool RightBuy = false;
                                                 if (VItem.CostType == MsgItemView.ActionMode.CPs)
                                                 {
-                                                    if (RightBuy = (client.Player.ConquerPoints >= VItem.AmountCost))
-                                                    {
-                                                        client.Player.ConquerPoints -= (uint)VItem.AmountCost;
-                                                        npc.OwnerVendor.Player.ConquerPoints += (uint)VItem.AmountCost;
-                                                    }
+                                                    RightBuy = client.Player.ConquerPoints >= VItem.AmountCost
+                                                        && npc.OwnerVendor.Player.ConquerPoints <= uint.MaxValue - VItem.AmountCost;
                                                 }
                                                 else if (VItem.CostType == MsgItemView.ActionMode.Gold)
                                                 {
-                                                    if (RightBuy = (client.Player.Money >= VItem.AmountCost))
+                                                    RightBuy = client.Player.Money >= VItem.AmountCost
+                                                        && npc.OwnerVendor.Player.Money <= uint.MaxValue - VItem.AmountCost;
+                                                }
+
+                                                // Remove the listing first. This makes the sale atomic against
+                                                // two buyers racing for the same booth item; currency only moves
+                                                // after exactly one buyer owns the listing.
+                                                if (RightBuy && npc.OwnerVendor.MyVendor.Items.TryRemove(id, out VItem))
+                                                {
+                                                    if (VItem.CostType == MsgItemView.ActionMode.CPs)
+                                                    {
+                                                        client.Player.ConquerPoints -= VItem.AmountCost;
+                                                        npc.OwnerVendor.Player.ConquerPoints += VItem.AmountCost;
+                                                        client.Player.SendUpdate(stream, client.Player.ConquerPoints, MsgUpdate.DataType.ConquerPoints);
+                                                        npc.OwnerVendor.Player.SendUpdate(stream, npc.OwnerVendor.Player.ConquerPoints, MsgUpdate.DataType.ConquerPoints);
+                                                    }
+                                                    else
                                                     {
                                                         client.Player.Money -= VItem.AmountCost;
                                                         npc.OwnerVendor.Player.Money += VItem.AmountCost;
-
                                                         client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
                                                         npc.OwnerVendor.Player.SendUpdate(stream, npc.OwnerVendor.Player.Money, MsgUpdate.DataType.Money);
                                                     }
-                                                }
-                                                if (RightBuy)
-                                                {
-                                                    if (npc.OwnerVendor.MyVendor.Items.TryRemove(id, out VItem))
-                                                    {
-                                                        client.Inventory.Update(VItem.DataItem, Instance.AddMode.MOVE, stream);
 
-                                                        client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                                                    client.Inventory.Update(VItem.DataItem, Instance.AddMode.MOVE, stream);
+                                                    client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
 
-                                                        action = ItemUsageID.RemoveVendingItem;
-                                                        npc.OwnerVendor.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                                                    action = ItemUsageID.RemoveVendingItem;
+                                                    npc.OwnerVendor.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
+                                                    npc.OwnerVendor.Inventory.Update(VItem.DataItem, Instance.AddMode.REMOVE, stream, true);
 
-
-                                                        npc.OwnerVendor.Inventory.Update(VItem.DataItem, Instance.AddMode.REMOVE, stream, true);
-
-
-                                                        var sellit = Pool.ItemsBase[VItem.DataItem.ITEM_ID];
+                                                    var sellit = Pool.ItemsBase[VItem.DataItem.ITEM_ID];
 #if Arabic
-                                                           string Messaj = "" + npc.OwnerVendor.Player.Name + " just sold " + sellit.Name + " to " + client.Player.Name + " for " + VItem.AmountCost + (VItem.CostType == MsgItemView.ActionMode.CPs ? " ConquerPoints." : " Gold.");
-                                              
+                                                    string Messaj = "" + npc.OwnerVendor.Player.Name + " just sold " + sellit.Name + " to " + client.Player.Name + " for " + VItem.AmountCost + (VItem.CostType == MsgItemView.ActionMode.CPs ? " ConquerPoints." : " Gold.");
 #else
-                                                        string Messaj = "" + npc.OwnerVendor.Player.Name + " just sold " + sellit.Name + " to " + client.Player.Name + " for " + VItem.AmountCost + (VItem.CostType == MsgItemView.ActionMode.CPs ? " ConquerPoints." : " Gold.");
-
+                                                    string Messaj = "" + npc.OwnerVendor.Player.Name + " just sold " + sellit.Name + " to " + client.Player.Name + " for " + VItem.AmountCost + (VItem.CostType == MsgItemView.ActionMode.CPs ? " ConquerPoints." : " Gold.");
 #endif
-                                                        client.SendSysMesage(Messaj, MsgMessage.ChatMode.TopLeft, MsgMessage.MsgColor.red, true);
-                                                    }
+                                                    client.SendSysMesage(Messaj, MsgMessage.ChatMode.TopLeft, MsgMessage.MsgColor.red, true);
                                                 }
                                             }
                                         }
@@ -1648,9 +1649,13 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             return;
-                        //-1
-                        dwParam = (ulong)client.Player.WHMoney;
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
+                        {
+                            client.SendSysMesage("You must be at a warehouse to access stored silver.");
+                            break;
+                        }
 
+                        dwParam = (ulong)client.Player.WHMoney;
                         client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                         break;
                     }
@@ -1660,12 +1665,21 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             break;
-                        if (client.Player.Money > (long)dwParam)
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
                         {
+                            client.SendSysMesage("You must be at a warehouse to deposit silver.");
+                            break;
+                        }
+                        if (dwParam == 0 || dwParam > uint.MaxValue)
+                            break;
 
-                            client.Player.WHMoney += (long)dwParam;
-                            client.Player.Money -= (uint)dwParam;
+                        uint amount = (uint)dwParam;
+                        if (client.Player.Money >= amount)
+                        {
+                            client.Player.WHMoney += amount;
+                            client.Player.Money -= amount;
                             client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
+                            client.Player.SendUpdate(stream, client.Player.WHMoney, MsgUpdate.DataType.WHMoney);
                             client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
                         }
                         break;
@@ -1676,10 +1690,20 @@ namespace GameServer.Game.MsgServer
                             break;
                         if (client.PokerPlayer != null)
                             break;
-                        if (client.Player.WHMoney >= (long)dwParam)
+                        if (!Game.Era1.Era1Services.CanUseClassicWarehouse(client, id))
                         {
-                            client.Player.Money += (uint)dwParam;
-                            client.Player.WHMoney -= (long)dwParam;
+                            client.SendSysMesage("You must be at a warehouse to withdraw silver.");
+                            break;
+                        }
+                        if (dwParam == 0 || dwParam > uint.MaxValue)
+                            break;
+
+                        uint amount = (uint)dwParam;
+                        if (client.Player.WHMoney >= amount
+                            && amount <= uint.MaxValue - client.Player.Money)
+                        {
+                            client.Player.Money += amount;
+                            client.Player.WHMoney -= amount;
                             client.Player.SendUpdate(stream, client.Player.Money, MsgUpdate.DataType.Money);
                             client.Player.SendUpdate(stream, client.Player.WHMoney, MsgUpdate.DataType.WHMoney);
                             client.Send(stream.ItemUsageCreate(action, id, dwParam, timestamp, dwParam2, dwParam3, dwparam4));
