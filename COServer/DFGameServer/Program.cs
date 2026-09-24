@@ -21,6 +21,7 @@ namespace GameServer
     public class Program
     {
         public static FastRandom Random = new();
+        public static readonly DateTime StartedAtUtc = DateTime.UtcNow;
         public static string StartupPath = "";
 
         public static bool ChanceSuccess(int percent)
@@ -247,6 +248,7 @@ namespace GameServer
                     Game.MsgTournaments.MsgSchedules.SpawnLavaBeast(true);
                
               
+                Threading.Server.SendStatusHeartbeat();
                 Console.WriteLine("The server is ready for incoming connections!\n", ConsoleColor.Green);
               
                
