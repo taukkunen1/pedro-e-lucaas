@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup diario do Database5700 (TrinityConquer)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Ajuste os dois caminhos abaixo para o servidor de producao.
+ExecStart=/opt/trinityconquer/scripts/backup-database.sh /opt/trinityconquer /var/backups/trinityconquer
