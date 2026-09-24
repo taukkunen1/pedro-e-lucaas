@@ -115,6 +115,7 @@ namespace GameServer.Game.MsgFloorItem
                     if (!mapItem.TryClaimPickup())
                         return false;
 
+                    bool awarded = false;
                     try
                     {
                         bool added;
@@ -129,6 +130,10 @@ namespace GameServer.Game.MsgFloorItem
                             return false;
                         }
 
+                        // From this point onward the item belongs to the player.
+                        // Never release the floor claim after a successful inventory award,
+                        // even if map cleanup or a quest side effect throws.
+                        awarded = true;
                         client.Map.cells[mapItem.X, mapItem.Y] &= ~Role.MapFlagType.Item;
                         client.Map.View.LeaveMap<Role.IMapObj>(mapItem);
                         mapItem.SendAll(packet, MsgDropID.Remove);
@@ -138,7 +143,8 @@ namespace GameServer.Game.MsgFloorItem
                     }
                     catch
                     {
-                        mapItem.ReleasePickupClaim();
+                        if (!awarded)
+                            mapItem.ReleasePickupClaim();
                         throw;
                     }
             }
