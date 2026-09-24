@@ -323,6 +323,19 @@ namespace GameServer.Game.MsgServer
                         Database.ServerDatabase.LoginQueue.Enqueue(logs);
                         switch (data[0])
                         {
+                            case "autohunt":
+                            case "ah":
+                                {
+                                    if (data.Length == 1 || data[1] == "settings")
+                                        Catching.ShowSettings(client);
+                                    else if (data[1] == "start")
+                                        Catching.Start(client);
+                                    else if (data[1] == "stop")
+                                        Catching.End(client);
+                                    else
+                                        client.SendSysMesage("Usage: @autohunt [settings|start|stop]");
+                                    break;
+                                }
                             case "leave":
                                 {
                                     if (client.Player.Map == 700 && UnlimitedArenaRooms.Maps.ContainsValue(client.Player.DynamicID))
