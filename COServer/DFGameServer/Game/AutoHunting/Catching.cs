@@ -114,6 +114,7 @@ namespace GameServer
         {
             if (client == null || client.AutoHunting == null)
                 return;
+            client.AutoHunting.DialogContext = 1;
 
             using (var rec = new ServerSockets.RecycledPacket())
             {
@@ -189,6 +190,9 @@ namespace GameServer
 
         public static void ShowPickupSettings(Client.GameClient client)
         {
+            if (client == null || client.AutoHunting == null)
+                return;
+            client.AutoHunting.DialogContext = 2;
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
@@ -228,6 +232,22 @@ namespace GameServer
             }
             ShowPickupSettings(client);
             return true;
+        }
+
+        public static bool HandleDialogOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+            if (option == 255 && client.AutoHunting.DialogContext != 0)
+            {
+                client.AutoHunting.DialogContext = 0;
+                return true;
+            }
+            if (client.AutoHunting.DialogContext == 1)
+                return HandleSettingsOption(client, option);
+            if (client.AutoHunting.DialogContext == 2)
+                return HandlePickupSettingsOption(client, option);
+            return false;
         }
 
         public static void Start(Client.GameClient client)
