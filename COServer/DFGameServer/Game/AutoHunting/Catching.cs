@@ -690,6 +690,63 @@ namespace GameServer
                 Thread.Sleep(1000);
             }
         }
+        private static void AutoUsePotions(Client.GameClient client)
+        {
+            if (!ValidClient(client) || !client.AutoHunting.Enable)
+                return;
+
+            int maxHp = (int)client.Status.MaxHitpoints;
+            int maxMp = (int)client.Status.MaxMana;
+            bool needHp = client.AutoHunting.HpPotionPercent > 0 && maxHp > 0 &&
+                          client.Player.HitPoints * 100 <= maxHp * client.AutoHunting.HpPotionPercent;
+            bool needMp = client.AutoHunting.MpPotionPercent > 0 && maxMp > 0 &&
+                          client.Player.Mana * 100 <= maxMp * client.AutoHunting.MpPotionPercent;
+            if (!needHp && !needMp)
+                return;
+
+            Game.MsgServer.MsgGameItem selected = null;
+            Database.ItemType.DBItem selectedBase = null;
+            foreach (var item in client.Inventory.ClientItems.Values)
+            {
+                Database.ItemType.DBItem dbItem;
+                if (!Pool.ItemsBase.TryGetValue(item.ITEM_ID, out dbItem))
+                    continue;
+
+                bool matches = (needHp && dbItem.ItemHP > 0) || (needMp && dbItem.ItemMP > 0);
+                if (!matches)
+                    continue;
+
+                // Prefer the smallest potion that still has useful recovery, preserving
+                // stronger consumables when a weaker one is sufficient.
+                if (selectedBase == null ||
+                    (needHp && dbItem.ItemHP > 0 && dbItem.ItemHP < selectedBase.ItemHP) ||
+                    (needMp && dbItem.ItemMP > 0 && dbItem.ItemMP < selectedBase.ItemMP))
+                {
+                    selected = item;
+                    selectedBase = dbItem;
+                }
+            }
+
+            if (selected == null || selectedBase == null)
+                return;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                if (needHp && selectedBase.ItemHP > 0)
+                {
+                    client.Player.HitPoints = Math.Min(client.Player.HitPoints + selectedBase.ItemHP, maxHp);
+                    client.Player.SendUpdate(stream, client.Player.HitPoints, MsgUpdate.DataType.Hitpoints, false);
+                }
+                if (needMp && selectedBase.ItemMP > 0)
+                {
+                    client.Player.Mana = (ushort)Math.Min(client.Player.Mana + selectedBase.ItemMP, maxMp);
+                    client.Player.SendUpdate(stream, client.Player.Mana, MsgUpdate.DataType.Mana, false);
+                }
+                client.Inventory.Update(selected, Role.Instance.Inventory.AddMode.REMOVE, stream);
+            }
+        }
+
         private unsafe void SkillHunting()
         {
             while (true)
@@ -702,6 +759,7 @@ namespace GameServer
                         {
                             if (client != null)
                             {
+                                AutoUsePotions(client);
                                 AutoPickUp(client);
                                 HitMob(client);
                             }
