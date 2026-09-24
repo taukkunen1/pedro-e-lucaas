@@ -227,8 +227,8 @@ namespace GameServer.Database
                     write.Write<long>("Character", "VipTime", client.Player.ExpireVip.Ticks);
                     write.Write<ushort>("AutoHunt", "Radius", AutoHunting.NormalizeRadius(client.AutoHunting.HuntRadius));
                     write.Write<bool>("AutoHunt", "UseSkills", client.AutoHunting.UseSkills);
-                    write.Write<byte>("AutoHunt", "HpPotionPercent", client.AutoHunting.HpPotionPercent);
-                    write.Write<byte>("AutoHunt", "MpPotionPercent", client.AutoHunting.MpPotionPercent);
+                    write.Write<byte>("AutoHunt", "HpPotionPercent", (byte)Math.Min(100, client.AutoHunting.HpPotionPercent));
+                    write.Write<byte>("AutoHunt", "MpPotionPercent", (byte)Math.Min(100, client.AutoHunting.MpPotionPercent));
                     write.Write<byte>("AutoHunt", "ExpDeliveryMode", (byte)client.AutoHunting.ExpDeliveryMode);
                     write.Write<bool>("AutoHunt", "FastMode", client.AutoHunting.FastMode);
                     write.Write<bool>("AutoHunt", "DBalls", client.AutoHunting.DBalls);
