@@ -43,12 +43,12 @@ namespace GameServer.Threading
 
         public static void SendStatusHeartbeat()
         {
-            if (ServerConfig == null || ServerConfig.IsInterServer)
+            if (GameServer.Program.GSConfig == null)
                 return;
 
             var heartbeat = new
             {
-                ServerName = string.IsNullOrWhiteSpace(ServerConfig.ServerName) ? "Placebo" : ServerConfig.ServerName,
+                ServerName = string.IsNullOrWhiteSpace(GameServer.Program.GSConfig.ServerName) ? "Placebo" : GameServer.Program.GSConfig.ServerName,
                 OnlinePlayers = GamePoll.Count,
                 StartedAtUtc = Program.StartedAtUtc,
                 LastHeartbeatUtc = DateTime.UtcNow
