@@ -25,6 +25,42 @@ namespace GameServer
         public static bool CanAutoJump(byte vipLevel) => vipLevel >= AutoJumpVipLevel;
         public static bool CanAutoPickUp(byte vipLevel) => vipLevel >= AutoPickUpVipLevel;
 
+        public bool ShouldAutoPickUp(Game.MsgFloorItem.MsgItem floorItem)
+        {
+            if (floorItem == null)
+                return false;
+
+            if (floorItem.Typ == Game.MsgFloorItem.MsgItem.ItemType.Money)
+                return LootMoney;
+
+            if (floorItem.Typ != Game.MsgFloorItem.MsgItem.ItemType.Item || floorItem.ItemBase == null)
+                return false;
+
+            var item = floorItem.ItemBase;
+            uint id = item.ITEM_ID;
+
+            if (DBalls && (id == Database.ItemType.DragonBall || id == Database.ItemType.DragonBallScroll))
+                return true;
+            if (Meteors && (id == Database.ItemType.Meteor || id == Database.ItemType.MeteorTear || id == Database.ItemType.MeteorScroll))
+                return true;
+            if (PlusItems && item.Plus > 0)
+                return true;
+            if (QualityItems && Database.ItemType.ItemPosition(id) != 0 && id % 10 >= 7)
+                return true;
+            if (SocketedItems && (item.SocketOne != Role.Flags.Gem.NoSocket || item.SocketTwo != Role.Flags.Gem.NoSocket))
+                return true;
+            if (BlessedItems && item.Bless > 0)
+                return true;
+            if (MaterialItems && (id == Database.ItemType.EuxeniteOre || id == Database.ItemType.Emerald || (id >= 1072000 && id < 1073000)))
+                return true;
+            if (SoulItems && Database.ItemType.GetSoulPosition(id) != Role.Flags.SoulTyp.None)
+                return true;
+            if (ExpBallEventItems && (id == Database.ItemType.ExpBall || id == Database.ItemType.ExpBall2 || id == Database.ItemType.PowerExpBall))
+                return true;
+
+            return false;
+        }
+
         public bool FastMode = false;
         public bool Enable = false;
         public bool DBalls = false;
