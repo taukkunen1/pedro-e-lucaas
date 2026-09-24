@@ -7,22 +7,27 @@ namespace GameServer.Game.Era1
     /// </summary>
     public static class Era1Items
     {
-        public static bool IsBlockedEquipment(uint itemId)
+        private static bool IsBlockedByIdFamily(uint itemId)
         {
-            // ItemPosition depends on the loaded 5695 item database. Keep the
-            // deterministic Era 1 family gates first so promotion self-tests
-            // can run before Database.Server.Initialize/LoadDatabase.
             uint type = itemId / 1000;
 
-            if (type == 201 || type == 202 || type == 300)
+            return type == 201
+                || type == 202
+                || type == 300
+                || (type >= 601 && type <= 619)
+                || type == 141
+                || type == 142
+                || type == 143;
+        }
+
+        public static bool IsBlockedEquipment(uint itemId)
+        {
+            // These post-5017 families are deterministic from the item id and
+            // do not require the 5695 item database to be loaded.
+            if (IsBlockedByIdFamily(itemId))
                 return true;
 
-            if (type >= 601 && type <= 619)
-                return true;
-
-            if (type == 141 || type == 142 || type == 143)
-                return true;
-
+            uint type = itemId / 1000;
             ushort position = Database.ItemType.ItemPosition(itemId);
             switch ((Role.Flags.ConquerItem)position)
             {
@@ -61,7 +66,10 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 patch 5035 headgear gate failed.");
             if (!IsBlockedEquipment(601000))
                 throw new System.InvalidOperationException("Era 1 later-profession weapon gate failed.");
-            if (IsBlockedEquipment(410073) || IsBlockedEquipment(500073) || IsBlockedEquipment(900003))
+            // The promotion self-test runs before the 5695 item database is loaded.
+            // Validate the deterministic family boundary here; runtime metadata
+            // gates (ItemPosition and shield level) are exercised after database load.
+            if (IsBlockedByIdFamily(410073) || IsBlockedByIdFamily(500073) || IsBlockedByIdFamily(900003))
                 throw new System.InvalidOperationException("Era 1 classic equipment was blocked unexpectedly.");
 
             System.Console.WriteLine("ERA1 ITEMS SELFTEST PASS");
