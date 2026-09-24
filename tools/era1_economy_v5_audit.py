@@ -142,16 +142,22 @@ def active_population_scaled_event_faucets(currency_rows, features):
             continue
         lines = read(path).splitlines()
         for i, raw in enumerate(lines):
+            clean = raw.strip()
+            if clean.startswith("//"):
+                continue
             if not re.search(r"\.Player\.(Money|ConquerPoints)\s*\+=", raw):
                 continue
             a = max(0, i - 8)
             b = min(len(lines), i + 4)
-            window = "\n".join(lines[a:b])
-            if "Pool.GamePoll.Count" in window:
+            active_window = "\n".join(
+                line for line in lines[a:b]
+                if not line.strip().startswith("//")
+            )
+            if "Pool.GamePoll.Count" in active_window:
                 findings.append({
                     "path": path.relative_to(ROOT).as_posix(),
                     "line": i + 1,
-                    "source": raw.strip(),
+                    "source": clean,
                 })
     return findings
 
