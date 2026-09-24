@@ -325,8 +325,12 @@ namespace GameServer
         {
             if (!ValidClient(client))
                 return;
+            if (client.AutoHunting.PursuingLoot)
+                return;
             if (client != null && client.Map != null && client.Player.View != null && client.Player != null && client.Player.HitPoints > 0)
             {
+                if (AutoPickUp(client))
+                    return;
                 if (DateTime.Now < client.AutoHunting.AttackStamp.AddMilliseconds(client.AutoHunting.FastMode ? 800 : 1000))
                     return;
                 bool ExistMonsters = false;
@@ -529,10 +533,14 @@ namespace GameServer
             return true;
         }
 
-        private static void AutoPickUp(Client.GameClient client)
+        private static bool AutoPickUp(Client.GameClient client)
         {
             if (!ValidClient(client) || !client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.VipLevel))
-                return;
+            {
+                if (client != null && client.AutoHunting != null)
+                    client.AutoHunting.PursuingLoot = false;
+                return false;
+            }
 
             var floorItems = client.Map.View.Roles(Role.MapObjectType.Item, client.Player.X, client.Player.Y)
                 .OfType<Game.MsgFloorItem.MsgItem>()
@@ -543,7 +551,10 @@ namespace GameServer
                 .ToArray();
 
             if (floorItems.Length == 0)
-                return;
+            {
+                client.AutoHunting.PursuingLoot = false;
+                return false;
+            }
 
             var target = floorItems[0];
             int distance = Role.Core.GetDistance(client.Player.X, client.Player.Y, target.X, target.Y);
@@ -552,8 +563,9 @@ namespace GameServer
             // the selected loot gets one hunting tick before combat resumes.
             if (distance > 5)
             {
+                client.AutoHunting.PursuingLoot = true;
                 MoveForAutoHunt(client, target.X, target.Y);
-                return;
+                return true;
             }
 
             using (var rec = new ServerSockets.RecycledPacket())
@@ -561,6 +573,8 @@ namespace GameServer
                 var stream = rec.GetStream();
                 Game.MsgFloorItem.MsgBuilder.TryAutoPickup(client, target, stream);
             }
+            client.AutoHunting.PursuingLoot = false;
+            return true;
         }
 
         private unsafe static void HitMob(Client.GameClient client)
@@ -782,7 +796,6 @@ namespace GameServer
                             if (client != null)
                             {
                                 AutoUsePotions(client);
-                                AutoPickUp(client);
                                 HitMob(client);
                             }
                         }
