@@ -30,4 +30,11 @@
     <ProjectReference Include="..\DFCore\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="App_Data\updates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
