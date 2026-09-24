@@ -350,6 +350,34 @@ namespace GameServer
                 }
             }
         }
+        private static void AutoPickUp(Client.GameClient client)
+        {
+            if (!ValidClient(client) || !client.AutoHunting.Enable)
+                return;
+            if (!AutoHunting.CanAutoPickUp(client.Player.VipLevel))
+                return;
+
+            // Snapshot first because a successful pickup removes the object from MapView.
+            var floorItems = client.Map.View.Roles(Role.MapObjectType.Item, client.Player.X, client.Player.Y)
+                .OfType<Game.MsgFloorItem.MsgItem>()
+                .Where(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y) <= 5)
+                .OrderBy(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y))
+                .ToArray();
+
+            if (floorItems.Length == 0)
+                return;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                foreach (var item in floorItems)
+                {
+                    if (client.AutoHunting.ShouldAutoPickUp(item))
+                        Game.MsgFloorItem.MsgBuilder.TryAutoPickup(client, item, stream);
+                }
+            }
+        }
+
         private unsafe static void HitMob(Client.GameClient client)
         {
             if (!ValidClient(client))
@@ -513,6 +541,7 @@ namespace GameServer
                         {
                             if (client != null)
                             {
+                                AutoPickUp(client);
                                 HitMob(client);
                             }
                         }
