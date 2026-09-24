@@ -69,6 +69,33 @@ def method_block(text, npc_name):
     end = text.find("[NpcAttribute(", start + len(marker))
     return text[start:end if end >= 0 else len(text)]
 
+def audit_npc_currency_sites(npc_text):
+    rows = []
+    marker = re.compile(r"\[NpcAttribute\(NpcID\.([A-Za-z0-9_]+)\)\]")
+    matches = list(marker.finditer(npc_text))
+    for idx, match in enumerate(matches):
+        name = match.group(1)
+        start = match.start()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(npc_text)
+        block = npc_text[start:end]
+        base_line = npc_text.count("\n", 0, start) + 1
+        for offset, line in enumerate(block.splitlines()):
+            clean = line.strip()
+            if clean.startswith("//"):
+                continue
+            m = re.search(r"client\.Player\.(Money|ConquerPoints)\s*([+\-]=)\s*([^;]+);", clean)
+            if not m:
+                continue
+            rows.append({
+                "npc": name,
+                "line": base_line + offset,
+                "currency": "Gold" if m.group(1) == "Money" else "CP",
+                "operation": m.group(2),
+                "amount_expression": m.group(3).strip(),
+                "source": clean[:300],
+            })
+    return rows
+
 def audit_arbitrage(item_text, npc_text):
     findings = []
 
@@ -143,6 +170,7 @@ def main():
     services = read(GAME / "Game" / "Era1" / "Era1Services.cs")
     shops = read(GAME / "Game" / "Era1" / "Era1Shops.cs")
     vendor = read(GAME / "Role" / "Instance" / "Vendor.cs")
+    processor = read(GAME / "Game" / "MsgNpc" / "Procesor.cs")
     item = read(GAME / "Game" / "MsgServer" / "MsgItemUsuagePacket.cs")
     npc = read(GAME / "Game" / "MsgNpc" / "NpcHandler.cs")
 
@@ -172,6 +200,10 @@ def main():
         ("Warehouse", "warehouse fee is zero",
          "WarehouseFeeSilver = 0" in services,
          "deposit/withdraw is storage/transfer, not a sink"),
+        ("NPC service", "hidden CP Admin Gold route blocked",
+         processor.count("IsBlockedNpcService(npcid, option)") >= 2
+         and "MarketCpAdmin && option == 3" in services,
+         "both NPC packet paths gate MarketCpAdmin option 3"),
     ]
     for area, name, passed, detail in checks:
         ok &= add_result(results, area, name, passed, detail)
@@ -222,6 +254,7 @@ def main():
     )
 
     booths = audit_static_booths()
+    npc_currency_sites = audit_npc_currency_sites(npc)
 
     CATALOG.mkdir(parents=True, exist_ok=True)
     with (CATALOG / "era1_v4_service_audit.csv").open("w", newline="", encoding="utf-8") as f:
@@ -241,10 +274,17 @@ def main():
         w.writeheader()
         w.writerows(arbitrage)
 
+    with (CATALOG / "era1_v4_npc_currency_sites.csv").open("w", newline="", encoding="utf-8") as f:
+        fields = ["npc", "line", "currency", "operation", "amount_expression", "source"]
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        w.writerows(npc_currency_sites)
+
     for row in results:
         print(f"[{row['status']}] {row['area']}: {row['check']} - {row['detail']}")
     print(f"Static legacy booths inventoried: {len(booths)}")
     print(f"Direct CP<->Gold conversion findings: {len(arbitrage)}")
+    print(f"NPC currency mutation sites inventoried: {len(npc_currency_sites)}")
 
     if args.check and not ok:
         raise SystemExit(1)
