@@ -21,6 +21,7 @@ namespace GameServer
         public ushort OriginY;
         public ushort HuntRadius = 0;
         public volatile bool PursuingLoot = false;
+        public byte DialogContext = 0;
         public bool UseSkills = true;
         public byte HpPotionPercent = 40;
         public byte MpPotionPercent = 30;
