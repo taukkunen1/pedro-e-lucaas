@@ -1,0 +1,42 @@
+@model ConquerSite.Models.DTOs.UpdatesPageDTO
+@{
+    ViewData["Title"] = "Updates";
+}
+
+<section class="tc-page-hero tc-page-hero-updates">
+    <div class="container">
+        <div class="tc-kicker">PLACEBO · DEVELOPMENT</div>
+        <h1>Updates</h1>
+        <p>Gameplay changes, Era 1 decisions, client work and website releases in one permanent changelog.</p>
+    </div>
+</section>
+
+<section class="tc-updates-shell">
+    <div class="container">
+        @if (Model.Posts.Count == 0)
+        {
+            <div class="tc-ranking-unavailable">
+                <strong>No updates published</strong>
+                <p>The changelog is currently empty.</p>
+            </div>
+        }
+        else
+        {
+            <div class="tc-update-list">
+                @foreach (var post in Model.Posts)
+                {
+                    <article class="tc-update-card @(post.Featured ? "tc-update-featured" : "")">
+                        <div class="tc-update-meta">
+                            <span>@post.Category</span>
+                            @if (!string.IsNullOrWhiteSpace(post.Version)) { <span>@post.Version</span> }
+                            <time datetime="@post.PublishedAt.ToString("yyyy-MM-dd")">@post.PublishedAt.ToString("dd MMM yyyy")</time>
+                        </div>
+                        <h2><a asp-controller="Home" asp-action="Update" asp-route-id="@post.Slug">@post.Title</a></h2>
+                        <p>@post.Summary</p>
+                        <a class="tc-update-link" asp-controller="Home" asp-action="Update" asp-route-id="@post.Slug">Read update <span>→</span></a>
+                    </article>
+                }
+            </div>
+        }
+    </div>
+</section>
