@@ -12,6 +12,11 @@ namespace ConquerSite.Models.DTOs
         public DateTime? LastHeartbeatUtc { get; set; }
         public long UptimeSeconds { get; set; }
         public string ClientPatch { get; set; } = "-";
+        public bool ArenaActive { get; set; }
+        public bool GuildWarActive { get; set; }
+        public bool WeeklyPkActive { get; set; }
+        public int LavaBeastsPending { get; set; }
+        public DateTime? NextLavaBeastUtc { get; set; }
 
         public string UptimeLabel
         {
