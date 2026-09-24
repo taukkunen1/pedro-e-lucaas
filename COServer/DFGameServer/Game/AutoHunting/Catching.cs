@@ -569,7 +569,7 @@ namespace GameServer
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
-                Game.MsgFloorItem.MsgBuilder.TryAutoPickup(client, target, stream);
+                Game.MsgFloorItem.MsgItemPacket.TryAutoPickup(client, target, stream);
             }
             client.AutoHunting.PursuingLoot = false;
             return true;
@@ -779,7 +779,7 @@ namespace GameServer
                     client.Player.Mana = (ushort)Math.Min(client.Player.Mana + selectedBase.ItemMP, maxMp);
                     client.Player.SendUpdate(stream, client.Player.Mana, MsgUpdate.DataType.Mana, false);
                 }
-                client.Inventory.Update(selected, Role.Instance.Inventory.AddMode.REMOVE, stream);
+                client.Inventory.Update(selected, Instance.AddMode.REMOVE, stream);
             }
         }
 
