@@ -22,7 +22,7 @@ namespace ConquerSite.Models.DTOs
                     ApiPort = 8080; // Default port if parsing fails
                 }
                 RestApiHelper.ApiPort = ApiPort;
-                RestApiHelper.ApiRequestBaseURI = $"http://localhost:{ApiPort}/api/"; // Regenerate the base URI with the port
+                RestApiHelper.Init();
             }
         }
     }
