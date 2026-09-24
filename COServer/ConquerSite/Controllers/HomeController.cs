@@ -46,7 +46,11 @@ namespace ConquerSite.Controllers
                 _logger.LogWarning(ex, "Placebo status API unavailable.");
             }
 
-            return View(status);
+            return View(new HomePageDTO
+            {
+                Status = status,
+                LatestUpdates = LoadUpdates().Take(3).ToList()
+            });
         }
 
         public IActionResult Downloads()
