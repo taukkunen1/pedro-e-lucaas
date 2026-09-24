@@ -77,6 +77,13 @@ namespace GameServer.Game.Era1
             return amount > 0;
         }
 
+        public static bool IsBlockedNpcService(uint npcId, byte option)
+        {
+            // Market CP Admin case 3 is a hidden custom/5695 route that burns
+            // 999,999,999 Silver for item 3400146. It is not an Era 1 service.
+            return npcId == (uint)Game.MsgNpc.NpcID.MarketCpAdmin && option == 3;
+        }
+
         public static void RunSelfTest()
         {
             if (ClassicMarketMap != 1036
@@ -102,6 +109,10 @@ namespace GameServer.Game.Era1
 
             if (!IsValidVendingPrice(1) || IsValidVendingPrice(0))
                 throw new System.InvalidOperationException("Era 1 vending price boundary failed.");
+
+            if (!IsBlockedNpcService((uint)Game.MsgNpc.NpcID.MarketCpAdmin, 3)
+                || IsBlockedNpcService((uint)Game.MsgNpc.NpcID.MarketCpAdmin, 1))
+                throw new System.InvalidOperationException("Era 1 hidden NPC service boundary failed.");
 
             if (!IsAllowedPlayerVendingItem(Database.ItemType.DragonBall)
                 || IsAllowedPlayerVendingItem(201003)
