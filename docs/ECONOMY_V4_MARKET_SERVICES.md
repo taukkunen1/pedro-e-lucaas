@@ -68,8 +68,11 @@ de armazenamento. Portanto:
 - Silver continua compartilhado entre warehouses, como no comportamento clássico;
 - o jogador precisa estar fisicamente junto a um Warehouse NPC;
 - `ShowWarehouseMoney`, `DepositWarehouse` e `WarehouseWithdraw` aplicam a mesma boundary;
-- o pacote aceita tanto o NPC ecoado no `id` quanto `ActiveNpc`, mas a proximidade real
+- o pacote de itens `MsgWarehouse` aplica a mesma regra para `Show`, `DepositItem` e `WithdrawItem`;
+- variantes posteriores `House`, `Sash` e Poker-style são rejeitadas antes de acessar o storage;
+- o pacote de Silver aceita tanto o NPC ecoado no `id` quanto `ActiveNpc`, mas a proximidade real
   continua obrigatória;
+- o pacote de itens exige o `NpcID` clássico explícito e em tela;
 - depositar todo o Silver carregado é permitido (`>=`, não o antigo `>`);
 - valores zero, casts acima de `uint` e overflow no saque são rejeitados.
 
@@ -151,7 +154,7 @@ Execute:
 python tools/era1_economy_v4_audit.py --check
 ```
 
-O script valida os gates e gera:
+O script valida os gates — incluindo storage de Silver e itens, atomicidade do vending e bloqueio das variantes pós-5017 — e gera:
 
 - `docs/catalogo/era1_v4_service_audit.csv`
 - `docs/catalogo/era1_v4_static_booths.csv`
