@@ -318,12 +318,22 @@ namespace GameServer
             if (pending == 0)
                 return;
 
-            using (var rec = new ServerSockets.RecycledPacket())
+            try
             {
-                var stream = rec.GetStream();
-                // PendingExperience stores the final kill EXP value. Apply it without
-                // recalculating server/gem/double-EXP multipliers at stop time.
-                client.IncreaseExperienceRaw(stream, pending);
+                using (var rec = new ServerSockets.RecycledPacket())
+                {
+                    var stream = rec.GetStream();
+                    // PendingExperience stores the final kill EXP value. Apply it without
+                    // recalculating server/gem/double-EXP multipliers at stop time.
+                    client.IncreaseExperienceRaw(stream, pending);
+                }
+            }
+            catch
+            {
+                // Do not lose already-earned EXP if payout fails during a disconnect
+                // or another transient server-side exception. Restore it atomically.
+                client.AutoHunting.AddPendingExperience(pending);
+                throw;
             }
         }
 
