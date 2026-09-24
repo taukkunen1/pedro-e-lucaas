@@ -787,3 +787,136 @@ h1, h2, h3, h4, h5, h6,
     padding-right: 0;
   }
 }
+
+
+/* Placebo brand */
+.tc-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .55rem;
+  white-space: nowrap;
+}
+
+.tc-brand-mark {
+  color: #f1eadf;
+  font-family: "Cinzel", serif;
+  font-size: 1.42rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+}
+
+.tc-brand-era {
+  color: var(--tc-gold);
+  font-family: "Inter", sans-serif;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  line-height: 1;
+}
+
+/* Live server status */
+.tc-status-strip {
+  position: relative;
+  z-index: 4;
+  margin-top: -1px;
+  background: #0a0806;
+  border-top: 1px solid rgba(199, 155, 75, .16);
+  border-bottom: 1px solid var(--tc-border);
+}
+
+.tc-status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr 1fr 1fr;
+}
+
+.tc-status-item {
+  min-height: 92px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(199, 155, 75, .14);
+}
+
+.tc-status-item:first-child {
+  border-left: 1px solid rgba(199, 155, 75, .14);
+}
+
+.tc-status-label {
+  color: #7f7568;
+  font-size: .69rem;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  margin-bottom: .28rem;
+}
+
+.tc-status-item strong {
+  color: #e9e1d5;
+  font-size: .98rem;
+  font-weight: 700;
+}
+
+.tc-status-online {
+  color: #b9d6a4 !important;
+}
+
+.tc-status-offline {
+  color: #d68e83 !important;
+}
+
+.tc-status-dot {
+  display: inline-block;
+  width: .48rem;
+  height: .48rem;
+  margin-right: .45rem;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+  vertical-align: .05rem;
+}
+
+.tc-status-updated {
+  padding: .48rem 0 .62rem;
+  color: #6f665b;
+  font-size: .72rem;
+  text-align: right;
+}
+
+@media (max-width: 991.98px) {
+  .tc-status-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tc-status-item {
+    border-bottom: 1px solid rgba(199, 155, 75, .12);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .tc-brand {
+    gap: .38rem;
+  }
+
+  .tc-brand-mark {
+    font-size: 1.15rem;
+  }
+
+  .tc-brand-era {
+    font-size: .58rem;
+  }
+
+  .tc-status-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tc-status-item {
+    min-height: 78px;
+    padding: .9rem;
+  }
+
+  .tc-status-updated {
+    text-align: left;
+  }
+}
