@@ -563,9 +563,8 @@ namespace GameServer
             // the selected loot gets one hunting tick before combat resumes.
             if (distance > 5)
             {
-                client.AutoHunting.PursuingLoot = true;
-                MoveForAutoHunt(client, target.X, target.Y);
-                return true;
+                client.AutoHunting.PursuingLoot = MoveForAutoHunt(client, target.X, target.Y);
+                return client.AutoHunting.PursuingLoot;
             }
 
             using (var rec = new ServerSockets.RecycledPacket())
