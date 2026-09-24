@@ -241,7 +241,7 @@ namespace GameServer
                                             client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
                                             client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
                                                 ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.Walk;
+                                                : Role.Flags.ConquerAction.None;
                                             client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                             client.Player.X = X;
                                             client.Player.Y = Y;
@@ -292,7 +292,7 @@ namespace GameServer
                                 client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
                                 client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
                                                 ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.Walk;
+                                                : Role.Flags.ConquerAction.None;
                                 client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                 client.Player.X = X;
                                 client.Player.Y = Y;
@@ -334,7 +334,7 @@ namespace GameServer
                                             client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
                                             client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
                                                 ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.Walk;
+                                                : Role.Flags.ConquerAction.None;
                                             client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                             client.Player.X = X;
                                             client.Player.Y = Y;
