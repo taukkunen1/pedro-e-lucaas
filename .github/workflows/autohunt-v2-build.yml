@@ -18,30 +18,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - name: Locate NPC reply dispatcher
-        shell: pwsh
-        run: |
-          $patterns = 'NpcReply|NpcServerRequest|NpcRequest|NpcDialog|NpcReplyCreate|GamePackets\.Npc|PacketAttribute.*Npc|Finalize.*Npc'
-          Get-ChildItem -Path COServer -Recurse -File -Include *.cs |
-            Select-String -Pattern $patterns |
-            ForEach-Object { "$($_.Path):$($_.LineNumber): $($_.Line.Trim())" } |
-            Tee-Object -FilePath npc-dispatcher-search.txt
-          if (-not (Test-Path npc-dispatcher-search.txt) -or (Get-Item npc-dispatcher-search.txt).Length -eq 0) {
-            Write-Host "No direct NPC dispatcher symbol found; dumping MsgNpc and packet-related file paths."
-            Get-ChildItem -Path COServer -Recurse -File -Include *.cs |
-              Where-Object { $_.FullName -match 'MsgNpc|Npc|Packet' } |
-              ForEach-Object { $_.FullName } |
-              Set-Content -Path npc-dispatcher-search.txt
-          }
-          Write-Host "=== NPC DISPATCHER SEARCH RESULTS ==="
-          Get-Content npc-dispatcher-search.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: npc-dispatcher-search
-          path: npc-dispatcher-search.txt
       - name: Restore
         run: dotnet restore COServer/DFGameServer/GameServer.csproj
       - name: Build
         run: dotnet build COServer/DFGameServer/GameServer.csproj --configuration Debug --no-restore
-
-# CI trigger after workflow registration on main.
