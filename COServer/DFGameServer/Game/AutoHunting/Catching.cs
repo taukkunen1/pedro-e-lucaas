@@ -35,13 +35,13 @@ namespace GameServer
         private static ushort[] SkillXPRobot = new ushort[] { 1110, 6011 };//CycloneXP FatalStrike
         public static bool ValidClient(Client.GameClient client)
         {
-            if (!client.Player.Alive)
-                return false;
             if (client == null)
                 return false;
-            if (!client.FullLoading)
-                return false;
             if (client.Player == null)
+                return false;
+            if (!client.Player.Alive)
+                return false;
+            if (!client.FullLoading)
                 return false;
             if (client.Player.CompleteLogin == false)
                 return false;
@@ -229,7 +229,9 @@ namespace GameServer
                                             var stream = rec.GetStream();
                                             Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
                                             {
-                                                Mode = MsgInterAction.Action.Jump,
+                                                Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                    ? MsgInterAction.Action.Jump
+                                                    : MsgInterAction.Action.Walk,
                                                 X = X,
                                                 Y = Y,
                                                 UID = client.Player.UID,
@@ -237,7 +239,9 @@ namespace GameServer
                                             };
                                             client.Player.View.SendView(stream.InterActionWalk(&inter), true);
                                             client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = Role.Flags.ConquerAction.Jump;
+                                            client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                ? Role.Flags.ConquerAction.Jump
+                                                : Role.Flags.ConquerAction.Walk;
                                             client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                             client.Player.X = X;
                                             client.Player.Y = Y;
@@ -276,7 +280,9 @@ namespace GameServer
                                 var stream = rec.GetStream();
                                 Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
                                 {
-                                    Mode = MsgInterAction.Action.Jump,
+                                    Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                    ? MsgInterAction.Action.Jump
+                                                    : MsgInterAction.Action.Walk,
                                     X = X,
                                     Y = Y,
                                     UID = client.Player.UID,
@@ -284,7 +290,9 @@ namespace GameServer
                                 };
                                 client.Player.View.SendView(stream.InterActionWalk(&inter), true);
                                 client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                client.Player.Action = Role.Flags.ConquerAction.Jump;
+                                client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                ? Role.Flags.ConquerAction.Jump
+                                                : Role.Flags.ConquerAction.Walk;
                                 client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                 client.Player.X = X;
                                 client.Player.Y = Y;
@@ -314,7 +322,9 @@ namespace GameServer
                                             var stream = rec.GetStream();
                                             Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
                                             {
-                                                Mode = MsgInterAction.Action.Jump,
+                                                Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                    ? MsgInterAction.Action.Jump
+                                                    : MsgInterAction.Action.Walk,
                                                 X = X,
                                                 Y = Y,
                                                 UID = client.Player.UID,
@@ -322,7 +332,9 @@ namespace GameServer
                                             };
                                             client.Player.View.SendView(stream.InterActionWalk(&inter), true);
                                             client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = Role.Flags.ConquerAction.Jump;
+                                            client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
+                                                ? Role.Flags.ConquerAction.Jump
+                                                : Role.Flags.ConquerAction.Walk;
                                             client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
                                             client.Player.X = X;
                                             client.Player.Y = Y;
