@@ -159,6 +159,15 @@ namespace API.Controllers
                     l.X = iniHelper.ReadUInt16("Character", "X", 0);
                     l.Y = iniHelper.ReadUInt16("Character", "Y", 0);
                     l.RacePoints = iniHelper.ReadUInt32("Character", "RacePoints", 0);
+                    l.Money = iniHelper.ReadUInt32("Character", "Money", 0);
+                    l.ConquerPoints = iniHelper.ReadUInt32("Character", "ConquerPoints", 0);
+                    l.PkPoints = iniHelper.ReadUInt32("Character", "PkPoints", 0);
+                    l.VipLevel = iniHelper.ReadUInt32("Character", "VipLevel", 0);
+                    l.GuildID = iniHelper.ReadUInt32("Character", "GuildID", 0);
+                    l.GuildRank = iniHelper.ReadUInt32("Character", "GuildRank", 0);
+                    l.DonationNobility = iniHelper.ReadUInt32("Character", "DonationNobility", 0);
+                    l.OnlineMinutes = iniHelper.ReadUInt32("Character", "OnlineMinutes", 0);
+                    l.Spouse = iniHelper.ReadString("Character", "Spouse", "None");
                 }
             } else
             {
