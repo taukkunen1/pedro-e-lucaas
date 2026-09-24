@@ -135,6 +135,8 @@ namespace GameServer
                 if (ValidCoord(client))
                 {
                     client.AutoHunting.DirectionChange = 0;
+                    client.AutoHunting.OriginX = client.Player.X;
+                    client.AutoHunting.OriginY = client.Player.Y;
                     client.AutoHunting.X = 0;
                     client.AutoHunting.Y = 0;
                     client.AutoHunting.AttackStamp = DateTime.Now;
@@ -198,7 +200,7 @@ namespace GameServer
                 foreach (Role.IMapObj Obj in client.Player.View.Roles(Role.MapObjectType.Monster))
                 {
                     var entity = Obj as Game.MsgMonster.MonsterRole;
-                    if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                    if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                     {
                         ExistMonsters = true;
                         break;
@@ -216,9 +218,11 @@ namespace GameServer
                             if (client.Player.X == (ushort)(Obj.X - Xx) && client.Player.Y == Obj.Y) continue;
 
                             var entity = Obj as Game.MsgMonster.MonsterRole;
-                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                             {
                                 ushort X = (ushort)(Obj.X - Xx), Y = Obj.Y;
+                                if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                                    continue;
                                 Role.GameMap Map = Pool.ServerMaps[client.Map.ID];
                                 if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle))
                                 {
@@ -271,6 +275,11 @@ namespace GameServer
                         Y = (ushort)(client.Player.Y + RobotRandom.Next(5, 15));
                     }
                     Role.GameMap Map = Pool.ServerMaps[client.Map.ID];
+                    if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                    {
+                        X = client.AutoHunting.OriginX;
+                        Y = client.AutoHunting.OriginY;
+                    }
                     if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle) && client.AutoHunting.DirectionChange < 10)
                     {
                         if (ValidCoord(client, X, Y, true))
@@ -309,10 +318,12 @@ namespace GameServer
                         foreach (var Obj in client.Map.View.GetAllMapRoles(Role.MapObjectType.Monster))
                         {
                             var entity = Obj as Game.MsgMonster.MonsterRole;
-                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                             {
                                 Game.MsgServer.AttackHandler.Algoritms.InLineAlgorithm Line = new Game.MsgServer.AttackHandler.Algoritms.InLineAlgorithm(client.Player.X, Obj.X, client.Player.Y, Obj.Y, client.Map, 15, 0);
                                 X = (ushort)Line.lcoords[(int)(Line.lcoords.Count() - 1)].X; Y = (ushort)Line.lcoords[(int)(Line.lcoords.Count() - 1)].Y;
+                                if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                                    continue;
                                 if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle))
                                 {
                                     if (ValidCoord(client, X, Y, true))
@@ -350,31 +361,72 @@ namespace GameServer
                 }
             }
         }
+        private unsafe static bool MoveForAutoHunt(Client.GameClient client, ushort x, ushort y)
+        {
+            if (!client.AutoHunting.IsInsideHuntRadius(x, y) || !ValidCoord(client, x, y, true))
+                return false;
+
+            ushort targetX = x, targetY = y;
+            client.AutoHunting.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, targetX, targetY);
+            if (!client.Map.AddGroundItemWithAngle(ref targetX, ref targetY, 0, client.AutoHunting.Angle))
+                return false;
+            if (!client.AutoHunting.IsInsideHuntRadius(targetX, targetY))
+                return false;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
+                {
+                    Mode = AutoHunting.CanAutoJump(client.Player.VipLevel) ? MsgInterAction.Action.Jump : MsgInterAction.Action.Walk,
+                    X = targetX,
+                    Y = targetY,
+                    UID = client.Player.UID,
+                    OponentUID = 1
+                };
+                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
+                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, targetX, targetY);
+                client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel) ? Role.Flags.ConquerAction.Jump : Role.Flags.ConquerAction.None;
+                client.Map.View.MoveTo<Role.IMapObj>(client.Player, targetX, targetY);
+                client.Player.X = targetX;
+                client.Player.Y = targetY;
+                client.Player.View.Role(false, stream);
+                client.Player.LastMove = DateTime.Now;
+            }
+            return true;
+        }
+
         private static void AutoPickUp(Client.GameClient client)
         {
-            if (!ValidClient(client) || !client.AutoHunting.Enable)
-                return;
-            if (!AutoHunting.CanAutoPickUp(client.Player.VipLevel))
+            if (!ValidClient(client) || !client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.VipLevel))
                 return;
 
-            // Snapshot first because a successful pickup removes the object from MapView.
             var floorItems = client.Map.View.Roles(Role.MapObjectType.Item, client.Player.X, client.Player.Y)
                 .OfType<Game.MsgFloorItem.MsgItem>()
-                .Where(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y) <= 5)
-                .OrderBy(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y))
+                .Where(item => client.AutoHunting.IsInsideHuntRadius(item.X, item.Y))
+                .Where(item => client.AutoHunting.ShouldAutoPickUp(item))
+                .OrderBy(item => client.AutoHunting.GetAutoPickUpPriority(item))
+                .ThenBy(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y))
                 .ToArray();
 
             if (floorItems.Length == 0)
                 return;
 
+            var target = floorItems[0];
+            int distance = Role.Core.GetDistance(client.Player.X, client.Player.Y, target.X, target.Y);
+
+            // Pick up immediately when already close enough; otherwise movement toward
+            // the selected loot gets one hunting tick before combat resumes.
+            if (distance > 5)
+            {
+                MoveForAutoHunt(client, target.X, target.Y);
+                return;
+            }
+
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
-                foreach (var item in floorItems)
-                {
-                    if (client.AutoHunting.ShouldAutoPickUp(item))
-                        Game.MsgFloorItem.MsgBuilder.TryAutoPickup(client, item, stream);
-                }
+                Game.MsgFloorItem.MsgBuilder.TryAutoPickup(client, target, stream);
             }
         }
 
@@ -388,7 +440,8 @@ namespace GameServer
                 {
                     if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) > Role.RoleView.ViewThreshold) continue;
                     var entity = Obj as Game.MsgMonster.MonsterRole;
-                    if (entity.HitPoints > 0 && !entity.ContainFlag(MsgUpdate.Flags.Ghost) && !entity.Name.Contains("Guard"))
+                    if (entity.HitPoints > 0 && !entity.ContainFlag(MsgUpdate.Flags.Ghost) && !entity.Name.Contains("Guard") &&
+                        client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                     {
                         ushort SpellID = 0;
                         if (client.Player.Class >= 10 && client.Player.Class <= 15) SpellID = SkillRobotTrojan[RobotRandom.Next(SkillRobotTrojan.Length)];
