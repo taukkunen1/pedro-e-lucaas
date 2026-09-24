@@ -225,6 +225,22 @@ namespace GameServer.Database
                     write.Write<byte>("Character", "DailySignUpRewards", client.Player.DailySignUpRewards);
                     write.Write<byte>("Character", "VipLevel", client.Player.VipLevel);
                     write.Write<long>("Character", "VipTime", client.Player.ExpireVip.Ticks);
+                    write.Write<ushort>("AutoHunt", "Radius", AutoHunting.NormalizeRadius(client.AutoHunting.HuntRadius));
+                    write.Write<bool>("AutoHunt", "UseSkills", client.AutoHunting.UseSkills);
+                    write.Write<byte>("AutoHunt", "HpPotionPercent", client.AutoHunting.HpPotionPercent);
+                    write.Write<byte>("AutoHunt", "MpPotionPercent", client.AutoHunting.MpPotionPercent);
+                    write.Write<byte>("AutoHunt", "ExpDeliveryMode", (byte)client.AutoHunting.ExpDeliveryMode);
+                    write.Write<bool>("AutoHunt", "FastMode", client.AutoHunting.FastMode);
+                    write.Write<bool>("AutoHunt", "DBalls", client.AutoHunting.DBalls);
+                    write.Write<bool>("AutoHunt", "Meteors", client.AutoHunting.Meteors);
+                    write.Write<bool>("AutoHunt", "PlusItems", client.AutoHunting.PlusItems);
+                    write.Write<bool>("AutoHunt", "QualityItems", client.AutoHunting.QualityItems);
+                    write.Write<bool>("AutoHunt", "ExpBallEventItems", client.AutoHunting.ExpBallEventItems);
+                    write.Write<bool>("AutoHunt", "SocketedItems", client.AutoHunting.SocketedItems);
+                    write.Write<bool>("AutoHunt", "BlessedItems", client.AutoHunting.BlessedItems);
+                    write.Write<bool>("AutoHunt", "MaterialItems", client.AutoHunting.MaterialItems);
+                    write.Write<bool>("AutoHunt", "SoulItems", client.AutoHunting.SoulItems);
+                    write.Write<bool>("AutoHunt", "LootMoney", client.AutoHunting.LootMoney);
                     write.Write<long>("Character", "LastDragonPill", client.Player.LastDragonPill.Ticks);
                     client.Player.Achievement.Save(client.Achievement);
                     write.WriteString("Character", "Achivement", client.Achievement.ToString());
@@ -686,6 +702,23 @@ namespace GameServer.Database
                 client.Player.DailySignUpRewards = reader.ReadByte("Character", "DailySignUpRewards", 0);
                 client.Player.VipLevel = reader.ReadByte("Character", "VipLevel", 0);
                 client.Player.ExpireVip = DateTime.FromBinary(reader.ReadInt64("Character", "VipTime", 0));
+                client.AutoHunting.HuntRadius = AutoHunting.NormalizeRadius(reader.ReadUInt16("AutoHunt", "Radius", 0));
+                client.AutoHunting.UseSkills = reader.ReadBool("AutoHunt", "UseSkills", true);
+                client.AutoHunting.HpPotionPercent = Math.Min((byte)100, reader.ReadByte("AutoHunt", "HpPotionPercent", 40));
+                client.AutoHunting.MpPotionPercent = Math.Min((byte)100, reader.ReadByte("AutoHunt", "MpPotionPercent", 30));
+                byte expDelivery = reader.ReadByte("AutoHunt", "ExpDeliveryMode", 0);
+                client.AutoHunting.ExpDeliveryMode = expDelivery == 1 ? AutoHunting.AutoHuntExpDelivery.Instant : AutoHunting.AutoHuntExpDelivery.OnStop;
+                client.AutoHunting.FastMode = reader.ReadBool("AutoHunt", "FastMode", false);
+                client.AutoHunting.DBalls = reader.ReadBool("AutoHunt", "DBalls", false);
+                client.AutoHunting.Meteors = reader.ReadBool("AutoHunt", "Meteors", false);
+                client.AutoHunting.PlusItems = reader.ReadBool("AutoHunt", "PlusItems", false);
+                client.AutoHunting.QualityItems = reader.ReadBool("AutoHunt", "QualityItems", false);
+                client.AutoHunting.ExpBallEventItems = reader.ReadBool("AutoHunt", "ExpBallEventItems", false);
+                client.AutoHunting.SocketedItems = reader.ReadBool("AutoHunt", "SocketedItems", false);
+                client.AutoHunting.BlessedItems = reader.ReadBool("AutoHunt", "BlessedItems", false);
+                client.AutoHunting.MaterialItems = reader.ReadBool("AutoHunt", "MaterialItems", false);
+                client.AutoHunting.SoulItems = reader.ReadBool("AutoHunt", "SoulItems", false);
+                client.AutoHunting.LootMoney = reader.ReadBool("AutoHunt", "LootMoney", false);
                 client.Player.LastDragonPill = DateTime.FromBinary(reader.ReadInt64("Character", "LastDragonPill", 0));
                 if (DateTime.Now > client.Player.ExpireVip)
                 {
