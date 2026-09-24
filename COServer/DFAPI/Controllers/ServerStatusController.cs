@@ -50,7 +50,12 @@ namespace API.Controllers
                 LastHeartbeatUtc = heartbeat?.LastHeartbeatUtc,
                 UptimeSeconds = fresh && heartbeat.StartedAtUtc > DateTime.MinValue
                     ? Math.Max(0, (long)(now - heartbeat.StartedAtUtc).TotalSeconds)
-                    : 0
+                    : 0,
+                ArenaActive = fresh && heartbeat.ArenaActive,
+                GuildWarActive = fresh && heartbeat.GuildWarActive,
+                WeeklyPkActive = fresh && heartbeat.WeeklyPkActive,
+                LavaBeastsPending = fresh ? heartbeat.LavaBeastsPending : 0,
+                NextLavaBeastUtc = fresh ? heartbeat.NextLavaBeastUtc : null
             };
         }
     }
