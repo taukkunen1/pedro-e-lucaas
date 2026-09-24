@@ -566,7 +566,7 @@ namespace GameServer.Client
 
         public void IncreaseExperienceRaw(ServerSockets.Packet stream, ulong experience)
         {
-            if (experience == 0 || Player.CursedTimer > 2 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+            if (experience == 0 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
                 return;
 
             Player.Experience += experience;
@@ -617,7 +617,7 @@ namespace GameServer.Client
         {
             try
             {
-                if (AutoHunting != null && AutoHunting.Enable)
+                if (AutoHunting != null && AutoHunting.PendingExperience > 0)
                     Catching.FlushPendingExperience(this);
             }
             catch (Exception ex)
