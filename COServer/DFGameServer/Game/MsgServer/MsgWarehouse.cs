@@ -89,6 +89,22 @@
             if (client.PokerPlayer != null)
                 return;
             stream.GetWarehouse(out NpcID, out Action, out ItemUID);
+
+            // Economy V4 hardening: classic item storage is only available
+            // through a physical city/Market warehouse. House/Sash/Poker and
+            // other later warehouse packet variants are not part of Era 1.
+            if (!Game.Era1.Era1Services.IsClassicWarehouseAction(Action))
+            {
+                client.SendSysMesage("This warehouse service is not available in Era 1.");
+                return;
+            }
+            if (!Game.Era1.Era1Services.IsClassicWarehouseNpc(NpcID)
+                || !Game.Era1.Era1Services.CanUseClassicWarehouse(client, NpcID))
+            {
+                client.SendSysMesage("You must be at a warehouse to access stored items.");
+                return;
+            }
+
             switch (Action)
             {
                 case DepositActionID.ShashDepositItem:
