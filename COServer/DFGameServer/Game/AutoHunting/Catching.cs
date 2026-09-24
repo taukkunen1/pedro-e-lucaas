@@ -127,7 +127,10 @@ namespace GameServer
                 client.CreateBoxDialog("Sorry, cannot use Autohunting with more than 3 accounts at same time.");
                 return;
             }
-            if (client.Player.VipLevel >= 3)
+            // Official Conquer Auto Hunt behavior (2013):
+            // Auto Hunt is available to every player.
+            // VIP 3+ changes movement to Auto Jump; VIP 4+ unlocks Auto Pick Up.
+            // Keep the server authoritative for both privileges.
             {
                 if (ValidCoord(client))
                 {
@@ -169,7 +172,6 @@ namespace GameServer
                     client.SendSysMesage("You~can't~use~autohunt~here.", MsgMessage.ChatMode.Whisper, MsgMessage.MsgColor.red);
                 }
             }
-            else client.CreateBoxDialog("Available for VIP Level 3.");
         }
         public static void End(Client.GameClient client)
         {
