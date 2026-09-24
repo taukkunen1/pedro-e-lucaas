@@ -22,7 +22,29 @@ namespace ConquerSite.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ServerStatusDTO status = new ServerStatusDTO
+            {
+                ApiOnline = false,
+                GameServerOnline = false,
+                ServerName = "Placebo",
+                ClientPatch = _downloadsSettings.GetLastPatch() ?? "-"
+            };
+
+            try
+            {
+                ServerStatusDTO apiStatus = RestApiHelper.GetRequest<ServerStatusDTO>("status");
+                if (apiStatus != null)
+                {
+                    status = apiStatus;
+                    status.ClientPatch = _downloadsSettings.GetLastPatch() ?? "-";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Placebo status API unavailable.");
+            }
+
+            return View(status);
         }
 
         public IActionResult Downloads()
