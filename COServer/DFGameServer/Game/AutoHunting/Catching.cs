@@ -736,9 +736,9 @@ namespace GameServer
             int maxHp = (int)client.Status.MaxHitpoints;
             int maxMp = (int)client.Status.MaxMana;
             bool needHp = client.AutoHunting.HpPotionPercent > 0 && maxHp > 0 &&
-                          client.Player.HitPoints * 100 <= maxHp * client.AutoHunting.HpPotionPercent;
+                          (long)client.Player.HitPoints * 100 <= (long)maxHp * client.AutoHunting.HpPotionPercent;
             bool needMp = client.AutoHunting.MpPotionPercent > 0 && maxMp > 0 &&
-                          client.Player.Mana * 100 <= maxMp * client.AutoHunting.MpPotionPercent;
+                          (long)client.Player.Mana * 100 <= (long)maxMp * client.AutoHunting.MpPotionPercent;
             if (!needHp && !needMp)
                 return;
 
@@ -750,15 +750,15 @@ namespace GameServer
                 if (!Pool.ItemsBase.TryGetValue(item.ITEM_ID, out dbItem))
                     continue;
 
-                bool matches = (needHp && dbItem.ItemHP > 0) || (needMp && dbItem.ItemMP > 0);
-                if (!matches)
+                // Never consume a mixed/other consumable for the wrong resource.
+                bool restoresNeededResource = (needHp && dbItem.ItemHP > 0) || (needMp && dbItem.ItemMP > 0);
+                if (!restoresNeededResource)
                     continue;
 
-                // Prefer the smallest potion that still has useful recovery, preserving
-                // stronger consumables when a weaker one is sufficient.
-                if (selectedBase == null ||
-                    (needHp && dbItem.ItemHP > 0 && dbItem.ItemHP < selectedBase.ItemHP) ||
-                    (needMp && dbItem.ItemMP > 0 && dbItem.ItemMP < selectedBase.ItemMP))
+                int selectedRecovery = selectedBase == null ? int.MaxValue :
+                    Math.Max(needHp ? selectedBase.ItemHP : 0, needMp ? selectedBase.ItemMP : 0);
+                int candidateRecovery = Math.Max(needHp ? dbItem.ItemHP : 0, needMp ? dbItem.ItemMP : 0);
+                if (selectedBase == null || candidateRecovery < selectedRecovery)
                 {
                     selected = item;
                     selectedBase = dbItem;
@@ -768,9 +768,14 @@ namespace GameServer
             if (selected == null || selectedBase == null)
                 return;
 
+            // Remove first. Recovery is granted only if the inventory mutation succeeds,
+            // preventing free healing/mana if consumption fails or races another action.
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
+                if (!client.Inventory.Update(selected, Instance.AddMode.REMOVE, stream))
+                    return;
+
                 if (needHp && selectedBase.ItemHP > 0)
                 {
                     client.Player.HitPoints = Math.Min(client.Player.HitPoints + selectedBase.ItemHP, maxHp);
@@ -781,7 +786,6 @@ namespace GameServer
                     client.Player.Mana = (ushort)Math.Min(client.Player.Mana + selectedBase.ItemMP, maxMp);
                     client.Player.SendUpdate(stream, client.Player.Mana, MsgUpdate.DataType.Mana, false);
                 }
-                client.Inventory.Update(selected, Instance.AddMode.REMOVE, stream);
             }
         }
 
