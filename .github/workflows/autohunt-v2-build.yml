@@ -1,6 +1,7 @@
 name: Auto Hunt V2 Build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - feature/original-vip-autohunt
@@ -21,3 +22,5 @@ jobs:
         run: dotnet restore COServer/DFGameServer/GameServer.csproj
       - name: Build
         run: dotnet build COServer/DFGameServer/GameServer.csproj --configuration Debug --no-restore
+
+# CI trigger after workflow registration on main.
