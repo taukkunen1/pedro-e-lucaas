@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "website-v2",
+    "title": "Placebo Website V2",
+    "summary": "The public website is being rebuilt around the Placebo Era 1 identity with live server information.",
+    "category": "Website",
+    "version": "V2",
+    "publishedAt": "2026-09-24T00:00:00",
+    "featured": true,
+    "changes": [
+      "Replaced legacy TrinityConquer branding with Placebo Era 1.",
+      "Added live API, GameServer, player count, uptime and client patch status.",
+      "Added a dedicated Server Info page for the Era 1 ruleset.",
+      "Added live Level, PK, Nobility, Guild and Arena rankings."
+    ]
+  },
+  {
+    "slug": "auto-hunt-v2",
+    "title": "Auto Hunt V2",
+    "summary": "Auto Hunt remains as a Placebo quality-of-life feature with server-side gates and persisted VIP permissions.",
+    "category": "Gameplay",
+    "version": "Era 1",
+    "publishedAt": "2026-09-24T00:00:00",
+    "featured": false,
+    "changes": [
+      "Auto Jump requires VIP 3 or higher.",
+      "Auto Pick Up requires VIP 4 or higher.",
+      "Permissions are validated server-side.",
+      "VIP state is persisted rather than treated as a client-only toggle."
+    ]
+  },
+  {
+    "slug": "era1-boundaries",
+    "title": "Era 1 Gameplay Boundaries",
+    "summary": "Post-5017 progression systems are being removed or blocked so the adapted 5695 client follows the Placebo Era 1 ruleset.",
+    "category": "Era 1",
+    "version": "5017 inspired",
+    "publishedAt": "2026-09-24T00:00:00",
+    "featured": false,
+    "changes": [
+      "Mount gameplay, riding equipment and mount skills are blocked.",
+      "Clan gameplay and later Frozen Grotto content are disabled.",
+      "Chi, Sub-Class, Talismans and Martial Arsenal remain outside the ruleset.",
+      "Classic progression remains capped at level 130."
+    ]
+  }
+]
