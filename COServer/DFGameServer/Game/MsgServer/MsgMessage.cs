@@ -601,6 +601,20 @@ namespace GameServer.Game.MsgServer
                     switch (data[0])
                     {
                         #region GM Commands
+                        case "autohunt":
+                        case "ah":
+                            {
+                                // Contas de PM/GM tambem precisam do comando para testar o Auto Hunt.
+                                if (data.Length == 1 || data[1] == "settings")
+                                    Catching.ShowSettings(client);
+                                else if (data[1] == "start")
+                                    Catching.Start(client);
+                                else if (data[1] == "stop")
+                                    Catching.End(client);
+                                else
+                                    client.SendSysMesage("Usage: @autohunt [settings|start|stop]");
+                                break;
+                            }
                         case "spawnmob":
                             switch(data[1].ToLower())
                             {

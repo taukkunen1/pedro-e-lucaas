@@ -115,6 +115,7 @@ namespace GameServer
             if (client == null || client.AutoHunting == null)
                 return;
             client.AutoHunting.DialogContext = 1;
+            client.ActiveNpc = AutoHuntDialogNpc; // qualquer outro NPC aberto depois troca o ActiveNpc e invalida o contexto
 
             using (var rec = new ServerSockets.RecycledPacket())
             {
@@ -193,6 +194,7 @@ namespace GameServer
             if (client == null || client.AutoHunting == null)
                 return;
             client.AutoHunting.DialogContext = 2;
+            client.ActiveNpc = AutoHuntDialogNpc;
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
@@ -234,10 +236,19 @@ namespace GameServer
             return true;
         }
 
+        /// <summary>ActiveNpc virtual dos dialogos do @autohunt (o mesmo do item de Auto Hunt).</summary>
+        public const uint AutoHuntDialogNpc = 987977854;
+
         public static bool HandleDialogOption(Client.GameClient client, byte option)
         {
             if (client == null || client.AutoHunting == null)
                 return false;
+            if (client.ActiveNpc != AutoHuntDialogNpc)
+            {
+                // O jogador abriu outro NPC depois do @autohunt: a resposta nao e' nossa.
+                client.AutoHunting.DialogContext = 0;
+                return false;
+            }
             if (option == 255 && client.AutoHunting.DialogContext != 0)
             {
                 client.AutoHunting.DialogContext = 0;
@@ -342,10 +353,12 @@ namespace GameServer
             if (client == null || client.Player == null || client.AutoHunting == null)
                 return;
             client.AutoHunting.Enable = false;
-            FlushPendingExperience(client);
-            if (!ValidClient(client))
-                return;
+            client.AutoHunting.PursuingLoot = false;
             client.OnAutoAttack = false;
+            FlushPendingExperience(client);
+            // Restaura o titulo mesmo com o jogador morto (parada por morte sem Heaven's Blessing).
+            if (client.Socket == null || !client.Socket.Alive || !client.FullLoading)
+                return;
             client.Player.MyTitle = client.AutoHunting.Mytitle;
             using (var rec = new ServerSockets.RecycledPacket())
             {
@@ -398,25 +411,8 @@ namespace GameServer
                                         using (var rec = new ServerSockets.RecycledPacket())
                                         {
                                             var stream = rec.GetStream();
-                                            Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                            {
-                                                Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                    ? MsgInterAction.Action.Jump
-                                                    : MsgInterAction.Action.Walk,
-                                                X = X,
-                                                Y = Y,
-                                                UID = client.Player.UID,
-                                                OponentUID = 1
-                                            };
-                                            client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                            client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.None;
-                                            client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                            client.Player.X = X;
-                                            client.Player.Y = Y;
-                                            client.Player.View.Role(false, stream);
+                                            if (!PerformMove(client, X, Y, stream))
+                                            return;
                                             client.AutoHunting.DirectionChange = 0;
                                             client.Player.LastMove = DateTime.Now;
                                             client.AutoHunting.AttackStamp = DateTime.Now;
@@ -454,25 +450,8 @@ namespace GameServer
                             using (var rec = new ServerSockets.RecycledPacket())
                             {
                                 var stream = rec.GetStream();
-                                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                {
-                                    Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                    ? MsgInterAction.Action.Jump
-                                                    : MsgInterAction.Action.Walk,
-                                    X = X,
-                                    Y = Y,
-                                    UID = client.Player.UID,
-                                    OponentUID = 1
-                                };
-                                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.None;
-                                client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                client.Player.X = X;
-                                client.Player.Y = Y;
-                                client.Player.View.Role(false, stream);
+                                if (!PerformMove(client, X, Y, stream))
+                                            return;
                                 client.Player.LastMove = DateTime.Now;
                             }
                         }
@@ -498,25 +477,8 @@ namespace GameServer
                                         using (var rec = new ServerSockets.RecycledPacket())
                                         {
                                             var stream = rec.GetStream();
-                                            Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                            {
-                                                Mode = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                    ? MsgInterAction.Action.Jump
-                                                    : MsgInterAction.Action.Walk,
-                                                X = X,
-                                                Y = Y,
-                                                UID = client.Player.UID,
-                                                OponentUID = 1
-                                            };
-                                            client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                            client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel)
-                                                ? Role.Flags.ConquerAction.Jump
-                                                : Role.Flags.ConquerAction.None;
-                                            client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                            client.Player.X = X;
-                                            client.Player.Y = Y;
-                                            client.Player.View.Role(false, stream);
+                                            if (!PerformMove(client, X, Y, stream))
+                                            return;
                                             client.Player.LastMove = DateTime.Now;
                                         }
                                     }
@@ -528,6 +490,65 @@ namespace GameServer
                 }
             }
         }
+        /// <summary>
+        /// Movimento do Auto Hunt. VIP 3+ (Auto Jump) salta direto para o destino; os demais
+        /// andam um passo por tick em direcao ao destino, com pacote de walk valido.
+        /// Antes, sem VIP 3, o servidor mandava "Walk" com deslocamento de varias celulas,
+        /// o que teletransportava o personagem e dessincronizava o cliente.
+        /// </summary>
+        private unsafe static bool PerformMove(Client.GameClient client, ushort x, ushort y, ServerSockets.Packet stream)
+        {
+            if (AutoHunting.CanAutoJump(client.Player.VipLevel))
+            {
+                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
+                {
+                    Mode = MsgInterAction.Action.Jump,
+                    X = x,
+                    Y = y,
+                    UID = client.Player.UID,
+                    OponentUID = 1
+                };
+                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
+                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, x, y);
+                client.Player.Action = Role.Flags.ConquerAction.Jump;
+                client.Map.View.MoveTo<Role.IMapObj>(client.Player, x, y);
+                client.Player.X = x;
+                client.Player.Y = y;
+                client.Player.View.Role(false, stream);
+                return true;
+            }
+
+            // Sem Auto Jump: corre ate 3 passos por tick (velocidade de corrida normal).
+            bool moved = false;
+            for (int step = 0; step < 3; step++)
+            {
+                if (client.Player.X == x && client.Player.Y == y)
+                    break;
+                var dir = Role.Core.GetAngle(client.Player.X, client.Player.Y, x, y);
+                ushort stepX = client.Player.X, stepY = client.Player.Y;
+                Role.Core.IncXY(dir, ref stepX, ref stepY);
+                if (!client.Map.ValidLocation(stepX, stepY) || !client.AutoHunting.IsInsideHuntRadius(stepX, stepY)
+                    || !ValidCoord(client, stepX, stepY, true))
+                    break;
+
+                Game.MsgServer.WalkQuery walk = new Game.MsgServer.WalkQuery()
+                {
+                    Direction = (uint)dir,
+                    UID = client.Player.UID,
+                    Running = Game.MsgServer.MsgMovement.Run
+                };
+                client.Player.View.SendView(stream.MovementCreate(&walk), true);
+                client.Player.Angle = dir;
+                client.Player.Action = Role.Flags.ConquerAction.None;
+                client.Map.View.MoveTo<Role.IMapObj>(client.Player, stepX, stepY);
+                client.Player.X = stepX;
+                client.Player.Y = stepY;
+                client.Player.View.Role(false, stream);
+                moved = true;
+            }
+            return moved;
+        }
+
         private unsafe static bool MoveForAutoHunt(Client.GameClient client, ushort x, ushort y)
         {
             if (!client.AutoHunting.IsInsideHuntRadius(x, y) || !ValidCoord(client, x, y, true))
@@ -543,21 +564,8 @@ namespace GameServer
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
-                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                {
-                    Mode = AutoHunting.CanAutoJump(client.Player.VipLevel) ? MsgInterAction.Action.Jump : MsgInterAction.Action.Walk,
-                    X = targetX,
-                    Y = targetY,
-                    UID = client.Player.UID,
-                    OponentUID = 1
-                };
-                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, targetX, targetY);
-                client.Player.Action = AutoHunting.CanAutoJump(client.Player.VipLevel) ? Role.Flags.ConquerAction.Jump : Role.Flags.ConquerAction.None;
-                client.Map.View.MoveTo<Role.IMapObj>(client.Player, targetX, targetY);
-                client.Player.X = targetX;
-                client.Player.Y = targetY;
-                client.Player.View.Role(false, stream);
+                if (!PerformMove(client, targetX, targetY, stream))
+                    return false;
                 client.Player.LastMove = DateTime.Now;
             }
             return true;
@@ -702,9 +710,12 @@ namespace GameServer
                                 }
                             }
                         }
-                        if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) <= 2 || client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
+                        bool isArcher = client.Player.Class >= 40 && client.Player.Class <= 45;
+                        int reach = !client.AutoHunting.UseSkills && isArcher ? 8 : 2;
+                        if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) <= reach || client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
                         {
-                            if (client.Player.Class != 135 && client.Player.Class != 145)
+                            // Taoistas so atacam fisico quando "Skills" esta desligado; senao ficariam parados.
+                            if ((client.Player.Class != 135 && client.Player.Class != 145) || !client.AutoHunting.UseSkills)
                             {
                                 if (!(client.AutoHunting.X == client.Player.X && client.AutoHunting.Y == client.Player.Y) || client.AutoHunting.X == 0 && client.AutoHunting.Y == 0)
                                 {
@@ -717,12 +728,14 @@ namespace GameServer
                                     var stream = rec.GetStream();
                                     InteractQuery action = new InteractQuery();
                                     action.AtkType = MsgAttackPacket.AttackID.Physical;
-                                    if (client.Player.Class >= 40 && client.Player.Class <= 45)
+                                    if (isArcher && client.AutoHunting.UseSkills)
                                     {
                                         action.AtkType = MsgAttackPacket.AttackID.Magic;
                                         action.Damage = 8001;
                                         action.SpellID = 8001;
                                     }
+                                    else if (isArcher)
+                                        action.AtkType = MsgAttackPacket.AttackID.Archer; // ataque normal de arco, sem Scatter
                                     action.UID = client.Player.UID;
                                     action.OpponentUID = Obj.UID;
                                     action.X = Obj.X;
@@ -757,6 +770,32 @@ namespace GameServer
                 Thread.Sleep(1000);
             }
         }
+        /// <summary>
+        /// Auto Hunt oficial: morreu com Heaven's Blessing, revive no lugar apos 20 s e continua;
+        /// sem a bencao, o Auto Hunt para (e entrega a EXP guardada). Antes, o personagem morto
+        /// ficava com o Auto Hunt "ligado" para sempre, sem cacar e sem receber a EXP.
+        /// </summary>
+        private static bool HandleDeath(Client.GameClient client)
+        {
+            if (client.Player == null || client.Player.Alive)
+                return false;
+            if (client.Player.HeavenBlessing <= 0)
+            {
+                End(client);
+                client.SendSysMesage("Auto Hunt stopped: you died without Heaven's Blessing.");
+                return true;
+            }
+            if (DateTime.Now > client.Player.DeadStamp.AddSeconds(20))
+            {
+                using (var rec = new ServerSockets.RecycledPacket())
+                {
+                    var stream = rec.GetStream();
+                    client.Player.Revive(stream);
+                }
+            }
+            return true;
+        }
+
         private static void AutoUsePotions(Client.GameClient client)
         {
             if (!ValidClient(client) || !client.AutoHunting.Enable)
@@ -764,7 +803,7 @@ namespace GameServer
 
             int maxHp = (int)client.Status.MaxHitpoints;
             int maxMp = (int)client.Status.MaxMana;
-            bool needHp = client.AutoHunting.HpPotionPercent > 0 && maxHp > 0 &&
+            bool needHp = !client.Player.ContainFlag(MsgUpdate.Flags.PoisonStar) && client.AutoHunting.HpPotionPercent > 0 && maxHp > 0 &&
                           (long)client.Player.HitPoints * 100 <= (long)maxHp * client.AutoHunting.HpPotionPercent;
             bool needMp = client.AutoHunting.MpPotionPercent > 0 && maxMp > 0 &&
                           (long)client.Player.Mana * 100 <= (long)maxMp * client.AutoHunting.MpPotionPercent;
@@ -830,6 +869,8 @@ namespace GameServer
                         {
                             if (client != null)
                             {
+                                if (HandleDeath(client))
+                                    continue;
                                 AutoUsePotions(client);
                                 HitMob(client);
                             }

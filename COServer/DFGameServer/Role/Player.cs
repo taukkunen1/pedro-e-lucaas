@@ -1011,6 +1011,9 @@ namespace GameServer.Role
                 TransformationID = 0;
 
             GhostStamp = DateTime.Now.AddMilliseconds(1000);
+            // Auto Hunt oficial: quem matou o jogador em Auto Hunt vai para a lista de inimigos.
+            if (killer != null && killer.UID != UID && Owner.AutoHunting != null && Owner.AutoHunting.Enable && Associate != null)
+                Associate.AddEnemy(Owner, killer);
             Owner.OnAutoAttack = false;
             //if (Game.MsgTournaments.MsgSchedules.CaptureTheFlag != null)
             //    Game.MsgTournaments.MsgSchedules.CaptureTheFlag.CheckHaveFlag(killer, this);

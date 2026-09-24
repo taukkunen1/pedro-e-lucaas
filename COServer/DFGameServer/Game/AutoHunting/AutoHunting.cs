@@ -206,7 +206,6 @@ namespace GameServer
             HpPotionPercent = 40;
             MpPotionPercent = 30;
             ExpDeliveryMode = AutoHuntExpDelivery.OnStop;
-            PendingExperience = 0;
             X = 0;
             Y = 0;
             AttackStamp = DateTime.Now;
