@@ -237,6 +237,9 @@ namespace GameServer.Database
             // Economy V4: classic Market is player vending. The legacy Booths.txt
             // layer is a custom infinite-supply shop system and stays disabled.
             if (Game.Era1.Era1Services.EnablePost5017StaticBooths)
+                // Economy V4: the 5695/custom Booths.txt catalogue mints infinite
+            // system stock. Era 1 uses only player-created Market stalls.
+            if (Game.Era1.Era1MarketServices.EnableLegacyStaticBooths)
                 Booth.Load();
             Tranformation.Int();
             QuestInfo.Init();
