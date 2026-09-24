@@ -1,0 +1,38 @@
+@model ConquerSite.Models.DTOs.UpdatePostDTO
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="tc-page-hero tc-page-hero-updates">
+    <div class="container">
+        <div class="tc-update-meta tc-update-meta-hero">
+            <span>@Model.Category</span>
+            @if (!string.IsNullOrWhiteSpace(Model.Version)) { <span>@Model.Version</span> }
+            <time datetime="@Model.PublishedAt.ToString("yyyy-MM-dd")">@Model.PublishedAt.ToString("dd MMM yyyy")</time>
+        </div>
+        <h1>@Model.Title</h1>
+        <p>@Model.Summary</p>
+    </div>
+</section>
+
+<section class="tc-update-detail-shell">
+    <div class="container">
+        <article class="tc-update-detail">
+            <div class="tc-kicker">CHANGELOG</div>
+            <h2>What changed</h2>
+            @if (Model.Changes.Count > 0)
+            {
+                <ul class="tc-change-list">
+                    @foreach (var change in Model.Changes)
+                    {
+                        <li>@change</li>
+                    }
+                </ul>
+            }
+            <div class="tc-update-detail-footer">
+                <a asp-controller="Home" asp-action="Updates">← All updates</a>
+                <a asp-controller="Home" asp-action="ServerInfo">Server Info</a>
+            </div>
+        </article>
+    </div>
+</section>
