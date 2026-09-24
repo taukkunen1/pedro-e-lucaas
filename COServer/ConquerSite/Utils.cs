@@ -11,7 +11,7 @@ namespace ConquerSite
         }
         public static void LogoutAccount(ISession CurrentSession)
         {
-            Extensions.SessionExtensions.Set<Account>(CurrentSession, "MyAccount", null);
+            CurrentSession.Remove("MyAccount");
         }
         public static Account CurrentLoggedAccount(ISession CurrentSession)
         {
