@@ -16,6 +16,42 @@ namespace GameServer
         public string LootMoneyStatus => this.LootMoney ? "[Enabled]" : "[Disabled]";
         public string Status => this.Enable ? "[Enabled]" : "[Disabled]";
 
+        // Hunting zone is anchored when Auto Hunt starts. Radius 0 means unlimited.
+        public ushort OriginX;
+        public ushort OriginY;
+        public ushort HuntRadius = 0;
+
+        public bool IsInsideHuntRadius(ushort x, ushort y)
+        {
+            return HuntRadius == 0 || Role.Core.GetDistance(OriginX, OriginY, x, y) <= HuntRadius;
+        }
+
+        // Prefer explicitly selected valuable loot, then selected equipment/materials,
+        // then Silver. Distance is the tie-breaker inside the same priority class.
+        public int GetAutoPickUpPriority(Game.MsgFloorItem.MsgItem floorItem)
+        {
+            if (floorItem == null)
+                return int.MaxValue;
+            if (floorItem.Typ == Game.MsgFloorItem.MsgItem.ItemType.Money)
+                return 300;
+            if (floorItem.Typ != Game.MsgFloorItem.MsgItem.ItemType.Item || floorItem.ItemBase == null)
+                return int.MaxValue;
+
+            uint id = floorItem.ItemBase.ITEM_ID;
+            if (id == Database.ItemType.DragonBall || id == Database.ItemType.DragonBallScroll)
+                return 0;
+            if (id == Database.ItemType.Meteor || id == Database.ItemType.MeteorTear || id == Database.ItemType.MeteorScroll)
+                return 10;
+            if (floorItem.ItemBase.Plus > 0 || floorItem.ItemBase.SocketOne != Role.Flags.Gem.NoSocket ||
+                floorItem.ItemBase.SocketTwo != Role.Flags.Gem.NoSocket || floorItem.ItemBase.Bless > 0)
+                return 20;
+            if (Database.ItemType.ItemPosition(id) != 0 && id % 10 >= 7)
+                return 30;
+            if (id == Database.ItemType.ExpBall || id == Database.ItemType.ExpBall2 || id == Database.ItemType.PowerExpBall)
+                return 40;
+            return 100;
+        }
+
         // Official Auto Hunt privilege thresholds.
         // Basic Auto Hunt: everyone; Auto Jump: VIP 3+; Auto Pick Up: VIP 4+.
         public const byte AutoJumpVipLevel = 3;
@@ -94,6 +130,9 @@ namespace GameServer
             SoulItems = false;
             LootMoney = false;
             DirectionChange = 0;
+            OriginX = 0;
+            OriginY = 0;
+            HuntRadius = 0;
             X = 0;
             Y = 0;
             AttackStamp = DateTime.Now;
