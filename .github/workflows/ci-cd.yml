@@ -59,7 +59,8 @@ jobs:
           $projects = @(
             "COServer/DFAccountServer/AccountServer.csproj",
             "COServer/DFGameServer/GameServer.csproj",
-            "COServer/DFAPI/API.csproj"
+            "COServer/DFAPI/API.csproj",
+            "COServer/ConquerSite/ConquerSite.csproj"
           )
 
           foreach ($project in $projects) {
@@ -99,7 +100,8 @@ jobs:
           $projects = @(
             @("COServer/DFAccountServer/AccountServer.csproj", "AccountServer"),
             @("COServer/DFGameServer/GameServer.csproj", "GameServer"),
-            @("COServer/DFAPI/API.csproj", "API")
+            @("COServer/DFAPI/API.csproj", "API"),
+            @("COServer/ConquerSite/ConquerSite.csproj", "Website")
           )
 
           foreach ($project in $projects) {
@@ -127,7 +129,7 @@ jobs:
         shell: pwsh
         run: |
           $publishRoot = Join-Path $env:RUNNER_TEMP "publish"
-          $zipPath = Join-Path $env:RUNNER_TEMP "TrinityConquer-$env:BUILD_ENVIRONMENT-${{ github.sha }}.zip"
+          $zipPath = Join-Path $env:RUNNER_TEMP "Placebo-$env:BUILD_ENVIRONMENT-${{ github.sha }}.zip"
 
           if (Test-Path $zipPath) {
             Remove-Item $zipPath -Force
@@ -139,7 +141,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TrinityConquer-${{ github.sha }}
+          name: Placebo-${{ github.sha }}
           path: ${{ env.ARTIFACT_ZIP }}
           if-no-files-found: error
           retention-days: 14
