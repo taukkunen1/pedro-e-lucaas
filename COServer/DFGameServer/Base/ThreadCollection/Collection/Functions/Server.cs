@@ -51,7 +51,17 @@ namespace GameServer.Threading
                 ServerName = string.IsNullOrWhiteSpace(GameServer.Program.GSConfig.ServerName) ? "Placebo" : GameServer.Program.GSConfig.ServerName,
                 OnlinePlayers = GamePoll.Count,
                 StartedAtUtc = Program.StartedAtUtc,
-                LastHeartbeatUtc = DateTime.UtcNow
+                LastHeartbeatUtc = DateTime.UtcNow,
+                ArenaActive = Game.MsgTournaments.MsgSchedules.Arena != null
+                    && Game.MsgTournaments.MsgSchedules.Arena.Proces != Game.MsgTournaments.ProcesType.Dead,
+                GuildWarActive = Game.MsgTournaments.MsgSchedules.GuildWar != null
+                    && Game.MsgTournaments.MsgSchedules.GuildWar.Proces != Game.MsgTournaments.ProcesType.Dead,
+                WeeklyPkActive = Game.MsgTournaments.MsgSchedules.PkWar != null
+                    && !Game.MsgTournaments.MsgSchedules.PkWar.IsFinished(),
+                LavaBeastsPending = Game.MsgTournaments.MsgSchedules.LavaBeastsCount,
+                NextLavaBeastUtc = Game.MsgTournaments.MsgSchedules.LavaBeastsCount > 0
+                    ? Game.MsgTournaments.MsgSchedules.NextLavaBeast.ToUniversalTime()
+                    : (DateTime?)null
             };
 
             _ = Task.Run(() =>
