@@ -1,0 +1,134 @@
+@model ConquerSite.Models.DTOs.RankingsDTO
+@{
+    ViewData["Title"] = "Rankings";
+}
+
+<section class="tc-page-hero tc-page-hero-rankings">
+    <div class="container">
+        <div class="tc-kicker">PLACEBO · LIVE DATA</div>
+        <h1>Rankings</h1>
+        <p>Current Placebo standings generated from server data. No sample players or hardcoded scores.</p>
+    </div>
+</section>
+
+<section class="tc-rankings-shell">
+    <div class="container">
+        @if (!Model.Available)
+        {
+            <div class="tc-ranking-unavailable">
+                <strong>Rankings unavailable</strong>
+                <p>The Placebo API could not be reached. Rankings are hidden rather than displaying stale or fabricated data.</p>
+            </div>
+        }
+        else
+        {
+            <div class="tc-ranking-meta">
+                <span>Live server data</span>
+                <span>Updated @Model.GeneratedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")</span>
+            </div>
+
+            <div class="tc-ranking-tabs" role="tablist" aria-label="Ranking categories">
+                <button class="tc-ranking-tab active" type="button" data-ranking-target="level">Level</button>
+                <button class="tc-ranking-tab" type="button" data-ranking-target="pk">PK</button>
+                <button class="tc-ranking-tab" type="button" data-ranking-target="nobility">Nobility</button>
+                <button class="tc-ranking-tab" type="button" data-ranking-target="guilds">Guilds</button>
+                <button class="tc-ranking-tab" type="button" data-ranking-target="arena">Arena</button>
+            </div>
+
+            <div class="tc-ranking-panel active" data-ranking-panel="level">
+                <div class="tc-section-heading">
+                    <div class="tc-kicker">CHARACTER PROGRESSION</div>
+                    <h2>Level ranking</h2>
+                    <p>Ordered by reborn count, level and experience.</p>
+                </div>
+                <div class="tc-ranking-table">
+                    <div class="tc-ranking-row tc-ranking-head"><span>#</span><span>Player</span><span>Class</span><span>Reborn</span><span>Level</span></div>
+                    @foreach (var entry in Model.Level)
+                    {
+                        <div class="tc-ranking-row"><strong>@entry.Rank</strong><span class="tc-rank-name">@entry.Name</span><span>@entry.Class</span><span>@entry.Reborn</span><strong>@entry.Level</strong></div>
+                    }
+                    @if (Model.Level.Count == 0) { <div class="tc-ranking-empty">No ranked characters yet.</div> }
+                </div>
+            </div>
+
+            <div class="tc-ranking-panel" data-ranking-panel="pk">
+                <div class="tc-section-heading">
+                    <div class="tc-kicker">PLAYER KILLING</div>
+                    <h2>PK ranking</h2>
+                    <p>Characters with the highest current PK Point totals.</p>
+                </div>
+                <div class="tc-ranking-table">
+                    <div class="tc-ranking-row tc-ranking-head"><span>#</span><span>Player</span><span>Class</span><span>Level</span><span>PK Points</span></div>
+                    @foreach (var entry in Model.PK)
+                    {
+                        <div class="tc-ranking-row"><strong>@entry.Rank</strong><span class="tc-rank-name">@entry.Name</span><span>@entry.Class</span><span>@entry.Level</span><strong>@entry.PKPoints</strong></div>
+                    }
+                    @if (Model.PK.Count == 0) { <div class="tc-ranking-empty">No PK ranking data yet.</div> }
+                </div>
+            </div>
+
+            <div class="tc-ranking-panel" data-ranking-panel="nobility">
+                <div class="tc-section-heading">
+                    <div class="tc-kicker">NOBILITY</div>
+                    <h2>Nobility ranking</h2>
+                    <p>Active nobles ordered by their persisted nobility donation.</p>
+                </div>
+                <div class="tc-ranking-table">
+                    <div class="tc-ranking-row tc-ranking-head"><span>#</span><span>Player</span><span>Class</span><span>Level</span><span>Donation</span></div>
+                    @foreach (var entry in Model.Nobility)
+                    {
+                        <div class="tc-ranking-row"><strong>@entry.Rank</strong><span class="tc-rank-name">@entry.Name</span><span>@entry.Class</span><span>@entry.Level</span><strong>@entry.NobilityDonation.ToString("N0")</strong></div>
+                    }
+                    @if (Model.Nobility.Count == 0) { <div class="tc-ranking-empty">No active nobles yet.</div> }
+                </div>
+            </div>
+
+            <div class="tc-ranking-panel" data-ranking-panel="guilds">
+                <div class="tc-section-heading">
+                    <div class="tc-kicker">GUILDS</div>
+                    <h2>Guild ranking</h2>
+                    <p>Ordered by guild level, member count and Silver fund.</p>
+                </div>
+                <div class="tc-ranking-table">
+                    <div class="tc-ranking-row tc-ranking-head"><span>#</span><span>Guild</span><span>Leader</span><span>Level</span><span>Members</span></div>
+                    @foreach (var entry in Model.Guilds)
+                    {
+                        <div class="tc-ranking-row"><strong>@entry.Rank</strong><span class="tc-rank-name">@entry.Name</span><span>@entry.Leader</span><span>@entry.Level</span><strong>@entry.Members</strong></div>
+                    }
+                    @if (Model.Guilds.Count == 0) { <div class="tc-ranking-empty">No guild ranking data yet.</div> }
+                </div>
+            </div>
+
+            <div class="tc-ranking-panel" data-ranking-panel="arena">
+                <div class="tc-section-heading">
+                    <div class="tc-kicker">ARENA</div>
+                    <h2>Arena ranking</h2>
+                    <p>Ordered by Arena Points and total wins.</p>
+                </div>
+                <div class="tc-ranking-table">
+                    <div class="tc-ranking-row tc-ranking-head"><span>#</span><span>Player</span><span>Points</span><span>Wins</span><span>Losses</span></div>
+                    @foreach (var entry in Model.Arena)
+                    {
+                        <div class="tc-ranking-row"><strong>@entry.Rank</strong><span class="tc-rank-name">@entry.Name</span><strong>@entry.ArenaPoints</strong><span>@entry.Wins</span><span>@entry.Losses</span></div>
+                    }
+                    @if (Model.Arena.Count == 0) { <div class="tc-ranking-empty">No Arena ranking data yet.</div> }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+<script>
+document.querySelectorAll('.tc-ranking-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+        var target = tab.getAttribute('data-ranking-target');
+        document.querySelectorAll('.tc-ranking-tab').forEach(function (item) { item.classList.remove('active'); });
+        document.querySelectorAll('.tc-ranking-panel').forEach(function (panel) { panel.classList.remove('active'); });
+        tab.classList.add('active');
+        var panel = document.querySelector('[data-ranking-panel="' + target + '"]');
+        if (panel) panel.classList.add('active');
+    });
+});
+</script>
+}
