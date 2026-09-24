@@ -263,7 +263,7 @@ namespace GameServer.Database
                             ClientItem.Bless = Item.Bless;
                             ClientItem.Bound = Item.Bound;
                             ClientItem.Enchant = Item.Enchant;
-                            ClientItem.Suspicious = Item.Suspicious;
+                            ClientItem.Suspicious = 0; // Era 1: itens suspeitos vieram no Patch 5022
                             ClientItem.Locked = Item.Locked;
                             ClientItem.PlusProgress = Item.PlusProgress;
                             ClientItem.Inscribed = Item.Inscribed;

@@ -323,6 +323,19 @@ namespace GameServer.Game.MsgServer
                         Database.ServerDatabase.LoginQueue.Enqueue(logs);
                         switch (data[0])
                         {
+                            case "autohunt":
+                            case "ah":
+                                {
+                                    if (data.Length == 1 || data[1] == "settings")
+                                        Catching.ShowSettings(client);
+                                    else if (data[1] == "start")
+                                        Catching.Start(client);
+                                    else if (data[1] == "stop")
+                                        Catching.End(client);
+                                    else
+                                        client.SendSysMesage("Usage: @autohunt [settings|start|stop]");
+                                    break;
+                                }
                             case "leave":
                                 {
                                     if (client.Player.Map == 700 && UnlimitedArenaRooms.Maps.ContainsValue(client.Player.DynamicID))
@@ -588,6 +601,20 @@ namespace GameServer.Game.MsgServer
                     switch (data[0])
                     {
                         #region GM Commands
+                        case "autohunt":
+                        case "ah":
+                            {
+                                // Contas de PM/GM tambem precisam do comando para testar o Auto Hunt.
+                                if (data.Length == 1 || data[1] == "settings")
+                                    Catching.ShowSettings(client);
+                                else if (data[1] == "start")
+                                    Catching.Start(client);
+                                else if (data[1] == "stop")
+                                    Catching.End(client);
+                                else
+                                    client.SendSysMesage("Usage: @autohunt [settings|start|stop]");
+                                break;
+                            }
                         case "spawnmob":
                             switch(data[1].ToLower())
                             {

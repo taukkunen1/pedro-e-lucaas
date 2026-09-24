@@ -260,6 +260,31 @@ def main():
             "atomic pair extraction prevents settle/refund replay of the same escrow",
         ),
         (
+            "Trade",
+            "trade reference is never dropped with live escrow",
+            not [
+                f for f in GAME.rglob("*.cs")
+                if f.name != "Trade.cs"
+                and f.name != "MsgTrade.cs"
+                and "MyTrade = null" in read(f)
+            ]
+            and msgtrade.count("MyTrade = null") == 2
+            and all(
+                m >= msgtrade.find("Trade.TryTakePair(") >= 0
+                for m in [i for i in range(len(msgtrade)) if msgtrade.startswith("MyTrade = null", i)]
+            )
+            and "AbortOwnSide(" in trade
+            and "user.MyTrade.AbortOwnSide(stream);" in msgtrade,
+            "MyTrade is only cleared after settlement consumed escrow or after an own-side refund",
+        ),
+        (
+            "PK",
+            "no detain on death (5017 has no redemption system)",
+            "Confiscator.AddItem(" not in read(GAME / "Role" / "Player.cs")
+            and "Era 1 (5017): nao existe detencao/resgate" in read(GAME / "Role" / "Player.cs"),
+            "red/black name equipment drops to the ground; RedeemGear/ClaimGear only serve legacy records",
+        ),
+        (
             "Guild",
             "guild treasury has balancing telemetry leg",
             guild.count('Code:MsgGuildProces.GuildTreasury') >= 2

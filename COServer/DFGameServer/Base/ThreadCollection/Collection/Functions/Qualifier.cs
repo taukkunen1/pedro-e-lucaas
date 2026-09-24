@@ -24,6 +24,7 @@ namespace GameServer.Threading
         }
         public static void TeamArenaQualifier(int time)
         {
+            if (!global::Core.Features.FeatureRegistry.IsKept("events.teamarena")) return; // [feature-gate events.teamarena]
             try
             {
                 TeamArena.CheckGroups(DateTime.Now);

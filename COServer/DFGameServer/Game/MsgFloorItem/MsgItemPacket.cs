@@ -71,6 +71,87 @@ namespace GameServer.Game.MsgFloorItem
             return item;
         }
 
+        public static bool TryAutoPickup(Client.GameClient client, MsgFloorItem.MsgItem mapItem, ServerSockets.Packet packet)
+        {
+            if (client == null || mapItem == null || client.InTrade || !client.Player.OnMyOwnServer)
+                return false;
+            if (!client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.StoredVipLevel))
+                return false;
+            if (!client.AutoHunting.ShouldAutoPickUp(mapItem))
+                return false;
+            if (Role.Core.GetDistance(client.Player.X, client.Player.Y, mapItem.X, mapItem.Y) > 5)
+                return false;
+
+            // Respect the same temporary owner/team protection used by manual pickup.
+            if (mapItem.ToMySelf && !mapItem.ExpireMySelf && mapItem.ItemOwner != client.Player.UID)
+            {
+                if (client.Team == null || !client.Team.IsTeamMember(mapItem.ItemOwner))
+                    return false;
+                if (mapItem.Typ == MsgItem.ItemType.Money && !client.Team.PickupMoney)
+                    return false;
+                if (mapItem.Typ == MsgItem.ItemType.Item && !client.Team.PickupItems)
+                    return false;
+            }
+
+            switch (mapItem.Typ)
+            {
+                case MsgItem.ItemType.Money:
+                    if (!mapItem.TryClaimPickup())
+                        return false;
+                    client.Player.Money += mapItem.Gold;
+                    client.Player.SendUpdate(packet, client.Player.Money, MsgServer.MsgUpdate.DataType.Money);
+                    mapItem.SendAll(packet, MsgDropID.Remove);
+                    client.Map.cells[mapItem.X, mapItem.Y] &= ~Role.MapFlagType.Item;
+                    client.Map.View.LeaveMap<Role.IMapObj>(mapItem);
+                    return true;
+
+                case MsgItem.ItemType.Item:
+                    if (mapItem.ItemBase == null || !client.Inventory.HaveSpace(1))
+                        return false;
+
+                    Database.ItemType.DBItem dbItem;
+                    if (!Pool.ItemsBase.TryGetValue(mapItem.MsgFloor.m_ID, out dbItem))
+                        return false;
+                    if (!mapItem.TryClaimPickup())
+                        return false;
+
+                    bool awarded = false;
+                    try
+                    {
+                        bool added;
+                        if (mapItem.ItemBase.StackSize > 1)
+                            added = client.Inventory.Update(mapItem.ItemBase, Instance.AddMode.ADD, packet);
+                        else
+                            added = client.Inventory.Add(mapItem.ItemBase, dbItem, packet);
+
+                        if (!added)
+                        {
+                            mapItem.ReleasePickupClaim();
+                            return false;
+                        }
+
+                        // From this point onward the item belongs to the player.
+                        // Never release the floor claim after a successful inventory award,
+                        // even if map cleanup or a quest side effect throws.
+                        awarded = true;
+                        client.Map.cells[mapItem.X, mapItem.Y] &= ~Role.MapFlagType.Item;
+                        client.Map.View.LeaveMap<Role.IMapObj>(mapItem);
+                        mapItem.SendAll(packet, MsgDropID.Remove);
+                        if (dbItem.ID == 711352)
+                            client.Player.QuestGUI.IncreaseQuestObjectives(packet, 1311, 1);
+                        return true;
+                    }
+                    catch
+                    {
+                        if (!awarded)
+                            mapItem.ReleasePickupClaim();
+                        throw;
+                    }
+            }
+
+            return false;
+        }
+
         [PacketAttribute(GamePackets.FloorMap)]
         public unsafe static void FloorMap(Client.GameClient client, ServerSockets.Packet packet)
         {
@@ -136,6 +217,8 @@ namespace GameServer.Game.MsgFloorItem
 
                         case MsgItem.ItemType.Money:
                             {
+                                if (!MapItem.TryClaimPickup())
+                                    return;
 
                                 client.Player.Money += MapItem.Gold;
                                 client.Player.SendUpdate(packet, client.Player.Money, MsgServer.MsgUpdate.DataType.Money);
@@ -152,15 +235,22 @@ namespace GameServer.Game.MsgFloorItem
                                 {
                                     if (Pool.ItemsBase.TryGetValue(MapItem.MsgFloor.m_ID, out DBItem))
                                     {
+                                        if (!MapItem.TryClaimPickup())
+                                            return;
 
+                                        bool added;
+                                        if (MapItem.ItemBase.StackSize > 1)
+                                            added = client.Inventory.Update(MapItem.ItemBase, Instance.AddMode.ADD, packet);
+                                        else
+                                            added = client.Inventory.Add(MapItem.ItemBase, DBItem, packet);
+
+                                        if (!added)
+                                        {
+                                            MapItem.ReleasePickupClaim();
+                                            return;
+                                        }
 
                                         client.Map.cells[MapItem.MsgFloor.m_X, MapItem.MsgFloor.m_Y] &= ~Role.MapFlagType.Item;
-                                        if (MapItem.ItemBase.StackSize > 1)
-                                        {
-                                            client.Inventory.Update(MapItem.ItemBase, Instance.AddMode.ADD, packet);
-                                        }
-                                        else
-                                            client.Inventory.Add(MapItem.ItemBase, DBItem, packet);
                                         client.Map.View.LeaveMap<Role.IMapObj>(MapItem);
                                         MapItem.SendAll(packet, MsgDropID.Remove);
                                         client.SendSysMesage("You have picked up a " + DBItem.Name + ".");
@@ -177,6 +267,9 @@ namespace GameServer.Game.MsgFloorItem
                                 Database.ItemType.DBItem DBItem;
                                 if (Pool.ItemsBase.TryGetValue(MapItem.MsgFloor.m_ID, out DBItem))
                                 {
+                                    if (!MapItem.TryClaimPickup())
+                                        return;
+
                                     if (MapItem.ItemBase.ITEM_ID == 3001133)
                                     {
                                         client.Player.ConquerPoints += 5;

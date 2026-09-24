@@ -9,6 +9,13 @@ namespace GameServer.Game.MsgServer.AttackHandler
     {
         public unsafe static void Execute(Client.GameClient user, InteractQuery Attack, ServerSockets.Packet stream, Dictionary<ushort, Database.MagicType.Magic> DBSpells)
         {
+            // Era 1 (5017): montarias vieram no Patch 5155.
+            if (Game.Era1.Era1Skills.IsPostClassic(Role.Flags.SpellID.Riding))
+            {
+                if (user.Player.ContainFlag(MsgUpdate.Flags.Ride))
+                    user.Player.RemoveFlag(MsgUpdate.Flags.Ride);
+                return;
+            }
             Database.MagicType.Magic DBSpell;
             MsgSpell ClientSpell;
             if (DateTime.Now < user.Player.KickedOffSteed.AddSeconds(15))

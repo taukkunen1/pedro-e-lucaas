@@ -174,6 +174,16 @@ namespace GameServer.Game.MsgNpc
                     }
                 }
             }
+            // Auto Hunt V2 dialogs are opened outside the normal NPC interaction flow.
+            // Consume only replies while an Auto Hunt dialog context is active so these
+            // option IDs cannot collide with ordinary NPC dialogs.
+            if (user.AutoHunting != null && user.AutoHunting.DialogContext != 0)
+            {
+                if (Catching.HandleDialogOption(user, option))
+                    return;
+                user.AutoHunting.DialogContext = 0;
+            }
+
             if (option == 255 || option == 0 || user.InTrade)
                 return;
             if (user.ActiveNpc == 987977854)

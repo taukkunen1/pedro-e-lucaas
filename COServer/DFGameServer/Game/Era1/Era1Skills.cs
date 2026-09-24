@@ -75,6 +75,11 @@ namespace GameServer.Game.Era1
                 case Role.Flags.SpellID.Perseverance:
                 case Role.Flags.SpellID.ArrowRain:
                 case Role.Flags.SpellID.Intensify:
+
+                // Montarias (Patch 5155)
+                case Role.Flags.SpellID.Riding:
+                case Role.Flags.SpellID.Spook:
+                case Role.Flags.SpellID.WarCry:
                     return true;
 
                 default:

@@ -126,6 +126,7 @@ namespace GameServer.Role.Instance
 
         public static bool AllowCreateClan(string Name)
         {
+            if (!global::Core.Features.FeatureRegistry.IsKept("social.clan")) return false; // [feature-gate social.clan] clans vieram no Patch 5155
             if (!Program.NameStrCheck(Name))
                 return false;
             foreach (var nname in ChangeNameRecords.Values)

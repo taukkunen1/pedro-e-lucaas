@@ -1106,7 +1106,21 @@ namespace GameServer.Game.MsgMonster
             {
                 ushort X = Player.X;
                 ushort Y = Player.Y;
-                Player.Dead(null, X, Y, monster.UID);
+                // Era 1 (5017): black name morto por guarda ou patrulha derruba
+                // equipamento e vai para a cadeia.
+                bool byLaw = (monster.Family.Settings & MonsterSettings.Guard) == MonsterSettings.Guard
+                    || monster.Family.Name == "Patroller";
+                Player.KilledByLawEnforcer = byLaw && Player.PKPoints >= 100;
+                try
+                {
+                    Player.Dead(null, X, Y, monster.UID);
+                }
+                finally
+                {
+                    Player.KilledByLawEnforcer = false;
+                }
+                if (byLaw && Player.PKPoints >= 100)
+                    Player.SendToJailByGuard();
             }
             else
             {

@@ -267,6 +267,31 @@ namespace GameServer.Role.Instance
             }
         }
 
+        /// <summary>
+        /// Economy V5: encerra apenas o lado deste jogador, devolvendo a propria escrow.
+        /// Usado quando o vinculo com o parceiro esta quebrado: nunca toca no ledger do
+        /// parceiro, que pode pertencer a outro trade. Retorna false se o refund nao for
+        /// seguro; nesse caso o trade continua aberto e nada e' descartado.
+        /// </summary>
+        public bool AbortOwnSide(ServerSockets.Packet stream)
+        {
+            uint cps;
+            uint money;
+            if (!TryTakeRefund(out cps, out money))
+            {
+                Owner.SendSysMesage("Trade cannot be closed while the escrow cannot be refunded safely.");
+                return false;
+            }
+
+            ApplyRefund(cps, money, stream);
+            Owner.Player.targetTrade = 0;
+            if (Owner.Socket != null && Owner.Socket.Alive)
+                Owner.Send(stream.TradeCreate(Owner.Player.UID, MsgTrade.TradeID.CloseTradeWindow));
+            if (object.ReferenceEquals(Owner.MyTrade, this))
+                Owner.MyTrade = null;
+            return true;
+        }
+
         public void DestroyItems(ServerSockets.Packet stream)
         {
             uint cps;

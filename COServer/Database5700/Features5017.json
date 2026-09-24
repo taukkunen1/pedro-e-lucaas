@@ -448,7 +448,6 @@
         "DFGameServer/Game/MsgServer/MsgWarehouse*",
         "DFGameServer/Game/MsgServer/MsgDetainedItem*",
         "DFGameServer/Game/MsgServer/MsgEmbedSocket*",
-        "DFGameServer/Game/MsgServer/MsgTradePartner*",
         "DFGameServer/NewItems.cs",
         "DFGameServer/Database/ItemType.cs",
         "DFGameServer/Database/ClientItems.cs",
@@ -483,7 +482,6 @@
         "GameServer.Game.MsgServer.MsgItemUsuagePacket",
         "GameServer.Game.MsgServer.MsgItemView",
         "GameServer.Game.MsgServer.MsgShowEquipment",
-        "GameServer.Game.MsgServer.MsgTradePartner",
         "GameServer.Game.MsgServer.MsgUpdateItem",
         "GameServer.Game.MsgServer.MsgWarehouse",
         "GameServer.NewItems"
@@ -493,22 +491,52 @@
       "quests": []
     },
     {
-      "id": "core.itemextra",
-      "name": "Item extra / item lock",
-      "origin": "Verify",
-      "confidence": "medium",
-      "decision": "review",
+      "id": "social.tradepartner",
+      "name": "Trade partners",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "remove",
       "paths": [
-        "DFGameServer/Game/MsgServer/MsgItemExtra*",
-        "DFGameServer/Game/MsgServer/MsgItemLock*"
+        "DFGameServer/Game/MsgServer/MsgTradePartner*"
       ],
       "dbFiles": [],
-      "note": "Economy V2 bloqueia Refinery/Purification/Stabilization diretamente em MsgItemExtra. ItemLock permanece separado para revisao historica antes de qualquer gate amplo.",
+      "note": "Revisao 2026-09-24: retirar. Trade partners vieram no Patch 5022 (abr/2008).",
+      "types": [
+        "GameServer.Game.MsgServer.MsgTradePartner"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.itemextra",
+      "name": "Item extra (Refinery / Purification / Stabilization)",
+      "origin": "Verify",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgItemExtra*"
+      ],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar. Os handlers ja retornam cedo via Era1Economy.EnablePost5017ItemExtra=false (Economy V2); o remove so deixa de registrar esses handlers. Item lock foi separado em core.itemlock.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
-        "GameServer.Game.MsgServer.MsgItemExtra",
-        "GameServer.Game.MsgServer.MsgItemLock"
+        "GameServer.Game.MsgServer.MsgItemExtra"
       ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "core.itemlock",
+      "name": "Item lock",
+      "origin": "Verify",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar (provavelmente posterior ao 5017; confirmar). Sem paths de proposito: o handler MsgItemLock NAO pode ser desregistrado, senao itens ja travados ficam presos. O gate e' em codigo via MsgItemLock.LockEnabled: RequestLock recusado e Locked/UnLockTimer zerados ao carregar itens.",
+      "types": [],
       "npcs": [],
       "items": [],
       "quests": []
@@ -637,6 +665,113 @@
       "quests": []
     },
     {
+      "id": "economy.demonbox",
+      "name": "Demon Boxes / CP Packs",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar. Demon Boxes vieram no Patch 5171 (set/2009). Caixas e CP Packs nao entram no inventario nem podem ser usados.",
+      "types": [],
+      "npcs": [
+        "HeavenDemonBox",
+        "ChaosDemonBox",
+        "SacredDemonBox",
+        "AuroraDemonBox",
+        "DemonBox",
+        "AncientDemonBox",
+        "FloodDemonBox"
+      ],
+      "items": [
+        720650,
+        720651,
+        720652,
+        720653,
+        720654,
+        720655,
+        720656,
+        720657,
+        720658,
+        720659,
+        720660,
+        720661,
+        720662,
+        720663,
+        720664,
+        720665,
+        720666,
+        720667,
+        720671,
+        720672,
+        720673,
+        720674,
+        720675,
+        720676,
+        720677,
+        720678,
+        720679,
+        720681,
+        720682,
+        720683,
+        720684,
+        720685,
+        720687,
+        720688,
+        720689,
+        720690,
+        720691,
+        720693,
+        720694,
+        720695,
+        720696,
+        720697,
+        3000272,
+        3000273,
+        3000274,
+        3000275,
+        3000276
+      ],
+      "quests": []
+    },
+    {
+      "id": "social.arsenal",
+      "name": "Martial Arsenal da guild",
+      "origin": "Posterior",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [
+        "DFGameServer/Game/MsgServer/MsgGuildArsenal*",
+        "DFGameServer/Game/MsgServer/MsgGuildFastArsenal*"
+      ],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar. Martial Arsenal veio no Patch 5180 (nov/2009). BP de arsenal = 0 e itens inscritos sao liberados ao carregar.",
+      "types": [
+        "GameServer.Game.MsgServer.MsgGuildArsenalInfo",
+        "GameServer.Game.MsgServer.MsgGuildArsenalList",
+        "GameServer.Game.MsgServer.MsgGuildFastArsenal"
+      ],
+      "npcs": [],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "economy.luckybag",
+      "name": "Lucky Bag (event bag)",
+      "origin": "Custom",
+      "confidence": "high",
+      "decision": "remove",
+      "paths": [],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar. Bolsa de evento que dava CP pela chave LuckyBag.",
+      "types": [],
+      "npcs": [],
+      "items": [
+        728352
+      ],
+      "quests": []
+    },
+    {
       "id": "social.team",
       "name": "Equipe / lider",
       "origin": "Original5017",
@@ -737,14 +872,14 @@
       "name": "Clan / familia",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgClan.cs",
         "DFGameServer/Game/MsgServer/MsgFamilyOccupy*",
         "DFGameServer/Database/ClanTable.cs"
       ],
       "dbFiles": [],
-      "note": "Clan existia na era 5017, mas conferir funcoes de FamilyOccupy",
+      "note": "Revisao 2026-09-24: retirar. Clans vieram no Patch 5155 (jul/2009). Criacao bloqueada, clan nao e anexado no login (ClanUID continua salvo) e ClanBp fica 0.",
       "types": [
         "GameServer.Database.ClanTable",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -760,7 +895,7 @@
       "name": "Mentor / aprendiz",
       "origin": "Original5017",
       "confidence": "high",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgMentorApprentice*",
         "DFGameServer/Game/MsgServer/MsgApprenticeInformation*",
@@ -770,7 +905,7 @@
         "cq_tutor_type.txt",
         "cq_tutor_battle_limit_type.txt"
       ],
-      "note": "Ja existe toggle EnabledMentor no config",
+      "note": "Revisao 2026-09-24: retirar. Mentor/Aprendiz veio no Patch 5022 (abr/2008). ServerConfig.EnabledMentor desliga o sistema e o BP compartilhado.",
       "types": [
         "GameServer.Database.TutorInfo",
         "GameServer.Game.MsgServer.MsgApprenticeInformation",
@@ -785,13 +920,13 @@
       "name": "Flores",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgFlower*",
         "DFGameServer/Database/FlowersTable.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Flores/ranking de flores vieram no Patch 5072 (nov/2008).",
       "types": [
         "GameServer.Database.FlowersTable",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -853,12 +988,12 @@
       "name": "Casas",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Database/HouseTable.cs"
       ],
       "dbFiles": [],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto (sem data confirmada no 5017).",
       "types": [
         "GameServer.Database.HouseTable"
       ],
@@ -894,12 +1029,12 @@
       "name": "Enlight",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgEnlight*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Enlightenment veio no Patch 5127 (mai/2009).",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgEnlight"
@@ -1044,7 +1179,7 @@
       "name": "VIP",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgVipHandler*",
         "DFGameServer/Game/MsgServer/MsgVipStatus*",
@@ -1053,7 +1188,7 @@
       "dbFiles": [
         "Share.txt"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto. VipLevel passa a valer 0; o nivel salvo e preservado (StoredVipLevel).",
       "types": [
         "GameServer.Database.ShareVIP",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -1214,12 +1349,12 @@
       "name": "Surprise Box",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/SurpriseBox*"
       ],
       "dbFiles": [],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto.",
       "types": [
         "GameServer.Game.MsgServer.SurpriseBox"
       ],
@@ -1263,7 +1398,7 @@
       "name": "Team Arena",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/Arena Gui/MsgTeamArena*",
         "DFGameServer/Game/MsgTournaments/MsgTeamArena.cs",
@@ -1272,7 +1407,7 @@
       "dbFiles": [
         "TeamArena.ini"
       ],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto (Arena 1v1 mantida).",
       "types": [
         "GameServer.Database.TeamArenaTable",
         "GameServer.Game.MsgServer.MsgBuilder",
@@ -1293,7 +1428,7 @@
       "name": "Elite PK",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/ElitePk/**",
         "DFGameServer/Game/MsgTournaments/OfficialTournaments/MsgElite*",
@@ -1303,7 +1438,7 @@
         "Elite.ini",
         "ElitePk.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto. A estatua do Elite PK que ja existe continua.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgElitePKBrackets",
@@ -1360,16 +1495,16 @@
     {
       "id": "events.citywar",
       "name": "City War",
-      "origin": "Original5017",
+      "origin": "Custom",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/CityWars.cs"
       ],
       "dbFiles": [
         "CityWar.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Nenhuma fonte oficial; evento com esse nome so aparece em servidor privado. Sai do agendador.",
       "types": [
         "GameServer.Game.MsgTournaments.CityWars"
       ],
@@ -1382,13 +1517,13 @@
       "name": "Clan War (classica e nova)",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgClanWar.cs",
         "DFGameServer/Game/MsgTournaments/MsgClassicClanWar.cs"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Depende de clans (Patch 5155). ClassicClanWar sai do agendador.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgClanWar",
         "GameServer.Game.MsgTournaments.MsgClassicClanWar"
@@ -1402,14 +1537,14 @@
       "name": "Class PK War",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgClassPKWar.cs"
       ],
       "dbFiles": [
         "ClassPkWar.ini"
       ],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgClassPKWar"
       ],
@@ -1473,13 +1608,13 @@
       "name": "Capture the Flag",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgCaptureTheFlag.cs",
         "DFGameServer/Game/MsgServer/Arena Gui/MsgCaptureTheFlag*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto.",
       "types": [
         "GameServer.Game.MsgServer.MsgBuilder",
         "GameServer.Game.MsgServer.MsgCaptureTheFlagRankings",
@@ -1495,12 +1630,12 @@
       "name": "Fortress Wars",
       "origin": "Posterior",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/FortressWars.cs"
       ],
       "dbFiles": [],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto; leva junto a chave de reward FortressWar.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgFortressWar"
       ],
@@ -1515,7 +1650,7 @@
       "name": "Quiz Show",
       "origin": "Original5017",
       "confidence": "medium",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgQuizShow.cs",
         "DFGameServer/Database/QuizShow.cs",
@@ -1524,7 +1659,7 @@
       "dbFiles": [
         "quizquestins.ini"
       ],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgQuizShow"
       ],
@@ -1564,14 +1699,14 @@
       "name": "Couples PK",
       "origin": "Verify",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgTournaments/MsgCouples.cs"
       ],
       "dbFiles": [
         "CouplesPK.ini"
       ],
-      "note": "Revisao 2026-09-21: manter.",
+      "note": "Revisao 2026-09-24: retirar. Retirado por decisao do projeto.",
       "types": [
         "GameServer.Game.MsgTournaments.MsgCouples"
       ],
@@ -1604,18 +1739,26 @@
       "name": "Race (corrida)",
       "origin": "Original5017",
       "confidence": "low",
-      "decision": "keep",
+      "decision": "remove",
       "paths": [
         "DFGameServer/Game/MsgServer/MsgRacePotion*",
         "DFGameServer/Game/MsgServer/MsgRaceRecord*"
       ],
       "dbFiles": [],
-      "note": "",
+      "note": "Revisao 2026-09-24: retirar. Horse Racing veio no Patch 5212 (fev/2010). NPCs e packs de pontos bloqueados; mapa 1950 bloqueado em Era1Maps.",
       "types": [
         "GameServer.Game.MsgServer.MsgRacePotion"
       ],
-      "npcs": [],
-      "items": [],
+      "npcs": [
+        "SteedRace",
+        "SteedRaceFinish"
+      ],
+      "items": [
+        720874,
+        720875,
+        720876,
+        720877
+      ],
       "quests": []
     },
     {
@@ -1662,6 +1805,26 @@
         "Football",
         "KillerOfElite",
         "ExtremePk"
+      ],
+      "items": [],
+      "quests": []
+    },
+    {
+      "id": "events.knightgame",
+      "name": "KnightGame",
+      "origin": "Custom",
+      "confidence": "medium",
+      "decision": "remove",
+      "paths": [],
+      "dbFiles": [],
+      "note": "Revisao 2026-09-24: retirar. Evento customizado; sai do agendador e os NPCs de entrada/premio nao sao registrados.",
+      "types": [],
+      "npcs": [
+        "KnightGame",
+        "KnightGameClaim",
+        "KnightGameClaim2",
+        "KnightGameClaim3",
+        "KnightGameClaim4"
       ],
       "items": [],
       "quests": []

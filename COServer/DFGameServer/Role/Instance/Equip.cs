@@ -800,6 +800,7 @@ namespace GameServer.Role.Instance
         }
         public unsafe void SendMentorShare(ServerSockets.Packet stream)
         {
+            if (!ServerConfig.EnabledMentor) return; // [feature-gate social.mentor]
             MsgApprenticeInformation Information = MsgApprenticeInformation.Create();
             Information.Mode = MsgApprenticeInformation.Action.Mentor;
             if (Owner.Player.MyMentor != null)

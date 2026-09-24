@@ -20,13 +20,20 @@ FEATURES = [
  F('core.character','Personagem (criacao, atributos, proficiencia, magias)','Original5017','high',[M+'MsgNewRole*',M+'MsgClientInfo*',M+'MsgNameChange*',M+'MsgStatus*',M+'MsgUpdatePacket*',M+'MsgAtributeSet*',M+'MsgProficiency*',M+'MsgUpdateProfExperience*',S+'Database/AtributesStatus.cs',S+'Database/DBLevExp.cs',S+'Database/ClientProficiency.cs',S+'Database/ClientSpells.cs'],['levexp.txt','Stats.ini']),
  F('core.combat','Combate e magias','Original5017','high',[M+'MsgAttackPacket*',M+'AttackHandler/**',M+'MsgSpell*',M+'MsgPkExploit*',M+'MsgBlackspot*',S+'Database/MagicType.cs'],['magictype.txt','magictypeop.txt']),
  F('core.world','Mundo: movimento, mapas, clima, itens no chao','Original5017','high',[M+'MsgMovement*',M+'MsgInterAction*',M+'MsgWeather*',M+'MsgMapStatus*',M+'MsgMapTraps*',M+'MsgFlagIcon*',S+'Game/MsgFloorItem/**'],['GameMapEx.ini','portals.ini','Traps.txt']),
- F('core.items','Itens, equipamento, armazem, sockets','Original5017','high',[M+'MsgGameItem*',M+'MsgItemUsuagePacket*',M+'MsgUpdateItem*',M+'MsgItemView*',M+'MsgShowEquipment*',M+'MsgWarehouse*',M+'MsgDetainedItem*',M+'MsgEmbedSocket*',M+'MsgTradePartner*',S+'NewItems.cs',S+'Database/ItemType.cs',S+'Database/ClientItems.cs',S+'Database/ConfiscatorTable.cs',S+'Database/Shops/**'],['itemtype.txt','itemtype.dat','ItemAdd.ini','Refinery.txt','Souls*.ini']),
- F('core.itemextra','Item extra / item lock','Original5017','low',[M+'MsgItemExtra*',M+'MsgItemLock*'],note='Item lock provavelmente veio depois; confirmar'),
+ F('core.items','Itens, equipamento, armazem, sockets','Original5017','high',[M+'MsgGameItem*',M+'MsgItemUsuagePacket*',M+'MsgUpdateItem*',M+'MsgItemView*',M+'MsgShowEquipment*',M+'MsgWarehouse*',M+'MsgDetainedItem*',M+'MsgEmbedSocket*',S+'NewItems.cs',S+'Database/ItemType.cs',S+'Database/ClientItems.cs',S+'Database/ConfiscatorTable.cs',S+'Database/Shops/**'],['itemtype.txt','itemtype.dat','ItemAdd.ini','Refinery.txt','Souls*.ini']),
+ F('core.itemextra','Item extra (Refinery / Purification / Stabilization)','Original5017','low',[M+'MsgItemExtra*']),
+ # core.itemlock sem paths de proposito: o handler MsgItemLock precisa continuar registrado
+ # para o unlock funcionar. O gate e' em codigo (MsgItemLock.LockEnabled).
+ F('core.itemlock','Item lock','Verify','medium',[]),
  F('core.npcs','NPCs, dialogos, monstros e drops','Original5017','high',[S+'Game/MsgNpc/**',S+'Game/MsgMonster/**',S+'Database/NpcServer.cs'],['Npcs.txt','SobNpcs.txt','monster.txt','Spawns.txt']),
  F('core.quests','Quests','Original5017','high',[M+'MsgQuestData*',M+'MsgQuestList*',S+'Database/QuestInfo.cs',S+'Database/RoleQuests.cs'],['Questinfo.ini']),
  F('core.communication','Chat, broadcast, mensagens, GUI','Original5017','high',[M+'MsgMessage*',M+'MsgBroadcast*',M+'MsgStaticMessage*',M+'MsgPopupInfo*',M+'MsgStringPacket*',M+'MsgGameUpdate*',M+'MsgDataPacket*',M+'Gui/**',S+'Game/MsgTournaments/MsgBroadcast.cs']),
  F('social.team','Equipe / lider','Original5017','high',[M+'MsgTeam*',M+'TeamPk/**']),
  F('social.trade','Troca e barracas','Original5017','high',[M+'MsgTrade.cs',M+'MsgTrade/**']),
+ F('social.tradepartner','Trade partners','Posterior','high',[M+'MsgTradePartner*']),
+ F('social.arsenal','Martial Arsenal da guild','Posterior','high',[M+'MsgGuildArsenal*',M+'MsgGuildFastArsenal*']),
+ F('economy.demonbox','Demon Boxes / CP Packs','Posterior','high',[]),
+ F('economy.luckybag','Lucky Bag (event bag)','Custom','high',[]),
  F('social.friends','Amigos / conhecidos','Original5017','high',[M+'MsgKnowPersons*',M+'MsgKnownPersonInfo*']),
  F('social.guild','Guild','Original5017','high',[M+'MsgGuild*',S+'Database/GuildTable.cs']),
  F('social.clan','Clan / familia','Original5017','medium',[M+'MsgClan.cs',M+'MsgFamilyOccupy*',S+'Database/ClanTable.cs'],note='Clan existia na era 5017, mas conferir funcoes de FamilyOccupy'),
@@ -55,7 +62,7 @@ FEATURES = [
  F('events.elitepk','Elite PK','Original5017','medium',[M+'ElitePk/**',S+'Game/MsgTournaments/OfficialTournaments/MsgElite*',S+'Game/MsgTournaments/OfficialTournaments/MsgTeamElite*'],['Elite.ini','ElitePk.ini']),
  F('events.guildwar','Guild War','Original5017','high',[S+'Game/MsgTournaments/MsgGuildWar.cs'],['GuildWarInfo.ini']),
  F('events.eliteguildwar','Elite Guild War','Posterior','medium',[S+'Game/MsgTournaments/MsgEliteGuildWar.cs']),
- F('events.citywar','City War','Original5017','medium',[S+'Game/MsgTournaments/CityWars.cs'],['CityWar.ini']),
+ F('events.citywar','City War','Custom','medium',[S+'Game/MsgTournaments/CityWars.cs'],['CityWar.ini']),
  F('events.clanwar','Clan War (classica e nova)','Original5017','medium',[S+'Game/MsgTournaments/MsgClanWar.cs',S+'Game/MsgTournaments/MsgClassicClanWar.cs']),
  F('events.classpkwar','Class PK War','Verify','low',[S+'Game/MsgTournaments/MsgClassPKWar.cs'],['ClassPkWar.ini']),
  F('events.pkwar','PK War','Original5017','medium',[S+'Game/MsgTournaments/MsgPkWar.cs']),
@@ -68,6 +75,7 @@ FEATURES = [
  F('events.demonexterminator','Demon Exterminator','Verify','low',[S+'Database/InfoDemonExterminators.cs']),
  F('events.race','Race (corrida)','Original5017','low',[M+'MsgRacePotion*',M+'MsgRaceRecord*']),
  F('events.custom-minigames','Minigames customizados','Custom','medium',[S+'Game/MsgTournaments/MsgLastManStand.cs',S+'Game/MsgTournaments/KingOfTheHill.cs',S+'Game/MsgTournaments/PassTheBomb.cs',S+'Game/MsgTournaments/Fivenout.cs',S+'Game/MsgTournaments/FrozenSky.cs',S+'Game/MsgTournaments/KillerSystem.cs',S+'Game/MsgTournaments/MsgTopFight.cs',S+'Game/MsgTournaments/MsgTreasureThief.cs',S+'Game/MsgEvents/**']),
+ F('events.knightgame','KnightGame','Custom','medium',[]),
  F('events.framework','Framework de torneios','Base','high',[S+'Game/MsgTournaments/ITournament.cs',S+'Game/MsgTournaments/OfficialTournaments.cs',S+'Game/MsgTournaments/ProcesType.cs',S+'Game/MsgTournaments/TournamentType.cs',S+'Game/MsgTournaments/MsgNone.cs',S+'Game/MsgTournaments/MsgCheckLine.cs'],['ClanWar/**']),
  F('extras.interserver','InterServer (multi-servidor)','Custom','high',[S+'Game/MsgInterServer/**',M+'MsgInterServerIdentifier*']),
  F('extras.autohunting','Auto Hunting','Posterior','high',[S+'Game/AutoHunting/**']),
@@ -77,6 +85,9 @@ FEATURES = [
 ]
 # NPCs (nomes do enum NpcID) cujo handler deve ser desligado junto com a feature
 NPCS = {
+ 'economy.demonbox': ['HeavenDemonBox','ChaosDemonBox','SacredDemonBox','AuroraDemonBox','DemonBox','AncientDemonBox','FloodDemonBox'],
+ 'events.race': ['SteedRace','SteedRaceFinish'],
+ 'events.knightgame': ['KnightGame','KnightGameClaim','KnightGameClaim2','KnightGameClaim3','KnightGameClaim4'],
  'progression.subclass': ['Sage','Warlock','MartialArtist','ApothecarySubClass','Performer','SubClassManager'],
  'progression.chi': ['ChiMaster','ChiToken'],
  'events.custom-minigames': ['PassTheBomb','FiveNOut','FrozenSky','KingOfTheHill','TreasureThief','LastManStand','DragonWar','TeamDeathMatch','HideNSeek','KillTheCaptain','FreezeWar','Football','KillerOfElite','ExtremePk'],
@@ -105,7 +116,7 @@ def _types(paths):
         for m in _re.finditer(r'^ {4}(?:\w+\s+)*?(?:class|struct|enum|interface)\s+(\w+)', t, _re.M): out.add(ns.group(1) + '.' + m.group(1))
     return sorted(out)
 # ids de itens/quests que so existem em dados e pertencem a feature (bloqueados quando decision=remove)
-ITEMS = {'progression.subclass': [723342, 723094, 720774, 720775], 'progression.chi': [729304, 729476, 729477, 729478, 729479, 729572, 729659, 729660]}
+ITEMS = {'economy.demonbox': [720650, 720651, 720652, 720653, 720654, 720655, 720656, 720657, 720658, 720659, 720660, 720661, 720662, 720663, 720664, 720665, 720666, 720667, 720671, 720672, 720673, 720674, 720675, 720676, 720677, 720678, 720679, 720681, 720682, 720683, 720684, 720685, 720687, 720688, 720689, 720690, 720691, 720693, 720694, 720695, 720696, 720697, 3000272, 3000273, 3000274, 3000275, 3000276], 'economy.luckybag': [728352], 'events.race': [720874, 720875, 720876, 720877], 'progression.subclass': [723342, 723094, 720774, 720775], 'progression.chi': [729304, 729476, 729477, 729478, 729479, 729572, 729659, 729660]}
 QUESTS = {}
 old = {}
 if os.path.exists(OUT):

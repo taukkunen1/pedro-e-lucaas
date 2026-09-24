@@ -223,8 +223,24 @@ namespace GameServer.Database
                     write.Write<ulong>("Character", "DailySignUpDays", client.Player.DailySignUpDays);
                     write.Write<byte>("Character", "DailyMonth", client.Player.DailyMonth);
                     write.Write<byte>("Character", "DailySignUpRewards", client.Player.DailySignUpRewards);
-                    write.Write<byte>("Character", "VipLevel", client.Player.VipLevel);
+                    write.Write<byte>("Character", "VipLevel", client.Player.StoredVipLevel);
                     write.Write<long>("Character", "VipTime", client.Player.ExpireVip.Ticks);
+                    write.Write<ushort>("AutoHunt", "Radius", AutoHunting.NormalizeRadius(client.AutoHunting.HuntRadius));
+                    write.Write<bool>("AutoHunt", "UseSkills", client.AutoHunting.UseSkills);
+                    write.Write<byte>("AutoHunt", "HpPotionPercent", Math.Min((byte)100, client.AutoHunting.HpPotionPercent));
+                    write.Write<byte>("AutoHunt", "MpPotionPercent", Math.Min((byte)100, client.AutoHunting.MpPotionPercent));
+                    write.Write<byte>("AutoHunt", "ExpDeliveryMode", (byte)client.AutoHunting.ExpDeliveryMode);
+                    write.Write<bool>("AutoHunt", "FastMode", client.AutoHunting.FastMode);
+                    write.Write<bool>("AutoHunt", "DBalls", client.AutoHunting.DBalls);
+                    write.Write<bool>("AutoHunt", "Meteors", client.AutoHunting.Meteors);
+                    write.Write<bool>("AutoHunt", "PlusItems", client.AutoHunting.PlusItems);
+                    write.Write<bool>("AutoHunt", "QualityItems", client.AutoHunting.QualityItems);
+                    write.Write<bool>("AutoHunt", "ExpBallEventItems", client.AutoHunting.ExpBallEventItems);
+                    write.Write<bool>("AutoHunt", "SocketedItems", client.AutoHunting.SocketedItems);
+                    write.Write<bool>("AutoHunt", "BlessedItems", client.AutoHunting.BlessedItems);
+                    write.Write<bool>("AutoHunt", "MaterialItems", client.AutoHunting.MaterialItems);
+                    write.Write<bool>("AutoHunt", "SoulItems", client.AutoHunting.SoulItems);
+                    write.Write<bool>("AutoHunt", "LootMoney", client.AutoHunting.LootMoney);
                     write.Write<long>("Character", "LastDragonPill", client.Player.LastDragonPill.Ticks);
                     client.Player.Achievement.Save(client.Achievement);
                     write.WriteString("Character", "Achivement", client.Achievement.ToString());
@@ -450,7 +466,7 @@ namespace GameServer.Database
                         player.DailySignUpDays = client.Player.DailySignUpDays;
                         player.DailyMonth = client.Player.DailyMonth;
                         player.DailySignUpRewards = client.Player.DailySignUpRewards;
-                        player.VipLevel = client.Player.VipLevel;
+                        player.VipLevel = client.Player.StoredVipLevel;
                         player.ExpireVip = client.Player.ExpireVip;
                         player.LastDragonPill = client.Player.LastDragonPill;
                         client.Player.Achievement.Save(client.Achievement);
@@ -628,6 +644,12 @@ namespace GameServer.Database
                 client.Player.Map = reader.ReadUInt32("Character", "Map", 1002);
                 client.Player.X = reader.ReadUInt16("Character", "X", 429);
                 client.Player.Y = reader.ReadUInt16("Character", "Y", 378);
+                if (Game.Era1.Era1Maps.IsBlocked(client.Player.Map)) // Era 1: mapa posterior ao 5017
+                {
+                    client.Player.Map = Game.Era1.Era1Maps.SafeMap;
+                    client.Player.X = Game.Era1.Era1Maps.SafeX;
+                    client.Player.Y = Game.Era1.Era1Maps.SafeY;
+                }
                 client.MiningAttempts = reader.ReadUInt16("Character", "MiningAttempts", 200);
                 client.Player.PMap = reader.ReadUInt32("Character", "PMap", 1002);
                 client.Player.PMapX = reader.ReadUInt16("Character", "PMapX", 300);
@@ -686,10 +708,27 @@ namespace GameServer.Database
                 client.Player.DailySignUpRewards = reader.ReadByte("Character", "DailySignUpRewards", 0);
                 client.Player.VipLevel = reader.ReadByte("Character", "VipLevel", 0);
                 client.Player.ExpireVip = DateTime.FromBinary(reader.ReadInt64("Character", "VipTime", 0));
+                client.AutoHunting.HuntRadius = AutoHunting.NormalizeRadius(reader.ReadUInt16("AutoHunt", "Radius", 0));
+                client.AutoHunting.UseSkills = reader.ReadBool("AutoHunt", "UseSkills", true);
+                client.AutoHunting.HpPotionPercent = Math.Min((byte)100, reader.ReadByte("AutoHunt", "HpPotionPercent", 40));
+                client.AutoHunting.MpPotionPercent = Math.Min((byte)100, reader.ReadByte("AutoHunt", "MpPotionPercent", 30));
+                byte expDelivery = reader.ReadByte("AutoHunt", "ExpDeliveryMode", 0);
+                client.AutoHunting.ExpDeliveryMode = expDelivery == 1 ? AutoHunting.AutoHuntExpDelivery.Instant : AutoHunting.AutoHuntExpDelivery.OnStop;
+                client.AutoHunting.FastMode = reader.ReadBool("AutoHunt", "FastMode", false);
+                client.AutoHunting.DBalls = reader.ReadBool("AutoHunt", "DBalls", false);
+                client.AutoHunting.Meteors = reader.ReadBool("AutoHunt", "Meteors", false);
+                client.AutoHunting.PlusItems = reader.ReadBool("AutoHunt", "PlusItems", false);
+                client.AutoHunting.QualityItems = reader.ReadBool("AutoHunt", "QualityItems", false);
+                client.AutoHunting.ExpBallEventItems = reader.ReadBool("AutoHunt", "ExpBallEventItems", false);
+                client.AutoHunting.SocketedItems = reader.ReadBool("AutoHunt", "SocketedItems", false);
+                client.AutoHunting.BlessedItems = reader.ReadBool("AutoHunt", "BlessedItems", false);
+                client.AutoHunting.MaterialItems = reader.ReadBool("AutoHunt", "MaterialItems", false);
+                client.AutoHunting.SoulItems = reader.ReadBool("AutoHunt", "SoulItems", false);
+                client.AutoHunting.LootMoney = reader.ReadBool("AutoHunt", "LootMoney", false);
                 client.Player.LastDragonPill = DateTime.FromBinary(reader.ReadInt64("Character", "LastDragonPill", 0));
                 if (DateTime.Now > client.Player.ExpireVip)
                 {
-                    if (client.Player.VipLevel >= 1)
+                    if (client.Player.StoredVipLevel >= 1)
                         client.Player.VipLevel = 0;
                 }
                 client.Achievement = new AchievementCollection();
@@ -872,7 +911,7 @@ namespace GameServer.Database
                     client.Player.Associate.Online = true;
                 }
                 client.Player.ClanUID = reader.ReadUInt32("Character", "ClanID", 0);
-                if (client.Player.ClanUID != 0)
+                if (client.Player.ClanUID != 0 && global::Core.Features.FeatureRegistry.IsKept("social.clan")) // [feature-gate social.clan] ClanUID fica salvo
                 {
                     Role.Instance.Clan myclan;
                     if (Role.Instance.Clan.Clans.TryGetValue(client.Player.ClanUID, out myclan))
@@ -1008,6 +1047,12 @@ namespace GameServer.Database
                 client.Player.Map = player.Map;
                 client.Player.X = player.X;
                 client.Player.Y = player.Y;
+                if (Game.Era1.Era1Maps.IsBlocked(client.Player.Map)) // Era 1: mapa posterior ao 5017
+                {
+                    client.Player.Map = Game.Era1.Era1Maps.SafeMap;
+                    client.Player.X = Game.Era1.Era1Maps.SafeX;
+                    client.Player.Y = Game.Era1.Era1Maps.SafeY;
+                }
                 client.MiningAttempts = player.MiningAttempts;
                 client.Player.PMap = player.PMap;
                 client.Player.PMapX = player.PMapX;
@@ -1068,7 +1113,7 @@ namespace GameServer.Database
                 client.Player.LastDragonPill = player.LastDragonPill;
                 if (DateTime.Now > client.Player.ExpireVip)
                 {
-                    if (client.Player.VipLevel >= 1)
+                    if (client.Player.StoredVipLevel >= 1)
                         client.Player.VipLevel = 0;
                 }
                 client.Achievement = new AchievementCollection();
@@ -1230,7 +1275,7 @@ namespace GameServer.Database
                     client.Player.Associate.Online = true;
                 }
                 client.Player.ClanUID = player.ClanUID;
-                if (client.Player.ClanUID != 0)
+                if (client.Player.ClanUID != 0 && global::Core.Features.FeatureRegistry.IsKept("social.clan")) // [feature-gate social.clan] ClanUID fica salvo
                 {
                     Role.Instance.Clan myclan;
                     if (Role.Instance.Clan.Clans.TryGetValue(client.Player.ClanUID, out myclan))
@@ -1428,10 +1473,10 @@ namespace GameServer.Database
                     ClientItem.Bless = Item.Bless;
                     ClientItem.Bound = Item.Bound;
                     ClientItem.Enchant = Item.Enchant;
-                    ClientItem.Suspicious = Item.Suspicious;
-                    ClientItem.Locked = Item.Locked;
+                    ClientItem.Suspicious = 0; // Era 1: itens suspeitos vieram no Patch 5022
+                    ClientItem.Locked = Game.MsgServer.MsgItemLock.LockEnabled ? Item.Locked : (byte)0; // core.itemlock
                     ClientItem.PlusProgress = Item.PlusProgress;
-                    ClientItem.Inscribed = Item.Inscribed;
+                    ClientItem.Inscribed = global::Core.Features.FeatureRegistry.IsKept("social.arsenal") ? Item.Inscribed : (byte)0; // social.arsenal (Patch 5180)
                     ClientItem.Activate = Item.Activate;
                     ClientItem.TimeLeftInMinutes = Item.TimeLeftInMinutes;
                     ClientItem.StackSize = Item.StackSize;
@@ -1514,7 +1559,7 @@ namespace GameServer.Database
                         ClientItem.Refinary = new Game.MsgServer.MsgItemExtra.Refinery();
                     }
                     ClientItem.Fake = Item.Fake;
-                    ClientItem.UnLockTimer = Item.UnlockTimer;
+                    ClientItem.UnLockTimer = Game.MsgServer.MsgItemLock.LockEnabled ? Item.UnlockTimer : 0; // core.itemlock
                     ClientItem.EndDate = DateTime.FromBinary(Item.Expiration);
                     if (Item.ItemId == 750000)//demonExterminator jar
                         client.DemonExterminator.ItemUID = Item.Uid;

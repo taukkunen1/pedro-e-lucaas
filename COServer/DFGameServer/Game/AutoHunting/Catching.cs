@@ -9,7 +9,7 @@ namespace GameServer
 {
     class Catching
     {
-        private Thread JumpPlayer, Skill, Revive;
+        private Thread JumpPlayer, Skill;
         public Catching()
         {
             JumpPlayer = new Thread(new ThreadStart(JumpHunting));
@@ -18,30 +18,24 @@ namespace GameServer
             Skill = new Thread(new ThreadStart(SkillHunting));
             Skill.Start();
 
-            Revive = new Thread(new ThreadStart(ReviveHunting));
-            Revive.Start();
         }
         public static bool Auto = true;
         private static Random RobotRandom = new Random();
         private static ushort[] SkillRobotTrojan = new ushort[] { 1045, 1046, 1115 };//FastBlade,ScentSword,Hercules
         private static ushort[] SkillRobotArcher = new ushort[] { 8001 };//Scatter
-        private static ushort[] SkillRobotNinja = new ushort[] { 6000 };//TwofoldBlades
-        private static ushort[] SkillRobotMonk = new ushort[] { 10381, 10415 };//RadiantPalm,WhirlwindKick
         private static ushort[] SkillRobotWater = new ushort[] { 1000 };//Thunder
         private static ushort[] SkillRobotFire = new ushort[] { 1000, 1002 };//Tornado
-        private static ushort[] SkillPirate = new ushort[] { 11110, 11070, 11030 };
-
-        private static ushort[] SkillRobotAttacked = new ushort[] { 6000, 10381, 10415, 1000, 1002 };
-        private static ushort[] SkillXPRobot = new ushort[] { 1110, 6011 };//CycloneXP FatalStrike
+        private static ushort[] SkillRobotAttacked = new ushort[] { 1000, 1002 };
+        private static ushort[] SkillXPRobot = new ushort[] { 1110 };//CycloneXP
         public static bool ValidClient(Client.GameClient client)
         {
-            if (!client.Player.Alive)
-                return false;
             if (client == null)
                 return false;
-            if (!client.FullLoading)
-                return false;
             if (client.Player == null)
+                return false;
+            if (!client.Player.Alive)
+                return false;
+            if (!client.FullLoading)
                 return false;
             if (client.Player.CompleteLogin == false)
                 return false;
@@ -116,6 +110,157 @@ namespace GameServer
             }
             return true;
         }
+        public static void ShowSettings(Client.GameClient client)
+        {
+            if (client == null || client.AutoHunting == null)
+                return;
+            client.AutoHunting.DialogContext = 1;
+            client.ActiveNpc = AutoHuntDialogNpc; // qualquer outro NPC aberto depois troca o ActiveNpc e invalida o contexto
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgNpc.Dialog dialog = new Game.MsgNpc.Dialog(client, stream);
+                dialog.AddText("Auto Hunt V2 settings. These options are saved per character.");
+                dialog.AddOption("Radius: " + client.AutoHunting.RadiusLabel, 240);
+                dialog.AddOption("Skills: " + client.AutoHunting.SkillsStatus, 241);
+                dialog.AddOption("EXP: " + client.AutoHunting.ExpDeliveryLabel, 242);
+                dialog.AddOption("Fast mode: " + client.AutoHunting.FastModeStatus, 243);
+                dialog.AddOption("HP potion: " + client.AutoHunting.HpPotionPercent + "%", 245);
+                dialog.AddOption("MP potion: " + client.AutoHunting.MpPotionPercent + "%", 246);
+                dialog.AddOption("Pickup settings", 244);
+                dialog.AddOption("Close", 255);
+                dialog.FinalizeDialog();
+            }
+        }
+
+        public static bool HandleSettingsOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+
+            switch (option)
+            {
+                case 240:
+                    client.AutoHunting.CycleRadius();
+                    ShowSettings(client);
+                    return true;
+                case 241:
+                    client.AutoHunting.UseSkills = !client.AutoHunting.UseSkills;
+                    ShowSettings(client);
+                    return true;
+                case 242:
+                    if (client.AutoHunting.Enable && client.AutoHunting.ExpDeliveryMode == AutoHunting.AutoHuntExpDelivery.OnStop)
+                        FlushPendingExperience(client);
+                    client.AutoHunting.ToggleExpDelivery();
+                    ShowSettings(client);
+                    return true;
+                case 243:
+                    client.AutoHunting.FastMode = !client.AutoHunting.FastMode;
+                    ShowSettings(client);
+                    return true;
+                case 244:
+                    ShowPickupSettings(client);
+                    return true;
+                case 245:
+                    client.AutoHunting.HpPotionPercent = NextPotionThreshold(client.AutoHunting.HpPotionPercent);
+                    ShowSettings(client);
+                    return true;
+                case 246:
+                    client.AutoHunting.MpPotionPercent = NextPotionThreshold(client.AutoHunting.MpPotionPercent);
+                    ShowSettings(client);
+                    return true;
+            }
+            return false;
+        }
+
+        private static byte NextPotionThreshold(byte current)
+        {
+            switch (current)
+            {
+                case 0: return 20;
+                case 20: return 30;
+                case 30: return 40;
+                case 40: return 50;
+                case 50: return 60;
+                case 60: return 70;
+                case 70: return 80;
+                default: return 0;
+            }
+        }
+
+        public static void ShowPickupSettings(Client.GameClient client)
+        {
+            if (client == null || client.AutoHunting == null)
+                return;
+            client.AutoHunting.DialogContext = 2;
+            client.ActiveNpc = AutoHuntDialogNpc;
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgNpc.Dialog dialog = new Game.MsgNpc.Dialog(client, stream);
+                dialog.AddText("VIP 4+ Auto Pick Up filters.");
+                dialog.AddOption("Dragon Balls " + client.AutoHunting.DBallsStatus, 230);
+                dialog.AddOption("Meteors " + client.AutoHunting.MeteorsStatus, 231);
+                dialog.AddOption("Plus items " + client.AutoHunting.PlusItemsStatus, 232);
+                dialog.AddOption("Quality items " + client.AutoHunting.QualityItemsStatus, 233);
+                dialog.AddOption("Socketed " + client.AutoHunting.SocketedItemsStatus, 234);
+                dialog.AddOption("Blessed " + client.AutoHunting.BlessedItemsStatus, 235);
+                dialog.AddOption("Materials " + client.AutoHunting.MaterialItemsStatus, 236);
+                dialog.AddOption("EXP/Event items " + client.AutoHunting.ExpBallEventItemsStatus, 237);
+                dialog.AddOption("Silver " + client.AutoHunting.LootMoneyStatus, 238);
+                dialog.AddOption("Back", 239);
+                dialog.FinalizeDialog();
+            }
+        }
+
+        public static bool HandlePickupSettingsOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+            switch (option)
+            {
+                case 230: client.AutoHunting.DBalls = !client.AutoHunting.DBalls; break;
+                case 231: client.AutoHunting.Meteors = !client.AutoHunting.Meteors; break;
+                case 232: client.AutoHunting.PlusItems = !client.AutoHunting.PlusItems; break;
+                case 233: client.AutoHunting.QualityItems = !client.AutoHunting.QualityItems; break;
+                case 234: client.AutoHunting.SocketedItems = !client.AutoHunting.SocketedItems; break;
+                case 235: client.AutoHunting.BlessedItems = !client.AutoHunting.BlessedItems; break;
+                case 236: client.AutoHunting.MaterialItems = !client.AutoHunting.MaterialItems; break;
+                case 237: client.AutoHunting.ExpBallEventItems = !client.AutoHunting.ExpBallEventItems; break;
+                case 238: client.AutoHunting.LootMoney = !client.AutoHunting.LootMoney; break;
+                case 239: ShowSettings(client); return true;
+                default: return false;
+            }
+            ShowPickupSettings(client);
+            return true;
+        }
+
+        /// <summary>ActiveNpc virtual dos dialogos do @autohunt (o mesmo do item de Auto Hunt).</summary>
+        public const uint AutoHuntDialogNpc = 987977854;
+
+        public static bool HandleDialogOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+            if (client.ActiveNpc != AutoHuntDialogNpc)
+            {
+                // O jogador abriu outro NPC depois do @autohunt: a resposta nao e' nossa.
+                client.AutoHunting.DialogContext = 0;
+                return false;
+            }
+            if (option == 255 && client.AutoHunting.DialogContext != 0)
+            {
+                client.AutoHunting.DialogContext = 0;
+                return true;
+            }
+            if (client.AutoHunting.DialogContext == 1)
+                return HandleSettingsOption(client, option);
+            if (client.AutoHunting.DialogContext == 2)
+                return HandlePickupSettingsOption(client, option);
+            return false;
+        }
+
         public static void Start(Client.GameClient client)
         {
             if (!ValidClient(client))
@@ -127,17 +272,22 @@ namespace GameServer
                 client.CreateBoxDialog("Sorry, cannot use Autohunting with more than 3 accounts at same time.");
                 return;
             }
-            if (client.Player.VipLevel >= 3)
+            // Official Conquer Auto Hunt behavior (2013):
+            // Auto Hunt is available to every player.
+            // VIP 3+ changes movement to Auto Jump; VIP 4+ unlocks Auto Pick Up.
+            // Keep the server authoritative for both privileges.
             {
                 if (ValidCoord(client))
                 {
                     client.AutoHunting.DirectionChange = 0;
+                    client.AutoHunting.OriginX = client.Player.X;
+                    client.AutoHunting.OriginY = client.Player.Y;
                     client.AutoHunting.X = 0;
                     client.AutoHunting.Y = 0;
                     client.AutoHunting.AttackStamp = DateTime.Now;
                     client.AutoHunting.Angle = (Role.Flags.ConquerAngle)Pool.GetRandom.Next(0, 7);
                     client.AutoHunting.Enable = true;
-                    if (client.Player.VipLevel > 0)
+                    if (client.Player.StoredVipLevel > 0)
                     {
                         if (client.Player.MyTitle != 9)
                         {
@@ -169,14 +319,46 @@ namespace GameServer
                     client.SendSysMesage("You~can't~use~autohunt~here.", MsgMessage.ChatMode.Whisper, MsgMessage.MsgColor.red);
                 }
             }
-            else client.CreateBoxDialog("Available for VIP Level 3.");
         }
+        public static void FlushPendingExperience(Client.GameClient client)
+        {
+            if (client == null || client.Player == null)
+                return;
+
+            ulong pending = client.AutoHunting.TakePendingExperience();
+            if (pending == 0)
+                return;
+
+            try
+            {
+                using (var rec = new ServerSockets.RecycledPacket())
+                {
+                    var stream = rec.GetStream();
+                    // PendingExperience stores the final kill EXP value. Apply it without
+                    // recalculating server/gem/double-EXP multipliers at stop time.
+                    client.IncreaseExperienceRaw(stream, pending);
+                }
+            }
+            catch
+            {
+                // Do not lose already-earned EXP if payout fails during a disconnect
+                // or another transient server-side exception. Restore it atomically.
+                client.AutoHunting.AddPendingExperience(pending);
+                throw;
+            }
+        }
+
         public static void End(Client.GameClient client)
         {
-            if (!ValidClient(client))
+            if (client == null || client.Player == null || client.AutoHunting == null)
                 return;
             client.AutoHunting.Enable = false;
+            client.AutoHunting.PursuingLoot = false;
             client.OnAutoAttack = false;
+            FlushPendingExperience(client);
+            // Restaura o titulo mesmo com o jogador morto (parada por morte sem Heaven's Blessing).
+            if (client.Socket == null || !client.Socket.Alive || !client.FullLoading)
+                return;
             client.Player.MyTitle = client.AutoHunting.Mytitle;
             using (var rec = new ServerSockets.RecycledPacket())
             {
@@ -190,13 +372,15 @@ namespace GameServer
                 return;
             if (client != null && client.Map != null && client.Player.View != null && client.Player != null && client.Player.HitPoints > 0)
             {
+                if (AutoPickUp(client))
+                    return;
                 if (DateTime.Now < client.AutoHunting.AttackStamp.AddMilliseconds(client.AutoHunting.FastMode ? 800 : 1000))
                     return;
                 bool ExistMonsters = false;
                 foreach (Role.IMapObj Obj in client.Player.View.Roles(Role.MapObjectType.Monster))
                 {
                     var entity = Obj as Game.MsgMonster.MonsterRole;
-                    if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                    if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                     {
                         ExistMonsters = true;
                         break;
@@ -214,9 +398,11 @@ namespace GameServer
                             if (client.Player.X == (ushort)(Obj.X - Xx) && client.Player.Y == Obj.Y) continue;
 
                             var entity = Obj as Game.MsgMonster.MonsterRole;
-                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                             {
                                 ushort X = (ushort)(Obj.X - Xx), Y = Obj.Y;
+                                if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                                    continue;
                                 Role.GameMap Map = Pool.ServerMaps[client.Map.ID];
                                 if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle))
                                 {
@@ -225,21 +411,8 @@ namespace GameServer
                                         using (var rec = new ServerSockets.RecycledPacket())
                                         {
                                             var stream = rec.GetStream();
-                                            Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                            {
-                                                Mode = MsgInterAction.Action.Jump,
-                                                X = X,
-                                                Y = Y,
-                                                UID = client.Player.UID,
-                                                OponentUID = 1
-                                            };
-                                            client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                            client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = Role.Flags.ConquerAction.Jump;
-                                            client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                            client.Player.X = X;
-                                            client.Player.Y = Y;
-                                            client.Player.View.Role(false, stream);
+                                            if (!PerformMove(client, X, Y, stream))
+                                            return;
                                             client.AutoHunting.DirectionChange = 0;
                                             client.Player.LastMove = DateTime.Now;
                                             client.AutoHunting.AttackStamp = DateTime.Now;
@@ -265,6 +438,11 @@ namespace GameServer
                         Y = (ushort)(client.Player.Y + RobotRandom.Next(5, 15));
                     }
                     Role.GameMap Map = Pool.ServerMaps[client.Map.ID];
+                    if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                    {
+                        X = client.AutoHunting.OriginX;
+                        Y = client.AutoHunting.OriginY;
+                    }
                     if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle) && client.AutoHunting.DirectionChange < 10)
                     {
                         if (ValidCoord(client, X, Y, true))
@@ -272,21 +450,8 @@ namespace GameServer
                             using (var rec = new ServerSockets.RecycledPacket())
                             {
                                 var stream = rec.GetStream();
-                                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                {
-                                    Mode = MsgInterAction.Action.Jump,
-                                    X = X,
-                                    Y = Y,
-                                    UID = client.Player.UID,
-                                    OponentUID = 1
-                                };
-                                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                client.Player.Action = Role.Flags.ConquerAction.Jump;
-                                client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                client.Player.X = X;
-                                client.Player.Y = Y;
-                                client.Player.View.Role(false, stream);
+                                if (!PerformMove(client, X, Y, stream))
+                                            return;
                                 client.Player.LastMove = DateTime.Now;
                             }
                         }
@@ -299,10 +464,12 @@ namespace GameServer
                         foreach (var Obj in client.Map.View.GetAllMapRoles(Role.MapObjectType.Monster))
                         {
                             var entity = Obj as Game.MsgMonster.MonsterRole;
-                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard"))
+                            if (entity.HitPoints > 0 && !entity.Name.Contains("Guard") && client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                             {
                                 Game.MsgServer.AttackHandler.Algoritms.InLineAlgorithm Line = new Game.MsgServer.AttackHandler.Algoritms.InLineAlgorithm(client.Player.X, Obj.X, client.Player.Y, Obj.Y, client.Map, 15, 0);
                                 X = (ushort)Line.lcoords[(int)(Line.lcoords.Count() - 1)].X; Y = (ushort)Line.lcoords[(int)(Line.lcoords.Count() - 1)].Y;
+                                if (!client.AutoHunting.IsInsideHuntRadius(X, Y))
+                                    continue;
                                 if (client.Map.AddGroundItemWithAngle(ref X, ref Y, 0, client.AutoHunting.Angle))
                                 {
                                     if (ValidCoord(client, X, Y, true))
@@ -310,21 +477,8 @@ namespace GameServer
                                         using (var rec = new ServerSockets.RecycledPacket())
                                         {
                                             var stream = rec.GetStream();
-                                            Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
-                                            {
-                                                Mode = MsgInterAction.Action.Jump,
-                                                X = X,
-                                                Y = Y,
-                                                UID = client.Player.UID,
-                                                OponentUID = 1
-                                            };
-                                            client.Player.View.SendView(stream.InterActionWalk(&inter), true);
-                                            client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, X, Y);
-                                            client.Player.Action = Role.Flags.ConquerAction.Jump;
-                                            client.Map.View.MoveTo<Role.IMapObj>(client.Player, X, Y);
-                                            client.Player.X = X;
-                                            client.Player.Y = Y;
-                                            client.Player.View.Role(false, stream);
+                                            if (!PerformMove(client, X, Y, stream))
+                                            return;
                                             client.Player.LastMove = DateTime.Now;
                                         }
                                     }
@@ -336,9 +490,135 @@ namespace GameServer
                 }
             }
         }
+        /// <summary>
+        /// Movimento do Auto Hunt. VIP 3+ (Auto Jump) salta direto para o destino; os demais
+        /// andam um passo por tick em direcao ao destino, com pacote de walk valido.
+        /// Antes, sem VIP 3, o servidor mandava "Walk" com deslocamento de varias celulas,
+        /// o que teletransportava o personagem e dessincronizava o cliente.
+        /// </summary>
+        private unsafe static bool PerformMove(Client.GameClient client, ushort x, ushort y, ServerSockets.Packet stream)
+        {
+            if (AutoHunting.CanAutoJump(client.Player.StoredVipLevel))
+            {
+                Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
+                {
+                    Mode = MsgInterAction.Action.Jump,
+                    X = x,
+                    Y = y,
+                    UID = client.Player.UID,
+                    OponentUID = 1
+                };
+                client.Player.View.SendView(stream.InterActionWalk(&inter), true);
+                client.Player.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, x, y);
+                client.Player.Action = Role.Flags.ConquerAction.Jump;
+                client.Map.View.MoveTo<Role.IMapObj>(client.Player, x, y);
+                client.Player.X = x;
+                client.Player.Y = y;
+                client.Player.View.Role(false, stream);
+                return true;
+            }
+
+            // Sem Auto Jump: corre ate 3 passos por tick (velocidade de corrida normal).
+            bool moved = false;
+            for (int step = 0; step < 3; step++)
+            {
+                if (client.Player.X == x && client.Player.Y == y)
+                    break;
+                var dir = Role.Core.GetAngle(client.Player.X, client.Player.Y, x, y);
+                ushort stepX = client.Player.X, stepY = client.Player.Y;
+                Role.Core.IncXY(dir, ref stepX, ref stepY);
+                if (!client.Map.ValidLocation(stepX, stepY) || !client.AutoHunting.IsInsideHuntRadius(stepX, stepY)
+                    || !ValidCoord(client, stepX, stepY, true))
+                    break;
+
+                Game.MsgServer.WalkQuery walk = new Game.MsgServer.WalkQuery()
+                {
+                    Direction = (uint)dir,
+                    UID = client.Player.UID,
+                    Running = Game.MsgServer.MsgMovement.Run
+                };
+                client.Player.View.SendView(stream.MovementCreate(&walk), true);
+                client.Player.Angle = dir;
+                client.Player.Action = Role.Flags.ConquerAction.None;
+                client.Map.View.MoveTo<Role.IMapObj>(client.Player, stepX, stepY);
+                client.Player.X = stepX;
+                client.Player.Y = stepY;
+                client.Player.View.Role(false, stream);
+                moved = true;
+            }
+            return moved;
+        }
+
+        private unsafe static bool MoveForAutoHunt(Client.GameClient client, ushort x, ushort y)
+        {
+            if (!client.AutoHunting.IsInsideHuntRadius(x, y) || !ValidCoord(client, x, y, true))
+                return false;
+
+            ushort targetX = x, targetY = y;
+            client.AutoHunting.Angle = Role.Core.GetAngle(client.Player.X, client.Player.Y, targetX, targetY);
+            if (!client.Map.AddGroundItemWithAngle(ref targetX, ref targetY, 0, client.AutoHunting.Angle))
+                return false;
+            if (!client.AutoHunting.IsInsideHuntRadius(targetX, targetY))
+                return false;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                if (!PerformMove(client, targetX, targetY, stream))
+                    return false;
+                client.Player.LastMove = DateTime.Now;
+            }
+            return true;
+        }
+
+        private static bool AutoPickUp(Client.GameClient client)
+        {
+            if (!ValidClient(client) || !client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.StoredVipLevel))
+            {
+                if (client != null && client.AutoHunting != null)
+                    client.AutoHunting.PursuingLoot = false;
+                return false;
+            }
+
+            var floorItems = client.Map.View.Roles(Role.MapObjectType.Item, client.Player.X, client.Player.Y)
+                .OfType<Game.MsgFloorItem.MsgItem>()
+                .Where(item => client.AutoHunting.IsInsideHuntRadius(item.X, item.Y))
+                .Where(item => client.AutoHunting.ShouldAutoPickUp(item))
+                .OrderBy(item => client.AutoHunting.GetAutoPickUpPriority(item))
+                .ThenBy(item => Role.Core.GetDistance(client.Player.X, client.Player.Y, item.X, item.Y))
+                .ToArray();
+
+            if (floorItems.Length == 0)
+            {
+                client.AutoHunting.PursuingLoot = false;
+                return false;
+            }
+
+            var target = floorItems[0];
+            int distance = Role.Core.GetDistance(client.Player.X, client.Player.Y, target.X, target.Y);
+
+            // Pick up immediately when already close enough; otherwise movement toward
+            // the selected loot gets one hunting tick before combat resumes.
+            if (distance > 5)
+            {
+                client.AutoHunting.PursuingLoot = MoveForAutoHunt(client, target.X, target.Y);
+                return client.AutoHunting.PursuingLoot;
+            }
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgFloorItem.MsgItemPacket.TryAutoPickup(client, target, stream);
+            }
+            client.AutoHunting.PursuingLoot = false;
+            return true;
+        }
+
         private unsafe static void HitMob(Client.GameClient client)
         {
             if (!ValidClient(client))
+                return;
+            if (client.AutoHunting.PursuingLoot)
                 return;
             if (client != null && client.Map != null && client.Player.View != null && client.Player != null && client.Player.HitPoints > 0)
             {
@@ -346,17 +626,15 @@ namespace GameServer
                 {
                     if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) > Role.RoleView.ViewThreshold) continue;
                     var entity = Obj as Game.MsgMonster.MonsterRole;
-                    if (entity.HitPoints > 0 && !entity.ContainFlag(MsgUpdate.Flags.Ghost) && !entity.Name.Contains("Guard"))
+                    if (entity.HitPoints > 0 && !entity.ContainFlag(MsgUpdate.Flags.Ghost) && !entity.Name.Contains("Guard") &&
+                        client.AutoHunting.IsInsideHuntRadius(entity.X, entity.Y))
                     {
                         ushort SpellID = 0;
                         if (client.Player.Class >= 10 && client.Player.Class <= 15) SpellID = SkillRobotTrojan[RobotRandom.Next(SkillRobotTrojan.Length)];
                         if (client.Player.Class >= 40 && client.Player.Class <= 45) SpellID = SkillRobotArcher[RobotRandom.Next(SkillRobotArcher.Length)];
-                        if (client.Player.Class >= 50 && client.Player.Class <= 55) SpellID = SkillRobotNinja[RobotRandom.Next(SkillRobotNinja.Length)];
-                        if (client.Player.Class >= 60 && client.Player.Class <= 65) SpellID = SkillRobotMonk[RobotRandom.Next(SkillRobotMonk.Length)];
                         if (client.Player.Class >= 130 && client.Player.Class <= 135) SpellID = SkillRobotWater[RobotRandom.Next(SkillRobotWater.Length)];
                         if (client.Player.Class >= 140 && client.Player.Class <= 145) SpellID = SkillRobotFire[RobotRandom.Next(SkillRobotFire.Length)];
-                        if (client.Player.Class >= 70 && client.Player.Class <= 75) SpellID = SkillPirate[RobotRandom.Next(SkillPirate.Length)];
-                        if (!client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike) && client.Player.ContainFlag(MsgUpdate.Flags.XPList))
+                        if (client.AutoHunting.UseSkills && !client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike) && client.Player.ContainFlag(MsgUpdate.Flags.XPList))
                         {
                             List<ushort> SkillsXP = new List<ushort>();
                             ushort SkillXP = 0;
@@ -389,7 +667,7 @@ namespace GameServer
                             }
                         }
 
-                        if (!client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
+                        if (!client.Player.ContainFlag(MsgUpdate.Flags.Cyclone) && !client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike) && client.AutoHunting.UseSkills)
                         {
                             Dictionary<ushort, Database.MagicType.Magic> Spells;
                             if (Pool.Magic.TryGetValue(SpellID, out Spells))
@@ -432,9 +710,12 @@ namespace GameServer
                                 }
                             }
                         }
-                        if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) <= 2 || client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
+                        bool isArcher = client.Player.Class >= 40 && client.Player.Class <= 45;
+                        int reach = !client.AutoHunting.UseSkills && isArcher ? 8 : 2;
+                        if (Role.Core.GetDistance(Obj.X, Obj.Y, client.Player.X, client.Player.Y) <= reach || client.Player.ContainFlag(MsgUpdate.Flags.FatalStrike))
                         {
-                            if (client.Player.Class != 135 && client.Player.Class != 145)
+                            // Taoistas so atacam fisico quando "Skills" esta desligado; senao ficariam parados.
+                            if ((client.Player.Class != 135 && client.Player.Class != 145) || !client.AutoHunting.UseSkills)
                             {
                                 if (!(client.AutoHunting.X == client.Player.X && client.AutoHunting.Y == client.Player.Y) || client.AutoHunting.X == 0 && client.AutoHunting.Y == 0)
                                 {
@@ -447,12 +728,14 @@ namespace GameServer
                                     var stream = rec.GetStream();
                                     InteractQuery action = new InteractQuery();
                                     action.AtkType = MsgAttackPacket.AttackID.Physical;
-                                    if (client.Player.Class >= 40 && client.Player.Class <= 45)
+                                    if (isArcher && client.AutoHunting.UseSkills)
                                     {
                                         action.AtkType = MsgAttackPacket.AttackID.Magic;
                                         action.Damage = 8001;
                                         action.SpellID = 8001;
                                     }
+                                    else if (isArcher)
+                                        action.AtkType = MsgAttackPacket.AttackID.Archer; // ataque normal de arco, sem Scatter
                                     action.UID = client.Player.UID;
                                     action.OpponentUID = Obj.UID;
                                     action.X = Obj.X;
@@ -487,6 +770,93 @@ namespace GameServer
                 Thread.Sleep(1000);
             }
         }
+        /// <summary>
+        /// Auto Hunt oficial: morreu com Heaven's Blessing, revive no lugar apos 20 s e continua;
+        /// sem a bencao, o Auto Hunt para (e entrega a EXP guardada). Antes, o personagem morto
+        /// ficava com o Auto Hunt "ligado" para sempre, sem cacar e sem receber a EXP.
+        /// </summary>
+        private static bool HandleDeath(Client.GameClient client)
+        {
+            if (client.Player == null || client.Player.Alive)
+                return false;
+            if (client.Player.HeavenBlessing <= 0)
+            {
+                End(client);
+                client.SendSysMesage("Auto Hunt stopped: you died without Heaven's Blessing.");
+                return true;
+            }
+            if (DateTime.Now > client.Player.DeadStamp.AddSeconds(20))
+            {
+                using (var rec = new ServerSockets.RecycledPacket())
+                {
+                    var stream = rec.GetStream();
+                    client.Player.Revive(stream);
+                }
+            }
+            return true;
+        }
+
+        private static void AutoUsePotions(Client.GameClient client)
+        {
+            if (!ValidClient(client) || !client.AutoHunting.Enable)
+                return;
+
+            int maxHp = (int)client.Status.MaxHitpoints;
+            int maxMp = (int)client.Status.MaxMana;
+            bool needHp = !client.Player.ContainFlag(MsgUpdate.Flags.PoisonStar) && client.AutoHunting.HpPotionPercent > 0 && maxHp > 0 &&
+                          (long)client.Player.HitPoints * 100 <= (long)maxHp * client.AutoHunting.HpPotionPercent;
+            bool needMp = client.AutoHunting.MpPotionPercent > 0 && maxMp > 0 &&
+                          (long)client.Player.Mana * 100 <= (long)maxMp * client.AutoHunting.MpPotionPercent;
+            if (!needHp && !needMp)
+                return;
+
+            Game.MsgServer.MsgGameItem selected = null;
+            Database.ItemType.DBItem selectedBase = null;
+            foreach (var item in client.Inventory.ClientItems.Values)
+            {
+                Database.ItemType.DBItem dbItem;
+                if (!Pool.ItemsBase.TryGetValue(item.ITEM_ID, out dbItem))
+                    continue;
+
+                // Never consume a mixed/other consumable for the wrong resource.
+                bool restoresNeededResource = (needHp && dbItem.ItemHP > 0) || (needMp && dbItem.ItemMP > 0);
+                if (!restoresNeededResource)
+                    continue;
+
+                int selectedRecovery = selectedBase == null ? int.MaxValue :
+                    Math.Max(needHp ? selectedBase.ItemHP : 0, needMp ? selectedBase.ItemMP : 0);
+                int candidateRecovery = Math.Max(needHp ? dbItem.ItemHP : 0, needMp ? dbItem.ItemMP : 0);
+                if (selectedBase == null || candidateRecovery < selectedRecovery)
+                {
+                    selected = item;
+                    selectedBase = dbItem;
+                }
+            }
+
+            if (selected == null || selectedBase == null)
+                return;
+
+            // Remove first. Recovery is granted only if the inventory mutation succeeds,
+            // preventing free healing/mana if consumption fails or races another action.
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                if (!client.Inventory.Update(selected, Instance.AddMode.REMOVE, stream))
+                    return;
+
+                if (needHp && selectedBase.ItemHP > 0)
+                {
+                    client.Player.HitPoints = Math.Min(client.Player.HitPoints + selectedBase.ItemHP, maxHp);
+                    client.Player.SendUpdate(stream, client.Player.HitPoints, MsgUpdate.DataType.Hitpoints, false);
+                }
+                if (needMp && selectedBase.ItemMP > 0)
+                {
+                    client.Player.Mana = (ushort)Math.Min(client.Player.Mana + selectedBase.ItemMP, maxMp);
+                    client.Player.SendUpdate(stream, client.Player.Mana, MsgUpdate.DataType.Mana, false);
+                }
+            }
+        }
+
         private unsafe void SkillHunting()
         {
             while (true)
@@ -499,6 +869,9 @@ namespace GameServer
                         {
                             if (client != null)
                             {
+                                if (HandleDeath(client))
+                                    continue;
+                                AutoUsePotions(client);
                                 HitMob(client);
                             }
                         }
@@ -511,49 +884,6 @@ namespace GameServer
                 Thread.Sleep(1000);
             }
         }
-        private void ReviveHunting()
-        {
-            while (true)
-            {
-                try
-                {
-                    if (Auto)
-                    {
-                        foreach (Client.GameClient client in Pool.GamePoll.Values.Where(p => p.AutoHunting.Enable))
-                        {
-                            if (client != null && client.Map != null && client.Player.View != null && client.Player != null)
-                            {
-                                #region Revive
-                                if (client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && DateTime.Now > client.Player.DeadStamp.AddSeconds(20))
-                                {
-                                    client.Player.Action = Role.Flags.ConquerAction.None;
-                                    client.Player.TransformationID = 0;
-                                    client.Player.RemoveFlag(MsgUpdate.Flags.Dead);
-                                    client.Player.RemoveFlag(MsgUpdate.Flags.Ghost);
-                                    client.Player.HitPoints = (int)client.Status.MaxHitpoints;
-                                }
-                                #endregion
-                                if (client.Player.HitPoints > 0)
-                                {
-                                    #region Hitpoints
-                                    if (!client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && client.Player.HitPoints < client.Status.MaxHitpoints)
-                                        client.Player.HitPoints = Math.Min(client.Player.HitPoints + 3000, (int)client.Status.MaxHitpoints);
-                                    #endregion
-                                    #region Mana
-                                    if (!client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && client.Player.Mana < client.Status.MaxMana)
-                                        client.Player.Mana = (ushort)Math.Min(client.Player.Mana + 3000, client.Status.MaxMana);
-                                    #endregion
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteException(e);
-                }
-                Thread.Sleep(3000);
-            }
-        }
+
     }
 }

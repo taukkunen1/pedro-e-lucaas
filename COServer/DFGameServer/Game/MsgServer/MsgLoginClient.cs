@@ -167,6 +167,8 @@ namespace GameServer.Game.MsgServer
         {
             if ((client.ClientFlag & Client.ServerFlag.CreateCharacterSucces) != Client.ServerFlag.CreateCharacterSucces)
                 Database.ServerDatabase.LoadCharacter(client, client.ConnectionUID);
+            try { Game.Era1.Era1Migration.Run(client); } // itens posteriores ao 5017 que ja estavam com o jogador
+            catch (Exception e) { Console.WriteException(e); }
             client.Send(new MsgServer.MsgMessage("ANSWER_OK", "ALLUSERS", MsgMessage.MsgColor.red, MsgMessage.ChatMode.Dialog).GetArray(packet));
             try
             {

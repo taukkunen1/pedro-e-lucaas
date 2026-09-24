@@ -222,6 +222,9 @@ namespace GameServer.Game.MsgTournaments
                    , MsgServer.MsgMessage.MsgColor.white, MsgServer.MsgMessage.ChatMode.BroadcastMessage).GetArray(stream));
             }
 
+            // Estatuas da guild vencedora anterior saem quando outra guild vence.
+            Role.Statue.RemoveGuildStatuesExcept(1038, Winner.GuildID);
+
             RewardDeputiLeader.Clear();
             RewardLeader.Clear();
             Winner.DeputiLeaderReward = 7;

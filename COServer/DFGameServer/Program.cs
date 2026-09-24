@@ -130,6 +130,7 @@ namespace GameServer
                 Game.MsgNpc.Dialogs.Era1JobCenter.RunSelfTest();
                 Game.Era1.Era1Progression.RunSelfTest();
                 Game.Era1.Era1Items.RunSelfTest();
+                Game.Era1.Era1Maps.RunSelfTest();
                 Game.Era1.Era1Economy.RunSelfTest();
                 Game.Era1.Era1Shops.RunSelfTest();
                 Game.Era1.Era1Services.RunSelfTest();

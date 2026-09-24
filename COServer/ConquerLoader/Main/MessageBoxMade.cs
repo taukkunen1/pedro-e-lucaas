@@ -2,12 +2,15 @@
 {
     using Properties;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using System.Windows.Forms;
+    using TrinityConquerLoader.Updater;
 
     public class MessageBoxMade : Form
     {
@@ -28,8 +31,66 @@
             this.InitializeComponent();
         }
 
+        // URL do manifesto publicado pela API (ver DFAPI/Controllers/ClientUpdateController.cs).
+        // Sobrepor via app.config (chave "ManifestUrl") sem precisar recompilar o launcher.
+        private static string ManifestUrl =>
+            System.Configuration.ConfigurationManager.AppSettings["ManifestUrl"]
+            ?? "http://localhost:8080/api/clientupdate/manifest";
+
+        /// <summary>
+        /// Confere e aplica atualizacoes antes de abrir o jogo. Roda na thread do
+        /// BackgroundWorker (fora da UI thread), entao so mexe nos controles via Invoke.
+        /// Falha de rede/update nao impede o launcher de tentar abrir o jogo com o que
+        /// ja esta instalado -- so avisa o jogador.
+        /// </summary>
+        private void CheckForUpdates()
+        {
+            var manager = new UpdateManager(Environment.CurrentDirectory, ManifestUrl);
+            try
+            {
+                SetStatusLabel("Checking for updates...");
+                UpdateManifest manifest = manager.FetchManifestAsync().GetAwaiter().GetResult();
+
+                if (manager.GetLocalVersion() == manifest.Version)
+                    return; // versao local ja bate com o version.txt: nem precisa comparar hash de tudo
+
+                List<ManifestFile> pending = manager.GetPendingFiles(manifest);
+                if (pending.Count == 0)
+                {
+                    // Hashes batem mas o version.txt estava desatualizado (ex.: primeira vez); so grava a versao.
+                    File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "version.txt"), manifest.Version);
+                    return;
+                }
+
+                var progress = new Progress<UpdateProgress>(p =>
+                {
+                    string mb = (p.BytesTotal > 0) ? $" ({p.BytesDone / 1048576}/{p.BytesTotal / 1048576} MB)" : "";
+                    SetStatusLabel($"Updating {p.FilesDone}/{p.FilesTotal}: {p.CurrentFile}{mb}");
+                });
+                manager.ApplyUpdatesAsync(manifest, pending, progress, CancellationToken.None).GetAwaiter().GetResult();
+                SetStatusLabel("Update complete. Launching...");
+            }
+            catch (Exception ex)
+            {
+                // Nao bloqueia o launch: se a API estiver fora do ar, o jogador ainda consegue jogar
+                // com os arquivos que ja tem instalados.
+                SetStatusLabel("Could not check for updates, launching anyway...");
+                System.Diagnostics.Debug.WriteLine("[Updater] " + ex);
+            }
+        }
+
+        private void SetStatusLabel(string text)
+        {
+            if (label1.InvokeRequired)
+                label1.Invoke(new Action(() => label1.Text = text));
+            else
+                label1.Text = text;
+        }
+
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            CheckForUpdates();
+
             Process launch = Process.Start(new ProcessStartInfo
             {
                 WorkingDirectory = Environment.CurrentDirectory,

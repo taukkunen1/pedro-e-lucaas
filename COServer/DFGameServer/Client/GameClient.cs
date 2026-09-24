@@ -535,10 +535,7 @@ namespace GameServer.Client
                     Player.SendString(stream, Game.MsgServer.MsgStringPacket.StringID.Effect, true, new string[1] { effect.ToString() });
 
                 }
-                Experience *= ServerConfig.UserExpRate;
-                Experience += Experience * GemValues(Role.Flags.Gem.NormalRainbowGem) / 100;
-                if (Player.DExpTime > 0)
-                    Experience *= Player.RateExp;
+                Experience = CalculateFinalExperience(Experience);
                 Player.Experience += (ulong)Experience;
                 while (Player.Experience >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience)
                 {
@@ -555,6 +552,41 @@ namespace GameServer.Client
                 Player.SendUpdate(stream, (long)Player.Experience, Game.MsgServer.MsgUpdate.DataType.Experience, false);
             }
         }
+        public ulong CalculateFinalExperience(double experience)
+        {
+            if (Player.CursedTimer > 2 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                return 0;
+
+            experience *= ServerConfig.UserExpRate;
+            experience += experience * GemValues(Role.Flags.Gem.NormalRainbowGem) / 100;
+            if (Player.DExpTime > 0)
+                experience *= Player.RateExp;
+            return (ulong)Math.Max(0, experience);
+        }
+
+        public void IncreaseExperienceRaw(ServerSockets.Packet stream, ulong experience)
+        {
+            if (experience == 0 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                return;
+
+            Player.Experience = ulong.MaxValue - Player.Experience < experience
+                ? ulong.MaxValue
+                : Player.Experience + experience;
+            while (Player.Level < Game.Era1.Era1Progression.MaxLevel &&
+                   Player.Experience >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience)
+            {
+                Player.Experience -= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience;
+                UpdateLevel(stream, (ushort)(Player.Level + 1));
+                if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                {
+                    Player.Experience = 0;
+                    break;
+                }
+            }
+            UpdateRebornLastLevel(stream);
+            Player.SendUpdate(stream, (long)Player.Experience, Game.MsgServer.MsgUpdate.DataType.Experience, false);
+        }
+
         public void UpdateRebornLastLevel(ServerSockets.Packet stream)
         {
             if (Player.Reborn > 0)
@@ -585,6 +617,15 @@ namespace GameServer.Client
         }
         public unsafe void DisconectStopFunctions()
         {
+            try
+            {
+                if (AutoHunting != null && AutoHunting.PendingExperience > 0)
+                    Catching.FlushPendingExperience(this);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             try
             {
                 using (var rec = new ServerSockets.RecycledPacket())
@@ -1316,6 +1357,11 @@ namespace GameServer.Client
         }
         public void Teleport(ushort x, ushort y, uint MapID, uint DynamicID = 0, bool revive = true, bool CanTeleport = false)
         {
+            if (Game.Era1.Era1Maps.IsBlocked(MapID))
+            {
+                SendSysMesage("This area is not available on this server.");
+                return;
+            }
 
             if (Player.Name == DragonWar.LastWinner)
             {
