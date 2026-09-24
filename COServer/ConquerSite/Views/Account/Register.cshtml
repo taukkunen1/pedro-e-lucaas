@@ -1,44 +1,55 @@
-﻿@model Account
+@model Account
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Create Account";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-3">
-            <h1>@ViewData["Title"]</h1>
-            <p>Register now your account.</p>
-            <form asp-action="RegisterPost">
-                <div class="form-group">
-                    @Html.LabelFor(x => x.Username)
-                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Input Username" })
-                    <small id="Username" class="form-text text-muted">We'll never share your username with anyone else.</small>
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(x => x.Password)
-                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Input password" })
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(x => x.Email)
-                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Input email" })
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Create account</button>
-            </form>
+<section class="tc-auth-page">
+    <div class="container">
+        <div class="tc-auth-card">
+            <div class="tc-kicker">BEGIN ERA 1</div>
+            <h1>Create your account</h1>
+            <p class="tc-form-help mb-4">One account gives you access to the game and the TrinityConquer website.</p>
+
             @if (ViewBag.Message != null)
             {
                 @foreach (Message msg in ViewBag.Message)
                 {
-                    <div class="alert alert-@msg.Type.ToString().ToLower() mt-5" role="alert">
-                        @msg.Text
-                    </div>
+                    <div class="alert alert-@msg.Type.ToString().ToLower()" role="alert">@msg.Text</div>
                 }
             }
+
+            <form asp-action="RegisterPost" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Username)
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Choose a username", @autocomplete = "username" })
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Email)
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email address", @type = "email", @autocomplete = "email" })
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Choose a password", @autocomplete = "new-password" })
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn tc-btn-primary btn-block mt-4">Create account</button>
+            </form>
+
+            <div class="tc-auth-switch">
+                Already have an account?
+                <a asp-action="Login" asp-controller="Account">Login</a>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
