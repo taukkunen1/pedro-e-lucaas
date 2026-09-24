@@ -325,8 +325,6 @@ namespace GameServer
         {
             if (!ValidClient(client))
                 return;
-            if (client.AutoHunting.PursuingLoot)
-                return;
             if (client != null && client.Map != null && client.Player.View != null && client.Player != null && client.Player.HitPoints > 0)
             {
                 if (AutoPickUp(client))
@@ -580,6 +578,8 @@ namespace GameServer
         private unsafe static void HitMob(Client.GameClient client)
         {
             if (!ValidClient(client))
+                return;
+            if (client.AutoHunting.PursuingLoot)
                 return;
             if (client != null && client.Map != null && client.Player.View != null && client.Player != null && client.Player.HitPoints > 0)
             {
