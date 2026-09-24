@@ -1,70 +1,150 @@
 @model ConquerSite.Models.DTOs.DowloadsSettings
 @{
     ViewData["Title"] = "Download";
+    string patch = string.IsNullOrWhiteSpace(Model.GetLastPatch()) ? "Not published" : Model.GetLastPatch();
+    string version = string.IsNullOrWhiteSpace(Model.GetClientVersion()) ? "5695 adapted" : Model.GetClientVersion();
 }
 
-<section class="tc-page-hero">
+<section class="tc-page-hero tc-page-hero-downloads">
     <div class="container">
-        <div class="tc-kicker">PLAY PLACEBO</div>
-        <h1>Download</h1>
-        <p>Install the Placebo client and let the launcher keep your game files up to date.</p>
+        <div class="tc-kicker">PLACEBO · WINDOWS CLIENT</div>
+        <h1>Download & Launcher</h1>
+        <p>Install the Placebo client once. After that, the launcher keeps supported game files synchronized through incremental updates.</p>
     </div>
 </section>
 
-<section class="tc-download-shell">
+<section class="tc-download-shell tc-download-v2">
     <div class="container">
-        <div class="row">
+        <div class="tc-download-release">
+            <div><span>Client base</span><strong>@version</strong></div>
+            <div><span>Current patch</span><strong>@patch</strong></div>
+            <div><span>Platform</span><strong>Windows</strong></div>
+            <div><span>Update method</span><strong>Incremental SHA-256</strong></div>
+        </div>
+
+        <div class="row mt-5">
             <div class="col-lg-7 mb-4 mb-lg-0">
-                <div class="tc-download-card">
-                    <div class="tc-download-version">Current client patch: @Model.GetLastPatch()</div>
-                    <h2 class="mt-2">Placebo for Windows</h2>
-                    <p class="tc-muted-copy mt-3">
-                        Download the complete client if this is your first installation. After installation,
-                        start Placebo through the launcher so future patches can be applied automatically.
-                    </p>
+                <article class="tc-download-card tc-download-primary">
+                    <div class="tc-kicker">FIRST INSTALLATION</div>
+                    <h2>Full Placebo client</h2>
+                    <p class="tc-muted-copy">For a new installation, download the complete client package. The adapted 5695 client is the technical base; Era 1 gameplay rules are enforced by the server.</p>
 
                     <div class="tc-download-actions">
                         @if (!string.IsNullOrWhiteSpace(Model.GetClientMegaUrl()))
                         {
-                            <a class="btn tc-btn-primary btn-lg" href="@Model.GetClientMegaUrl()" target="_blank" rel="noopener noreferrer">
-                                Download via MEGA
-                            </a>
+                            <a class="btn tc-btn-primary btn-lg" href="@Model.GetClientMegaUrl()" target="_blank" rel="noopener noreferrer">Download full client</a>
                         }
                         @if (!string.IsNullOrWhiteSpace(Model.GetClientMediafireUrl()))
                         {
-                            <a class="btn tc-btn-outline btn-lg" href="@Model.GetClientMediafireUrl()" target="_blank" rel="noopener noreferrer">
-                                MediaFire mirror
-                            </a>
+                            <a class="btn tc-btn-outline btn-lg" href="@Model.GetClientMediafireUrl()" target="_blank" rel="noopener noreferrer">Alternative mirror</a>
                         }
                     </div>
 
-                    <div class="tc-download-note">
-                        The adapted 5695 client is used as the technical base for Placebo Era 1.
-                        Gameplay rules and progression are controlled by the server.
+                    @if (!Model.HasFullClientDownload)
+                    {
+                        <div class="tc-download-warning">The full client package has not been published yet.</div>
+                    }
+
+                    <div class="tc-file-meta">
+                        <div><span>Package size</span><strong>@(string.IsNullOrWhiteSpace(Model.GetClientSize()) ? "Pending publication" : Model.GetClientSize())</strong></div>
+                        <div><span>Published</span><strong>@(string.IsNullOrWhiteSpace(Model.GetPublishedDate()) ? "Pending publication" : Model.GetPublishedDate())</strong></div>
                     </div>
-                </div>
+
+                    <div class="tc-checksum">
+                        <span>Full client SHA-256</span>
+                        @if (Model.HasChecksum)
+                        {
+                            <code>@Model.GetClientSha256()</code>
+                        }
+                        else
+                        {
+                            <strong>Checksum will appear here when the final package is published.</strong>
+                        }
+                    </div>
+                </article>
             </div>
 
             <div class="col-lg-5">
-                <div class="tc-download-card">
-                    <div class="tc-kicker">INSTALLATION</div>
-                    <h3>Three steps to play</h3>
-                    <ol class="tc-step-list mt-4">
-                        <li>
-                            <strong>Download the full client</strong>
-                            Use one of the mirrors and extract or install it in a folder you can write to.
-                        </li>
-                        <li>
-                            <strong>Run the Trinity launcher</strong>
-                            The launcher checks the patch manifest and downloads missing updates.
-                        </li>
-                        <li>
-                            <strong>Login and play</strong>
-                            Create a game account on the website, then enter your credentials in the client.
-                        </li>
-                    </ol>
-                </div>
+                <article class="tc-download-card tc-launcher-card">
+                    <div class="tc-kicker">EXISTING INSTALLATION</div>
+                    <h2>Placebo Launcher</h2>
+                    <p class="tc-muted-copy">Use the launcher to check the published manifest, compare local SHA-256 hashes and download only changed files.</p>
+
+                    @if (Model.HasLauncherDownload)
+                    {
+                        <a class="btn tc-btn-primary btn-block" href="@Model.GetLauncherUrl()">Download launcher</a>
+                    }
+                    else
+                    {
+                        <div class="tc-download-warning">Standalone launcher download is not published yet. Use the launcher included with the full client.</div>
+                    }
+
+                    <div class="tc-launcher-flow">
+                        <div><strong>1</strong><span>Read current manifest</span></div>
+                        <div><strong>2</strong><span>Compare local files</span></div>
+                        <div><strong>3</strong><span>Download changed files</span></div>
+                        <div><strong>4</strong><span>Verify SHA-256</span></div>
+                        <div><strong>5</strong><span>Start Placebo</span></div>
+                    </div>
+                </article>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="tc-download-how">
+    <div class="container">
+        <div class="tc-section-heading">
+            <div class="tc-kicker">INSTALLATION</div>
+            <h2>From download to Twin City</h2>
+            <p>A clean installation is intentionally simple.</p>
+        </div>
+
+        <div class="row tc-install-grid">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <article><span>01</span><h3>Download</h3><p>Get the full Placebo client from the primary link or available mirror.</p></article>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <article><span>02</span><h3>Extract</h3><p>Extract the package to a normal writable Windows folder. Avoid running directly from the archive.</p></article>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <article><span>03</span><h3>Launch</h3><p>Start Placebo through the included launcher. It checks for supported incremental updates before opening the game.</p></article>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <article><span>04</span><h3>Login</h3><p>Create your account on the website, enter your credentials in the client and play.</p></article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tc-download-tech">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mb-4">
+                <article class="tc-rule-panel">
+                    <div class="tc-kicker">AUTO-UPDATE</div>
+                    <h2>How the Placebo updater works</h2>
+                    <p>The launcher requests the current client manifest from the Placebo API. Each manifest entry contains a relative path, file size and SHA-256 hash. Files that differ locally are downloaded to a temporary <code>.part</code> file and only replace the installed file after the expected hash matches.</p>
+                    <p>If the update API is unavailable, the launcher warns the player and attempts to start the already installed client instead of blocking play.</p>
+                </article>
+            </div>
+            <div class="col-lg-5 mb-4">
+                <article class="tc-rule-panel">
+                    <div class="tc-kicker">INTEGRITY</div>
+                    <h2>What SHA-256 means here</h2>
+                    <p>SHA-256 is used to verify that downloaded files match the published manifest and to avoid downloading unchanged files.</p>
+                    <div class="tc-download-security-note">The current manifest design is an integrity mechanism, not a signed trust chain. HTTPS should be used for production distribution.</div>
+                </article>
+            </div>
+        </div>
+
+        <div class="tc-download-support">
+            <div>
+                <div class="tc-kicker">NEED HELP?</div>
+                <h2>Installation problems?</h2>
+                <p>Check the Placebo guides for patch failures, server.dat issues and launcher troubleshooting.</p>
+            </div>
+            <a class="btn tc-btn-outline" asp-controller="Home" asp-action="Guides">Open guides</a>
         </div>
     </div>
 </section>
