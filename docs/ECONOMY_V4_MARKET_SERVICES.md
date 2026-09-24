@@ -115,6 +115,21 @@ São proibidos na camada de servidor:
 A remoção de `Booths.txt` da runtime elimina a principal oferta fixa custom encontrada nesta
 auditoria.
 
+### CP Admin clássico
+
+O `MarketCpAdmin` permanece com a conversão histórica DragonBall -> CP:
+
+- 1 DragonBall -> 215 CP;
+- 1 DragonBall Scroll -> 2.150 CP;
+- o Mall da Era 1 vende 1 DragonBall por 215 CP.
+
+Assim, DB <-> CP fica em paridade nominal e não cria lucro circular server-side. A existência
+do CPAdmin no Market para converter Dragon Balls em CP é documentada oficialmente em 2007.
+
+No mesmo handler existia uma opção 3 custom escondida no diálogo, porém acionável por pacote
+forjado, que tentava consumir 999.999.999 Silver para criar o item 3400146. A V4 bloqueia
+essa opção na fronteira dos dois packets NPC, antes de o handler ser executado.
+
 ## Telemetria
 
 `EconomyTelemetry.json` classifica:
@@ -141,6 +156,7 @@ O script valida os gates e gera:
 - `docs/catalogo/era1_v4_service_audit.csv`
 - `docs/catalogo/era1_v4_static_booths.csv`
 - `docs/catalogo/era1_v4_arbitrage_findings.csv`
+- `docs/catalogo/era1_v4_npc_currency_sites.csv`
 
 O CI executa o auditor antes do build. Qualquer regressão estrutural da policy faz o pipeline
 falhar antes de promover a build.
