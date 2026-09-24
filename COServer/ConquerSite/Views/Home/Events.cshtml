@@ -1,0 +1,137 @@
+@model ConquerSite.Models.DTOs.ServerStatusDTO
+@{
+    ViewData["Title"] = "Events";
+    string liveClass(bool active) => active ? "tc-event-live" : "tc-event-idle";
+}
+
+<section class="tc-page-hero tc-page-hero-events">
+    <div class="container">
+        <div class="tc-kicker">PLACEBO · ERA 1</div>
+        <h1>Events</h1>
+        <p>The event board only lists systems that remain part of the Placebo ruleset. Runtime state comes from the GameServer heartbeat.</p>
+    </div>
+</section>
+
+<section class="tc-events-shell">
+    <div class="container">
+        @if (!Model.ApiOnline || !Model.GameServerOnline)
+        {
+            <div class="tc-event-api-warning">
+                <strong>Live event state unavailable</strong>
+                <span>The schedule below remains visible, but current event activity cannot be confirmed until the GameServer heartbeat returns.</span>
+            </div>
+        }
+
+        <div class="tc-event-live-grid">
+            <article class="tc-event-status-card @liveClass(Model.ArenaActive)">
+                <span class="tc-event-pulse"></span>
+                <div><small>Arena 1v1</small><strong>@(Model.GameServerOnline ? (Model.ArenaActive ? "Available" : "Idle") : "Unknown")</strong></div>
+            </article>
+            <article class="tc-event-status-card @liveClass(Model.GuildWarActive)">
+                <span class="tc-event-pulse"></span>
+                <div><small>Guild War</small><strong>@(Model.GameServerOnline ? (Model.GuildWarActive ? "Active" : "Idle") : "Unknown")</strong></div>
+            </article>
+            <article class="tc-event-status-card @liveClass(Model.WeeklyPkActive)">
+                <span class="tc-event-pulse"></span>
+                <div><small>Weekly PK</small><strong>@(Model.GameServerOnline ? (Model.WeeklyPkActive ? "Active" : "Idle") : "Unknown")</strong></div>
+            </article>
+            <article class="tc-event-status-card @liveClass(Model.LavaBeastsPending > 0)">
+                <span class="tc-event-pulse"></span>
+                <div>
+                    <small>Lava Beast queue</small>
+                    <strong>@(Model.GameServerOnline ? Model.LavaBeastsPending.ToString() + " pending" : "Unknown")</strong>
+                </div>
+            </article>
+        </div>
+
+        @if (Model.GameServerOnline && Model.LavaBeastsPending > 0 && Model.NextLavaBeastUtc.HasValue)
+        {
+            <div class="tc-next-boss">
+                <span>Next queued Lava Beast</span>
+                <strong>@Model.NextLavaBeastUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")</strong>
+            </div>
+        }
+
+        <div class="tc-section-heading mt-5">
+            <div class="tc-kicker">SCHEDULE</div>
+            <h2>Era 1 event calendar</h2>
+            <p>Times below follow the GameServer clock. Only automatically scheduled events confirmed in the current server code are given fixed times.</p>
+        </div>
+
+        <div class="tc-event-schedule">
+            <article class="tc-event-row tc-event-featured">
+                <div class="tc-event-when"><strong>Sunday</strong><span>Until 19:00</span></div>
+                <div class="tc-event-copy">
+                    <span class="tc-info-state tc-state-kept">Era 1</span>
+                    <h3>Guild War</h3>
+                    <p>The classic Guild War runs on Sunday and is closed by the scheduler at 19:00 server time. Winner persistence and guild statues remain part of Placebo.</p>
+                </div>
+            </article>
+
+            <article class="tc-event-row">
+                <div class="tc-event-when"><strong>Always</strong><span>Qualifier</span></div>
+                <div class="tc-event-copy">
+                    <span class="tc-info-state tc-state-kept">Available</span>
+                    <h3>Arena 1v1</h3>
+                    <p>The retained Arena is kept alive by the scheduler rather than being opened as a weekly timed event.</p>
+                </div>
+            </article>
+
+            <article class="tc-event-row">
+                <div class="tc-event-when"><strong>Runtime</strong><span>Triggered</span></div>
+                <div class="tc-event-copy">
+                    <span class="tc-info-state tc-state-custom">Placebo</span>
+                    <h3>Lava Beast</h3>
+                    <p>Lava Beast uses a server-side queue instead of a fixed public weekday schedule. When multiple spawns are queued, the scheduler spaces them by approximately three minutes.</p>
+                </div>
+            </article>
+
+            <article class="tc-event-row">
+                <div class="tc-event-when"><strong>Enabled</strong><span>No auto-time found</span></div>
+                <div class="tc-event-copy">
+                    <span class="tc-info-state tc-state-kept">Era 1</span>
+                    <h3>Weekly PK War</h3>
+                    <p>Weekly PK remains enabled in the Era 1 feature registry and its event logic is active. The current scheduler does not expose an automatic start time, so the website does not invent one.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="tc-events-disabled">
+    <div class="container">
+        <div class="tc-section-heading">
+            <div class="tc-kicker">NOT IN PLACEBO</div>
+            <h2>Removed event systems</h2>
+            <p>These later or project-removed events are intentionally excluded from the public schedule.</p>
+        </div>
+        <div class="tc-tag-list tc-event-disabled-tags">
+            <span>Team Arena</span>
+            <span>Elite PK</span>
+            <span>Elite Guild War</span>
+            <span>City War</span>
+            <span>Clan War</span>
+            <span>Class PK War</span>
+            <span>Pole Domination</span>
+            <span>Capture the Flag</span>
+            <span>Fortress War</span>
+            <span>Quiz Show</span>
+            <span>Skill Tournament</span>
+            <span>Couples PK</span>
+            <span>Horse Race</span>
+            <span>Custom Minigames</span>
+        </div>
+    </div>
+</section>
+
+<section class="tc-cta">
+    <div class="container text-center">
+        <div class="tc-kicker">COMPETE</div>
+        <h2>Prepare your Era 1 character.</h2>
+        <p>Check the rankings or review the server rules before the next competition.</p>
+        <div class="tc-hero-actions justify-content-center">
+            <a class="btn tc-btn-primary btn-lg" asp-controller="Home" asp-action="Rankings">Rankings</a>
+            <a class="btn tc-btn-outline btn-lg" asp-controller="Home" asp-action="ServerInfo">Server Info</a>
+        </div>
+    </div>
+</section>
