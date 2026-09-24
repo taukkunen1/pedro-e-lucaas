@@ -232,13 +232,19 @@ namespace GameServer.Game.MsgFloorItem
                                         if (!MapItem.TryClaimPickup())
                                             return;
 
-                                        client.Map.cells[MapItem.MsgFloor.m_X, MapItem.MsgFloor.m_Y] &= ~Role.MapFlagType.Item;
+                                        bool added;
                                         if (MapItem.ItemBase.StackSize > 1)
-                                        {
-                                            client.Inventory.Update(MapItem.ItemBase, Instance.AddMode.ADD, packet);
-                                        }
+                                            added = client.Inventory.Update(MapItem.ItemBase, Instance.AddMode.ADD, packet);
                                         else
-                                            client.Inventory.Add(MapItem.ItemBase, DBItem, packet);
+                                            added = client.Inventory.Add(MapItem.ItemBase, DBItem, packet);
+
+                                        if (!added)
+                                        {
+                                            MapItem.ReleasePickupClaim();
+                                            return;
+                                        }
+
+                                        client.Map.cells[MapItem.MsgFloor.m_X, MapItem.MsgFloor.m_Y] &= ~Role.MapFlagType.Item;
                                         client.Map.View.LeaveMap<Role.IMapObj>(MapItem);
                                         MapItem.SendAll(packet, MsgDropID.Remove);
                                         client.SendSysMesage("You have picked up a " + DBItem.Name + ".");
