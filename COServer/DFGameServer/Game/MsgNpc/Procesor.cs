@@ -97,6 +97,11 @@ namespace GameServer.Game.MsgNpc
             }
             if (option == 255)
                 return;
+            if (Game.Era1.Era1Services.IsBlockedNpcService(npcid, option))
+            {
+                user.SendSysMesage("This service is not available in Era 1.");
+                return;
+            }
             user.ActiveNpc = (uint)npcid;
             if (user.EditNPC)
             {
@@ -331,6 +336,11 @@ namespace GameServer.Game.MsgNpc
                 return;
             }
             npcid = (uint)user.ActiveNpc;
+            if (Game.Era1.Era1Services.IsBlockedNpcService(npcid, option))
+            {
+                user.SendSysMesage("This service is not available in Era 1.");
+                return;
+            }
             ExecuteNpc.Enqueue(new InvokerClient(user, stream, (uint)npcid, type, option, input));
         }
         public class ExecuteNpcInvoker : ConcurrentSmartThreadQueue<InvokerClient>
