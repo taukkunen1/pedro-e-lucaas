@@ -243,11 +243,21 @@ def main():
         ),
         (
             "Trade",
+            "close/refund is atomic and peer-loss safe",
+            "TryTakePair(" in trade
+            and "TryTakeRefund(" in trade
+            and "Refund first, then close UI/references" in trade
+            and "if (Target.InTrade)" not in case_block(trade, "public unsafe void CloseTrade()", "public void DestroyItems"),
+            "close/disconnect refunds escrow before clearing trade references and does not require peer InTrade",
+        ),
+        (
+            "Trade",
             "settlement consumes escrow before credit",
-            msgtrade.find("targetTrade.ConquerPoints = 0;") >= 0
-            and msgtrade.find("user.Player.ConquerPoints += userReceivesCps;") >= 0
-            and msgtrade.find("targetTrade.ConquerPoints = 0;") < msgtrade.find("user.Player.ConquerPoints += userReceivesCps;"),
-            "disconnect/replay cannot refund already settled currency",
+            "Trade.TryTakePair(" in msgtrade
+            and "out targetEscrowCps" in msgtrade
+            and "user.Player.ConquerPoints += targetEscrowCps;" in msgtrade
+            and msgtrade.find("Trade.TryTakePair(") < msgtrade.find("user.Player.ConquerPoints += targetEscrowCps;"),
+            "atomic pair extraction prevents settle/refund replay of the same escrow",
         ),
         (
             "Guild",
