@@ -535,10 +535,7 @@ namespace GameServer.Client
                     Player.SendString(stream, Game.MsgServer.MsgStringPacket.StringID.Effect, true, new string[1] { effect.ToString() });
 
                 }
-                Experience *= ServerConfig.UserExpRate;
-                Experience += Experience * GemValues(Role.Flags.Gem.NormalRainbowGem) / 100;
-                if (Player.DExpTime > 0)
-                    Experience *= Player.RateExp;
+                Experience = CalculateFinalExperience(Experience);
                 Player.Experience += (ulong)Experience;
                 while (Player.Experience >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience)
                 {
@@ -555,6 +552,18 @@ namespace GameServer.Client
                 Player.SendUpdate(stream, (long)Player.Experience, Game.MsgServer.MsgUpdate.DataType.Experience, false);
             }
         }
+        public ulong CalculateFinalExperience(double experience)
+        {
+            if (Player.CursedTimer > 2 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                return 0;
+
+            experience *= ServerConfig.UserExpRate;
+            experience += experience * GemValues(Role.Flags.Gem.NormalRainbowGem) / 100;
+            if (Player.DExpTime > 0)
+                experience *= Player.RateExp;
+            return (ulong)Math.Max(0, experience);
+        }
+
         public void IncreaseExperienceRaw(ServerSockets.Packet stream, ulong experience)
         {
             if (experience == 0 || Player.CursedTimer > 2 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
