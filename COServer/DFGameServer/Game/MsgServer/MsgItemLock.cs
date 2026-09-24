@@ -34,6 +34,13 @@ namespace GameServer.Game.MsgServer
     }
     public unsafe struct MsgItemLock
     {
+        /// <summary>
+        /// Feature core.itemlock (Features5017.json). Quando "remove", novos locks sao
+        /// recusados e locks existentes sao zerados ao carregar o item. O handler continua
+        /// registrado de proposito: o unlock precisa seguir funcionando.
+        /// </summary>
+        public static bool LockEnabled => global::Core.Features.FeatureRegistry.IsKept("core.itemlock");
+
         public enum TypeLock : byte
         {
             RequestLock = 0, RequestUnlock = 1, UnlockDate = 2
@@ -54,6 +61,11 @@ namespace GameServer.Game.MsgServer
             {
                 case TypeLock.RequestLock:
                     {
+                        if (!LockEnabled)
+                        {
+                            user.SendSysMesage("Item lock is not available on this server.");
+                            break;
+                        }
                         MsgGameItem GameItem;
                         if (user.TryGetItem(UID, out GameItem))
                         {

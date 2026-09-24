@@ -193,7 +193,7 @@ If you have purchased the source from official distributors can access to the re
 - <s>Squama System (Trap with ID 18 dynamic and rewards for it)</s>
 - <s>Fix for Issue reported "Disproportionate Damage Scaling with Minor BP Differences in PVP"</s>
 - <s>Tournaments Update (Fix some bugs)</s>
-- Statue System (Not working good if you use Statue Guild, maybe is a client issue)
+- <s>Statue System (Not working good if you use Statue Guild, maybe is a client issue)</s>
 
 ## Requeriments
 - .NET 10 SDK

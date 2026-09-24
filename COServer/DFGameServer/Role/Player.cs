@@ -559,6 +559,7 @@ namespace GameServer.Role
             get { return _clanbp; }
             set
             {
+                if (!global::Core.Features.FeatureRegistry.IsKept("social.clan")) value = 0; // [feature-gate social.clan]
                 ExtraBattlePower -= _clanbp;
                 _clanbp = value;
                 ExtraBattlePower += _clanbp;
@@ -581,6 +582,7 @@ namespace GameServer.Role
             get { return _mentorBp; }
             set
             {
+                if (!ServerConfig.EnabledMentor) value = 0; // [feature-gate social.mentor]
                 ExtraBattlePower -= _mentorBp;
                 ExtraBattlePower += value;
                 _mentorBp = value;
@@ -1172,6 +1174,17 @@ namespace GameServer.Role
                 }
             }
         }
+        /// <summary>Verdadeiro so durante a morte de um black name causada por guarda/patrulha (ver MsgMonster.ActionHandler).</summary>
+        public bool KilledByLawEnforcer;
+        /// <summary>Era 1 (5017): black name morto por guarda/patrulha vai para a cadeia (sem recompensa de Warden).</summary>
+        public void SendToJailByGuard()
+        {
+            if (Map == 6000 || Map == 1020 || (Map == 1011 && DynamicID != 0)
+                || Pool.NoDropItems.Contains(Map) || Pool.FreePkMap.Contains(Map))
+                return;
+            Owner.Teleport(35, 72, 6000, 0, false);
+            JailerUID = 0;
+        }
         public void CheckDropItems(Role.Player killer, ServerSockets.Packet stream)
         {
             //Removed the Drop Items.
@@ -1243,7 +1256,7 @@ namespace GameServer.Role
 
                     }
                 }
-                if (PKPoints >= 30 && killer != null && !Pool.FreePkMap.Contains(Map))
+                if (PKPoints >= 30 && (killer != null || KilledByLawEnforcer) && !Pool.FreePkMap.Contains(Map))
                 {
                     int Count_DropItem = (PKPoints >= 30 && PKPoints <= 99) ? 1 : 2;
                     var EquipmentArray = Owner.Equipment.CurentEquip.Where(p => p != null &&
@@ -1271,6 +1284,21 @@ namespace GameServer.Role
                             trying++;
                         }
                         while (Dropable < Count_DropItem);
+
+                        // Era 1 (5017): nao existe detencao/resgate (Patch 5066). O equipamento
+                        // de red/black name cai no chao. So remove do corpo o que tem celula livre
+                        // no chao, para nenhum item sumir.
+                        var groundCells = new Dictionary<uint, KeyValuePair<ushort, ushort>>();
+                        foreach (var item in ItemsDrop.Values)
+                        {
+                            ushort dropX = (ushort)Pool.GetRandom.Next(Math.Max(0, x - 5), x + 5);
+                            ushort dropY = (ushort)Pool.GetRandom.Next(Math.Max(0, y - 5), y + 5);
+                            if (Owner.Map.AddGroundItem(ref dropX, ref dropY))
+                                groundCells[item.UID] = new KeyValuePair<ushort, ushort>(dropX, dropY);
+                        }
+                        foreach (var uid in ItemsDrop.Keys.ToArray())
+                            if (!groundCells.ContainsKey(uid))
+                                ItemsDrop.Remove(uid);
 
                         //remove equip item--------------
 
@@ -1300,9 +1328,17 @@ namespace GameServer.Role
 
                         //--------------------------------
 
-                        //add container Item
+                        // equipamento vai para o chao (sem detain / Warden Zhang)
                         foreach (var item in ItemsDrop.Values)
-                            Owner.Confiscator.AddItem(Owner, killer.Owner, item, stream);
+                        {
+                            var cell = groundCells[item.UID];
+                            item.Position = 0;
+                            Game.MsgFloorItem.MsgItem floorItem = new Game.MsgFloorItem.MsgItem(item, cell.Key, cell.Value, Game.MsgFloorItem.MsgItem.ItemType.Item, 0, DynamicID, Map, UID, false, Owner.Map);
+                            if (Owner.Map.EnqueueItem(floorItem))
+                                floorItem.SendAll(stream, Game.MsgFloorItem.MsgDropID.Visible);
+                            else
+                                Owner.Inventory.Update(item, global::GameServer.Instance.AddMode.ADD, stream); // nunca perder o item
+                        }
                         //-----------
                     }
                 }
@@ -1354,7 +1390,7 @@ namespace GameServer.Role
                             {
                                 if (killer.MyGuild.Enemy.ContainsKey(GuildID))
                                 {
-                                    killer.PKPoints += 3;
+                                    killer.AddPkPoints(3);
                                     if (killer.MyGuild != null && killer.MyGuildMember != null && MyGuild != null && MyGuild.GuildName != killer.MyGuild.GuildName)
                                     {
                                         killer.MyGuildMember.PkDonation += 5;
@@ -1371,7 +1407,7 @@ namespace GameServer.Role
                             {
                                 if (killer.MyClan.Enemy.ContainsKey(ClanUID))
                                 {
-                                    killer.PKPoints += 3;
+                                    killer.AddPkPoints(3);
                                     if (killer.MyGuild != null && killer.MyGuildMember != null && MyGuild != null && MyGuild.GuildName != killer.MyGuild.GuildName)
                                     {
                                         killer.MyGuildMember.PkDonation += 5;
@@ -1381,14 +1417,14 @@ namespace GameServer.Role
                             }
                             if (killer.Associate.Contain(Role.Instance.AssociateGS.Enemy, UID))
                             {
-                                killer.PKPoints += 5;
+                                killer.AddPkPoints(5);
                                 if (killer.MyGuild != null && killer.MyGuildMember != null && MyGuild != null && MyGuild.GuildName != killer.MyGuild.GuildName)
                                 {
                                     killer.MyGuildMember.PkDonation += 10;
                                 }
                                 return;
                             }
-                            killer.PKPoints += 5;
+                            killer.AddPkPoints(10); // Era 1 (5017): 10 por kill comum, 5 inimigo, 3 guild inimiga
                             if (killer.MyGuild != null && killer.MyGuildMember != null && MyGuild != null && MyGuild.GuildName != killer.MyGuild.GuildName)
                             {
                                 killer.MyGuildMember.PkDonation += 10;
@@ -1753,6 +1789,11 @@ namespace GameServer.Role
             }
         }
         ushort _pkpoints;
+        /// <summary>Era 1 (5017): sem o limite de 1000 PK points (Patch 5022), mas sem estourar o ushort.</summary>
+        public void AddPkPoints(ushort amount)
+        {
+            PKPoints = (ushort)Math.Min(ushort.MaxValue, PKPoints + amount);
+        }
         public ushort PKPoints
         {
             get { return _pkpoints; }
@@ -1783,10 +1824,13 @@ namespace GameServer.Role
             }
         }
         byte _viplevel;
+        /// <summary>Nivel VIP salvo, mesmo com economy.vip removido (para nao apagar dados).</summary>
+        public byte StoredVipLevel => _viplevel;
         public byte VipLevel
         {
             get
             {
+                if (!global::Core.Features.FeatureRegistry.IsKept("economy.vip")) return 0; // [feature-gate economy.vip] VIP e' posterior ao 5017
                 return _viplevel;
             }
             set

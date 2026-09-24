@@ -876,6 +876,7 @@ namespace GameServer.Role.Instance
         }
         public uint ShareMemberPotency(Role.Flags.GuildMemberRank RankMember)
         {
+            if (!global::Core.Features.FeatureRegistry.IsKept("social.arsenal")) return 0; // [feature-gate social.arsenal]
             uint GetArsenalPotency = GetFullPotencyArsenal();
             if (Info.Level == 9)
             {

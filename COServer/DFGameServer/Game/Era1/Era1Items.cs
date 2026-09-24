@@ -28,6 +28,15 @@ namespace GameServer.Game.Era1
             if (type >= 601 && type <= 619)
                 return true;
 
+            // Patch 5035 (jul/2008): headbands de guerreiro (141), plumas de arqueiro (142)
+            // e headbands de monge (143).
+            if (type == 141 || type == 142 || type == 143)
+                return true;
+
+            // Patch 5035: escudos a partir do nivel 120.
+            if (type == 900 && Pool.ItemsBase.TryGetValue(itemId, out var shield) && shield.Level >= 120)
+                return true;
+
             return false;
         }
 
@@ -44,6 +53,8 @@ namespace GameServer.Game.Era1
                 throw new System.InvalidOperationException("Era 1 talisman item gate failed.");
             if (!IsBlockedEquipment(300000))
                 throw new System.InvalidOperationException("Era 1 steed item gate failed.");
+            if (!IsBlockedEquipment(141003) || !IsBlockedEquipment(142003))
+                throw new System.InvalidOperationException("Era 1 patch 5035 headgear gate failed.");
             if (!IsBlockedEquipment(601000))
                 throw new System.InvalidOperationException("Era 1 later-profession weapon gate failed.");
             if (IsBlockedEquipment(410073) || IsBlockedEquipment(500073) || IsBlockedEquipment(900003))

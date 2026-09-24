@@ -34,42 +34,62 @@ Evite ler diretorios inteiros como `COServer/Database5700`, `COServer/DFGameServ
 
 ## Sistemas 5017
 
-Resumo atual:
+Resumo atual (gerado de `Features5017.json`; use `tools/features_set.py --list` para conferir):
 
-- `keep`: 36 sistemas.
-- `remove`: 9 sistemas.
-- `review`: 16 sistemas.
+- `keep`: 25 sistemas.
+- `remove`: 42 sistemas.
+- `review`: 0 sistemas.
 
 Sistemas em `remove`:
 
-- `progression.chi`
+- `social.tradepartner`
+- `core.itemextra`
+- `core.itemlock`
+- `economy.demonbox`
+- `social.arsenal`
+- `economy.luckybag`
+- `social.clan`
+- `social.mentor`
+- `social.flowers`
+- `social.houses`
+- `progression.enlight`
 - `progression.subclass`
+- `progression.chi`
 - `progression.achievements`
 - `progression.titles`
-- `extras.offlinetg`
+- `progression.transform`
+- `economy.vip`
 - `economy.osshop`
-- `events.custom-minigames`
-- `extras.bot`
-- `extras.interserver`
-
-Sistemas em `review`:
-
-- `events.eliteguildwar`
-- `events.fortress`
-- `extras.autohunting`
 - `economy.advertise`
-- `economy.memoryagate`
 - `economy.poker`
+- `economy.memoryagate`
 - `economy.surprisebox`
+- `events.teamarena`
+- `events.elitepk`
+- `events.eliteguildwar`
+- `events.citywar`
+- `events.clanwar`
 - `events.classpkwar`
+- `events.poledomination`
+- `events.ctf`
+- `events.fortress`
+- `events.quizshow`
+- `events.skilltournament`
 - `events.couples`
 - `events.demonexterminator`
-- `events.poledomination`
-- `events.skilltournament`
-- `events.teamarena`
+- `events.race`
+- `events.custom-minigames`
+- `events.knightgame`
+- `extras.interserver`
+- `extras.bot`
+- `extras.offlinetg`
 - `extras.machine`
-- `progression.transform`
-- `social.houses`
+
+Sistemas em `review`: nenhum.
+
+Nota: `core.itemlock` e' `remove` mas sem paths/types de proposito. O gate e' em codigo (`MsgItemLock.LockEnabled`) para o unlock de itens ja travados continuar funcionando.
+
+Linha do tempo usada para as decisoes: `docs/ERA1_LINHA_DO_TEMPO.md`.
 
 ## Cuidados
 

@@ -352,7 +352,7 @@ namespace GameServer.Role
         {
             if (statue != null)
             {
-                if (statue.StatuePacket != null && statue.Static)
+                if (statue.StatuePacket != null)
                 {
                     stream.Seek(0);
                     fixed (byte* ptr = statue.StatuePacket)
@@ -466,7 +466,7 @@ namespace GameServer.Role
                 stream.Write(Name, string.Empty, statue.user.Player.ClanName);
 
                 stream.Finalize(Game.GamePackets.SpawnPlayer);
-                if (statue.StatuePacket == null && statue.Static)
+                if (statue.StatuePacket == null)
                 {
                     statue.StatuePacket = new byte[stream.Size];
                     int size = stream.Size;

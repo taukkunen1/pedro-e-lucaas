@@ -75,7 +75,7 @@ namespace GameServer.Game.MsgFloorItem
         {
             if (client == null || mapItem == null || client.InTrade || !client.Player.OnMyOwnServer)
                 return false;
-            if (!client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.VipLevel))
+            if (!client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.StoredVipLevel))
                 return false;
             if (!client.AutoHunting.ShouldAutoPickUp(mapItem))
                 return false;

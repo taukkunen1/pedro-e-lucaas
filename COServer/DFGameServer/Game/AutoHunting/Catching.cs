@@ -287,7 +287,7 @@ namespace GameServer
                     client.AutoHunting.AttackStamp = DateTime.Now;
                     client.AutoHunting.Angle = (Role.Flags.ConquerAngle)Pool.GetRandom.Next(0, 7);
                     client.AutoHunting.Enable = true;
-                    if (client.Player.VipLevel > 0)
+                    if (client.Player.StoredVipLevel > 0)
                     {
                         if (client.Player.MyTitle != 9)
                         {
@@ -498,7 +498,7 @@ namespace GameServer
         /// </summary>
         private unsafe static bool PerformMove(Client.GameClient client, ushort x, ushort y, ServerSockets.Packet stream)
         {
-            if (AutoHunting.CanAutoJump(client.Player.VipLevel))
+            if (AutoHunting.CanAutoJump(client.Player.StoredVipLevel))
             {
                 Game.MsgServer.InterActionWalk inter = new Game.MsgServer.InterActionWalk()
                 {
@@ -573,7 +573,7 @@ namespace GameServer
 
         private static bool AutoPickUp(Client.GameClient client)
         {
-            if (!ValidClient(client) || !client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.VipLevel))
+            if (!ValidClient(client) || !client.AutoHunting.Enable || !AutoHunting.CanAutoPickUp(client.Player.StoredVipLevel))
             {
                 if (client != null && client.AutoHunting != null)
                     client.AutoHunting.PursuingLoot = false;

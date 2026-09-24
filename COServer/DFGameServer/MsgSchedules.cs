@@ -78,16 +78,34 @@ namespace GameServer.Game.MsgTournaments
             MsgBroadcast.Create();
         }
 
+        /// <summary>Era 1 (5017): o Frozen Grotto nao existe; a Lava Beast nasce no Labyrinth 4.</summary>
+        public const uint LavaBeastMap = 1354;
+
         public static void SpawnLavaBeast(bool firstwork = false)
         {
-            var Map = ServerMaps[2056];
-            int Loc = Pool.GetRandom.Next(0, Pool.LavaBeast.Count);
+            Role.GameMap Map;
+            if (!ServerMaps.TryGetValue(LavaBeastMap, out Map) || Pool.LavaBeast.Count == 0)
+                return;
+            // Sorteia uma posicao livre; descarta posicoes que nao sao andaveis neste mapa.
+            int Loc = -1;
+            for (int tries = 0; tries < Pool.LavaBeast.Count * 2 && Loc < 0; tries++)
+            {
+                int candidate = Pool.GetRandom.Next(0, Pool.LavaBeast.Count);
+                var c = Pool.LavaBeast[candidate];
+                if (Map.ValidLocation((ushort)c.X, (ushort)c.Y))
+                    Loc = candidate;
+            }
+            if (Loc < 0)
+            {
+                Console.WriteLine("LavaBeast: nenhuma posicao valida no mapa " + LavaBeastMap);
+                return;
+            }
             var spawnLoc = Pool.LavaBeast[Loc];
             LavaBeast.RemoveAt(Loc);
             using (var rec = new ServerSockets.RecycledPacket())
             {
                 var stream = rec.GetStream();
-                string msg = $"LavaBeast has spawned in FrozenGrotto6 at {spawnLoc.X},{spawnLoc.Y}! Hurry find it and kill it.";
+                string msg = $"LavaBeast has spawned in the Labyrinth (4th floor) at {spawnLoc.X},{spawnLoc.Y}! Hurry find it and kill it.";
                 Program.SendGlobalPackets.Enqueue(new MsgServer.MsgMessage(msg, "ALLUSERS", "Server", MsgServer.MsgMessage.MsgColor.red, MsgServer.MsgMessage.ChatMode.TopLeft).GetArray(stream));
                 Database.Server.AddMapMonster(stream, Map, 20055, (ushort)spawnLoc.X, (ushort)spawnLoc.Y, 1, 1, 1);
                 if (!firstwork)
@@ -206,11 +224,14 @@ namespace GameServer.Game.MsgTournaments
                 }
 
                 PkWar.CheckUp();
-                CouplesPKWar.CheckUp();
+                if (global::Core.Features.FeatureRegistry.IsKept("events.couples")) // [feature-gate events.couples]
+                    CouplesPKWar.CheckUp();
                 CurrentTournament.CheckUp();
 
 
                 #region Hourly PVP Events
+                if (global::Core.Features.FeatureRegistry.IsKept("events.custom-minigames")) // [feature-gate events.custom-minigames]
+                {
                 Random Rand = new Random();
                 if (CurrentTournament.Process == ProcesType.Dead)
                 {
@@ -267,9 +288,12 @@ namespace GameServer.Game.MsgTournaments
 
 
                 }
+                } // [feature-gate events.custom-minigames]
                 #endregion
 
                 #region Poles
+                if (global::Core.Features.FeatureRegistry.IsKept("events.poledomination")) // [feature-gate events.poledomination]
+                {
                 #region PoleDomination
                 if ((Now64.Hour == 01 || Now64.Hour == 05 || Now64.Hour == 09 || Now64.Hour == 13 || Now64.Hour == 17 || Now64.Hour == 21) && Now64.Minute == 10)
                 {
@@ -394,24 +418,34 @@ namespace GameServer.Game.MsgTournaments
                 }
 
                 #endregion
+                } // [feature-gate events.poledomination]
                 #endregion
 
                 #region Fortress
+                if (global::Core.Features.FeatureRegistry.IsKept("events.fortress")) // [feature-gate events.fortress]
+                {
                 MsgFortressWar.CheckUP();
+                } // [feature-gate events.fortress]
                 #endregion
 
                 #region TeamPkTournament (18:45 Saturday)
+                if (global::Core.Features.FeatureRegistry.IsKept("events.skilltournament")) // [feature-gate events.skilltournament]
+                {
                 if ((Now64.DayOfWeek == DayOfWeek.Saturday) && Now64.Hour == 18 && Now64.Minute == 55)
                 {
                     TeamPkTournament.Start();
                 }
+                } // [feature-gate events.skilltournament]
                 #endregion
 
                 #region SkillTeamTournament (19:45 Wednesday)
+                if (global::Core.Features.FeatureRegistry.IsKept("events.skilltournament")) // [feature-gate events.skilltournament]
+                {
                 if ((Now64.DayOfWeek == DayOfWeek.Wednesday) && Now64.Hour == 19 && Now64.Minute == 55)
                 {
                     SkillTeamPkTournament.Start();
                 }
+                } // [feature-gate events.skilltournament]
                 #endregion
 
                 #region LavaBeasts
@@ -425,15 +459,19 @@ namespace GameServer.Game.MsgTournaments
                 #endregion
 
                 #region TreasureThief
+                if (global::Core.Features.FeatureRegistry.IsKept("events.custom-minigames")) // [feature-gate events.custom-minigames]
+                {
                 if (Now64.Minute == 45)
                 {
                     CurrentTournament = Tournaments[TournamentType.TreasureThief];
                     CurrentTournament.Open();
                 }
+                } // [feature-gate events.custom-minigames]
                 #endregion
 
                 #region CityWar
-                if (Now64.Hour == 11 && Now64.Minute == 00 && Now64.Second == 00)
+                if (global::Core.Features.FeatureRegistry.IsKept("events.citywar") // [feature-gate events.citywar]
+                    && Now64.Hour == 11 && Now64.Minute == 00 && Now64.Second == 00)
                 {
                     if (CityWar.Proces == ProcesType.Dead)
                         CityWar.Start();
@@ -508,14 +546,19 @@ namespace GameServer.Game.MsgTournaments
                 #endregion
 
                 #region NobilityTournament
+                if (global::Core.Features.FeatureRegistry.IsKept("events.custom-minigames")) // [feature-gate events.custom-minigames]
+                {
                 if (Now64.Hour != 19 && Now64.Minute == 32 && Now64.Second < 4)
                 {
                     CurrentTournament = Tournaments[TournamentType.TopFight];
                     CurrentTournament.Open();
                 }
+                } // [feature-gate events.custom-minigames]
                 #endregion
 
                 #region CaptureTheFlag
+                if (global::Core.Features.FeatureRegistry.IsKept("events.ctf")) // [feature-gate events.ctf]
+                {
                 if (Now64.DayOfWeek == DayOfWeek.Wednesday)
                 {
                     if (Now64.Hour == 18 && Now64.Second == 05)
@@ -527,13 +570,17 @@ namespace GameServer.Game.MsgTournaments
                         CaptureTheFlag.CheckFinish();
                     }
                 }
+                } // [feature-gate events.ctf]
                 #endregion
 
                 #region ElitePkTournament // Friday 19:55 PM
+                if (global::Core.Features.FeatureRegistry.IsKept("events.elitepk")) // [feature-gate events.elitepk]
+                {
                 if (Now64.Hour == 19 && Now64.Minute == 55 && Now64.Second < 3)
                 {
                     ElitePkTournament.Start();
                 }
+                } // [feature-gate events.elitepk]
                 #endregion
 
                 if (Now64.DayOfWeek == DayOfWeek.Sunday) // Each Sunday
@@ -584,7 +631,8 @@ namespace GameServer.Game.MsgTournaments
                 }
 
                 #region KnightGame
-                if (Now64.Minute == 3 && Now64.Second == 00)
+                if (global::Core.Features.FeatureRegistry.IsKept("events.knightgame") // [feature-gate events.knightgame]
+                    && Now64.Minute == 3 && Now64.Second == 00)
                 {
                     SendInvitation("KnightGame", "ConquerPoints, Prizes", 404, 292, 1002, 0, 60, MsgServer.MsgStaticMessage.Messages.None);
                 }
@@ -593,7 +641,8 @@ namespace GameServer.Game.MsgTournaments
                 #region ClassicClanWar
 
 
-                if (Now64.Hour >= 14 && Now64.Hour < 15)
+                if (global::Core.Features.FeatureRegistry.IsKept("events.clanwar") // [feature-gate events.clanwar]
+                    && Now64.Hour >= 14 && Now64.Hour < 15)
                 {
                     if (ClassicClanWar.Proces == ProcesType.Dead)
                         ClassicClanWar.Start();
@@ -625,6 +674,8 @@ namespace GameServer.Game.MsgTournaments
                 #endregion
 
                 #region ClassPK // Monday 18:00 PM
+                if (global::Core.Features.FeatureRegistry.IsKept("events.classpkwar")) // [feature-gate events.classpkwar]
+                {
                 if (Now64.DayOfWeek == DayOfWeek.Monday)
                 {
                     if (Now64.Hour == 18 && Now64.Minute == 0)
@@ -649,9 +700,12 @@ namespace GameServer.Game.MsgTournaments
                             }
                     }
                 }
+                } // [feature-gate events.classpkwar]
                 #endregion
 
                 #region EliteGuildWar
+                if (global::Core.Features.FeatureRegistry.IsKept("events.eliteguildwar")) // [feature-gate events.eliteguildwar]
+                {
                 if (CaptureTheFlag.Proces != ProcesType.Alive)
                 {
                     if (Now64.Hour >= 20 && Now64.Hour < 21)
@@ -682,6 +736,7 @@ namespace GameServer.Game.MsgTournaments
                             EliteGuildWar.CompleteEndGuildWar();
                     }
                 }
+                } // [feature-gate events.eliteguildwar]
                 #endregion
             }
             catch (Exception e)

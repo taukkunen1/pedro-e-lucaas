@@ -99,6 +99,9 @@ namespace GameServer
         }
 
         // Official Auto Hunt privilege thresholds.
+        // O sistema VIP geral foi removido no Era 1 (economy.vip = remove, VipLevel vale 0).
+        // O Auto Hunt usa o nivel VIP salvo (Player.StoredVipLevel), concedido por @vip,
+        // so para estes dois privilegios; nenhum outro beneficio de VIP volta.
         // Basic Auto Hunt: everyone; Auto Jump: VIP 3+; Auto Pick Up: VIP 4+.
         public const byte AutoJumpVipLevel = 3;
         public const byte AutoPickUpVipLevel = 4;

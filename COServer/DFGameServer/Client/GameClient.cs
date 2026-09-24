@@ -1357,6 +1357,11 @@ namespace GameServer.Client
         }
         public void Teleport(ushort x, ushort y, uint MapID, uint DynamicID = 0, bool revive = true, bool CanTeleport = false)
         {
+            if (Game.Era1.Era1Maps.IsBlocked(MapID))
+            {
+                SendSysMesage("This area is not available on this server.");
+                return;
+            }
 
             if (Player.Name == DragonWar.LastWinner)
             {

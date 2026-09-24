@@ -151,21 +151,20 @@ namespace GameServer.Game.MsgServer
                     }
                 case TradeID.RequestCompleteTrade:
                     {
-                        if (user.MyTrade.Target.Socket.Alive)
+                        if (!user.InTrade || user.MyTrade.Target == null)
+                            break;
+
+                        if (user.MyTrade.Target.Socket != null && user.MyTrade.Target.Socket.Alive)
                         {
-                            try
+                            // Economy V5: vinculo quebrado com o parceiro nunca descarta a
+                            // escrow. Devolve so o lado deste jogador e fecha a janela.
+                            var partnerTrade = user.MyTrade.Target.MyTrade;
+                            bool linked = partnerTrade != null
+                                && partnerTrade.Target != null
+                                && partnerTrade.Target.Player.UID == user.Player.UID;
+                            if (!linked)
                             {
-                                if (user.MyTrade.Target.MyTrade.Target.Player.UID != user.Player.UID)
-                                {
-                                    user.Send(stream.TradeCreate(dwParam, TradeID.CloseTradeWindow));
-                                    user.MyTrade = null;
-                                    break;
-                                }
-                            }
-                            catch
-                            {
-                                user.Send(stream.TradeCreate(dwParam, TradeID.CloseTradeWindow));
-                                user.MyTrade = null;
+                                user.MyTrade.AbortOwnSide(stream);
                                 break;
                             }
                             if (user.InTrade)
