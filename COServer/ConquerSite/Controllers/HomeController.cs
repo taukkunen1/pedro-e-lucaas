@@ -57,6 +57,26 @@ namespace ConquerSite.Controllers
             return View();
         }
 
+        public IActionResult Rankings()
+        {
+            RankingsDTO rankings = new RankingsDTO { Available = false };
+            try
+            {
+                RankingsDTO apiRankings = RestApiHelper.GetRequest<RankingsDTO>("rankings");
+                if (apiRankings != null)
+                {
+                    rankings = apiRankings;
+                    rankings.Available = true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Placebo rankings API unavailable.");
+            }
+
+            return View(rankings);
+        }
+
         public IActionResult Guides()
         {
             return View();
