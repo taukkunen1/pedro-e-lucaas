@@ -172,6 +172,7 @@ def main():
     vendor = read(GAME / "Role" / "Instance" / "Vendor.cs")
     processor = read(GAME / "Game" / "MsgNpc" / "Procesor.cs")
     item = read(GAME / "Game" / "MsgServer" / "MsgItemUsuagePacket.cs")
+    warehouse_packet = read(GAME / "Game" / "MsgServer" / "MsgWarehouse.cs")
     npc = read(GAME / "Game" / "MsgNpc" / "NpcHandler.cs")
 
     results = []
@@ -188,15 +189,29 @@ def main():
          "PlayerVendingTaxBasisPoints = 0" in services,
          "classic player stalls are transfer-only"),
         ("Market", "atomic player booth sale",
-         item.find("TryRemove(id, out VItem)") < item.find("client.Player.ConquerPoints -= VItem.AmountCost")
+         item.find("TryRemove(id, out VItem)") >= 0
+         and item.find("client.Player.ConquerPoints -= VItem.AmountCost") >= 0
+         and item.find("client.Player.Money -= VItem.AmountCost") >= 0
+         and item.find("TryRemove(id, out VItem)") < item.find("client.Player.ConquerPoints -= VItem.AmountCost")
          and item.find("TryRemove(id, out VItem)") < item.find("client.Player.Money -= VItem.AmountCost"),
          "listing removal precedes buyer/seller currency movement"),
         ("Warehouse", "remote warehouse disabled",
          "EnablePost5017RemoteWarehouse => false" in services,
          "VIP remote warehouse is post-target-era"),
-        ("Warehouse", "physical access enforced",
+        ("Warehouse", "physical Silver access enforced",
          item.count("CanUseClassicWarehouse(client, id)") >= 3,
-         "show/deposit/withdraw require a warehouse NPC in screen"),
+         "show/deposit/withdraw Silver require a warehouse NPC in screen"),
+        ("Warehouse", "physical item storage enforced",
+         "IsClassicWarehouseAction(Action)" in warehouse_packet
+         and "IsClassicWarehouseNpc(NpcID)" in warehouse_packet
+         and "CanUseClassicWarehouse(client, NpcID)" in warehouse_packet,
+         "item show/deposit/withdraw require a physical classic warehouse"),
+        ("Warehouse", "post-5017 warehouse variants blocked",
+         "Show_WH_House" in warehouse_packet
+         and "ShashShow" in warehouse_packet
+         and "ShowInventorySash" in warehouse_packet
+         and "IsClassicWarehouseAction" in services,
+         "House/Sash/Poker-style warehouse packet variants are rejected by the Era 1 action boundary"),
         ("Warehouse", "warehouse fee is zero",
          "WarehouseFeeSilver = 0" in services,
          "deposit/withdraw is storage/transfer, not a sink"),
