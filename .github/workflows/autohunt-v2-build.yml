@@ -31,8 +31,10 @@ jobs:
             Get-ChildItem -Path COServer -Recurse -File -Include *.cs |
               Where-Object { $_.FullName -match 'MsgNpc|Npc|Packet' } |
               ForEach-Object { $_.FullName } |
-              Tee-Object -FilePath npc-dispatcher-search.txt
+              Set-Content -Path npc-dispatcher-search.txt
           }
+          Write-Host "=== NPC DISPATCHER SEARCH RESULTS ==="
+          Get-Content npc-dispatcher-search.txt
       - uses: actions/upload-artifact@v4
         with:
           name: npc-dispatcher-search
