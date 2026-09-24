@@ -136,6 +136,8 @@ namespace GameServer.Game.MsgFloorItem
 
                         case MsgItem.ItemType.Money:
                             {
+                                if (!MapItem.TryClaimPickup())
+                                    return;
 
                                 client.Player.Money += MapItem.Gold;
                                 client.Player.SendUpdate(packet, client.Player.Money, MsgServer.MsgUpdate.DataType.Money);
@@ -152,7 +154,8 @@ namespace GameServer.Game.MsgFloorItem
                                 {
                                     if (Pool.ItemsBase.TryGetValue(MapItem.MsgFloor.m_ID, out DBItem))
                                     {
-
+                                        if (!MapItem.TryClaimPickup())
+                                            return;
 
                                         client.Map.cells[MapItem.MsgFloor.m_X, MapItem.MsgFloor.m_Y] &= ~Role.MapFlagType.Item;
                                         if (MapItem.ItemBase.StackSize > 1)
@@ -177,6 +180,9 @@ namespace GameServer.Game.MsgFloorItem
                                 Database.ItemType.DBItem DBItem;
                                 if (Pool.ItemsBase.TryGetValue(MapItem.MsgFloor.m_ID, out DBItem))
                                 {
+                                    if (!MapItem.TryClaimPickup())
+                                        return;
+
                                     if (MapItem.ItemBase.ITEM_ID == 3001133)
                                     {
                                         client.Player.ConquerPoints += 5;
