@@ -83,6 +83,29 @@ namespace ConquerSite.Controllers
             return View(rankings);
         }
 
+        public IActionResult Events()
+        {
+            ServerStatusDTO status = new ServerStatusDTO
+            {
+                ApiOnline = false,
+                GameServerOnline = false,
+                ServerName = "Placebo"
+            };
+
+            try
+            {
+                ServerStatusDTO apiStatus = RestApiHelper.GetRequest<ServerStatusDTO>("status");
+                if (apiStatus != null)
+                    status = apiStatus;
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Placebo event status API unavailable.");
+            }
+
+            return View(status);
+        }
+
         public IActionResult Updates()
         {
             return View(new UpdatesPageDTO { Posts = LoadUpdates() });
