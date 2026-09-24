@@ -116,6 +116,101 @@ namespace GameServer
             }
             return true;
         }
+        public static void ShowSettings(Client.GameClient client)
+        {
+            if (client == null || client.AutoHunting == null)
+                return;
+
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgNpc.Dialog dialog = new Game.MsgNpc.Dialog(client, stream);
+                dialog.AddText("Auto Hunt V2 settings. These options are saved per character.");
+                dialog.AddOption("Radius: " + client.AutoHunting.RadiusLabel, 240);
+                dialog.AddOption("Skills: " + client.AutoHunting.SkillsStatus, 241);
+                dialog.AddOption("EXP: " + client.AutoHunting.ExpDeliveryLabel, 242);
+                dialog.AddOption("Fast mode: " + client.AutoHunting.FastModeStatus, 243);
+                dialog.AddOption("Pickup settings", 244);
+                dialog.AddOption("Close", 255);
+                dialog.FinalizeDialog();
+            }
+        }
+
+        public static bool HandleSettingsOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+
+            switch (option)
+            {
+                case 240:
+                    client.AutoHunting.CycleRadius();
+                    ShowSettings(client);
+                    return true;
+                case 241:
+                    client.AutoHunting.UseSkills = !client.AutoHunting.UseSkills;
+                    ShowSettings(client);
+                    return true;
+                case 242:
+                    if (client.AutoHunting.Enable && client.AutoHunting.ExpDeliveryMode == AutoHunting.AutoHuntExpDelivery.OnStop)
+                        FlushPendingExperience(client);
+                    client.AutoHunting.ToggleExpDelivery();
+                    ShowSettings(client);
+                    return true;
+                case 243:
+                    client.AutoHunting.FastMode = !client.AutoHunting.FastMode;
+                    ShowSettings(client);
+                    return true;
+                case 244:
+                    ShowPickupSettings(client);
+                    return true;
+            }
+            return false;
+        }
+
+        public static void ShowPickupSettings(Client.GameClient client)
+        {
+            using (var rec = new ServerSockets.RecycledPacket())
+            {
+                var stream = rec.GetStream();
+                Game.MsgNpc.Dialog dialog = new Game.MsgNpc.Dialog(client, stream);
+                dialog.AddText("VIP 4+ Auto Pick Up filters.");
+                dialog.AddOption("Dragon Balls " + client.AutoHunting.DBallsStatus, 230);
+                dialog.AddOption("Meteors " + client.AutoHunting.MeteorsStatus, 231);
+                dialog.AddOption("Plus items " + client.AutoHunting.PlusItemsStatus, 232);
+                dialog.AddOption("Quality items " + client.AutoHunting.QualityItemsStatus, 233);
+                dialog.AddOption("Socketed " + client.AutoHunting.SocketedItemsStatus, 234);
+                dialog.AddOption("Blessed " + client.AutoHunting.BlessedItemsStatus, 235);
+                dialog.AddOption("Materials " + client.AutoHunting.MaterialItemsStatus, 236);
+                dialog.AddOption("EXP/Event items " + client.AutoHunting.ExpBallEventItemsStatus, 237);
+                dialog.AddOption("Silver " + client.AutoHunting.LootMoneyStatus, 238);
+                dialog.AddOption("Back", 239);
+                dialog.FinalizeDialog();
+            }
+        }
+
+        public static bool HandlePickupSettingsOption(Client.GameClient client, byte option)
+        {
+            if (client == null || client.AutoHunting == null)
+                return false;
+            switch (option)
+            {
+                case 230: client.AutoHunting.DBalls = !client.AutoHunting.DBalls; break;
+                case 231: client.AutoHunting.Meteors = !client.AutoHunting.Meteors; break;
+                case 232: client.AutoHunting.PlusItems = !client.AutoHunting.PlusItems; break;
+                case 233: client.AutoHunting.QualityItems = !client.AutoHunting.QualityItems; break;
+                case 234: client.AutoHunting.SocketedItems = !client.AutoHunting.SocketedItems; break;
+                case 235: client.AutoHunting.BlessedItems = !client.AutoHunting.BlessedItems; break;
+                case 236: client.AutoHunting.MaterialItems = !client.AutoHunting.MaterialItems; break;
+                case 237: client.AutoHunting.ExpBallEventItems = !client.AutoHunting.ExpBallEventItems; break;
+                case 238: client.AutoHunting.LootMoney = !client.AutoHunting.LootMoney; break;
+                case 239: ShowSettings(client); return true;
+                default: return false;
+            }
+            ShowPickupSettings(client);
+            return true;
+        }
+
         public static void Start(Client.GameClient client)
         {
             if (!ValidClient(client))
