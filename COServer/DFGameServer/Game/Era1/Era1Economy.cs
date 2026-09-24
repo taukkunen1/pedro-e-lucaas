@@ -81,15 +81,22 @@ namespace GameServer.Game.Era1
 
         public static bool IsClassicWeaponSocketTarget(uint itemId)
         {
-            if (!IsClassicEquipment(itemId) || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
-                return false;
             uint type = itemId / 1000;
-            return (type >= 410 && type <= 490) || (type >= 500 && type <= 580);
+            return IsClassicEquipment(itemId)
+                && !Game.Era1.Era1Items.IsBlockedByIdFamily(itemId)
+                && ((type >= 410 && type <= 490) || (type >= 500 && type <= 580));
+        }
+
+        internal static bool IsClassicEquipmentSocketFamily(uint itemId)
+        {
+            return IsClassicEquipment(itemId)
+                && !IsClassicWeaponSocketTarget(itemId)
+                && !Game.Era1.Era1Items.IsBlockedByIdFamily(itemId);
         }
 
         public static bool IsClassicEquipmentSocketTarget(uint itemId)
         {
-            if (!IsClassicEquipment(itemId) || IsClassicWeaponSocketTarget(itemId)
+            if (!IsClassicEquipmentSocketFamily(itemId)
                 || Game.Era1.Era1Items.IsBlockedEquipment(itemId))
                 return false;
             ushort position = Database.ItemType.ItemPosition(itemId);
@@ -338,7 +345,7 @@ namespace GameServer.Game.Era1
                 || ClassicComposeGemCost(130033, 5) != 1)
                 throw new System.InvalidOperationException("Era 1 classic composition/refining policy failed.");
             if (!IsClassicWeaponSocketTarget(410073) || IsClassicWeaponSocketTarget(900003)
-                || !IsClassicEquipmentSocketTarget(900003)
+                || !IsClassicEquipmentSocketFamily(900003)
                 || WeaponFirstSocketDragonBalls != 1 || WeaponSecondSocketDragonBalls != 5
                 || EquipmentFirstSocketDragonBalls != 12 || EquipmentSecondSocketStarDrills != 7)
                 throw new System.InvalidOperationException("Era 1 socket policy failed.");
@@ -350,8 +357,8 @@ namespace GameServer.Game.Era1
                 || EnablePost5017ItemExtra || EnablePost5017CompositionMentorRewards
                 || EnableDirectLevelUpgradeWithCps)
                 throw new System.InvalidOperationException("Post-5017 item systems must stay disabled in Era 1.");
-            if (Game.Era1.Era1Items.IsBlockedEquipment(410073)
-                || !Game.Era1.Era1Items.IsBlockedEquipment(201003))
+            if (Game.Era1.Era1Items.IsBlockedByIdFamily(410073)
+                || !Game.Era1.Era1Items.IsBlockedByIdFamily(201003))
                 throw new System.InvalidOperationException("Era 1 item boundary/economy integration failed.");
             if (EnablePost5017MonsterRewards)
                 throw new System.InvalidOperationException("Post-5017 monster reward scripts must stay disabled in Era 1.");
