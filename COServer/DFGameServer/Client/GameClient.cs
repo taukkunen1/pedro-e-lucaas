@@ -555,6 +555,27 @@ namespace GameServer.Client
                 Player.SendUpdate(stream, (long)Player.Experience, Game.MsgServer.MsgUpdate.DataType.Experience, false);
             }
         }
+        public void IncreaseExperienceRaw(ServerSockets.Packet stream, ulong experience)
+        {
+            if (experience == 0 || Player.CursedTimer > 2 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                return;
+
+            Player.Experience += experience;
+            while (Player.Level < Game.Era1.Era1Progression.MaxLevel &&
+                   Player.Experience >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience)
+            {
+                Player.Experience -= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience;
+                UpdateLevel(stream, (ushort)(Player.Level + 1));
+                if (Player.Level >= Game.Era1.Era1Progression.MaxLevel)
+                {
+                    Player.Experience = 0;
+                    break;
+                }
+            }
+            UpdateRebornLastLevel(stream);
+            Player.SendUpdate(stream, (long)Player.Experience, Game.MsgServer.MsgUpdate.DataType.Experience, false);
+        }
+
         public void UpdateRebornLastLevel(ServerSockets.Packet stream)
         {
             if (Player.Reborn > 0)
@@ -585,6 +606,15 @@ namespace GameServer.Client
         }
         public unsafe void DisconectStopFunctions()
         {
+            try
+            {
+                if (AutoHunting != null && AutoHunting.Enable)
+                    Catching.FlushPendingExperience(this);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             try
             {
                 using (var rec = new ServerSockets.RecycledPacket())
