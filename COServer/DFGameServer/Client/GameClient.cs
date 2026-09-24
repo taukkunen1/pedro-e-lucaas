@@ -569,7 +569,9 @@ namespace GameServer.Client
             if (experience == 0 || Player.Level >= Game.Era1.Era1Progression.MaxLevel)
                 return;
 
-            Player.Experience += experience;
+            Player.Experience = ulong.MaxValue - Player.Experience < experience
+                ? ulong.MaxValue
+                : Player.Experience + experience;
             while (Player.Level < Game.Era1.Era1Progression.MaxLevel &&
                    Player.Experience >= Pool.LevelInfo[Database.DBLevExp.Sort.User][(byte)Player.Level].Experience)
             {
