@@ -1,67 +1,104 @@
+@model ConquerSite.Models.DTOs.CharacterDashboardDTO
 @{
     ViewData["Title"] = "My Character";
-    Character c = (Character)ViewBag.Character;
-    string uid = c.UID.ToString();
-    string uidMask = uid.Length > 4 ? "****" + uid.Substring(uid.Length - 4) : "****";
 }
 
 <section class="tc-page-hero tc-page-hero-account">
     <div class="container">
-        <div class="tc-kicker">ACCOUNT DASHBOARD</div>
-        <h1>My Character</h1>
-        <p>Your current Placebo character at a glance.</p>
+        <div class="tc-kicker">PLACEBO · ACCOUNT</div>
+        <h1>Character Dashboard</h1>
+        <p>Your Era 1 character, progression and account-linked gameplay status in one place.</p>
     </div>
 </section>
 
-<section class="tc-account-shell">
+<section class="tc-account-shell tc-dashboard-v2">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <article class="tc-character-card">
-                    <div class="tc-character-avatar">
-                        <img src="@ViewBag.CharacterAvatar" alt="@ViewBag.Character.Name" />
-                    </div>
-                    <div class="tc-character-body">
-                        <div class="tc-kicker">ACTIVE CHARACTER</div>
-                        <h2>@ViewBag.Character.Name</h2>
-                        <p>@ViewBag.CharacterClassName · Level @ViewBag.Character.Level</p>
-                        <div class="tc-character-id">UID @uidMask</div>
-                    </div>
-                </article>
+        @if (!Model.Available || Model.Character == null)
+        {
+            <div class="tc-dashboard-empty">
+                <div class="tc-kicker">CHARACTER UNAVAILABLE</div>
+                <h2>No character data found</h2>
+                <p>Your website account is valid, but the character API did not return an active character yet. Create or enter the game with your character and try again.</p>
+                <a class="btn tc-btn-primary" asp-controller="Home" asp-action="Downloads">Download Placebo</a>
             </div>
-
-            <div class="col-lg-8">
-                <div class="row tc-stat-grid">
-                    <div class="col-sm-6 mb-4">
-                        <article class="tc-stat-card">
-                            <span>Level</span>
-                            <strong>@ViewBag.Character.Level</strong>
-                        </article>
-                    </div>
-                    <div class="col-sm-6 mb-4">
-                        <article class="tc-stat-card">
-                            <span>Class</span>
-                            <strong>@ViewBag.CharacterClassName</strong>
-                        </article>
-                    </div>
-                    <div class="col-sm-6 mb-4">
-                        <article class="tc-stat-card">
-                            <span>Reborn</span>
-                            <strong>@ViewBag.Character.Reborn</strong>
-                        </article>
-                    </div>
-                    <div class="col-sm-6 mb-4">
-                        <article class="tc-stat-card">
-                            <span>Donation Points</span>
-                            <strong>@ViewBag.Character.RacePoints</strong>
-                        </article>
-                    </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <article class="tc-character-card tc-character-card-v2">
+                        <div class="tc-character-avatar">
+                            <img src="@Model.AvatarUrl" alt="@Model.Character.Name" />
+                        </div>
+                        <div class="tc-character-body">
+                            <div class="tc-kicker">ACTIVE CHARACTER</div>
+                            <h2>@Model.Character.Name</h2>
+                            <p>@Model.ClassName · Level @Model.Character.Level</p>
+                            <div class="tc-character-id">UID @Model.MaskedUid</div>
+                        </div>
+                        <div class="tc-character-summary">
+                            <div><span>Reborn</span><strong>@Model.Character.Reborn</strong></div>
+                            <div><span>PK status</span><strong>@Model.PkStatus</strong></div>
+                            <div><span>Online time</span><strong>@Model.OnlineTimeLabel</strong></div>
+                        </div>
+                    </article>
                 </div>
 
-                <div class="tc-account-note">
-                    More character information, rankings and security controls will be added to this dashboard in the next website phases.
+                <div class="col-lg-8">
+                    <div class="tc-dashboard-section-head">
+                        <div>
+                            <div class="tc-kicker">PROGRESSION</div>
+                            <h2>Character overview</h2>
+                        </div>
+                        <a class="tc-text-link" asp-controller="Home" asp-action="Rankings">Open rankings</a>
+                    </div>
+
+                    <div class="row tc-stat-grid">
+                        <div class="col-sm-6 col-xl-3 mb-4"><article class="tc-stat-card"><span>Level</span><strong>@Model.Character.Level</strong></article></div>
+                        <div class="col-sm-6 col-xl-3 mb-4"><article class="tc-stat-card"><span>Class</span><strong>@Model.ClassName</strong></article></div>
+                        <div class="col-sm-6 col-xl-3 mb-4"><article class="tc-stat-card"><span>Reborn</span><strong>@Model.Character.Reborn</strong></article></div>
+                        <div class="col-sm-6 col-xl-3 mb-4"><article class="tc-stat-card"><span>PK Points</span><strong>@Model.Character.PkPoints</strong></article></div>
+                    </div>
+
+                    <div class="tc-dashboard-panels">
+                        <article class="tc-dashboard-panel">
+                            <div class="tc-kicker">ECONOMY</div>
+                            <h3>Wallet</h3>
+                            <dl>
+                                <div><dt>Silver</dt><dd>@Model.Character.Money.ToString("N0")</dd></div>
+                                <div><dt>Conquer Points</dt><dd>@Model.Character.ConquerPoints.ToString("N0")</dd></div>
+                                <div><dt>Nobility donation</dt><dd>@Model.Character.DonationNobility.ToString("N0")</dd></div>
+                            </dl>
+                        </article>
+
+                        <article class="tc-dashboard-panel">
+                            <div class="tc-kicker">SOCIAL</div>
+                            <h3>Character links</h3>
+                            <dl>
+                                <div><dt>Guild ID</dt><dd>@(Model.Character.GuildID == 0 ? "None" : Model.Character.GuildID.ToString())</dd></div>
+                                <div><dt>Guild rank</dt><dd>@(Model.Character.GuildID == 0 ? "—" : Model.Character.GuildRank.ToString())</dd></div>
+                                <div><dt>Spouse</dt><dd>@(string.IsNullOrWhiteSpace(Model.Character.Spouse) || Model.Character.Spouse == "None" ? "None" : Model.Character.Spouse)</dd></div>
+                            </dl>
+                        </article>
+                    </div>
+
+                    <article class="tc-dashboard-panel tc-dashboard-autohunt">
+                        <div>
+                            <div class="tc-kicker">AUTO HUNT</div>
+                            <h3>VIP automation access</h3>
+                            <p>Placebo persists the VIP level used by Auto Hunt. Auto Jump unlocks at VIP 3 and Auto Pick Up at VIP 4.</p>
+                        </div>
+                        <div class="tc-autohunt-access">
+                            <div class="@(Model.AutoJumpUnlocked ? "is-unlocked" : "")"><span>Auto Jump</span><strong>@(Model.AutoJumpUnlocked ? "Unlocked" : "VIP 3 required")</strong></div>
+                            <div class="@(Model.AutoPickupUnlocked ? "is-unlocked" : "")"><span>Auto Pick Up</span><strong>@(Model.AutoPickupUnlocked ? "Unlocked" : "VIP 4 required")</strong></div>
+                        </div>
+                    </article>
+
+                    <div class="tc-account-note">
+                        Location coordinates and internal account/security fields are intentionally not exposed by this dashboard.
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </section>
