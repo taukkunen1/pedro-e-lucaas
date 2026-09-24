@@ -16,7 +16,17 @@ namespace GameServer.Game.MsgServer.AttackHandler.Updates
                user.ExpOblivion += Damage * 4;
            }
            else
-               user.IncreaseExperience(stream,Damage);
+           {
+               if (user.AutoHunting != null && user.AutoHunting.Enable &&
+                   user.AutoHunting.ExpDeliveryMode == AutoHunting.AutoHuntExpDelivery.OnStop)
+               {
+                   // Freeze all EXP multipliers at the moment this damage/kill EXP is earned.
+                   // Stop/logout only transfers this final value and never recalculates it.
+                   user.AutoHunting.AddPendingExperience(user.CalculateFinalExperience(Damage));
+               }
+               else
+                   user.IncreaseExperience(stream, Damage);
+           }
 
            if (user.Player.HeavenBlessing > 0)
            {
