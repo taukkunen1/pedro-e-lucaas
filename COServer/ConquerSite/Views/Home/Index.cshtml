@@ -1,8 +1,9 @@
-@model ConquerSite.Models.DTOs.ServerStatusDTO
+@model ConquerSite.Models.DTOs.HomePageDTO
 @{
     ViewData["Title"] = "Era 1";
-    string apiState = Model.ApiOnline ? "Online" : "Unavailable";
-    string gameState = !Model.ApiOnline ? "Unavailable" : (Model.GameServerOnline ? "Online" : "Offline");
+    var status = Model.Status;
+    string apiState = status.ApiOnline ? "Online" : "Unavailable";
+    string gameState = !status.ApiOnline ? "Unavailable" : (status.GameServerOnline ? "Online" : "Offline");
 }
 
 <section class="tc-hero">
@@ -29,33 +30,33 @@
         <div class="tc-status-grid">
             <div class="tc-status-item">
                 <span class="tc-status-label">API</span>
-                <strong class="@(Model.ApiOnline ? "tc-status-online" : "tc-status-offline")">
+                <strong class="@(status.ApiOnline ? "tc-status-online" : "tc-status-offline")">
                     <i class="tc-status-dot"></i>@apiState
                 </strong>
             </div>
             <div class="tc-status-item">
                 <span class="tc-status-label">GameServer</span>
-                <strong class="@(Model.GameServerOnline ? "tc-status-online" : "tc-status-offline")">
+                <strong class="@(status.GameServerOnline ? "tc-status-online" : "tc-status-offline")">
                     <i class="tc-status-dot"></i>@gameState
                 </strong>
             </div>
             <div class="tc-status-item">
                 <span class="tc-status-label">Players online</span>
-                <strong>@(Model.GameServerOnline ? Model.OnlinePlayers.ToString() : "—")</strong>
+                <strong>@(status.GameServerOnline ? status.OnlinePlayers.ToString() : "—")</strong>
             </div>
             <div class="tc-status-item">
                 <span class="tc-status-label">Uptime</span>
-                <strong>@Model.UptimeLabel</strong>
+                <strong>@status.UptimeLabel</strong>
             </div>
             <div class="tc-status-item">
                 <span class="tc-status-label">Client patch</span>
-                <strong>@Model.ClientPatch</strong>
+                <strong>@status.ClientPatch</strong>
             </div>
         </div>
-        @if (Model.ApiOnline && Model.LastHeartbeatUtc.HasValue)
+        @if (status.ApiOnline && status.LastHeartbeatUtc.HasValue)
         {
             <div class="tc-status-updated">
-                Last GameServer heartbeat: @Model.LastHeartbeatUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")
+                Last GameServer heartbeat: @status.LastHeartbeatUtc.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")
             </div>
         }
     </div>
@@ -157,6 +158,35 @@
                     <img src="~/images/ServerImage3.png" alt="Placebo world" class="img-fluid" loading="lazy" />
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="tc-section tc-section-paper tc-home-updates">
+    <div class="container">
+        <div class="tc-section-heading tc-section-heading-row">
+            <div>
+                <div class="tc-kicker">LATEST DEVELOPMENT</div>
+                <h2>Placebo updates</h2>
+                <p>Recent gameplay, client and project changes from the permanent changelog.</p>
+            </div>
+            <a class="tc-text-link" asp-controller="Home" asp-action="Updates">View all updates →</a>
+        </div>
+        <div class="row">
+            @foreach (var post in Model.LatestUpdates)
+            {
+                <div class="col-lg-4 mb-4">
+                    <article class="tc-home-update-card">
+                        <div class="tc-update-meta">
+                            <span>@post.Category</span>
+                            <time datetime="@post.PublishedAt.ToString("yyyy-MM-dd")">@post.PublishedAt.ToString("dd MMM yyyy")</time>
+                        </div>
+                        <h3><a asp-controller="Home" asp-action="Update" asp-route-id="@post.Slug">@post.Title</a></h3>
+                        <p>@post.Summary</p>
+                        <a class="tc-update-link" asp-controller="Home" asp-action="Update" asp-route-id="@post.Slug">Read update <span>→</span></a>
+                    </article>
+                </div>
+            }
         </div>
     </div>
 </section>
