@@ -1,39 +1,48 @@
-﻿@model LoginAccountDTO
+@model LoginAccountDTO
 @{
     ViewData["Title"] = "Login";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-3">
-            <h1>@ViewData["Title"]</h1>
-            <p>Register now your account.</p>
-            <form asp-action="LoginPost">
-                <div class="form-group">
-                    @Html.LabelFor(x => x.Username)
-                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Input Username" })
-                    <small id="Username" class="form-text text-muted">We'll never share your username with anyone else.</small>
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(x => x.Password)
-                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Input password" })
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+<section class="tc-auth-page">
+    <div class="container">
+        <div class="tc-auth-card">
+            <div class="tc-kicker">WELCOME BACK</div>
+            <h1>Enter TrinityConquer</h1>
+            <p class="tc-form-help mb-4">Sign in with your game account.</p>
+
             @if (ViewBag.Message != null)
             {
                 @foreach (Message msg in ViewBag.Message)
                 {
-                    <div class="alert alert-@msg.Type.ToString().ToLower() mt-5" role="alert">
-                        @msg.Text
-                    </div>
+                    <div class="alert alert-@msg.Type.ToString().ToLower()" role="alert">@msg.Text</div>
                 }
             }
+
+            <form asp-action="LoginPost" method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Username)
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Username", @autocomplete = "username" })
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Password", @autocomplete = "current-password" })
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn tc-btn-primary btn-block mt-4">Login</button>
+            </form>
+
+            <div class="tc-auth-switch">
+                New to TrinityConquer?
+                <a asp-action="Register" asp-controller="Account">Create an account</a>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
