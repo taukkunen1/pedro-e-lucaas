@@ -1,4 +1,5 @@
 ﻿using ConquerSite.Models;
+using ConquerSite.Models.DTOs;
 using Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,40 +33,68 @@ namespace ConquerSite.Controllers
 
         public IActionResult MyCharacter()
         {
-            Account acc = @Utils.CurrentLoggedAccount(HttpContext.Session);
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("CharacterUID", acc.EntityID.ToString());
-            Character c = RestApiHelper.GetRequest<Character>("Character", param);
-            ViewBag.Account = acc;
-            ViewBag.Character = c;
-            string PathPlayerFace = System.IO.Path.Combine("images", "PlayerFace", c.Face.ToString() + ".png");
-            string PlayerClassNames = System.IO.Path.Combine("conquer", "ProfessionalName.ini");
-            string webRootPath = _environment.WebRootPath;
-            string ClassNamesFilePath = System.IO.Path.Combine(webRootPath, PlayerClassNames);
-            string AvatarFilePath = System.IO.Path.Combine(webRootPath, PathPlayerFace);
-            string CharacterClassName = "Unknown";
-            #region Obtain the Class name from file
-            if (System.IO.File.Exists(ClassNamesFilePath))
+            Account acc = Utils.CurrentLoggedAccount(HttpContext.Session);
+            if (acc == null || acc.EntityID == 0)
+                return RedirectToAction("Login");
+
+            Character character = null;
+            try
             {
-                foreach(string lineClassName in System.IO.File.ReadAllLines(ClassNamesFilePath))
+                Dictionary<string, string> param = new Dictionary<string, string>
                 {
-                    string classId = lineClassName.Split(',')[0];
-                    if (classId == c.Class.ToString())
+                    { "CharacterUID", acc.EntityID.ToString() }
+                };
+                character = RestApiHelper.GetRequest<Character>("Character", param);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Unable to load Placebo character dashboard for UID {EntityID}.", acc.EntityID);
+            }
+
+            if (character == null || character.UID == 0)
+            {
+                return View(new CharacterDashboardDTO { Available = false });
+            }
+
+            string className = "Unknown";
+            string classNamesFilePath = System.IO.Path.Combine(_environment.WebRootPath, "conquer", "ProfessionalName.ini");
+            if (System.IO.File.Exists(classNamesFilePath))
+            {
+                foreach (string line in System.IO.File.ReadAllLines(classNamesFilePath))
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length >= 2 && parts[0] == character.Class.ToString())
                     {
-                        string className = lineClassName.Split(',')[1];
-                        CharacterClassName = className;
+                        className = parts[1];
+                        break;
                     }
                 }
             }
-            #endregion
-            ViewBag.CharacterClassName = CharacterClassName;
-            if (System.IO.File.Exists(AvatarFilePath)) {
-                ViewBag.CharacterAvatar = "/" + PathPlayerFace;
-            } else
+
+            string faceRelativePath = System.IO.Path.Combine("images", "PlayerFace", character.Face + ".png");
+            string avatarFilePath = System.IO.Path.Combine(_environment.WebRootPath, faceRelativePath);
+            string avatarUrl = System.IO.File.Exists(avatarFilePath)
+                ? "/" + faceRelativePath.Replace('\\', '/')
+                : "/images/PlayerFace/296.png";
+
+            string uid = character.UID.ToString();
+            string maskedUid = uid.Length > 4 ? "****" + uid.Substring(uid.Length - 4) : "****";
+            string pkStatus = character.PkPoints >= 100 ? "Black name" : character.PkPoints >= 30 ? "Red name" : "Normal";
+            uint hours = character.OnlineMinutes / 60;
+            uint minutes = character.OnlineMinutes % 60;
+
+            return View(new CharacterDashboardDTO
             {
-                ViewBag.CharacterAvatar = "/" + System.IO.Path.Combine("images", "PlayerFace", "296.png");
-            }
-            return View();
+                Available = true,
+                Character = character,
+                ClassName = className,
+                AvatarUrl = avatarUrl,
+                MaskedUid = maskedUid,
+                PkStatus = pkStatus,
+                OnlineTimeLabel = hours > 0 ? $"{hours}h {minutes}m" : $"{minutes}m",
+                AutoJumpUnlocked = character.VipLevel >= 3,
+                AutoPickupUnlocked = character.VipLevel >= 4
+            });
         }
 
         [HttpPost]
