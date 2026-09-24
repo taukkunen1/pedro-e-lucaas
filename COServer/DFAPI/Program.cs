@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+app.UseStaticFiles(); // serve COServer/DFAPI/wwwroot, incluindo /client-updates (manifest + pacotes do launcher)
 app.UseAuthorization();
 
 app.MapControllers();

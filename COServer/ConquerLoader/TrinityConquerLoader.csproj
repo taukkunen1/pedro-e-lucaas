@@ -76,6 +76,7 @@
       <HintPath>C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationFramework.dll</HintPath>
     </Reference>
     <Reference Include="system" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Core">
       <HintPath>C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Core.dll</HintPath>
     </Reference>
@@ -85,6 +86,8 @@
       <HintPath>$(UserProfile)\.nuget\packages\system.resources.extensions\8.0.0\lib\net462\System.Resources.Extensions.dll</HintPath>
     </Reference>
     <Compile Include="Main\Program.cs" />
+    <Compile Include="Updater\UpdateManifest.cs" />
+    <Compile Include="Updater\UpdateManager.cs" />
     <Compile Include="Main\MessageBoxMade.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +104,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -133,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Hero.jpg" />
