@@ -72,7 +72,9 @@ def method_block(text, npc_name):
 def audit_arbitrage(item_text, npc_text):
     findings = []
 
-    # Search only actual active mutations, not comments or mere balance checks.
+    # Search only active mutations inside the same switch case. Looking across
+    # adjacent cases creates false positives (e.g. Market CP Admin has a disabled
+    # 999,999,999-Silver bag case next to the classic DB->CP exchange cases).
     patterns = [
         ("CP_TO_GOLD", r"ConquerPoints\s*-=", r"Money\s*\+="),
         ("GOLD_TO_CP", r"Money\s*-=", r"ConquerPoints\s*\+="),
@@ -88,14 +90,39 @@ def audit_arbitrage(item_text, npc_text):
             for direction, left, right in patterns:
                 if not re.search(left, clean):
                     continue
-                a = max(0, i - 18)
-                b = min(len(lines), i + 19)
+
+                # Bound the inspection to the current case. If this is not switch
+                # code, fall back to a small local window.
+                case_start = None
+                for p in range(i, -1, -1):
+                    if re.match(r"^\s*case\s+", lines[p]):
+                        case_start = p
+                        break
+                    if re.match(r"^\s*\[NpcAttribute\(", lines[p]):
+                        break
+
+                case_end = None
+                if case_start is not None:
+                    for p in range(i + 1, len(lines)):
+                        if re.match(r"^\s*case\s+", lines[p]) or re.match(r"^\s*default\s*:", lines[p]):
+                            case_end = p
+                            break
+                        if re.match(r"^\s*\[NpcAttribute\(", lines[p]):
+                            break
+
+                if case_start is not None:
+                    a = case_start
+                    b = case_end if case_end is not None else min(len(lines), i + 40)
+                else:
+                    a = max(0, i - 10)
+                    b = min(len(lines), i + 11)
+
                 window = "\n".join(
                     x for x in lines[a:b] if not x.strip().startswith("//")
                 )
                 if re.search(right, window):
                     # Player vending contains both currencies as mutually exclusive
-                    # branches; it is not a conversion. Keep it explicitly allowlisted.
+                    # branches; it is not a conversion.
                     if "VItem.CostType" in window and "OwnerVendor" in window:
                         continue
                     findings.append({
@@ -114,6 +141,7 @@ def main():
 
     server = read(GAME / "Database" / "Server.cs")
     services = read(GAME / "Game" / "Era1" / "Era1Services.cs")
+    shops = read(GAME / "Game" / "Era1" / "Era1Shops.cs")
     vendor = read(GAME / "Role" / "Instance" / "Vendor.cs")
     item = read(GAME / "Game" / "MsgServer" / "MsgItemUsuagePacket.cs")
     npc = read(GAME / "Game" / "MsgNpc" / "NpcHandler.cs")
@@ -166,6 +194,22 @@ def main():
         results, "NPC service", "Barber classic fee",
         "Money -= 500" in barber and "Money -= 10000" in barber,
         "classic hairstyle=500; New Dynasty=10000"
+    )
+
+    # Classic CP Admin is a resource conversion, not Gold<->CP arbitrage:
+    # 1 DB -> 215 CP and 1 DB Scroll -> 2150 CP. Keep this exactly aligned
+    # with the Era 1 Shopping Mall purchase price so DB<->CP is parity, not
+    # a server-side profit loop.
+    cp_admin = method_block(npc, "MarketCpAdmin")
+    db_cp_parity = (
+        "ConquerPoints += 215;" in cp_admin
+        and "ConquerPoints += 2150;" in cp_admin
+        and "{ Database.ItemType.DragonBall, 215 }" in shops
+    )
+    ok &= add_result(
+        results, "Arbitrage", "DragonBall <-> CP parity",
+        db_cp_parity,
+        "classic CP Admin: DB=215 CP; DBScroll=2150 CP; mall DB=215 CP"
     )
 
     arbitrage = audit_arbitrage(item, npc)
