@@ -9,7 +9,7 @@ namespace GameServer
 {
     class Catching
     {
-        private Thread JumpPlayer, Skill, Revive;
+        private Thread JumpPlayer, Skill;
         public Catching()
         {
             JumpPlayer = new Thread(new ThreadStart(JumpHunting));
@@ -18,21 +18,15 @@ namespace GameServer
             Skill = new Thread(new ThreadStart(SkillHunting));
             Skill.Start();
 
-            Revive = new Thread(new ThreadStart(ReviveHunting));
-            Revive.Start();
         }
         public static bool Auto = true;
         private static Random RobotRandom = new Random();
         private static ushort[] SkillRobotTrojan = new ushort[] { 1045, 1046, 1115 };//FastBlade,ScentSword,Hercules
         private static ushort[] SkillRobotArcher = new ushort[] { 8001 };//Scatter
-        private static ushort[] SkillRobotNinja = new ushort[] { 6000 };//TwofoldBlades
-        private static ushort[] SkillRobotMonk = new ushort[] { 10381, 10415 };//RadiantPalm,WhirlwindKick
         private static ushort[] SkillRobotWater = new ushort[] { 1000 };//Thunder
         private static ushort[] SkillRobotFire = new ushort[] { 1000, 1002 };//Tornado
-        private static ushort[] SkillPirate = new ushort[] { 11110, 11070, 11030 };
-
-        private static ushort[] SkillRobotAttacked = new ushort[] { 6000, 10381, 10415, 1000, 1002 };
-        private static ushort[] SkillXPRobot = new ushort[] { 1110, 6011 };//CycloneXP FatalStrike
+        private static ushort[] SkillRobotAttacked = new ushort[] { 1000, 1002 };
+        private static ushort[] SkillXPRobot = new ushort[] { 1110 };//CycloneXP
         public static bool ValidClient(Client.GameClient client)
         {
             if (client == null)
@@ -721,49 +715,6 @@ namespace GameServer
                 Thread.Sleep(1000);
             }
         }
-        private void ReviveHunting()
-        {
-            while (true)
-            {
-                try
-                {
-                    if (Auto)
-                    {
-                        foreach (Client.GameClient client in Pool.GamePoll.Values.Where(p => p.AutoHunting.Enable))
-                        {
-                            if (client != null && client.Map != null && client.Player.View != null && client.Player != null)
-                            {
-                                #region Revive
-                                if (client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && DateTime.Now > client.Player.DeadStamp.AddSeconds(20))
-                                {
-                                    client.Player.Action = Role.Flags.ConquerAction.None;
-                                    client.Player.TransformationID = 0;
-                                    client.Player.RemoveFlag(MsgUpdate.Flags.Dead);
-                                    client.Player.RemoveFlag(MsgUpdate.Flags.Ghost);
-                                    client.Player.HitPoints = (int)client.Status.MaxHitpoints;
-                                }
-                                #endregion
-                                if (client.Player.HitPoints > 0)
-                                {
-                                    #region Hitpoints
-                                    if (!client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && client.Player.HitPoints < client.Status.MaxHitpoints)
-                                        client.Player.HitPoints = Math.Min(client.Player.HitPoints + 3000, (int)client.Status.MaxHitpoints);
-                                    #endregion
-                                    #region Mana
-                                    if (!client.Player.ContainFlag(MsgUpdate.Flags.Ghost) && client.Player.Mana < client.Status.MaxMana)
-                                        client.Player.Mana = (ushort)Math.Min(client.Player.Mana + 3000, client.Status.MaxMana);
-                                    #endregion
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteException(e);
-                }
-                Thread.Sleep(3000);
-            }
-        }
+
     }
 }
