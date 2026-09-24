@@ -1,90 +1,86 @@
-﻿@{
+@{
     ViewData["Title"] = "Guides";
 }
 
-<div class="container">
-    <div class="row my-3">
-        <div class="col-12">
-            <h1>@ViewData["Title"]</h1>
-            <h2>Answers for the common questions from server here...</h2>
-            <hr />
-            <div class="row">
-                <div class="col-12">
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        "Failed to open server.dat file" when enter on the client login
-                                    </button>
-                                </h5>
-                            </div>
+<section class="tc-page-hero tc-page-hero-guides">
+    <div class="container">
+        <div class="tc-kicker">KNOWLEDGE BASE</div>
+        <h1>Guides</h1>
+        <p>Quick answers for installation, progression and the rules that define TrinityConquer Era 1.</p>
+    </div>
+</section>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    <img src="~/images/ErrorServerDat.png" alt="Error Server Dat" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Error installing patch when patching
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body">
-                                    Need <strong>close any TrinityConquerLoader.exe</strong> process with <strong>Task Manager</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        How get CPs? I am not getting cps from monsters...
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body">
-                                    Getting CPs in TrinityConquer is a bit different, can get DragonBall from drop of monsters and exchange this in market. When having VIP3+ can use autohunt for auto looting this automaticly.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingCollapse-buy">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#headingCollapse-buy" aria-expanded="false" aria-controls="headingCollapse-buy">
-                                        How buy a character in this server?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="headingCollapse-buy" class="collapse" aria-labelledby="headingCollapse-buy" data-parent="#accordion">
-                                <div class="card-body">
-                                    Cannot buy a character in this server but can buy Donation Points for buy some special items in <strong>Donation Points Shop</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingCollapse-buycps">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#headingCollapse-buycps" aria-expanded="false" aria-controls="headingCollapse-buycps">
-                                        How buy a cps in this server?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="headingCollapse-buycps" class="collapse" aria-labelledby="headingCollapse-buycps" data-parent="#accordion">
-                                <div class="card-body">
-                                    Cannot buy a cps in this server but can buy Donation Points for buy some special items in <strong>Donation Points Shop</strong>
-                                </div>
-                            </div>
-                        </div>
+<section class="tc-guide-shell">
+    <div class="container">
+        <div class="tc-section-heading">
+            <div class="tc-kicker">GETTING STARTED</div>
+            <h2>Common questions</h2>
+            <p>These guides cover the issues players are most likely to encounter before and during their first sessions.</p>
+        </div>
+
+        <div class="tc-guide-list" id="guideAccordion">
+            <div class="tc-guide-item">
+                <button class="tc-guide-question" type="button" data-toggle="collapse" data-target="#guideServerDat"
+                        aria-expanded="true" aria-controls="guideServerDat">
+                    The client says “Failed to open server.dat”
+                </button>
+                <div id="guideServerDat" class="collapse show" data-parent="#guideAccordion">
+                    <div class="tc-guide-answer">
+                        <p>Launch TrinityConquer through the official launcher and make sure the client folder is writable.</p>
+                        <img src="~/images/ErrorServerDat.png" alt="server.dat error example" class="img-fluid tc-guide-image" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="tc-guide-item">
+                <button class="tc-guide-question collapsed" type="button" data-toggle="collapse" data-target="#guidePatch"
+                        aria-expanded="false" aria-controls="guidePatch">
+                    A patch fails while the launcher is updating
+                </button>
+                <div id="guidePatch" class="collapse" data-parent="#guideAccordion">
+                    <div class="tc-guide-answer">
+                        Close every running <strong>TrinityConquerLoader.exe</strong> process, reopen the launcher and let it retry the update.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tc-guide-item">
+                <button class="tc-guide-question collapsed" type="button" data-toggle="collapse" data-target="#guideEconomy"
+                        aria-expanded="false" aria-controls="guideEconomy">
+                    How does the Era 1 economy work?
+                </button>
+                <div id="guideEconomy" class="collapse" data-parent="#guideAccordion">
+                    <div class="tc-guide-answer">
+                        The economy is centered on hunting, Dragon Balls, Meteors, Silver and physical Market trading.
+                        TrinityConquer does not use the later progression systems that dominate newer Conquer versions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tc-guide-item">
+                <button class="tc-guide-question collapsed" type="button" data-toggle="collapse" data-target="#guideAutoHunt"
+                        aria-expanded="false" aria-controls="guideAutoHunt">
+                    How does Auto Hunt work?
+                </button>
+                <div id="guideAutoHunt" class="collapse" data-parent="#guideAccordion">
+                    <div class="tc-guide-answer">
+                        Auto Hunt is a quality-of-life feature kept by project decision. Auto Jump requires VIP 3+ and Auto Pick Up requires VIP 4+.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tc-guide-item">
+                <button class="tc-guide-question collapsed" type="button" data-toggle="collapse" data-target="#guideRemoved"
+                        aria-expanded="false" aria-controls="guideRemoved">
+                    Which modern systems are disabled?
+                </button>
+                <div id="guideRemoved" class="collapse" data-parent="#guideAccordion">
+                    <div class="tc-guide-answer">
+                        Chi, SubClass, Talismans, Mounts, Clans and Martial Arsenal are not part of the playable Era 1 ruleset.
+                        The adapted 5695 client can still display some legacy interface elements, but the server blocks removed systems.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
