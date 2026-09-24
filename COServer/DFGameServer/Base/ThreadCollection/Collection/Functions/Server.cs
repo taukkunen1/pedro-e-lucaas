@@ -1,5 +1,7 @@
-﻿using GameServer.Database;
+﻿using Core;
+using GameServer.Database;
 using System;
+using System.Threading.Tasks;
 using static GameServer.Pool;
 
 namespace GameServer.Threading
@@ -33,8 +35,36 @@ namespace GameServer.Threading
                 {
                     ResetRandom = DateTime.Now.AddMinutes(30);
                 }
+
+                SendStatusHeartbeat();
             }
             catch (Exception e) { Console.WriteException(e); }
+        }
+
+        public static void SendStatusHeartbeat()
+        {
+            if (Program.ServerConfig == null || Program.ServerConfig.IsInterServer)
+                return;
+
+            var heartbeat = new
+            {
+                ServerName = string.IsNullOrWhiteSpace(Program.ServerConfig.ServerName) ? "Placebo" : Program.ServerConfig.ServerName,
+                OnlinePlayers = GamePoll.Count,
+                StartedAtUtc = Program.StartedAtUtc,
+                LastHeartbeatUtc = DateTime.UtcNow
+            };
+
+            _ = Task.Run(() =>
+            {
+                try
+                {
+                    RestApiHelper.PostRequestSuccessful("status/heartbeat", heartbeat);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[STATUS] Heartbeat failed: {ex.Message}");
+                }
+            });
         }
 	}
 }
