@@ -1,0 +1,136 @@
+@using ConquerSite.Models
+@using Core.Models.GameServer
+@{
+    ViewData["Title"] = "Mint & Burn";
+    Account account = (Account)ViewBag.Account;
+    Character character = (Character)ViewBag.Character;
+    List<PlayerItem> items = (List<PlayerItem>)ViewBag.Items;
+    HashSet<uint> activeMintedItemUids = (HashSet<uint>)ViewBag.ActiveMintedItemUids;
+    List<MintBurnRecord> records = (List<MintBurnRecord>)ViewBag.Records;
+}
+
+<div class="container mint-burn-page">
+    <div class="row my-3">
+        <div class="col-12">
+            <h1>Mint & Burn</h1>
+            <p class="text-muted mb-0">Account: @account.Username</p>
+            @if (character != null && character.UID != 0)
+            {
+                <p class="text-muted">Character: @character.Name</p>
+            }
+        </div>
+    </div>
+
+    @if (TempData["MintBurnMessage"] != null)
+    {
+        <div class="alert alert-@TempData["MintBurnMessageType"]" role="alert">
+            @TempData["MintBurnMessage"]
+        </div>
+    }
+
+    @if (character == null || character.UID == 0)
+    {
+        <div class="alert alert-warning" role="alert">
+            Create a character in game before using Mint & Burn.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="h4">Inventory</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped mint-burn-table">
+                        <thead>
+                            <tr>
+                                <th>Item UID</th>
+                                <th>Item ID</th>
+                                <th>Position</th>
+                                <th>Plus</th>
+                                <th>Bless</th>
+                                <th>Sockets</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (PlayerItem item in items)
+                            {
+                                bool minted = activeMintedItemUids.Contains(item.Uid);
+                                <tr>
+                                    <td>@item.Uid</td>
+                                    <td>@item.ItemId</td>
+                                    <td>@item.Position</td>
+                                    <td>+@item.Plus</td>
+                                    <td>@item.Bless</td>
+                                    <td>@item.SocketOne / @item.SocketTwo</td>
+                                    <td>
+                                        @if (minted)
+                                        {
+                                            <span class="badge badge-info">Minted</span>
+                                        }
+                                        else if (item.Locked > 0)
+                                        {
+                                            <span class="badge badge-secondary">Locked</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-success">Available</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <form asp-controller="MintBurn" asp-action="Mint" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="itemUid" value="@item.Uid" />
+                                            <button type="submit" class="btn btn-sm btn-primary" @(minted || item.Locked > 0 ? "disabled" : "")>Mint</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                            @if (items.Count == 0)
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-muted">No inventory items were loaded from the game API.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h2 class="h4">Minted Items</h2>
+                @foreach (MintBurnRecord record in records)
+                {
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h3 class="h6 mb-2">Item @record.ItemId</h3>
+                            <div>UID: @record.ItemUid</div>
+                            <div>Power: @record.MintPower</div>
+                            <div>Status: @record.Status</div>
+                            <div class="text-muted small">Minted: @record.MintedAt.ToLocalTime()</div>
+                            @if (record.Status == MintBurnStatus.Minted)
+                            {
+                                <form asp-controller="MintBurn" asp-action="Burn" method="post" class="mt-2">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@record.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Burn</button>
+                                </form>
+                            }
+                            else if (record.BurnedAt.HasValue)
+                            {
+                                <div class="text-muted small">Burned: @record.BurnedAt.Value.ToLocalTime()</div>
+                            }
+                        </div>
+                    </div>
+                }
+                @if (records.Count == 0)
+                {
+                    <div class="alert alert-info" role="alert">
+                        No minted items yet.
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
